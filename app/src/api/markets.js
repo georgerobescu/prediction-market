@@ -290,10 +290,8 @@ export const sellOutcomes = async (lmsrOutcomeIndexes, amount) => {
   console.log(`selling "${JSON.stringify(wantList)}" with ${amount} each.`);
   console.log(`assembled "sellList": "${JSON.stringify(sellList)}"`);
 
-  const testSellList = [-1, "0", 0, "0"];
-
   // get market maker instance
-  const cost = await LMSR.calcNetCost.call(testSellList);
+  const cost = await LMSR.calcNetCost.call(sellList);
   console.log({ cost: cost.toString() });
 
   const defaultAccount = await getDefaultAccount();
@@ -303,8 +301,9 @@ export const sellOutcomes = async (lmsrOutcomeIndexes, amount) => {
     from: defaultAccount
   });
   console.log("approval set");
+  
   // run trade
-  const tx = await LMSR.trade(testSellList, cost, {
+  const tx = await LMSR.trade(sellList, cost, {
     from: defaultAccount,
     gas: 0x6691b7
   });

@@ -4,7 +4,7 @@ import { sortBy, intersection } from "lodash"
 import { getDefaultAccount, loadContract, loadConfig } from "./web3";
 import { generatePositionId, generatePositionIdList } from "./utils/positions";
 import { nameMarketOutcomes, nameOutcomePairs, listAffectedMarketsForOutcomeIds } from "./utils/probabilities";
-import { lmsrNetCost, lmsrTradeCost, lmsrCalcOutcomeTokenCount } from "./utils/lmsr";
+import { lmsrTradeCost, lmsrCalcOutcomeTokenCount } from "./utils/lmsr";
 import { resolvePositionGrouping } from "./utils/positionGrouping";
 import Decimal from "decimal.js";
 
@@ -92,22 +92,6 @@ export const generatePositionList = async (balances) => {
   const outcomeIdNames = nameMarketOutcomes(marketOutcomeCounts);
   const outcomePairNames = nameOutcomePairs(outcomeIdNames);
 
-  const netCostCalculator = await lmsrNetCost(markets, lmsr);
-
-  const outcomePrices = await Promise.all(
-    balances.map(async (balance, index) => {
-      if (+balance === 0) return 0
-      const indexes = Array(balances.length).fill("0");
-      indexes[index] = -balance;
-
-      return (await netCostCalculator(indexes)).abs().toString();
-    })
-  );
-
-  // extrapolate individual positions out of this information
-  // e.g. Ay independent of all other outcomes is lowest amount in Ay****
-  // AyBy independent of C* is lowest amount in AyBy**
-
   const positionGroupings = resolvePositionGrouping(balances.map((balance, index) => [outcomePairNames[index], balance]))
 
   const positionGroupingsSorted = sortBy(positionGroupings, [([ outcomeIds, value ]) => outcomeIds.length, ([ outcomeIds, value ]) => value ])
@@ -125,19 +109,6 @@ export const generatePositionList = async (balances) => {
     })
   );
 };
-
-export const listAffectedOutcomesForIds = async (outcomeIds) => {
-  const marketOutcomeCounts = await loadMarketOutcomeCounts();
-  const outcomeIdNames = nameMarketOutcomes(marketOutcomeCounts);
-  const outcomePairNames = nameOutcomePairs(outcomeIdNames);
-
-  let outcomeIdArray = outcomeIds
-  if (typeof outcomeIds === 'string') {
-    outcomeIdArray = outcomeIds.split(/&/g)
-  }
-
-  return outcomePairNames.filter((outcomes) => outcomeIdArray.every((id) => outcomes.split(/&/g).includes(id)))
-}
 
 export const listOutcomeIdsForIndexes = async (outcomeIndexes, invert) => {
   const marketOutcomeCounts = await loadMarketOutcomeCounts();

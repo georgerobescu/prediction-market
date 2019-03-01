@@ -61,55 +61,6 @@ export const lmsrTradeCost = (_funding, balances, outcomeTokenAmounts) => {
   return costBefore.sub(costAfter);
 };
 
-export const lmsrNetCost = async (markets, lmsr) => {
-  const LMSR = await loadContract("LMSRMarketMaker", lmsr);
-  const WETH9 = await loadContract("WETH9");
-  const PMSystem = await loadContract("PredictionMarketSystem");
-
-  let lmsrOutcomeIndex = 0;
-  const lmsrBalances = [];
-  const loadBalancePromise = Promise.all(
-    markets.map(async market => {
-      const outcomeCount = (await PMSystem.getOutcomeSlotCount(
-        market.conditionId
-      )).toNumber();
-      return Promise.all(
-        Array(outcomeCount)
-          .fill()
-          .map(async () => {
-            const positionId = generatePositionId(
-              markets,
-              WETH9,
-              lmsrOutcomeIndex++
-            );
-            const lmsrBalance = (await PMSystem.balanceOf(
-              lmsr,
-              positionId
-            )).toString();
-
-            lmsrBalances[lmsrOutcomeIndex] = {
-              balance: lmsrBalance.toString(),
-              positionId
-            };
-          })
-      );
-    })
-  );
-
-  await loadBalancePromise;
-
-  // return generator
-  return async tokenAmounts => {
-    let netCost = new Decimal(0)
-    try {
-      netCost = await LMSR.calcNetCost(tokenAmounts.map((n) => new Decimal(n).abs().toString()));
-    } catch (err) {
-      console.error(`LMSR calcNetCost failed`, tokenAmounts)
-    }
-    return netCost
-  };
-};
-
 /**
  * Calculates an estimation of amounts of outcome tokens (positions) that can be bought with the specified invest in collateral "amount".
  *

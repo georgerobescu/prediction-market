@@ -2,7 +2,7 @@ import web3 from "web3";
 import Decimal from 'decimal.js'
 
 import { getDefaultAccount, loadContract, loadConfig, getAccountBalance, getGasPrice } from "./web3";
-import { nameMarketOutcomes, nameOutcomePairs, getIndividualProbabilities } from "./utils/probabilities";
+import { nameOutcomePairs, getIndividualProbabilities } from "./utils/probabilities";
 
 const { BN } = web3.utils;
 

@@ -12,24 +12,17 @@ const cx = cn.bind(style)
 const YourPositions = ({ positions }) => (
   <div className={cx("your-positions")}>
     <h2>Positions</h2>
-    {!positions.length && <em>You don't hold any positions yet.</em>}
-    {positions.map((position, index) => (
+    {positions.length === 0 ?
+    <em>You don't hold any positions yet.</em> :
+    positions.filter(({value}) => value > 0).map((position, index) => (
       <div key={index} className={cx("position")}>
-        {position.outcomeIds === "" ? (
-          position.value > 0 && (
-            <span>
-              <strong>{formatFromWei(position.value)}</strong> In any Case
-            </span>
-          )
-        ) : (
-          <span>
-            <strong>{formatFromWei(position.value)}</strong>{" "}
-            when{" "}
-            {arrayToHumanReadableList(
-              position.markets.map(market => market.selectedOutcome === 0 ? pseudoMarkdown(market.when) : pseudoMarkdown(market.whenNot))
-            )}
-          </span>
-        )}
+        <strong>{formatFromWei(position.value)}</strong>
+        {position.marketWhens.length === 0 ?
+          <> in any case</> :
+          <> when {arrayToHumanReadableList(
+            position.marketWhens.map(pseudoMarkdown)
+          )}</>
+        }
       </div>
     ))}
   </div>

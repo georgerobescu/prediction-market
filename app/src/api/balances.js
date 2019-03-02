@@ -88,7 +88,7 @@ export const loadMarketOutcomeCounts = async () => {
 
 export const generatePositionList = async (balances) => {
   const marketOutcomeCounts = await loadMarketOutcomeCounts();
-  const { markets, lmsr } = await loadConfig();
+  const { markets } = await loadConfig();
   const outcomeIdNames = nameMarketOutcomes(marketOutcomeCounts);
   const outcomePairNames = nameOutcomePairs(outcomeIdNames);
 
@@ -100,14 +100,16 @@ export const generatePositionList = async (balances) => {
   return await Promise.all(
     positionGroupingsSorted.map(async ([outcomeIds, value]) => {
       const affectedMarkets = listAffectedMarketsForOutcomeIds(markets, outcomeIds)
-      
+      const marketWhens = affectedMarkets.map(market =>
+        market.selectedOutcome === 0 ? market.when : market.whenNot)
+
       return {
-        outcomeIds,
         value,
-        markets: affectedMarkets
+        marketWhens
       };
     })
   );
+  return balances
 };
 
 export const listOutcomeIdsForIndexes = async (outcomeIndexes, invert) => {

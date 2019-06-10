@@ -28,7 +28,7 @@ This version uses an EOA as the oracle for the markets. You may edit `markets.co
 
 3. Start the webpack dev server with `npm start`. This makes a hot-reloading dev build of the interface.
 
-4. Make a build with `npm run build`. This will output a webpack production build in `docs`, which may be used in conjunction with a static hosting service such as Github Pages. Be aware that all files output in `docs` must share a base `publicPath` which may be configured in `app/src/webpack.config.js`.
+4. Make a build with `npm run build`. This will output a webpack production build in `docs`, which may be used in conjunction with a static hosting service such as Github Pages or S3.
 
 ### Running Helper Scripts
 

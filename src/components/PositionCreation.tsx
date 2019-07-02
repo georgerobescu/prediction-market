@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import OutcomesBinary from "./outcomes-binary";
 import OutcomeSelection from "./outcome-selection";
+import BuySection from "./buy-section";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
-// import * as marketDataActions from "../actions/marketData";
+import * as marketDataActions from "../actions/marketData";
+import asWrappedTransaction from '../utils/asWrappedTransaction';
 import '../style.scss';
 
 export interface IProps {
@@ -15,6 +17,8 @@ export interface IProps {
   probabilities: Array<any>;
   stagedProbabilities: Array<any>;
   setMarketSelection: any;
+  ongoingTransactionType: Object;
+  setOngoingTransactionType: Function;
 }
 
 export interface IState {
@@ -67,6 +71,7 @@ class PositionCreation extends React.Component<IProps, IState> {
               />
             </section>
 
+            <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
 
           </ModalBody>
 
@@ -92,9 +97,14 @@ export default connect(
     // @ts-ignore
     markets: state.marketData.markets,
     // @ts-ignore
-    openMarketIndex: state.positionCreation.openMarketIndex
+    openMarketIndex: state.positionCreation.openMarketIndex,
+    // @ts-ignore
+    ongoingTransactionType: state.marketData.ongoingTransactionType
   }),
-  // dispatch => ({
-  //   // setSyncTime: bindActionCreators(marketDataActions.setSyncTime, dispatch)
-  // })
+  dispatch => ({
+    setOngoingTransactionType: bindActionCreators(
+      marketDataActions.setOngoingTransactionType,
+      dispatch
+    )
+  })
 )(PositionCreation);

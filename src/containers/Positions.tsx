@@ -3,7 +3,6 @@ import cn from "classnames";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as marketDataActions from "../actions/marketData";
-import BuySection from "../components/buy-section";
 import YourPositions from "../components/your-positions";
 import { getNetworkName } from "../utils/web3-helpers.js";
 import asWrappedTransaction from '../utils/asWrappedTransaction';
@@ -37,7 +36,6 @@ class Positions extends React.Component<IProps, IState> {
         ) : (
           <>
             <h2 className={cn("heading")}>Manage Positions</h2>
-            <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
             <YourPositions
               asWrappedTransaction={asWrappedTransaction(this.props)}
             />

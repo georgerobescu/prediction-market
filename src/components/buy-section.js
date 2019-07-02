@@ -4,6 +4,7 @@ import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as marketDataActions from "../actions/marketData";
+import * as positionCreationActions from "../actions/positionCreation";
 import PositionGroupDetails from "./position-group-details";
 import Spinner from "./spinner";
 import { maxUint256BN, zeroDecimal } from "../utils/constants";
@@ -37,7 +38,7 @@ function calcOutcomeTokenCounts(
   positions.forEach(({ positionIndex, outcomes }) => {
     const balance = positionBalances[positionIndex].toString();
     if (
-      outcomes.some(
+      outcomes.value.some(
         ({ marketIndex, outcomeIndex }) =>
           marketSelections[marketIndex].isAssumed &&
           outcomeIndex !== marketSelections[marketIndex].selectedOutcomeIndex
@@ -51,7 +52,7 @@ function calcOutcomeTokenCounts(
       );
       positionTypes[positionIndex] = "refunded";
     } else if (
-      outcomes.every(
+      outcomes.value.every(
         ({ marketIndex, outcomeIndex }) =>
           marketSelections[marketIndex].selectedOutcomeIndex == null ||
           outcomeIndex === marketSelections[marketIndex].selectedOutcomeIndex
@@ -114,7 +115,8 @@ const BuySection = ({
   stagedTransactionType,
   setStagedTransactionType,
   ongoingTransactionType,
-  asWrappedTransaction
+  asWrappedTransaction,
+  setNewlyCreatedTxn
 }) => {
   const [investmentAmount, setInvestmentAmount] = useState("");
   const [error, setError] = useState(null);
@@ -194,7 +196,7 @@ const BuySection = ({
     }
   }
 
-  async function buyOutcomeTokens() {
+  const buyOutcomeTokens = async () => {
     if (stagedTradeAmounts == null) {
       throw new Error(`No buy set yet`);
     }
@@ -216,8 +218,8 @@ const BuySection = ({
 
     await LMSRMarketMaker.trade(tradeAmounts, collateralLimit, {
       from: account
-    });
-  }
+    }).then(setNewlyCreatedTxn);
+  };
 
   async function setAllowance() {
     await collateral.contract.approve(LMSRMarketMaker.address, maxUint256BN, {
@@ -235,9 +237,6 @@ const BuySection = ({
     );
   }, [markets, positions, stagedTradeAmounts]);
 
-  // console.log(
-  //   asWrappedTransaction("buy outcome tokens", buyOutcomeTokens, setError)
-  // );
   return (
     <div className={cn("positions")}>
       {collateralBalance != null && (
@@ -403,7 +402,8 @@ BuySection.propTypes = {
   stagedTransactionType: PropTypes.string,
   setStagedTransactionType: PropTypes.func.isRequired,
   ongoingTransactionType: PropTypes.string,
-  asWrappedTransaction: PropTypes.func.isRequired
+  asWrappedTransaction: PropTypes.func.isRequired,
+  setNewlyCreatedTxn: PropTypes.func.isRequired
 };
 
 export default connect(
@@ -428,6 +428,10 @@ export default connect(
     ),
     setStagedTransactionType: bindActionCreators(
       marketDataActions.setStagedTransactionType,
+      dispatch
+    ),
+    setNewlyCreatedTxn: bindActionCreators(
+      positionCreationActions.setNewlyCreatedTxn,
       dispatch
     )
   })

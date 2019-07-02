@@ -2,30 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 import Web3 from "web3";
 import Decimal from "decimal.js-light";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import OutcomesBinary from "./outcomes-binary";
-import OutcomeSelection from "./outcome-selection";
 import Spinner from "./spinner";
 import { formatProbability } from "../utils/formatting";
+import * as positionCreationActions from "../actions/positionCreation";
 
 import cn from "classnames";
 
 const { BN } = Web3.utils;
 
 const Market = ({
-  conditionId,
-
   title,
   resolutionDate,
   outcomes,
-
   lmsrState,
   resolutionState,
-
   probabilities,
   stagedProbabilities,
-
-  marketSelection,
-  setMarketSelection
+  marketIndex,
+  setOpenMarketIndex
 }) => {
   const marketStage = lmsrState && lmsrState.stage;
   const isResolved = resolutionState && resolutionState.isResolved;
@@ -92,16 +89,7 @@ const Market = ({
               }}
             />
           </section>
-          <section className={cn("selection-section")}>
-            <OutcomeSelection
-              {...{
-                outcomes,
-                conditionId,
-                marketSelection,
-                setMarketSelection
-              }}
-            />
-          </section>
+          <button onClick={() => setOpenMarketIndex(marketIndex)}>Trade</button>
         </>
       )}
     </article>
@@ -109,8 +97,6 @@ const Market = ({
 };
 
 Market.propTypes = {
-  conditionId: PropTypes.any.isRequired,
-
   title: PropTypes.string.isRequired,
   resolutionDate: PropTypes.string.isRequired,
   outcomes: PropTypes.arrayOf(
@@ -118,7 +104,6 @@ Market.propTypes = {
       title: PropTypes.string.isRequired
     }).isRequired
   ).isRequired,
-
   lmsrState: PropTypes.shape({
     stage: PropTypes.string.isRequired
   }),
@@ -126,19 +111,25 @@ Market.propTypes = {
     isResolved: PropTypes.bool.isRequired,
     payoutNumerators: PropTypes.arrayOf(PropTypes.instanceOf(BN).isRequired)
   }),
-
   probabilities: PropTypes.arrayOf(PropTypes.instanceOf(Decimal)),
-
+  marketIndex: PropTypes.number.isRequired,
+  setOpenMarketIndex: PropTypes.func.isRequired,
   stagedProbabilities: PropTypes.arrayOf(
     PropTypes.instanceOf(Decimal).isRequired
-  ),
-
-  marketSelection: PropTypes.any,
-  setMarketSelection: PropTypes.any.isRequired
+  )
 };
 
 Market.defaultProps = {
   selectedOutcomes: {}
 };
 
-export default Market;
+export default connect(
+  // @ts-ignore
+  null,
+  dispatch => ({
+    setOpenMarketIndex: bindActionCreators(
+      positionCreationActions.setOpenMarketIndex,
+      dispatch
+    )
+  })
+)(Market);

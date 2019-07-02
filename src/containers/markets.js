@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
+import cn from "classnames";
 import PropTypes from "prop-types";
 import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as marketDataActions from "../actions/marketData";
-import Market from "./market";
+import Market from "../components/market";
 
 import { zeroDecimal, oneDecimal } from "../utils/constants";
 
@@ -115,32 +116,38 @@ const Markets = ({
 
   return (
     <div>
-      {markets.map((market, i) => (
-        <Market
-          key={market.conditionId}
-          {...{
-            ...market,
-            LMSRState,
-            resolutionState:
-              marketResolutionStates != null ? marketResolutionStates[i] : null,
-            probabilities:
-              marketProbabilities != null ? marketProbabilities[i] : null,
-            stagedProbabilities:
-              marketProbabilitiesAfterStagedTrade != null
-                ? marketProbabilitiesAfterStagedTrade[i]
-                : null,
-            marketSelection:
-              marketSelections != null ? marketSelections[i] : null,
-            setMarketSelection(marketSelection) {
-              setMarketSelections(
-                marketSelections.map((originalMarketSelection, j) =>
-                  i === j ? marketSelection : originalMarketSelection
-                )
-              );
-            }
-          }}
-        />
-      ))}
+      <h1 className={cn("page-title")}>FC1LA PM</h1>
+      <section className={cn("section", "market-section")}>
+        {markets.map((market, i) => (
+          <Market
+            key={market.conditionId}
+            {...{
+              ...market,
+              LMSRState,
+              resolutionState:
+                marketResolutionStates != null
+                  ? marketResolutionStates[i]
+                  : null,
+              probabilities:
+                marketProbabilities != null ? marketProbabilities[i] : null,
+              stagedProbabilities:
+                marketProbabilitiesAfterStagedTrade != null
+                  ? marketProbabilitiesAfterStagedTrade[i]
+                  : null,
+              marketSelection:
+                marketSelections != null ? marketSelections[i] : null,
+              setMarketSelection(marketSelection) {
+                setMarketSelections(
+                  marketSelections.map((originalMarketSelection, j) =>
+                    i === j ? marketSelection : originalMarketSelection
+                  )
+                );
+              }
+            }}
+          />
+        ))}
+      </section>
+      <div className={cn("separator")} />
     </div>
   );
 };

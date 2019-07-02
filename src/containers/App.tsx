@@ -3,11 +3,12 @@ import cn from "classnames";
 import Decimal from "decimal.js-light";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import * as marketDataActions from "../actions/marketData";
-import Markets from "../components/markets";
-import BuySection from "../components/buy-section";
-import YourPositions from "../components/your-positions";
 import Spinner from "../components/spinner";
+import Markets from "./markets";
+import Positions from "./Positions";
 import { getNetworkName, loadWeb3 } from "../utils/web3-helpers.js";
 import collateralInfo from "../utils/collateral-info";
 // @ts-ignore
@@ -265,9 +266,8 @@ export interface IProps {
   setCollateral: Function,
   setMarkets: Function,
   setPositions: Function,
-  ongoingTransactionType: Object,
-  setOngoingTransactionType: Function,
-  networkId: number
+  networkId: number,
+  history: Object
 }
 
 export interface IState {
@@ -466,31 +466,8 @@ class App extends React.Component<IProps, IState> {
       });
   };
 
-  asWrappedTransaction = (wrappedTransactionType, transactionFn, setError) => {
-    return async () => {
-      const { ongoingTransactionType, setOngoingTransactionType } = this.props;
-
-      if (ongoingTransactionType !== null) {
-        throw new Error(
-          `Attempted to ${wrappedTransactionType} while transaction to ${ongoingTransactionType} is ongoing`
-        );
-      }
-
-      try {
-        setOngoingTransactionType(wrappedTransactionType);
-        await transactionFn();
-      } catch (e) {
-        setError(e);
-        throw e;
-      } finally {
-        setOngoingTransactionType(null);
-        // triggerSync();
-      }
-    };
-  };
-
   public render() {
-    const { loading, account, networkId } = this.props;
+    const { loading, networkId, history } = this.props;
 
     if (loading === "SUCCESS") {
       return (
@@ -506,30 +483,12 @@ class App extends React.Component<IProps, IState> {
                   <div className="app-main-content">
                     <div className="app-wrapper">
                       <div className="row">
-                        <h1 className={cn("page-title")}>FCLA PM</h1>
-                        <section className={cn("section", "market-section")}>
-                          <Markets />
-                        </section>
-                        <div className={cn("separator")} />
-                        <section className={cn("section", "position-section")}>
-                          {account == null ? (
-                            <>
-                              <h2 className={cn("heading")}>Note</h2>
-                              <p>
-                                Please connect an Ethereum provider to{" "}
-                                {getNetworkName(networkId)} to interact with this market.
-                              </p>
-                            </>
-                          ) : (
-                            <>
-                              <h2 className={cn("heading")}>Manage Positions</h2>
-                              <BuySection asWrappedTransaction={this.asWrappedTransaction} />
-                              <YourPositions
-                                asWrappedTransaction={this.asWrappedTransaction}
-                              />
-                            </>
-                          )}
-                        </section>
+                        <ConnectedRouter history={history}>
+                          <Switch>
+                            <Route exact path="/" component={Markets} />
+                            <Route path="/positions" component={Positions} />
+                          </Switch>
+                        </ConnectedRouter>
                       </div>
                     </div>
                   </div>
@@ -612,8 +571,6 @@ export default connect(
     stagedTradeAmounts: state.marketData.stagedTradeAmounts,
     // @ts-ignore
     stagedTransactionType: state.marketData.stagedTransactionType,
-    // @ts-ignore
-    ongoingTransactionType: state.marketData.ongoingTransactionType
   }),
   dispatch => ({
     setSyncTime: bindActionCreators(marketDataActions.setSyncTime, dispatch),
@@ -659,10 +616,6 @@ export default connect(
     ),
     setStagedTransactionType: bindActionCreators(
       marketDataActions.setStagedTransactionType,
-      dispatch
-    ),
-    setOngoingTransactionType: bindActionCreators(
-      marketDataActions.setOngoingTransactionType,
       dispatch
     )
   })

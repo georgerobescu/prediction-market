@@ -147,7 +147,7 @@ const Markets = ({
         />
       )}
 
-      <h1 className={cn("page-title")}>FC1LA PM</h1>
+      <h1 className={cn("page-title")}>FCLA PM</h1>
       <section className={cn("section", "market-section")}>
         {markets.map((market, i) => (
           <Market

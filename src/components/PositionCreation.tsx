@@ -6,6 +6,7 @@ import OutcomeSelection from "./outcome-selection";
 import BuySection from "./buy-section";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import * as marketDataActions from "../actions/marketData";
+import * as positionCreationActions from "../actions/positionCreation";
 import asWrappedTransaction from '../utils/asWrappedTransaction';
 import '../style.scss';
 
@@ -18,6 +19,9 @@ export interface IProps {
   setMarketSelection: any;
   ongoingTransactionType: Object;
   setOngoingTransactionType: Function;
+  setOpenMarketIndex: Function;
+  newlyCreatedTxn: any;
+  setNewlyCreatedTxn: Function;
 }
 
 export interface IState {
@@ -26,8 +30,14 @@ export interface IState {
 }
 
 class PositionCreation extends React.Component<IProps, IState> {
+  closeModal = () => {
+    const { setOpenMarketIndex, setNewlyCreatedTxn } = this.props;
+
+    setOpenMarketIndex(-1);
+    setNewlyCreatedTxn(null);
+  }
   public render() {
-    const { markets, openMarketIndex, probabilities, stagedProbabilities, marketSelection, setMarketSelection } = this.props;
+    const { markets, openMarketIndex, probabilities, stagedProbabilities, marketSelection, setMarketSelection, newlyCreatedTxn } = this.props;
 
     const outcomes = markets[openMarketIndex].outcomes;
     const conditionId = markets[openMarketIndex].conditionId;
@@ -37,24 +47,32 @@ class PositionCreation extends React.Component<IProps, IState> {
       <div className="text-center">
         <Modal
           isOpen={openMarketIndex >= 0}
-          toggle={() => {}}>
+          toggle={this.closeModal}>
           <ModalHeader>Create a new Position</ModalHeader>
 
           <ModalBody>
-            {title}
+            {(newlyCreatedTxn === null) &&
+              <>
+                {title}
+                <section className={cn("selection-section")}>
+                  <OutcomeSelection
+                    {...{
+                      outcomes,
+                      conditionId,
+                      marketSelection,
+                      setMarketSelection
+                    }}
+                  />
+                </section>
+                <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
+              </>
+            }
 
-            <section className={cn("selection-section")}>
-              <OutcomeSelection
-                {...{
-                  outcomes,
-                  conditionId,
-                  marketSelection,
-                  setMarketSelection
-                }}
-              />
-            </section>
-
-            <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
+            {(newlyCreatedTxn !== null) &&
+              <>
+                Success! Your position has been created. Txn: {newlyCreatedTxn.tx}
+              </>
+            }
 
           </ModalBody>
 
@@ -62,9 +80,9 @@ class PositionCreation extends React.Component<IProps, IState> {
             <div className="jr-btn-group">
               <Button
                 className="jr-btn btn-primary btn btn-success"
-                onClick={() => {}}
+                onClick={this.closeModal}
               >
-                Close
+                Done
               </Button>
             </div>
           </ModalFooter>
@@ -82,11 +100,21 @@ export default connect(
     // @ts-ignore
     openMarketIndex: state.positionCreation.openMarketIndex,
     // @ts-ignore
-    ongoingTransactionType: state.marketData.ongoingTransactionType
+    ongoingTransactionType: state.marketData.ongoingTransactionType,
+    // @ts-ignore
+    newlyCreatedTxn: state.positionCreation.newlyCreatedTxn
   }),
   dispatch => ({
     setOngoingTransactionType: bindActionCreators(
       marketDataActions.setOngoingTransactionType,
+      dispatch
+    ),
+    setOpenMarketIndex: bindActionCreators(
+      positionCreationActions.setOpenMarketIndex,
+      dispatch
+    ),
+    setNewlyCreatedTxn: bindActionCreators(
+      positionCreationActions.setNewlyCreatedTxn,
       dispatch
     )
   })

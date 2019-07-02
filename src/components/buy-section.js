@@ -37,7 +37,7 @@ function calcOutcomeTokenCounts(
   positions.forEach(({ positionIndex, outcomes }) => {
     const balance = positionBalances[positionIndex].toString();
     if (
-      outcomes.some(
+      outcomes.value.some(
         ({ marketIndex, outcomeIndex }) =>
           marketSelections[marketIndex].isAssumed &&
           outcomeIndex !== marketSelections[marketIndex].selectedOutcomeIndex
@@ -51,7 +51,7 @@ function calcOutcomeTokenCounts(
       );
       positionTypes[positionIndex] = "refunded";
     } else if (
-      outcomes.every(
+      outcomes.value.every(
         ({ marketIndex, outcomeIndex }) =>
           marketSelections[marketIndex].selectedOutcomeIndex == null ||
           outcomeIndex === marketSelections[marketIndex].selectedOutcomeIndex

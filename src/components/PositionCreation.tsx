@@ -31,6 +31,7 @@ class PositionCreation extends React.Component<IProps, IState> {
 
     const outcomes = markets[openMarketIndex].outcomes;
     const conditionId = markets[openMarketIndex].conditionId;
+    const title = markets[openMarketIndex].title;
 
     return (
       <div className="text-center">
@@ -40,15 +41,7 @@ class PositionCreation extends React.Component<IProps, IState> {
           <ModalHeader>Create a new Position</ModalHeader>
 
           <ModalBody>
-            {/* <div className="form-row">
-              <Button
-                className="jr-btn btn-primary btn btn-success"
-                onClick={() => {}}
-              >
-                Get 100 Nitrogen Tokens
-              </Button>
-            </div>
-            Please click the button above to receive 100 Nitrogen (NTN) tokens. You will then be prompted with a MetaMask transaction popup. */}
+            {title}
 
             <section className={cn("selection-section")}>
               <OutcomeSelection

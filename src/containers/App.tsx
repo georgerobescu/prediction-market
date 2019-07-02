@@ -17,6 +17,7 @@ import '../style.scss';
 
 // Design components
 import Header from './../components/Header/index';
+import Footer from './../components/Footer/index';
 
 // Functions
 async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) {
@@ -471,8 +472,6 @@ class App extends React.Component<IProps, IState> {
 
     if (loading === "SUCCESS") {
       return (
-
-        <div className="">
           <div className="app-main">
             <div className="app-container">
               <div className="app-main-container">
@@ -492,12 +491,13 @@ class App extends React.Component<IProps, IState> {
                       </div>
                     </div>
                   </div>
-                  {/* <Footer/> */}
                 </main>
+                <div className="app-footer">
+                  <Footer/>
+                </div>
               </div>
             </div>
           </div>
-        </div>
       );
     }
 

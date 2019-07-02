@@ -235,9 +235,6 @@ const BuySection = ({
     );
   }, [markets, positions, stagedTradeAmounts]);
 
-  // console.log(
-  //   asWrappedTransaction("buy outcome tokens", buyOutcomeTokens, setError)
-  // );
   return (
     <div className={cn("positions")}>
       {collateralBalance != null && (

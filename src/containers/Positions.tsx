@@ -3,9 +3,9 @@ import cn from "classnames";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as marketDataActions from "../actions/marketData";
-import BuySection from "../components/buy-section";
 import YourPositions from "../components/your-positions";
 import { getNetworkName } from "../utils/web3-helpers.js";
+import asWrappedTransaction from '../utils/asWrappedTransaction';
 import '../style.scss';
 
 export interface IProps {
@@ -20,29 +20,6 @@ export interface IState {
 }
 
 class Positions extends React.Component<IProps, IState> {
-  asWrappedTransaction = (wrappedTransactionType, transactionFn, setError) => {
-    return async () => {
-      const { ongoingTransactionType, setOngoingTransactionType } = this.props;
-
-      if (ongoingTransactionType !== null) {
-        throw new Error(
-          `Attempted to ${wrappedTransactionType} while transaction to ${ongoingTransactionType} is ongoing`
-        );
-      }
-
-      try {
-        setOngoingTransactionType(wrappedTransactionType);
-        await transactionFn();
-      } catch (e) {
-        setError(e);
-        throw e;
-      } finally {
-        setOngoingTransactionType(null);
-        // triggerSync();
-      }
-    };
-  };
-
   public render() {
     const { account, networkId } = this.props;
 
@@ -59,9 +36,8 @@ class Positions extends React.Component<IProps, IState> {
         ) : (
           <>
             <h2 className={cn("heading")}>Manage Positions</h2>
-            <BuySection asWrappedTransaction={this.asWrappedTransaction} />
             <YourPositions
-              asWrappedTransaction={this.asWrappedTransaction}
+              asWrappedTransaction={asWrappedTransaction(this.props)}
             />
           </>
         )}

@@ -1,9 +1,10 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import reducers from "../reducers/index";
-import createHistory from "history/createHashHistory";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "../sagas/index";
 import { routerMiddleware } from "connected-react-router";
+
+const createHistory = require("history").createHashHistory;
 
 const history = createHistory();
 const routeMiddleware = routerMiddleware(history);

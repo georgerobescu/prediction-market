@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as marketDataActions from "../actions/marketData";
 import Market from "../components/market";
+import PositionCreation from "../components/PositionCreation";
 
 import { zeroDecimal, oneDecimal } from "../utils/constants";
 
@@ -55,7 +56,8 @@ const Markets = ({
   LMSRState,
   marketSelections,
   setMarketSelections,
-  stagedTradeAmounts
+  stagedTradeAmounts,
+  openMarketIndex
 }) => {
   useEffect(() => {
     setMarketSelections(
@@ -116,10 +118,40 @@ const Markets = ({
 
   return (
     <div>
-      <h1 className={cn("page-title")}>FC1LA PM</h1>
+      {/* Display the position creation dialog (if it should be open) */}
+      {openMarketIndex >= 0 && (
+        <PositionCreation
+          {...{
+            probabilities:
+              marketProbabilities != null
+                ? marketProbabilities[openMarketIndex]
+                : null,
+            stagedProbabilities:
+              marketProbabilitiesAfterStagedTrade != null
+                ? marketProbabilitiesAfterStagedTrade[openMarketIndex]
+                : null,
+            marketSelection:
+              marketSelections != null
+                ? marketSelections[openMarketIndex]
+                : null,
+            setMarketSelection(marketSelection) {
+              setMarketSelections(
+                marketSelections.map((originalMarketSelection, j) =>
+                  openMarketIndex === j
+                    ? marketSelection
+                    : originalMarketSelection
+                )
+              );
+            }
+          }}
+        />
+      )}
+
+      <h1 className={cn("page-title")}>FCLA PM</h1>
       <section className={cn("section", "market-section")}>
         {markets.map((market, i) => (
           <Market
+            marketIndex={i}
             key={market.conditionId}
             {...{
               ...market,
@@ -185,7 +217,8 @@ Markets.propTypes = {
   setMarketSelections: PropTypes.func.isRequired,
   stagedTradeAmounts: PropTypes.arrayOf(
     PropTypes.instanceOf(Decimal).isRequired
-  )
+  ),
+  openMarketIndex: PropTypes.number.isRequired
 };
 
 export default connect(
@@ -195,7 +228,8 @@ export default connect(
     LMSRState: state.marketData.LMSRState,
     marketResolutionStates: state.marketData.marketResolutionStates,
     marketSelections: state.marketData.marketSelections,
-    stagedTradeAmounts: state.marketData.stagedTradeAmounts
+    stagedTradeAmounts: state.marketData.stagedTradeAmounts,
+    openMarketIndex: state.positionCreation.openMarketIndex
   }),
   dispatch => ({
     setMarketSelections: bindActionCreators(

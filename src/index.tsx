@@ -3,13 +3,13 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import App from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
-import configureStore /* , { history }*/ from "./store";
+import configureStore, { history } from "./store";
 
 export const store = configureStore();
 
 const RootComponent = () => (
   <Provider store={store}>
-    <App />
+    <App history={history} />
   </Provider>
 );
 

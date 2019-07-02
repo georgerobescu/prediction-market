@@ -9,37 +9,12 @@ import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import '../style.scss';
 
 export interface IProps {
-  // setSyncTime: Function;
-  // loading: string,
-  // syncTime: number,
-  // setLMSRState: any,
-  // setMarketResolutionStates: any,
-  // setCollateralBalance: any,
-  // setPositionBalances: any,
-  // setLMSRAllowance: any,
-  // web3: Object,
-  // PMSystem: Object,
-  // LMSRMarketMaker: Object,
-  // positions: Array<any>,
   markets: Array<any>;
   openMarketIndex: number;
   marketSelection: Array<any>;
   probabilities: Array<any>;
   stagedProbabilities: Array<any>;
   setMarketSelection: any;
-  // collateral: Object,
-  // account: string,
-  // setLoading: Function,
-  // setNetworkId: Function,
-  // setWeb3: Function,
-  // setAccount: Function,
-  // setPMSystem: Function,
-  // setLMSRMarketMaker: Function,
-  // setCollateral: Function,
-  // setMarkets: Function,
-  // setPositions: Function,
-  // networkId: number,
-  // history: Object
 }
 
 export interface IState {
@@ -62,7 +37,7 @@ class PositionCreation extends React.Component<IProps, IState> {
           <ModalHeader>Mint Nitrogen (NTN) Token from Faucet</ModalHeader>
 
           <ModalBody>
-            <div className="form-row">
+            {/* <div className="form-row">
               <Button
                 className="jr-btn btn-primary btn btn-success"
                 onClick={() => {}}
@@ -70,7 +45,7 @@ class PositionCreation extends React.Component<IProps, IState> {
                 Get 100 Nitrogen Tokens
               </Button>
             </div>
-            Please click the button above to receive 100 Nitrogen (NTN) tokens. You will then be prompted with a MetaMask transaction popup.
+            Please click the button above to receive 100 Nitrogen (NTN) tokens. You will then be prompted with a MetaMask transaction popup. */}
 
             <section className={cn("outcomes-section")}>
               <OutcomesBinary

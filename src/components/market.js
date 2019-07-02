@@ -4,6 +4,7 @@ import Web3 from "web3";
 import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import OutcomesBinary from "./outcomes-binary";
 import Spinner from "./spinner";
 import { formatProbability } from "../utils/formatting";
 import * as positionCreationActions from "../actions/positionCreation";
@@ -19,6 +20,7 @@ const Market = ({
   lmsrState,
   resolutionState,
   probabilities,
+  stagedProbabilities,
   marketIndex,
   setOpenMarketIndex
 }) => {
@@ -78,6 +80,15 @@ const Market = ({
       </section>
       {marketStage !== "Closed" && (
         <>
+          <section className={cn("outcomes-section")}>
+            <OutcomesBinary
+              {...{
+                outcomes,
+                probabilities,
+                stagedProbabilities
+              }}
+            />
+          </section>
           <button onClick={() => setOpenMarketIndex(marketIndex)}>Trade</button>
         </>
       )}
@@ -102,7 +113,10 @@ Market.propTypes = {
   }),
   probabilities: PropTypes.arrayOf(PropTypes.instanceOf(Decimal)),
   marketIndex: PropTypes.number.isRequired,
-  setOpenMarketIndex: PropTypes.func.isRequired
+  setOpenMarketIndex: PropTypes.func.isRequired,
+  stagedProbabilities: PropTypes.arrayOf(
+    PropTypes.instanceOf(Decimal).isRequired
+  )
 };
 
 Market.defaultProps = {

@@ -2,7 +2,6 @@ import * as React from 'react';
 import cn from "classnames";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import OutcomesBinary from "./outcomes-binary";
 import OutcomeSelection from "./outcome-selection";
 import BuySection from "./buy-section";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
@@ -38,7 +37,7 @@ class PositionCreation extends React.Component<IProps, IState> {
         <Modal
           isOpen={openMarketIndex >= 0}
           toggle={() => {}}>
-          <ModalHeader>Mint Nitrogen (NTN) Token from Faucet</ModalHeader>
+          <ModalHeader>Create a new Position</ModalHeader>
 
           <ModalBody>
             {/* <div className="form-row">
@@ -51,15 +50,6 @@ class PositionCreation extends React.Component<IProps, IState> {
             </div>
             Please click the button above to receive 100 Nitrogen (NTN) tokens. You will then be prompted with a MetaMask transaction popup. */}
 
-            <section className={cn("outcomes-section")}>
-              <OutcomesBinary
-                {...{
-                  outcomes,
-                  probabilities,
-                  stagedProbabilities
-                }}
-              />
-            </section>
             <section className={cn("selection-section")}>
               <OutcomeSelection
                 {...{

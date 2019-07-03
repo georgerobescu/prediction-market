@@ -47,32 +47,81 @@ const Market = ({
       <div className="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
         <h2 className="title mb-3 mb-sm-0">PM FCLA</h2>
       </div>
-      <div className="jr-card p-0 border-0">
-        <div className="jr-card-body ">
-          <ul className="overflow-hidden list-group">
-            <li className="d-flex align-items-center list-group-item-action list-group-item">
-              <span className="mr-3">
-                <img
-                  className="user-avatar size-50"
-                  alt="Remy Sharp"
-                  src="assets/images/marketImage.jpg"
-                ></img>
-              </span>
-              <p className="br-break mb-0 list-group-item-text">
-                Market LOOPINg
-              </p>
-              <div className="form-checkbox ml-auto mt-2">
-                <input type="checkbox" color="primary"></input>
-                <span className="check">
-                  <i className="zmdi zmdi-check zmdi-hc-lg"></i>
-                </span>
-              </div>
-            </li>
-          </ul>
+      <div className="row mb-md-6">
+        <div className="col-lg-6 col-md-6 col-6 mb-md-6">
+          <div className="jr-card p-0 border-0">
+            <div className="jr-card-body ">
+              <ul className="overflow-hidden list-group">
+                <li className="d-flex align-items-center list-group-item-action list-group-item">
+                  <span className="mr-3">
+                    <img
+                      className="user-avatar size-50"
+                      alt="EcoTree"
+                      src="assets/images/marketImage.jpg"
+                    ></img>
+                  </span>
+                  <p className="br-break mb-0 list-group-item-text">{title}</p>
+                  <div className="form-checkbox ml-auto mt-2">
+                    <input type="checkbox" color="primary"></input>
+                    <span className="check">
+                      <i className="zmdi zmdi-check zmdi-hc-lg"></i>
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-3 col-md-3 col-3 mb-md-3">
+          <div className="jr-card p-0 border-0">
+            <div className="jr-card-body ">
+              <ul className="overflow-hidden list-group">
+                <li className="d-flex align-items-center list-group-item-action list-group-item">
+                  <span className="mr-3">
+                    <img
+                      className="user-avatar size-50"
+                      alt="EcoTree"
+                      src="assets/images/marketImage.jpg"
+                    ></img>
+                  </span>
+                  <p className="br-break mb-0 list-group-item-text">{title}</p>
+                  <div className="form-checkbox ml-auto mt-2">
+                    <input type="checkbox" color="primary"></input>
+                    <span className="check">
+                      <i className="zmdi zmdi-check zmdi-hc-lg"></i>
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-3 col-md-3 col-3 mb-md-3">
+          <div className="jr-card p-0 border-0">
+            <div className="jr-card-body ">
+              <ul className="overflow-hidden list-group">
+                <li className="d-flex align-items-center list-group-item-action list-group-item">
+                  <span className="mr-3">
+                    <img
+                      className="user-avatar size-50"
+                      alt="EcoTree"
+                      src="assets/images/marketImage.jpg"
+                    ></img>
+                  </span>
+                  <p className="br-break mb-0 list-group-item-text">{title}</p>
+                  <div className="form-checkbox ml-auto mt-2">
+                    <input type="checkbox" color="primary"></input>
+                    <span className="check">
+                      <i className="zmdi zmdi-check zmdi-hc-lg"></i>
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <section className={cn("title-section")}>
-        <h2 className={cn("title")}>{title}</h2>
         <div className={cn("title-infos")}>
           {marketStage !== "Closed" && (
             <div className={cn("title-info")}>

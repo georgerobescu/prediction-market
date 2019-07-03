@@ -42,12 +42,12 @@ const Market = ({
 
   return (
     <>
-      <div className="row mb-md-4">
-        <div className="col-lg-8 col-md-8 col-8 mb-md-8">
-          <div className="jr-card p-0 border-0">
+      <div className="row mt-4">
+        <div className="col-lg-8 col-md-8 col-12 col-sm-12">
+          <div className="jr-card p-0 jr-card-full-height">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">
-                <li className="d-flex align-items-center list-group-item-action list-group-item">
+                <li className="d-flex align-items-center list-group-item-action list-group-item border-0">
                   <span className="mr-3">
                     <img
                       className="user-avatar size-50"
@@ -57,29 +57,29 @@ const Market = ({
                   </span>
                   <p className="br-break mb-0 list-group-item-text">{title}</p>
                 </li>
+                <li className="d-flex align-items-center list-group-item-action list-group-item border-left-0 border-right-0 border-bottom-0">
+                  {marketStage !== "Closed" && (
+                    <>
+                      <OutcomesBinary
+                        {...{
+                          outcomes,
+                          probabilities,
+                          stagedProbabilities
+                        }}
+                      />
+                    </>
+                  )}
+                </li>
               </ul>
             </div>
-            {marketStage !== "Closed" && (
-              <>
-                <div className="">
-                  <OutcomesBinary
-                    {...{
-                      outcomes,
-                      probabilities,
-                      stagedProbabilities
-                    }}
-                  />
-                </div>
-              </>
-            )}
           </div>
         </div>
-        <div className="col-lg-2 col-md-2 col-2 mb-md-2">
-          <div className="jr-card p-0 border-0">
+        <div className="col-lg-2 col-md-2 col-12 col-sm-6">
+          <div className="jr-card p-0 jr-card-full-height">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">
                 {marketStage !== "Closed" && (
-                  <li className="d-flex align-items-center list-group-item-action list-group-item">
+                  <li className="d-flex align-items-center list-group-item-action list-group-item border-0">
                     <div className="text-sm-center col pl-0 pr-0">
                       <button
                         className="jr-btn jr-btn-xs btn btn-primary"
@@ -90,7 +90,7 @@ const Market = ({
                     </div>
                   </li>
                 )}
-                <li className="d-flex align-items-center list-group-item-action list-group-item">
+                <li className="d-flex align-items-center list-group-item-action list-group-item border-left-0 border-right-0 border-bottom-0">
                   {isResolved ? (
                     <div className="col">
                       <div className="row">Reported Outcome</div>
@@ -113,31 +113,33 @@ const Market = ({
             </div>
           </div>
         </div>
-        <div className="col-lg-2 col-md-2 col-2 mb-md-2">
-          <div className="jr-card p-0 border-0">
+        <div className="col-lg-2 col-md-2 col-12 col-sm-6">
+          <div className="jr-card p-0 jr-card-full-height">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">
-                <li className="d-flex align-items-center list-group-item-action list-group-item">
-                  <div className="">
-                    {marketStage !== "Closed" && (
-                      <div className="">
-                        <h3 className="">Probability</h3>
-                        <h3 className="">
-                          {probabilities == null ? (
-                            <Spinner width={25} height={25} />
-                          ) : (
-                            formatProbability(probabilities[0])
-                          )}
-                        </h3>
-                      </div>
-                    )}
-                  </div>
+                {marketStage !== "Closed" && (
+                  <li className="d-flex align-items-center list-group-item-action list-group-item border-0">
+                    <div className="">
+                      <h3 className="">Probability</h3>
+                      <h3 className="">
+                        {probabilities == null ? (
+                          <Spinner width={25} height={25} />
+                        ) : (
+                          formatProbability(probabilities[0])
+                        )}
+                      </h3>
+                    </div>
+                  </li>
+                )}
+                <li className="d-flex align-items-center list-group-item-action list-group-item border-left-0 border-right-0 border-bottom-0">
+                  Some other shit
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
+      <div className="col-12 jr-card p-0 border-bottom-0 m-0" />
     </>
   );
 };

@@ -9,8 +9,6 @@ import Spinner from "./spinner";
 import { formatProbability } from "../utils/formatting";
 import * as positionCreationActions from "../actions/positionCreation";
 
-import cn from "classnames";
-
 const { BN } = Web3.utils;
 
 const Market = ({
@@ -61,59 +59,79 @@ const Market = ({
                     ></img>
                   </span>
                   <p className="br-break mb-0 list-group-item-text">{title}</p>
-                  <div className="form-checkbox ml-auto mt-2">
-                    <input type="checkbox" color="primary"></input>
-                    <span className="check">
-                      <i className="zmdi zmdi-check zmdi-hc-lg"></i>
-                    </span>
-                  </div>
+                </li>
+              </ul>
+            </div>
+            {marketStage !== "Closed" && (
+              <>
+                <div className="">
+                  <OutcomesBinary
+                    {...{
+                      outcomes,
+                      probabilities,
+                      stagedProbabilities
+                    }}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="col-lg-2 col-md-2 col-2 mb-md-2">
+          <div className="jr-card p-0 border-0">
+            <div className="jr-card-body ">
+              <ul className="overflow-hidden list-group">
+                <li className="d-flex align-items-center list-group-item-action list-group-item">
+                  {marketStage !== "Closed" && (
+                    <>
+                      <button
+                        className="jr-btn jr-btn-xs btn btn-primary"
+                        onClick={() => setOpenMarketIndex(marketIndex)}
+                      >
+                        <span>Trade</span>
+                      </button>
+                    </>
+                  )}
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="col-lg-3 col-md-3 col-3 mb-md-3">
+        <div className="col-lg-4 col-md-4 col-4 mb-md-4">
           <div className="jr-card p-0 border-0">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">
                 <li className="d-flex align-items-center list-group-item-action list-group-item">
-                  <span className="mr-3">
-                    <img
-                      className="user-avatar size-50"
-                      alt="EcoTree"
-                      src="assets/images/marketImage.jpg"
-                    ></img>
-                  </span>
-                  <p className="br-break mb-0 list-group-item-text">{title}</p>
-                  <div className="form-checkbox ml-auto mt-2">
-                    <input type="checkbox" color="primary"></input>
-                    <span className="check">
-                      <i className="zmdi zmdi-check zmdi-hc-lg"></i>
-                    </span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-3 col-md-3 col-3 mb-md-3">
-          <div className="jr-card p-0 border-0">
-            <div className="jr-card-body ">
-              <ul className="overflow-hidden list-group">
-                <li className="d-flex align-items-center list-group-item-action list-group-item">
-                  <span className="mr-3">
-                    <img
-                      className="user-avatar size-50"
-                      alt="EcoTree"
-                      src="assets/images/marketImage.jpg"
-                    ></img>
-                  </span>
-                  <p className="br-break mb-0 list-group-item-text">{title}</p>
-                  <div className="form-checkbox ml-auto mt-2">
-                    <input type="checkbox" color="primary"></input>
-                    <span className="check">
-                      <i className="zmdi zmdi-check zmdi-hc-lg"></i>
-                    </span>
+                  <div className="">
+                    {marketStage !== "Closed" && (
+                      <div className="">
+                        <h3 className="">Probability</h3>
+                        <h3 className="">
+                          {probabilities == null ? (
+                            <Spinner width={25} height={25} />
+                          ) : (
+                            formatProbability(probabilities[0])
+                          )}
+                        </h3>
+                      </div>
+                    )}
+                    {isResolved ? (
+                      <div className="">
+                        <h3 className="">Reported Outcome</h3>
+                        <h3 className="">
+                          {resultOutcomeIndex != null
+                            ? outcomes[resultOutcomeIndex].title
+                            : "Mixed"}
+                        </h3>
+                      </div>
+                    ) : (
+                      <div className="">
+                        <h3 className="">Resolves</h3>
+                        <h3 className="">
+                          {new Date(resolutionDate).toLocaleString()}
+                        </h3>
+                      </div>
+                    )}
                   </div>
                 </li>
               </ul>
@@ -121,53 +139,6 @@ const Market = ({
           </div>
         </div>
       </div>
-      <section className={cn("title-section")}>
-        <div className={cn("title-infos")}>
-          {marketStage !== "Closed" && (
-            <div className={cn("title-info")}>
-              <h3 className={cn("label")}>Probability</h3>
-              <h3 className={cn("value")}>
-                {probabilities == null ? (
-                  <Spinner width={25} height={25} />
-                ) : (
-                  formatProbability(probabilities[0])
-                )}
-              </h3>
-            </div>
-          )}
-          {isResolved ? (
-            <div className={cn("title-info")}>
-              <h3 className={cn("label")}>Reported Outcome</h3>
-              <h3 className={cn("value", "centered")}>
-                {resultOutcomeIndex != null
-                  ? outcomes[resultOutcomeIndex].title
-                  : "Mixed"}
-              </h3>
-            </div>
-          ) : (
-            <div className={cn("title-info")}>
-              <h3 className={cn("label")}>Resolves</h3>
-              <h3 className={cn("value")}>
-                {new Date(resolutionDate).toLocaleString()}
-              </h3>
-            </div>
-          )}
-        </div>
-      </section>
-      {marketStage !== "Closed" && (
-        <>
-          <section className={cn("outcomes-section")}>
-            <OutcomesBinary
-              {...{
-                outcomes,
-                probabilities,
-                stagedProbabilities
-              }}
-            />
-          </section>
-          <button onClick={() => setOpenMarketIndex(marketIndex)}>Trade</button>
-        </>
-      )}
     </div>
   );
 };

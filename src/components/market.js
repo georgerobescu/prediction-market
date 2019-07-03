@@ -41,10 +41,7 @@ const Market = ({
   }
 
   return (
-    <div className="">
-      <div className="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
-        <h2 className="title mb-3 mb-sm-0">PM FCLA</h2>
-      </div>
+    <>
       <div className="row mb-md-4">
         <div className="col-lg-8 col-md-8 col-8 mb-md-8">
           <div className="jr-card p-0 border-0">
@@ -81,16 +78,35 @@ const Market = ({
           <div className="jr-card p-0 border-0">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">
-                <li className="d-flex align-items-center list-group-item-action list-group-item">
-                  {marketStage !== "Closed" && (
-                    <>
+                {marketStage !== "Closed" && (
+                  <li className="d-flex align-items-center list-group-item-action list-group-item">
+                    <div className="text-sm-center col pl-0 pr-0">
                       <button
                         className="jr-btn jr-btn-xs btn btn-primary"
                         onClick={() => setOpenMarketIndex(marketIndex)}
                       >
                         <span>Trade</span>
                       </button>
-                    </>
+                    </div>
+                  </li>
+                )}
+                <li className="d-flex align-items-center list-group-item-action list-group-item">
+                  {isResolved ? (
+                    <div className="col">
+                      <div className="row">Reported Outcome</div>
+                      <div className="row">
+                        {resultOutcomeIndex != null
+                          ? outcomes[resultOutcomeIndex].title
+                          : "Mixed"}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="col">
+                      <div className="row">Resolves</div>
+                      <div className="row">
+                        {new Date(resolutionDate).toLocaleString()}
+                      </div>
+                    </div>
                   )}
                 </li>
               </ul>
@@ -115,23 +131,6 @@ const Market = ({
                         </h3>
                       </div>
                     )}
-                    {isResolved ? (
-                      <div className="">
-                        <h3 className="">Reported Outcome</h3>
-                        <h3 className="">
-                          {resultOutcomeIndex != null
-                            ? outcomes[resultOutcomeIndex].title
-                            : "Mixed"}
-                        </h3>
-                      </div>
-                    ) : (
-                      <div className="">
-                        <h3 className="">Resolves</h3>
-                        <h3 className="">
-                          {new Date(resolutionDate).toLocaleString()}
-                        </h3>
-                      </div>
-                    )}
                   </div>
                 </li>
               </ul>
@@ -139,7 +138,7 @@ const Market = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

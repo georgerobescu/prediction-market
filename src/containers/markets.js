@@ -117,7 +117,7 @@ const Markets = ({
   }
 
   return (
-    <div>
+    <>
       {/* Display the position creation dialog (if it should be open) */}
       {openMarketIndex >= 0 && (
         <PositionCreation
@@ -146,41 +146,46 @@ const Markets = ({
           }}
         />
       )}
-
-      <h1 className={cn("page-title")}>FCLA PM</h1>
-      <section className={cn("section", "market-section")}>
-        {markets.map((market, i) => (
-          <Market
-            marketIndex={i}
-            key={market.conditionId}
-            {...{
-              ...market,
-              LMSRState,
-              resolutionState:
-                marketResolutionStates != null
-                  ? marketResolutionStates[i]
-                  : null,
-              probabilities:
-                marketProbabilities != null ? marketProbabilities[i] : null,
-              stagedProbabilities:
-                marketProbabilitiesAfterStagedTrade != null
-                  ? marketProbabilitiesAfterStagedTrade[i]
-                  : null,
-              marketSelection:
-                marketSelections != null ? marketSelections[i] : null,
-              setMarketSelection(marketSelection) {
-                setMarketSelections(
-                  marketSelections.map((originalMarketSelection, j) =>
-                    i === j ? marketSelection : originalMarketSelection
-                  )
-                );
-              }
-            }}
-          />
-        ))}
-      </section>
-      <div className={cn("separator")} />
-    </div>
+      <div className="row">
+        <div className="col-sm-12">
+          <h1 className={cn("page-title")}>FCLA PM</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className={cn("section", "market-section") + " col-sm-12"}>
+          {markets.map((market, i) => (
+            <Market
+              marketIndex={i}
+              key={market.conditionId}
+              {...{
+                ...market,
+                LMSRState,
+                resolutionState:
+                  marketResolutionStates != null
+                    ? marketResolutionStates[i]
+                    : null,
+                probabilities:
+                  marketProbabilities != null ? marketProbabilities[i] : null,
+                stagedProbabilities:
+                  marketProbabilitiesAfterStagedTrade != null
+                    ? marketProbabilitiesAfterStagedTrade[i]
+                    : null,
+                marketSelection:
+                  marketSelections != null ? marketSelections[i] : null,
+                setMarketSelection(marketSelection) {
+                  setMarketSelections(
+                    marketSelections.map((originalMarketSelection, j) =>
+                      i === j ? marketSelection : originalMarketSelection
+                    )
+                  );
+                }
+              }}
+            />
+          ))}
+        </div>
+        <div className={cn("separator")} />
+      </div>
+    </>
   );
 };
 

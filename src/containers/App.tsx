@@ -481,14 +481,12 @@ class App extends React.Component<IProps, IState> {
                 <main className="app-main-content-wrapper">
                   <div className="app-main-content">
                     <div className="app-wrapper">
-                      <div className="row">
-                        <ConnectedRouter history={history}>
-                          <Switch>
-                            <Route exact path="/" component={Markets} />
-                            <Route path="/positions" component={Positions} />
-                          </Switch>
-                        </ConnectedRouter>
-                      </div>
+                      <ConnectedRouter history={history}>
+                        <Switch>
+                          <Route exact path="/" component={Markets} />
+                          <Route path="/positions" component={Positions} />
+                        </Switch>
+                      </ConnectedRouter>
                     </div>
                   </div>
                 </main>

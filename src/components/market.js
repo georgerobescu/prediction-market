@@ -45,8 +45,8 @@ const Market = ({
       <div className="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
         <h2 className="title mb-3 mb-sm-0">PM FCLA</h2>
       </div>
-      <div className="row mb-md-6">
-        <div className="col-lg-6 col-md-6 col-6 mb-md-6">
+      <div className="row mb-md-4">
+        <div className="col-lg-8 col-md-8 col-8 mb-md-8">
           <div className="jr-card p-0 border-0">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">
@@ -97,7 +97,7 @@ const Market = ({
             </div>
           </div>
         </div>
-        <div className="col-lg-4 col-md-4 col-4 mb-md-4">
+        <div className="col-lg-2 col-md-2 col-2 mb-md-2">
           <div className="jr-card p-0 border-0">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">

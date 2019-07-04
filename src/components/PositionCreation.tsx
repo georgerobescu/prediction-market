@@ -63,8 +63,9 @@ class PositionCreation extends React.Component<IProps, IState> {
               <div className="jr-card-body">
 
                 {(newlyCreatedTxn === null) &&
-                  <>
-                    <section className={cn("selection-section")}>
+                  <div className="row">
+                    <div className={cn("outcome-selection") + " col-0 col-md-3"} />
+                    <div className={cn("outcome-selection") + " col-12 col-md-6"}>
                       <OutcomeSelection
                         {...{
                           outcomes,
@@ -73,9 +74,9 @@ class PositionCreation extends React.Component<IProps, IState> {
                           setMarketSelection
                         }}
                       />
-                    </section>
-                    <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
-                  </>
+                      <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
+                    </div>
+                  </div>
                 }
 
                 {(newlyCreatedTxn !== null) &&
@@ -92,10 +93,10 @@ class PositionCreation extends React.Component<IProps, IState> {
           <ModalFooter>
             <div className="jr-btn-group">
               <Button
-                className="jr-btn btn-primary btn btn-success"
+                className="jr-btn btn-primary btn btn-success mb-0"
                 onClick={this.closeModal}
               >
-                Done
+                Close
               </Button>
             </div>
           </ModalFooter>

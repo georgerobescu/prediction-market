@@ -35,7 +35,6 @@ class Positions extends React.Component<IProps, IState> {
           </>
         ) : (
           <>
-            <h2 className={cn("heading")}>Manage Positions</h2>
             <YourPositions
               asWrappedTransaction={asWrappedTransaction(this.props)}
             />

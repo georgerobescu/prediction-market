@@ -4,20 +4,6 @@ The original fully FCLA decentralized prediction markets.
 ## Code Structure
 FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-market core which has been completely rewritten to use React modern build setup with no configuration, typescript, drizzle, redux and proper components architecture. 
 
-## Development Instructions
-
-1. Run `yarn install`
-2. In a separate terminal, run `ganache-cli -d`
-3. Run `npm run migrate`
-4. Start the dev server with `npm start`
-
-It will generate a build folder inside the root with the styles, JS assets and contracts.
-
-## Debug Instructions
-
-Run `npm run build-css` generate CSS assets separately.
-Run `npm run build-js` to generate JS assets separately.
-
 ## Workflow
 
 ### PM Dashboard workflow
@@ -34,6 +20,21 @@ Run `npm run build-js` to generate JS assets separately.
 1. Carbon credits 
 2. Ice Melting
 3. Coffee production
+
+
+## Development Instructions
+
+1. Run `yarn install`
+2. In a separate terminal, run `ganache-cli -d`
+3. Run `npm run migrate`
+4. Start the dev server with `npm start`
+
+It will generate a build folder inside the root with the styles, JS assets and contracts.
+
+## Debug Instructions
+
+Run `npm run build-css` generate CSS assets separately.
+Run `npm run build-js` to generate JS assets separately.
 
 ### Running Helper Scripts
 

@@ -44,33 +44,41 @@ const OutcomesBinary = ({ probabilities, stagedProbabilities }) => {
           </div>
         </div>
         {shouldDisplayStagedProbability && (
-          <div
-            className={cn("inner-bar", "staged", {
-              inverted: stagedProbability.lt(probability),
-              "shift-left": estimatedHintPosition.lt(".2"),
-              "shift-right": estimatedHintPosition.gt(".8")
-            })}
-            style={{
-              backgroundColor: color,
-              borderColor: color,
-              left: stagedProbability.gt(probability)
-                ? formatProbability(probability)
-                : "auto",
-              right: stagedProbability.lt(probability)
-                ? formatProbability(oneDecimal.sub(probability))
-                : "auto",
-              width: formatProbability(absStagedProbabilityDifference)
-            }}
-          >
-            {shouldDisplayStagedProbability && (
+          <>
+            <div
+              className={
+                cn("inner-bar", "staged", {
+                  inverted: stagedProbability.lt(probability),
+                  "shift-left": estimatedHintPosition.lt(".2"),
+                  "shift-right": estimatedHintPosition.gt(".8")
+                }) + " d-inline-block"
+              }
+              style={{
+                backgroundColor: color,
+                borderColor: color,
+                left: stagedProbability.gt(probability)
+                  ? formatProbability(probability)
+                  : "auto",
+                right: stagedProbability.lt(probability)
+                  ? formatProbability(oneDecimal.sub(probability))
+                  : "auto",
+                width: formatProbability(absStagedProbabilityDifference)
+              }}
+            >
+              <div className={cn("hint")}>
+                <span className={cn("text")}>-</span>
+              </div>
+            </div>
+
+            <div className={"d-inline-block"}>
               <div className={cn("hint") + " text-center"}>
-                <span className={cn("text") + " text-secondary"}>
+                <span className={cn("text") + " pl-1"}>
                   <small>PREDICTED CHANGE</small>{" "}
                   {formatProbability(stagedProbabilityDifference)}
                 </span>
               </div>
-            )}
-          </div>
+            </div>
+          </>
         )}
       </div>
     </div>

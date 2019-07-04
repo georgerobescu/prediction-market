@@ -51,28 +51,41 @@ class PositionCreation extends React.Component<IProps, IState> {
           <ModalHeader>Create a new Position</ModalHeader>
 
           <ModalBody>
-            {(newlyCreatedTxn === null) &&
-              <>
-                {title}
-                <section className={cn("selection-section")}>
-                  <OutcomeSelection
-                    {...{
-                      outcomes,
-                      conditionId,
-                      marketSelection,
-                      setMarketSelection
-                    }}
-                  />
-                </section>
-                <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
-              </>
-            }
 
-            {(newlyCreatedTxn !== null) &&
-              <>
-                Success! Your position has been created. Txn: {newlyCreatedTxn.tx}
-              </>
-            }
+            <div className="jr-card bg-white border-0 p-0 m-0">
+
+              <div className="jr-card-header">
+                <h3 className="card-heading">
+                  <span>{title}</span>
+                </h3>
+              </div>
+
+              <div className="jr-card-body">
+
+                {(newlyCreatedTxn === null) &&
+                  <>
+                    <section className={cn("selection-section")}>
+                      <OutcomeSelection
+                        {...{
+                          outcomes,
+                          conditionId,
+                          marketSelection,
+                          setMarketSelection
+                        }}
+                      />
+                    </section>
+                    <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
+                  </>
+                }
+
+                {(newlyCreatedTxn !== null) &&
+                  <>
+                    Success! Your position has been created. Txn: {newlyCreatedTxn.tx}
+                  </>
+                }
+
+              </div>
+            </div>
 
           </ModalBody>
 

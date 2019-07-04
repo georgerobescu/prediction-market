@@ -156,6 +156,7 @@ const Markets = ({
           {markets.map((market, i) => (
             <Market
               marketIndex={i}
+              lastMarketListed={i === markets.length - 1}
               key={market.conditionId}
               {...{
                 ...market,

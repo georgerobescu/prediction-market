@@ -21,7 +21,9 @@ const Market = ({
   stagedProbabilities,
   marketIndex,
   setOpenMarketIndex,
-  oracle
+  oracle,
+  lastMarketListed,
+  icon
 }) => {
   const marketStage = lmsrState && lmsrState.stage;
   const isResolved = resolutionState && resolutionState.isResolved;
@@ -52,8 +54,8 @@ const Market = ({
                   <span className="mr-3">
                     <img
                       className="user-avatar size-50"
-                      alt="EcoTree"
-                      src="assets/images/marketImage.jpg"
+                      alt="Market Icon"
+                      src={icon}
                     ></img>
                   </span>
                   <p className="br-break mb-0 list-group-item-text">{title}</p>
@@ -149,7 +151,9 @@ const Market = ({
           </div>
         </div>
       </div>
-      <div className="col-12 jr-card p-0 border-bottom-0 m-0" />
+      {!lastMarketListed && (
+        <div className="col-12 jr-card p-0 border-bottom-0 m-0" />
+      )}
     </>
   );
 };
@@ -175,7 +179,9 @@ Market.propTypes = {
   stagedProbabilities: PropTypes.arrayOf(
     PropTypes.instanceOf(Decimal).isRequired
   ),
-  oracle: PropTypes.string.isRequired
+  oracle: PropTypes.string.isRequired,
+  lastMarketListed: PropTypes.bool.isRequired,
+  icon: PropTypes.string.isRequired
 };
 
 Market.defaultProps = {

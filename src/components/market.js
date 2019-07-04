@@ -20,7 +20,8 @@ const Market = ({
   probabilities,
   stagedProbabilities,
   marketIndex,
-  setOpenMarketIndex
+  setOpenMarketIndex,
+  oracle
 }) => {
   const marketStage = lmsrState && lmsrState.stage;
   const isResolved = resolutionState && resolutionState.isResolved;
@@ -119,20 +120,29 @@ const Market = ({
               <ul className="overflow-hidden list-group">
                 {marketStage !== "Closed" && (
                   <li className="d-flex align-items-center list-group-item-action list-group-item border-0">
-                    <div className="">
-                      <h3 className="">Probability</h3>
-                      <h3 className="">
+                    <div className="row col-sm-12 ml-sm-0 pl-md-0 pr-md-0">
+                      <div className="col-6 text-right pl-md-0 pr-md-1">
+                        Probability:
+                      </div>
+                      <div className="col-6 text-left pl-md-1 pr-md-0">
                         {probabilities == null ? (
                           <Spinner width={25} height={25} />
                         ) : (
                           formatProbability(probabilities[0])
                         )}
-                      </h3>
+                      </div>
                     </div>
                   </li>
                 )}
                 <li className="d-flex align-items-center list-group-item-action list-group-item border-left-0 border-right-0 border-bottom-0">
-                  Some other shit
+                  <div className="row col-sm-12 ml-sm-0 pl-md-0 pr-md-0">
+                    <div className="col-6 text-right pl-md-0 pr-md-1">
+                      Probability:
+                    </div>
+                    <div className="col-6 text-left pl-md-1 pr-md-0">
+                      {oracle}
+                    </div>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -164,7 +174,8 @@ Market.propTypes = {
   setOpenMarketIndex: PropTypes.func.isRequired,
   stagedProbabilities: PropTypes.arrayOf(
     PropTypes.instanceOf(Decimal).isRequired
-  )
+  ),
+  oracle: PropTypes.string.isRequired
 };
 
 Market.defaultProps = {

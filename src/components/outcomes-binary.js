@@ -27,7 +27,7 @@ const OutcomesBinary = ({ probabilities, stagedProbabilities }) => {
   }
 
   return (
-    <div className={cn("binary-outcome")}>
+    <div className={cn("binary-outcome") + " col-12 p-0"}>
       <div className={cn("bar")} style={{ color }}>
         <div
           className={cn("inner-bar", "current")}
@@ -37,8 +37,8 @@ const OutcomesBinary = ({ probabilities, stagedProbabilities }) => {
             width: probability != null ? formatProbability(probability) : "50%"
           }}
         >
-          <div className={cn("hint")}>
-            <span className={cn("text")}>
+          <div className={cn("hint") + " text-center"}>
+            <span className={cn("text") + " text-secondary"}>
               {probability != null ? formatProbability(probability) : "?"}
             </span>
           </div>
@@ -63,8 +63,8 @@ const OutcomesBinary = ({ probabilities, stagedProbabilities }) => {
             }}
           >
             {shouldDisplayStagedProbability && (
-              <div className={cn("hint")}>
-                <span className={cn("text")}>
+              <div className={cn("hint") + " text-center"}>
+                <span className={cn("text") + " text-secondary"}>
                   <small>PREDICTED CHANGE</small>{" "}
                   {formatProbability(stagedProbabilityDifference)}
                 </span>

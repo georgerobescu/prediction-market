@@ -139,7 +139,7 @@ const Market = ({
                 <li className="d-flex align-items-center list-group-item-action list-group-item border-left-0 border-right-0 border-bottom-0">
                   <div className="row col-sm-12 ml-sm-0 pl-md-0 pr-md-0">
                     <div className="col-6 text-right pl-md-0 pr-md-1">
-                      Probability:
+                      Oracles:
                     </div>
                     <div className="col-6 text-left pl-md-1 pr-md-0">
                       {oracle}

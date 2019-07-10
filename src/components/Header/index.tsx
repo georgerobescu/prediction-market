@@ -1,5 +1,7 @@
 import Menu from "./Menu";
-import * as React from 'react';;
+import * as React from 'react';
+import CurrentNetwork from './../CurrentNetwork';
+import Web3Status from './../Web3Status';
 
 class Header extends React.Component {
   public render() {
@@ -16,10 +18,10 @@ class Header extends React.Component {
 
           <ul className="header-notifications list-inline ml-auto">
               <li className="list-inline-item user-nav">
+                <Web3Status />
               </li>
               <li className="list-inline-item user-nav">
-              </li>
-              <li className="list-inline-item user-nav">
+                <CurrentNetwork />
               </li>
           </ul>
         </div>

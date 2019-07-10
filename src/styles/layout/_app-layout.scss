@@ -29,7 +29,10 @@
 .app-header {
   min-height: $app-bar-height;
   z-index: 99;
-  position: relative;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
 .app-main-content-wrapper {
@@ -38,6 +41,7 @@
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-top: $app-bar-height;
 }
 
 .app-container {

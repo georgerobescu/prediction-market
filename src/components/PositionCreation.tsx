@@ -51,38 +51,52 @@ class PositionCreation extends React.Component<IProps, IState> {
           <ModalHeader>Create a new Position</ModalHeader>
 
           <ModalBody>
-            {(newlyCreatedTxn === null) &&
-              <>
-                {title}
-                <section className={cn("selection-section")}>
-                  <OutcomeSelection
-                    {...{
-                      outcomes,
-                      conditionId,
-                      marketSelection,
-                      setMarketSelection
-                    }}
-                  />
-                </section>
-                <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
-              </>
-            }
 
-            {(newlyCreatedTxn !== null) &&
-              <>
-                Success! Your position has been created. Txn: {newlyCreatedTxn.tx}
-              </>
-            }
+            <div className="jr-card bg-white border-0 p-0 m-0">
+
+              <div className="jr-card-header">
+                <h3 className="card-heading">
+                  <span>{title}</span>
+                </h3>
+              </div>
+
+              <div className="jr-card-body">
+
+                {(newlyCreatedTxn === null) &&
+                  <div className="row">
+                    <div className={cn("outcome-selection") + " col-0 col-md-3"} />
+                    <div className={cn("outcome-selection") + " col-12 col-md-6"}>
+                      <OutcomeSelection
+                        {...{
+                          outcomes,
+                          conditionId,
+                          marketSelection,
+                          setMarketSelection
+                        }}
+                      />
+                      <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
+                    </div>
+                  </div>
+                }
+
+                {(newlyCreatedTxn !== null) &&
+                  <>
+                    Success! Your position has been created. Txn: {newlyCreatedTxn.tx}
+                  </>
+                }
+
+              </div>
+            </div>
 
           </ModalBody>
 
           <ModalFooter>
             <div className="jr-btn-group">
               <Button
-                className="jr-btn btn-primary btn btn-success"
+                className="jr-btn btn-primary btn btn-success mb-0"
                 onClick={this.closeModal}
               >
-                Done
+                Close
               </Button>
             </div>
           </ModalFooter>

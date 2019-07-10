@@ -11,8 +11,6 @@ import { maxUint256BN, zeroDecimal } from "../utils/constants";
 import { formatCollateral } from "../utils/formatting";
 import { calcPositionGroups } from "../utils/position-groups";
 
-import cn from "classnames";
-
 function calcOutcomeTokenCounts(
   positions,
   { funding, positionBalances },
@@ -116,7 +114,8 @@ const BuySection = ({
   setStagedTransactionType,
   ongoingTransactionType,
   asWrappedTransaction,
-  setNewlyCreatedTxn
+  setNewlyCreatedTxn,
+  openMarketIndex
 }) => {
   const [investmentAmount, setInvestmentAmount] = useState("");
   const [error, setError] = useState(null);
@@ -238,40 +237,76 @@ const BuySection = ({
   }, [markets, positions, stagedTradeAmounts]);
 
   return (
-    <div className={cn("positions")}>
+    <div>
       {collateralBalance != null && (
-        <p>{`Your balance: ${formatCollateral(
-          collateralBalance.amount,
-          collateral
-        )}`}</p>
+        <div className="form-group mt-3">
+          <label htmlFor="disabledYourBalance">Your balance</label>
+          <input
+            type="text"
+            id="disabledYourBalance"
+            className="form-control"
+            placeholder={formatCollateral(collateralBalance.amount, collateral)}
+            disabled
+          />
+        </div>
       )}
       {collateralBalance != null && collateral.isWETH && (
-        <p>{`Your unwrapped balance: ${formatCollateral(
-          collateralBalance.unwrappedAmount,
-          collateral
-        )}`}</p>
+        <div className="form-group mt-3">
+          <label htmlFor="disabledYourBalance">Your unwrapped balance</label>
+          <input
+            type="text"
+            id="disabledYourBalance"
+            className="form-control"
+            placeholder={formatCollateral(
+              collateralBalance.unwrappedAmount,
+              collateral
+            )}
+            disabled
+          />
+        </div>
       )}
       {marketStage === "Closed" ? (
         <p>Market maker is closed.</p>
       ) : (
         <>
           {LMSRAllowance != null && (
-            <p>{`Market maker allowance: ${
-              hasInfiniteAllowance
-                ? `∞ ${collateral.symbol}`
-                : formatCollateral(LMSRAllowance, collateral)
-            }`}</p>
+            <div className="form-group mt-3">
+              <label htmlFor="disabledYourBalance">
+                Market maker allowance
+              </label>
+              <input
+                type="text"
+                id="disabledYourBalance"
+                className="form-control"
+                placeholder={
+                  hasInfiniteAllowance
+                    ? `∞ ${collateral.symbol}`
+                    : formatCollateral(LMSRAllowance, collateral)
+                }
+                disabled
+              />
+            </div>
           )}
-          <input
-            type="text"
-            placeholder={`Investment amount in ${collateral.name}`}
-            value={investmentAmount}
-            onChange={e => {
-              setStagedTransactionType("buy outcome tokens");
-              setInvestmentAmount(e.target.value);
-            }}
-          />
+
+          <div className="form-group mt-3">
+            <label htmlFor="investmentAmountInput">
+              Investment amount in ${collateral.name}
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="investmentAmountInput"
+              placeholder="1001"
+              value={investmentAmount}
+              onChange={e => {
+                setStagedTransactionType("buy outcome tokens");
+                setInvestmentAmount(e.target.value);
+              }}
+            />
+          </div>
+
           <button
+            className="jr-btn btn btn-success"
             type="button"
             disabled={
               !hasEnoughAllowance ||
@@ -292,12 +327,14 @@ const BuySection = ({
             ) : marketStage === "Paused" ? (
               <p>[Market paused]</p>
             ) : (
-              <p>Buy</p>
+              <p className="m-0">Buy</p>
             )}
           </button>
+
           {((!hasAnyAllowance && stagedTradeAmounts == null) ||
             !hasEnoughAllowance) && (
             <button
+              className="jr-btn btn btn-primary"
               type="button"
               onClick={asWrappedTransaction(
                 "set allowance",
@@ -315,26 +352,45 @@ const BuySection = ({
         </>
       )}
       {error && (
-        <div className={cn("error")}>
+        <div className="text-danger">
           {error === true ? "An error has occured" : error.message}
         </div>
       )}
 
       {stagedTradePositionGroups != null && (
-        <div>
-          <div>You will receive:</div>
-          {stagedTradePositionGroups.map(positionGroup => (
-            <div key={positionGroup.collectionId} className={cn("position")}>
-              <div className={cn("row", "details")}>
-                <PositionGroupDetails
-                  {...{
-                    positionGroup,
-                    collateral
-                  }}
-                />
-              </div>
+        <div className="form-group mt-3">
+          <div className="jr-card p-0 border-0 bg-white mb-0">
+            You will receive:
+          </div>
+
+          <div className="jr-card p-0 border-0 mb-0">
+            <div className="jr-card-body">
+              <ul className="overflow-hidden list-group">
+                {stagedTradePositionGroups.map(positionGroup => (
+                  <li
+                    className="d-flex align-items-center list-group-item-action list-group-item"
+                    key={positionGroup.collectionId}
+                  >
+                    <span className="mr-3">
+                      <img
+                        className="user-avatar size-50"
+                        alt="Position Icon"
+                        src={markets[openMarketIndex].icon}
+                      />
+                    </span>
+                    <p className="br-break mb-0 list-group-item-text">
+                      <PositionGroupDetails
+                        {...{
+                          positionGroup,
+                          collateral
+                        }}
+                      />
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
+          </div>
         </div>
       )}
     </div>
@@ -403,13 +459,15 @@ BuySection.propTypes = {
   setStagedTransactionType: PropTypes.func.isRequired,
   ongoingTransactionType: PropTypes.string,
   asWrappedTransaction: PropTypes.func.isRequired,
-  setNewlyCreatedTxn: PropTypes.func.isRequired
+  setNewlyCreatedTxn: PropTypes.func.isRequired,
+  openMarketIndex: PropTypes.number.isRequired
 };
 
 export default connect(
   state => ({
     account: state.marketData.account,
     markets: state.marketData.markets,
+    openMarketIndex: state.positionCreation.openMarketIndex,
     positions: state.marketData.positions,
     collateral: state.marketData.collateral,
     collateralBalance: state.marketData.collateralBalance,

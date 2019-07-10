@@ -9818,8 +9818,7 @@ body {
   font-weight: 400;
   color: #5c5c5c;
   background-color: #f4f4f4;
-  height: 100%;
-  overflow: hidden; }
+  height: 100%; }
 
 body.ios-mobile-view-height {
   height: auto !important;
@@ -10235,7 +10234,10 @@ h6, .h6 {
 .app-header {
   min-height: 70px;
   z-index: 99;
-  position: relative; }
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0; }
 
 .app-main-content-wrapper {
   flex: 1;
@@ -10252,7 +10254,8 @@ h6, .h6 {
   flex-wrap: nowrap;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto; }
+  overflow-y: auto;
+  padding-top: 70px; }
 
 .app-container.fixed-drawer .app-main-header {
   width: auto !important;

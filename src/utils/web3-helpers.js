@@ -41,6 +41,56 @@ export function getReadOnlyProviderForNetworkId(networkId) {
     : `wss://${providerName}.infura.io/ws/v3/d743990732244555a1a0e82d5ab90c7f`;
 }
 
+/*
+ * @dev isAnyUnlockedAccount  Resolves if provider has at least one unlocked account. Rejects otherwise.
+ * @param web3                Web from Web3Provider injected by Ethereum-enabled browser.
+ */
+export function isAnyUnlockedAccount(web3) {
+  return new Promise((resolve, reject) => {
+    return web3.eth
+      .getAccounts()
+      .then(accounts => {
+        if (accounts.length >= 1) {
+          resolve();
+        } else {
+          reject();
+        }
+      })
+      .catch(reject);
+  });
+}
+
+/*
+ * @dev getDefaultAccount     Resolves the address of the current default account from provider.
+ * @param web3                Web from Web3Provider injected by Ethereum-enabled browser.
+ */
+export function getDefaultAccount(web3) {
+  return new Promise((resolve, reject) => {
+    return web3.eth
+      .getAccounts()
+      .then(accounts => {
+        if (accounts.length < 1) {
+          throw new Error("Please unlock your MetaMask account!");
+        }
+        resolve(accounts[0]);
+      })
+      .catch(reject);
+  });
+}
+
+/*
+ * @dev getNetworkName        Resolves the name of the current network the provider is connected to (e.g. Rinkeby, etc.).
+ * @param web3                Web from Web3Provider injected by Ethereum-enabled browser.
+ */
+export function getNetworkNameOld(web3) {
+  return new Promise((resolve, reject) => {
+    return web3.eth.net
+      .getNetworkType()
+      .then(resolve)
+      .catch(reject);
+  });
+}
+
 export async function loadWeb3(networkId) {
   const { default: Web3 } = await import("web3");
 

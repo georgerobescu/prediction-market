@@ -445,9 +445,6 @@ class App extends React.Component<IProps, IState> {
           setPositions
         } = this.props;
 
-
-        console.log('REACT_APP_NETWORK_ID:', process.env.REACT_APP_NETWORK_ID);
-
         let networkIdInner = Number(config.networkId);
 
         if (process.env.REACT_APP_NETWORK_ID !== undefined) {

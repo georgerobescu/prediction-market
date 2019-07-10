@@ -42,6 +42,8 @@ export function getReadOnlyProviderForNetworkId(networkId) {
 }
 
 export async function loadWeb3(networkId) {
+  networkId = Number(networkId);
+
   const { default: Web3 } = await import("web3");
 
   const web3InitErrors = [];
@@ -57,7 +59,6 @@ export async function loadWeb3(networkId) {
       getReadOnlyProviderForNetworkId(networkId)
     ]
   ]) {
-    console.log("providerCandidate:", providerCandidate);
     try {
       if (providerCandidate == null) {
         throw new Error("no provider found");

@@ -445,8 +445,8 @@ class App extends React.Component<IProps, IState> {
           setPositions
         } = this.props;
 
-        setNetworkId(config.networkId);
-        const { web3, account } = await loadWeb3(config.networkId);
+        setNetworkId(Number(process.env.REACT_APP_NETWORK_ID));
+        const { web3, account } = await loadWeb3(process.env.REACT_APP_NETWORK_ID);
         setWeb3(web3);
         setAccount(account);
         const {

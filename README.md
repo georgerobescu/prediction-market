@@ -1,8 +1,8 @@
 # prediction-market
-The original fully FCLA decentralized prediction markets.
+FCLA decentralized prediction markets.
 
 ## Code Structure
-FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-market core which has been completely rewritten to use React modern build setup with no configuration, typescript, drizzle, redux and proper components architecture. 
+FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-market core which has been completely rewritten to use React modern build setup with no configuration, typescript, drizzle, redux and proper components architecture.
 
 ## Workflow
 
@@ -17,7 +17,7 @@ FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-
 </p>
 
 ## Available markets
-1. Carbon credits 
+1. Carbon credits
 2. Ice Melting
 3. Coffee production
 

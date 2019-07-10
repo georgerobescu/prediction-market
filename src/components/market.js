@@ -46,7 +46,7 @@ const Market = ({
   return (
     <>
       <div className="row mt-4">
-        <div className="col-lg-8 col-md-8 col-12 col-sm-12">
+        <div className="offset-lg-2 offset-md-1 col-lg-4 col-md-6 col-sm-12">
           <div className="jr-card p-0 jr-card-full-height">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">

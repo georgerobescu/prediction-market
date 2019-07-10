@@ -478,7 +478,7 @@
 /*Sidebar Styles*/
 .rtl .side-nav {
   border-left: solid 1px #e9ecef !important; }
-  .rtl .side-nav .user-avatar {
+  .rtl .side-nav .market-avatar {
     margin: 0 0 0 15px !important; }
 
 .rtl.dark-indigo .side-nav,
@@ -872,10 +872,10 @@
   padding-right: 80px; }
 
 /*Avatar Styles*/
-.rtl .user-avatar {
+.rtl .market-avatar {
   margin-right: 0;
   margin-left: 8px; }
-  .rtl .user-avatar.ml-3 {
+  .rtl .market-avatar.ml-3 {
     margin-left: 8px !important; }
 
 /*Badges Styles*/
@@ -985,7 +985,7 @@
   margin-right: 25px; }
 
 /*List Styles*/
-.rtl .user-list .user-avatar {
+.rtl .user-list .market-avatar {
   margin-right: 0;
   margin-left: 20px; }
 

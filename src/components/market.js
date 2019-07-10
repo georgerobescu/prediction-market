@@ -50,17 +50,17 @@ const Market = ({
           <div className="jr-card p-0 jr-card-full-height">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">
-                <li className="d-flex align-items-center list-group-item-action list-group-item border-0">
+                <li className="d-flex align-items-center list-group-item border-0">
                   <span className="mr-3">
                     <img
-                      className="user-avatar size-50"
+                      className="market-avatar size-50"
                       alt="Market Icon"
                       src={icon}
                     ></img>
                   </span>
                   <p className="br-break mb-0 list-group-item-text">{title}</p>
                 </li>
-                <li className="d-flex align-items-center list-group-item-action list-group-item border-left-0 border-right-0 border-bottom-0">
+                <li className="d-flex align-items-center list-group-item border-left-0 border-right-0 border-bottom-0">
                   {marketStage !== "Closed" && (
                     <>
                       <OutcomesBinary

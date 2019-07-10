@@ -319,7 +319,7 @@ const YourPositions = ({
 
                     return (
                       <li
-                        className="d-flex align-items-center list-group-item-action list-group-item row m-0 pl-0 pr-0"
+                        className="d-flex align-items-center list-group-item row m-0 pl-0 pr-0"
                         key={positionGroup.collectionId}
                       >
                         <div className="rc-collapse col-12">
@@ -333,7 +333,7 @@ const YourPositions = ({
                               <i className="arrow" />
                               <span className="mr-3">
                                 <img
-                                  className="user-avatar size-50"
+                                  className="market-avatar size-50"
                                   alt="Position Icon"
                                   src={positionGroup.icon}
                                 />

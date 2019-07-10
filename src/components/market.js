@@ -77,46 +77,7 @@ const Market = ({
             </div>
           </div>
         </div>
-        <div className="col-lg-2 col-md-2 col-12 col-sm-6">
-          <div className="jr-card p-0 jr-card-full-height">
-            <div className="jr-card-body ">
-              <ul className="overflow-hidden list-group">
-                {marketStage !== "Closed" && (
-                  <li className="d-flex align-items-center list-group-item-action list-group-item border-0">
-                    <div className="text-sm-center col pl-0 pr-0">
-                      <button
-                        className="jr-btn jr-btn-secondary text-uppercase btn-block btn btn-default"
-                        onClick={() => setOpenMarketIndex(marketIndex)}
-                      >
-                        <span>Trade</span>
-                      </button>
-                    </div>
-                  </li>
-                )}
-                <li className="d-flex align-items-center list-group-item-action list-group-item border-left-0 border-right-0 border-bottom-0">
-                  {isResolved ? (
-                    <div className="col">
-                      <div className="row">Reported Outcome</div>
-                      <div className="row">
-                        {resultOutcomeIndex != null
-                          ? outcomes[resultOutcomeIndex].title
-                          : "Mixed"}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="col">
-                      <div className="row">Resolves</div>
-                      <div className="row">
-                        {new Date(resolutionDate).toLocaleString()}
-                      </div>
-                    </div>
-                  )}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="card jr-chart-or jr-card-full-height d-flex flex-column justify-content-between">
+        <div className="card jr-chart-or jr-card-full-height d-flex flex-column justify-content-between border-0">
           <div className="chart-header">
             <div className="sub-heading">Details</div>
             <span className="d-block mb-1 text-muted">
@@ -127,7 +88,10 @@ const Market = ({
                 formatProbability(probabilities[0])
               )}
             </span>
-            <span className="d-block mb-1 text-muted">Oracles: {oracle}</span>
+            <span className="d-block mb-1 text-muted">
+              <i className="zmdi zmdi-calendar-check text-muted chart-f20"></i>
+              Oracles: {oracle}
+            </span>
           </div>
           <div className="recharts-responsive-container">
             <div
@@ -241,6 +205,36 @@ const Market = ({
                 </g>
               </g>
             </svg>
+          </div>
+        </div>
+        <div className="col-lg-2 col-md-2 col-12 col-sm-6">
+          <div className="card text-center border-0">
+            <div className="stack-order  py-4 px-2">
+              {marketStage !== "Closed" && (
+                <button
+                  className="jr-btn jr-btn-secondary text-uppercase btn-block btn btn-default"
+                  onClick={() => setOpenMarketIndex(marketIndex)}
+                >
+                  <span>Trade</span>
+                </button>
+              )}
+              {isResolved ? (
+                <span className="h3 text-muted">
+                  <span>
+                    eported Outcome:{" "}
+                    {resultOutcomeIndex != null
+                      ? outcomes[resultOutcomeIndex].title
+                      : "Mixed"}
+                  </span>
+                </span>
+              ) : (
+                <span className="h6 text-muted">
+                  <span>
+                    Resolves: {new Date(resolutionDate).toLocaleString()}
+                  </span>
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>

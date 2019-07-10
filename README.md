@@ -31,6 +31,12 @@ FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-
 
 It will generate a build folder inside the root with the styles, JS assets and contracts.
 
+
+## Environnement variables
+
+`.env` and `.env.production` can overwrite environnement variables such as networkID for deployment etc.
+
+
 ## Debug Instructions
 
 Run `npm run build-css` generate CSS assets separately.

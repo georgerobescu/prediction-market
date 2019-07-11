@@ -86,12 +86,15 @@ const Markets = ({
         .neg()
         .exp()
     );
-    marketProbabilities = calcSelectedMarketProbabilitiesFromPositionProbabilities(
-      markets,
-      positions,
-      marketSelections,
-      positionProbabilities
-    );
+
+    if (marketSelections) {
+      marketProbabilities = calcSelectedMarketProbabilitiesFromPositionProbabilities(
+        markets,
+        positions,
+        marketSelections,
+        positionProbabilities
+      );
+    }
 
     if (stagedTradeAmounts != null) {
       const unnormalizedPositionProbabilitiesAfterStagedTrade = positionProbabilities.map(

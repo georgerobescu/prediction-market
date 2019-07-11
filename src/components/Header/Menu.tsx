@@ -1,6 +1,5 @@
 import * as React from 'react';
 // import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
-// import {NavLink, withRouter} from 'react-router-dom';
 // import AboutModal from './../AboutModal';
 // import BountyModal from './../BountyModal';
 
@@ -13,24 +12,28 @@ class Menu extends React.Component {
                     
                     {/* <li className="nav-item">
                       <BountyModal/>
+                    </li> */}
+                    <li className="nav-item">
+                        <a href="/#/">Markets</a>
                     </li>
                     <li className="nav-item">
-                        <a href="javascript:void(0)">Oracles</a>
+                        <a href="/#/positions">Positions</a>
+                        {/* <a href="javascript:void(0)">Oracles</a>
                         <ul className="sub-menu">
                             <li>
-                                <NavLink to="/app/oracles/add">
+                                <a href="/app/oracles/add">
                                     <i className="zmdi zmdi-pin zmdi-hc-fw"/>
                                     <span className="nav-text">Add</span>
-                                </NavLink>
+                                </a>
                             </li>
                             <li>
-                                <NavLink to="/app/oracles/mine">
+                                <a href="/app/oracles/mine">
                                     <i className="zmdi zmdi-filter-list zmdi-hc-fw"/>
                                     <span className="nav-text">My list</span>
-                                </NavLink>
+                                </a>
                             </li>
-                        </ul>
-                    </li> */}
+                        </ul> */}
+                    </li>
                 </ul>
             </div>
         );

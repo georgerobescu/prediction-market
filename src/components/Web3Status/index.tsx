@@ -45,7 +45,7 @@ class Header extends React.Component<IProps> {
 export default compose<any>(
   connect(
     state => ({
-      isAnyUnlockedAccount: state.web3.isAnyUnlockedAccount
+      // isAnyUnlockedAccount: state.web3.isAnyUnlockedAccount
     }),
     dispatch => ({
       setIsAnyUnlockedAccount: bindActionCreators(web3Actions.setIsAnyUnlockedAccount, dispatch)

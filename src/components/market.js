@@ -46,76 +46,83 @@ const Market = ({
   return (
     <>
       <div className="row mt-4">
-        <div className="offset-lg-2 offset-md-1 col-lg-4 col-md-6 col-sm-12">
-          <ul className="overflow-hidden list-group">
-            <li className="d-flex align-items-center list-group-item border-0">
-              <span className="mr-3">
-                <img
-                  className="market-avatar size-50"
-                  alt="Market Icon"
-                  src={icon}
-                ></img>
-              </span>
-              <p className="br-break mb-0 list-group-item-text">{title}</p>
-            </li>
-            <li className="d-flex align-items-center list-group-item border-left-0 border-right-0 border-bottom-0">
-              {marketStage !== "Closed" && (
-                <>
-                  <OutcomesBinary
-                    {...{
-                      outcomes,
-                      probabilities,
-                      stagedProbabilities
-                    }}
-                  />
-                </>
-              )}
-            </li>
-          </ul>
-        </div>
-        <div className="col-lg-2 col-md-2 col-sm-6">
-          <div className="chart-header">
-            <span className="d-block mb-1 text-muted">
-              Probability:{" "}
-              {probabilities == null ? (
-                <Spinner width={25} height={25} />
-              ) : (
-                formatProbability(probabilities[0])
-              )}
-            </span>
-            <span className="d-block mb-1 text-muted">
-              <i className="zmdi zmdi-calendar-check text-muted chart-f20"></i>
-              Oracles: {oracle}
-            </span>
-            {isResolved ? (
-              <span className="h3 text-muted">
-                <span>
-                  eported Outcome:{" "}
-                  {resultOutcomeIndex != null
-                    ? outcomes[resultOutcomeIndex].title
-                    : "Mixed"}
-                </span>
-              </span>
-            ) : (
-              <span className="h6 text-muted">
-                <span>
-                  Resolves: {new Date(resolutionDate).toLocaleString()}
-                </span>
-              </span>
-            )}
-          </div>
-        </div>
-        <div className="col-lg-2 col-md-2 col-sm-6">
-          <div className="">
-            <div className="stack-order  py-4 px-2">
-              {marketStage !== "Closed" && (
-                <button
-                  className="jr-btn jr-btn-secondary text-uppercase btn-block btn btn-default"
-                  onClick={() => setOpenMarketIndex(marketIndex)}
-                >
-                  <span>Trade</span>
-                </button>
-              )}
+        <div className="offset-lg-2 offset-md-1 col-lg-9 col-md-10 col-sm-12">
+          <div className="jr-card p-0 jr-card-full-height">
+            <div className="jr-card-body ">
+              <ul className="overflow-hidden list-group">
+                <li className="d-flex align-items-center list-group-item border-0">
+                  <span className="mr-3">
+                    <img
+                      className="market-avatar size-50"
+                      alt="Market Icon"
+                      src={icon}
+                    ></img>
+                  </span>
+                  <p className="br-break mb-0 list-group-item-text">{title}</p>
+                </li>
+                <li className="d-flex align-items-center list-group-item border-left-0 border-right-0 border-bottom-0">
+                  {marketStage !== "Closed" && (
+                    <>
+                      <OutcomesBinary
+                        {...{
+                          outcomes,
+                          probabilities,
+                          stagedProbabilities
+                        }}
+                      />
+                    </>
+                  )}
+                </li>
+                <li>
+                  <div className="row">
+                    <div className="col-lg-6 col-md-6 col-sm-6">
+                      <div className="chart-header">
+                        <span className="d-block mb-1 text-muted">
+                          Probability:{" "}
+                          {probabilities == null ? (
+                            <Spinner width={25} height={25} />
+                          ) : (
+                            formatProbability(probabilities[0])
+                          )}
+                        </span>
+                        <span className="d-block mb-1 text-muted">
+                          <i className="zmdi zmdi-calendar-check text-muted chart-f20"></i>
+                          Oracles: {oracle}
+                        </span>
+                        {isResolved ? (
+                          <span className="h3 text-muted">
+                            <span>
+                              eported Outcome:{" "}
+                              {resultOutcomeIndex != null
+                                ? outcomes[resultOutcomeIndex].title
+                                : "Mixed"}
+                            </span>
+                          </span>
+                        ) : (
+                          <span className="h6 text-muted">
+                            <span>
+                              Resolves:{" "}
+                              {new Date(resolutionDate).toLocaleString()}
+                            </span>
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="col-lg-6 col-md-6 col-sm-6">
+                      <div className="stack-order  py-4 px-2">
+                        {marketStage !== "Closed" && (
+                          <button
+                            className="jr-btn jr-btn-secondary text-uppercase btn-block btn btn-default"
+                            onClick={() => setOpenMarketIndex(marketIndex)}
+                          >
+                            <span>Trade</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

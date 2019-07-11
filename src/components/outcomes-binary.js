@@ -47,7 +47,7 @@ const OutcomesBinary = ({ probabilities, stagedProbabilities }) => {
                   inverted: stagedProbability.lt(probability),
                   "shift-left": estimatedHintPosition.lt(".2"),
                   "shift-right": estimatedHintPosition.gt(".8")
-                }) + " d-inline-block"
+                }) + " progress-bar bg-success"
               }
               style={{
                 backgroundColor: color,
@@ -66,7 +66,7 @@ const OutcomesBinary = ({ probabilities, stagedProbabilities }) => {
               </div>
             </div>
 
-            <div className={"d-inline-block"}>
+            <div className={"progress-bar bg-success"}>
               <div className={cn("hint") + " text-center"}>
                 <span className={cn("text") + " pl-1"}>
                   <small>PREDICTED CHANGE</small>{" "}

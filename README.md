@@ -54,6 +54,16 @@ For resolving the decentralized oracles
 
 ## Troubleshooting
 
+### No enough gas for deploying contracts
+
+Run:
+
+1. `rm -rf src/build`
+2. `npm stop`
+3. `npm run compile`
+4. `npm run migrate`
+5. `npm start`
+
 ### Empty Websocket Dependency Directory Build Errors
 
 If, after installing a new module, you see an error of the following form:

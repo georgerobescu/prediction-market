@@ -20,9 +20,9 @@ class Header extends React.Component {
               <li className="list-inline-item user-nav">
                 <Web3Status />
               </li>
-              {/* <li className="list-inline-item user-nav">
+              <li className="list-inline-item user-nav">
                 <CurrentNetwork />
-              </li> */}
+              </li>
           </ul>
         </div>
       </div>

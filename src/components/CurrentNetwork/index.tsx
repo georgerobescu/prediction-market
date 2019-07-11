@@ -7,7 +7,7 @@ import * as Web3Utils from '../../utils/web3-helpers';
 
 
 export interface IProps {
-  web3: Object,
+  web3: any,
   setNetworkName: (name: string) => any;
   networkName: string;
 }
@@ -17,11 +17,9 @@ class Header extends React.Component<IProps> {
   public componentDidMount() {
     const { web3, setNetworkName } = this.props;
 
-    console.log("Web3 blabla: ", web3);
-
     // Get network name (e.g. rinkeby, main, etc.) using Web3Utils and then save result to Redux
-    Web3Utils.getNetworkName(web3)
-      .then((name: string) => setNetworkName(name))
+    Web3Utils.getNetworkNameOld(web3)
+      .then(setNetworkName)
       .catch((name: string) => setNetworkName(''));
   }
 
@@ -52,24 +50,22 @@ class Header extends React.Component<IProps> {
 
     return (
       <div>
-        <li className="list-inline-item user-nav">
-          <button className={classbox}>
-            <i className="zmdi zmdi-circle zmdi-hc-fw" style={{color:styleIcon}}/> {networkName}
-          </button>
-        </li>
+        <button className={classbox}>
+          <i className="zmdi zmdi-circle zmdi-hc-fw" style={{color:styleIcon}}/> {networkName}
+        </button>
       </div>
     );
   }
 }
 
-export default compose<any>(
-  connect(
-    state => ({
-      // @ts-ignore
-      web3: state.marketData.web3,
-    }),
-    dispatch => ({
-      setNetworkName: bindActionCreators(web3Actions.setNetworkName, dispatch)
-    })
-  )
+export default connect(
+  state => ({
+    // @ts-ignore
+    web3: state.marketData.web3,
+    // @ts-ignore
+    networkName: state.web3.networkName
+  }),
+  dispatch => ({
+    setNetworkName: bindActionCreators(web3Actions.setNetworkName, dispatch)
+  })
 )(Header);

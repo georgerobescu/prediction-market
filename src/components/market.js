@@ -96,7 +96,12 @@ const Market = ({
           <div className="recharts-responsive-container">
             <div
               className="recharts-wrapper"
-              styleName="position: relative; cursor: default; width: 183px; height: 62px;"
+              style={{
+                position: "relative",
+                cursor: "default",
+                width: "183px",
+                height: "62px"
+              }}
             ></div>
             <svg
               className="recharts-surface"

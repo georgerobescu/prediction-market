@@ -21,6 +21,8 @@ class Header extends React.Component<IProps> {
       .then(() => setIsAnyUnlockedAccount(true))
       .catch(() => setIsAnyUnlockedAccount(false));
 
+    // Make initial web3 status call
+    this.setWeb3StatusMessage();
     // Update web3 status on an interval
     setInterval(this.setWeb3StatusMessage, 1000 * 10);
   }

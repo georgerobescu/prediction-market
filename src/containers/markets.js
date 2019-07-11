@@ -150,7 +150,7 @@ const Markets = ({
         />
       )}
       <div className="row">
-        <div className="col-sm-4 offset-md-2">
+        <div className="offset-lg-3 col-sm-4 offset-md-2">
           <h1 className={cn("page-title")}>FCLA PREDICTION MARKET</h1>
         </div>
       </div>

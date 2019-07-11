@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { withWeb3 } from 'react-web3-provider';
 import { bindActionCreators, compose } from 'redux';
 import * as web3Actions from '../../actions/web3Actions';
 import * as Web3Utils from '../../utils/web3-helpers';
 
 export interface IProps {
   web3: any;
-  web3State: any;
   setIsAnyUnlockedAccount: (isUnlocked: boolean) => any;
   isAnyUnlockedAccount: boolean;
+  setWeb3Status: Function;
+  web3Status: string;
 }
 
 class Header extends React.Component<IProps> {
@@ -20,36 +20,48 @@ class Header extends React.Component<IProps> {
     Web3Utils.isAnyUnlockedAccount(web3)
       .then(() => setIsAnyUnlockedAccount(true))
       .catch(() => setIsAnyUnlockedAccount(false));
+
+    // Update web3 status on an interval
+    setInterval(this.setWeb3StatusMessage, 1000 * 10);
   }
-  public render() {
-    return (
-      <div>
-        <button className="jr-btn jr-btn-xs jr-btn-primary btn btn-default">{this.determineWeb3StatusMessage()}</button>
-      </div>
-    );
-  }
-  private determineWeb3StatusMessage() {
-    const { web3State, isAnyUnlockedAccount } = this.props;
+  setWeb3StatusMessage = () => {
+    const { web3, isAnyUnlockedAccount, setWeb3Status } = this.props;
 
     const noWeb3Failure = 'Install MetaMask';
     const noUnlockedAccountFailure = 'Unlock MetaMask';
     const success = 'MetaMask Connected';
 
-    if (!web3State.isConnected || web3State.error) { return noWeb3Failure; }
+    if (!isAnyUnlockedAccount) { return setWeb3Status(noUnlockedAccountFailure); }
 
-    if (!isAnyUnlockedAccount) { return noUnlockedAccountFailure; }
-    return success;
+    try {
+      return web3.eth.net.isListening()
+       .then(() => setWeb3Status(success))
+       .catch(() => setWeb3Status(noWeb3Failure));
+    } catch (e) {
+      return setWeb3Status(noWeb3Failure);
+    }
+  }
+  public render() {
+    const { web3Status } = this.props;
+    return (
+      <div>
+        <button className="jr-btn jr-btn-xs jr-btn-primary btn btn-default">{web3Status}</button>
+      </div>
+    );
   }
 }
 
-export default compose<any>(
-  connect(
-    state => ({
-      // isAnyUnlockedAccount: state.web3.isAnyUnlockedAccount
-    }),
-    dispatch => ({
-      setIsAnyUnlockedAccount: bindActionCreators(web3Actions.setIsAnyUnlockedAccount, dispatch)
-    })
-  ),
-  withWeb3
+export default connect(
+  state => ({
+    // @ts-ignore
+    web3: state.marketData.web3,
+    // @ts-ignore
+    isAnyUnlockedAccount: state.web3.isAnyUnlockedAccount,
+    // @ts-ignore
+    web3Status: state.web3.web3Status
+  }),
+  dispatch => ({
+    setIsAnyUnlockedAccount: bindActionCreators(web3Actions.setIsAnyUnlockedAccount, dispatch),
+    setWeb3Status: bindActionCreators(web3Actions.setWeb3Status, dispatch)
+  })
 )(Header);

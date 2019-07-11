@@ -2,7 +2,8 @@ import * as types from '../actions/web3Actions-types';
 
 const INITIAL_STATE = {
   isAnyUnlockedAccount: false,
-  networkName: ''
+  networkName: '',
+  web3Status: ''
 };
 
 export default function web3(state = INITIAL_STATE, action) {
@@ -16,6 +17,11 @@ export default function web3(state = INITIAL_STATE, action) {
       return {
         ...state,
         networkName: action.networkName
+      };
+    case types.SET_WEB3_STATUS:
+      return {
+        ...state,
+        web3Status: action.web3Status
       };
     default:
       return state;

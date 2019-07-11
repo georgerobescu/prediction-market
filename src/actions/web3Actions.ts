@@ -13,3 +13,10 @@ export const setNetworkName = (networkName: string) => (
     type: types.SET_NETWORK_NAME
   }
 );
+
+export const setWeb3Status = (web3Status: string) => (
+  {
+    web3Status,
+    type: types.SET_WEB3_STATUS
+  }
+);

@@ -57,6 +57,12 @@ FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-
 
 It will generate a build folder inside the root with the styles, JS assets and contracts.
 
+## Demo
+
+Go to `pm.flyingcarpet.network`
+
+Contracts are deployed on [https://rinkeby.etherscan.io/address/0xa145220002d328361dfb37fc2448d4efdd0d59d6](0xa145220002d328361dfb37fc2448d4efdd0d59d6)
+
 
 ## Environnement variables
 

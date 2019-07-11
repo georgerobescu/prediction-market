@@ -52,80 +52,76 @@ module.exports = function(deployer, network, accounts) {
     )).logs.find(({ event }) => event === "LMSRMarketMakerCreation").args
       .lmsrMarketMaker;
 
-    const formattedDaiPriceTargetValue = `$${web3.utils.fromWei(
-      deployConfig.daiPriceTargetValue
-    )}`;
+    const ecoTreeRegistrationTargetValue = deployConfig.ecoTreeRegistrationTargetValue.toLocaleString();
 
-    const formattedDaiSupplyTargetValue = `${web3.utils.fromWei(
-      deployConfig.daiSupplyTargetValue,
-      "mether"
-    )} million DAI`;
-
-    const formattedDaiStabilityFeeTargetValue = `${new Decimal(
-      web3.utils.fromWei(deployConfig.daiStabilityFeeTargetValue, "gether")
-    )
-      .pow(60 * 60 * 24 * 365)
-      .sub(1)
-      .mul(100)
-      .toSignificantDigits(4)}%`;
+    const formattedAXAParametricInsuranceTargetValue =
+      "$" +
+      deployConfig.AXAParametricInsuranceTargetValue.toLocaleString() +
+      " DAI";
 
     writeToConfig({
       networkId: await web3.eth.net.getId(),
       lmsrAddress,
       markets: [
         {
-          title: `Will the DAI price exceed ${formattedDaiPriceTargetValue} according to the DutchX last auction closing price and Maker ETH price feed?`,
+          title: `Will more than ${ecoTreeRegistrationTargetValue} acres of forest be registered on EcoTree by Jan 1, 2020?`,
           resolutionDate: new Date(
-            deployConfig.daiPriceResolutionTime * 1000
+            deployConfig.ecoTreeRegistrationTargetTime * 1000
           ).toISOString(),
           outcomes: [
             {
               title: "Yes",
               short: "Yes",
-              when: `1 DAI > ${formattedDaiPriceTargetValue}`
+              when: `Acres of Forest > ${ecoTreeRegistrationTargetValue}`
             },
             {
               title: "No",
               short: "No",
-              when: `1 DAI ≤ ${formattedDaiPriceTargetValue}`
+              when: `Acres of Forest ≤ ${ecoTreeRegistrationTargetValue}`
             }
-          ]
+          ],
+          oracle: "FCLA + Chainlink",
+          icon: "/assets/images/trees.jpg"
         },
         {
-          title: `Will the DAI supply exceed ${formattedDaiSupplyTargetValue}?`,
+          title: `Will the IceAlive Greeland ice sheet melt rate increase by at least a factor of ${deployConfig.iceAliveMeltRateTarget} from 2019 to 2020?`,
           resolutionDate: new Date(
-            deployConfig.daiSupplyResolutionTime * 1000
+            deployConfig.iceAliveMeltRateTargetTime * 1000
           ).toISOString(),
           outcomes: [
             {
               title: "Yes",
               short: "Yes",
-              when: `DAI supply > ${formattedDaiSupplyTargetValue}`
+              when: `Melt Rate > ${deployConfig.iceAliveMeltRateTarget}`
             },
             {
               title: "No",
               short: "No",
-              when: `DAI supply ≤ ${formattedDaiSupplyTargetValue}`
+              when: `Melt Rate ≤ ${deployConfig.iceAliveMeltRateTarget}`
             }
-          ]
+          ],
+          oracle: "FCLA + Chainlink",
+          icon: "/assets/images/ice.jpg"
         },
         {
-          title: `Will the DAI stability fee exceed ${formattedDaiStabilityFeeTargetValue}?`,
+          title: `Will there be more than ${formattedAXAParametricInsuranceTargetValue} in AXA parametric insurance claims this year?`,
           resolutionDate: new Date(
-            deployConfig.daiStabilityFeeResolutionTime * 1000
+            deployConfig.AXAParametricInsuranceTargetTime * 1000
           ).toISOString(),
           outcomes: [
             {
               title: "Yes",
               short: "Yes",
-              when: `DAI stability fee > ${formattedDaiStabilityFeeTargetValue}`
+              when: `Parametric insurance claims > ${formattedAXAParametricInsuranceTargetValue}`
             },
             {
               title: "No",
               short: "No",
-              when: `DAI stability fee ≤ ${formattedDaiStabilityFeeTargetValue}`
+              when: `Parametric insurance claims ≤ ${formattedAXAParametricInsuranceTargetValue}`
             }
-          ]
+          ],
+          oracle: "FCLA + Chainlink",
+          icon: "/assets/images/trees2.jpg"
         }
       ]
     });

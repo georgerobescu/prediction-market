@@ -16,6 +16,33 @@ FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-
   <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/react_workflow_pm_dashboard.png" />
 </p>
 
+### Working Product
+
+#### Dashboard / Markets
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/markets.png" />
+</p>
+
+#### Create New Trade
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/create_new_position.png" />
+</p>
+
+#### Trade Confirmation
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/create_new_position_confirmation.png" />
+</p>
+
+#### Trade Confirmed
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/new_position_confirmation.png" />
+</p>
+
+#### Positions
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/positions.png" />
+</p>
+
 ## Available markets
 1. Carbon credits
 2. Ice Melting

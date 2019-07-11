@@ -368,12 +368,12 @@ const BuySection = ({
               <ul className="overflow-hidden list-group">
                 {stagedTradePositionGroups.map(positionGroup => (
                   <li
-                    className="d-flex align-items-center list-group-item-action list-group-item"
+                    className="d-flex align-items-center action list-group-item"
                     key={positionGroup.collectionId}
                   >
                     <span className="mr-3">
                       <img
-                        className="user-avatar size-50"
+                        className="market-avatar size-50"
                         alt="Position Icon"
                         src={markets[openMarketIndex].icon}
                       />

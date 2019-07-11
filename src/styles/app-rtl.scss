@@ -81,7 +81,7 @@
 .rtl .side-nav {
   border-left: solid 1px $gray-200 !important;
 
-  & .user-avatar {
+  & .market-avatar {
     margin: 0 0 0 15px !important;
   }
 }
@@ -633,7 +633,7 @@
 }
 
 /*Avatar Styles*/
-.rtl .user-avatar {
+.rtl .market-avatar {
   margin-right: 0;
   margin-left: 8px;
 
@@ -780,7 +780,7 @@
 }
 
 /*List Styles*/
-.rtl .user-list .user-avatar {
+.rtl .user-list .market-avatar {
   margin-right: 0;
   margin-left: 20px;
 }

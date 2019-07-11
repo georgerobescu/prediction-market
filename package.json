@@ -1,7 +1,7 @@
 {
-  "name": "hg-first-decentralized-market",
-  "version": "0.5.0",
-  "description": "PM 2.0 Experiments Showcase/Alpha Development",
+  "name": "prediction-market",
+  "version": "0.1.0",
+  "description": "FCLA decentralized prediction markets",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"

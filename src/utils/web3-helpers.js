@@ -38,7 +38,7 @@ export function getReadOnlyProviderForNetworkId(networkId) {
 
   return providerName == null
     ? null
-    : `wss://${providerName}.infura.io/ws/v3/d743990732244555a1a0e82d5ab90c7f`;
+    : `wss://${providerName}.infura.io/ws/v3/a891f75ad4e947338aeba96873c0b110`;
 }
 
 /*
@@ -92,6 +92,8 @@ export function getNetworkNameOld(web3) {
 }
 
 export async function loadWeb3(networkId) {
+  networkId = Number(networkId);
+
   const { default: Web3 } = await import("web3");
 
   const web3InitErrors = [];
@@ -107,7 +109,6 @@ export async function loadWeb3(networkId) {
       getReadOnlyProviderForNetworkId(networkId)
     ]
   ]) {
-    console.log("providerCandidate:", providerCandidate);
     try {
       if (providerCandidate == null) {
         throw new Error("no provider found");

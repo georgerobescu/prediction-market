@@ -271,7 +271,7 @@ const YourPositions = ({
 
   return (
     <div className={cn("your-positions")}>
-      <h2>Positions</h2>
+      <h2>My Positions</h2>
       {positionGroups == null ? (
         <Spinner width={25} height={25} />
       ) : positionGroups.length === 0 ? (
@@ -286,6 +286,7 @@ const YourPositions = ({
               </p>
               <div className={cn("controls")}>
                 <button
+                  className="jr-btn btn btn-primary"
                   type="button"
                   disabled={ongoingTransactionType != null}
                   onClick={asWrappedTransaction(
@@ -295,123 +296,203 @@ const YourPositions = ({
                   )}
                 >
                   {ongoingTransactionType === "redeem positions" ? (
-                    <Spinner inverted width={25} height={25} />
+                    <Spinner inverted width={25} height={25} className="m-0" />
                   ) : (
-                    <p>Redeem Positions</p>
+                    <p className="m-0">Redeem Positions</p>
                   )}
                 </button>
               </div>
               {error != null && (
-                <span className={cn("error")}>{error.message}</span>
+                <span className="text-danger">{error.message}</span>
               )}
             </p>
           )}
-          {positionGroups.map(positionGroup => {
-            const isSalePositionGroup =
-              salePositionGroup != null &&
-              salePositionGroup.collectionId === positionGroup.collectionId;
+          <div className="form-group mt-3">
+            <div className="jr-card p-0 border-0 mb-0">
+              <div className="jr-card-body">
+                <ul className="overflow-hidden list-group">
+                  {positionGroups.map(positionGroup => {
+                    const isSalePositionGroup =
+                      salePositionGroup != null &&
+                      salePositionGroup.collectionId ===
+                        positionGroup.collectionId;
 
-            return (
-              <div key={positionGroup.collectionId} className={cn("position")}>
-                <div className={cn("row", "details")}>
-                  <PositionGroupDetails
-                    {...{
-                      positionGroup,
-                      collateral
-                    }}
-                  />
-                  {marketStage !== "Closed" && (
-                    <div className={cn("controls")}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setStagedTransactionType("sell outcome tokens");
-                          setSalePositionGroup(
-                            isSalePositionGroup ? null : positionGroup
-                          );
-                          setSaleAmount("");
-                        }}
+                    return (
+                      <li
+                        className="d-flex align-items-center list-group-item row m-0 pl-0 pr-0"
+                        key={positionGroup.collectionId}
                       >
-                        Sell
-                      </button>
-                    </div>
-                  )}
-                </div>
-                {isSalePositionGroup && marketStage !== "Closed" && (
-                  <div className={cn("row", "sell")}>
-                    <div>
-                      You can sell a maximum amount of{" "}
-                      {formatCollateral(positionGroup.amount, collateral)} of
-                      this position.
-                    </div>
-                    <div className={cn("controls")}>
-                      <input
-                        type="text"
-                        value={saleAmount}
-                        placeholder="Amount of tokens to sell"
-                        onChange={e => {
-                          setStagedTransactionType("sell outcome tokens");
-                          setSaleAmount(e.target.value);
-                        }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setStagedTransactionType("sell outcome tokens");
-                          setSaleAmount(
-                            collateral.fromUnitsMultiplier
-                              .mul(positionGroup.amount.toString())
-                              .toFixed()
-                          );
-                        }}
-                      >
-                        Max Amount
-                      </button>
-                      <button
-                        type="button"
-                        disabled={
-                          stagedTradeAmounts == null ||
-                          stagedTransactionType !== "sell outcome tokens" ||
-                          ongoingTransactionType != null ||
-                          marketStage !== "Running" ||
-                          error != null
-                        }
-                        onClick={asWrappedTransaction(
-                          "sell outcome tokens",
-                          sellOutcomeTokens,
-                          setError
-                        )}
-                      >
-                        {ongoingTransactionType === "sell outcome tokens" ? (
-                          <Spinner inverted width={25} height={25} />
-                        ) : marketStage === "Paused" ? (
-                          <p>[Market paused]</p>
-                        ) : (
-                          <p>Confirm</p>
-                        )}
-                      </button>
-                    </div>
-                    <div className={cn("row", "messages")}>
-                      <p>
-                        {estimatedSaleEarnings && estimatedSaleEarnings > 0 && (
-                          <span>
-                            Estimated earnings from sale:{" "}
-                            {formatCollateral(
-                              estimatedSaleEarnings,
-                              collateral
-                            )}
-                          </span>
-                        )}
-                      </p>
-                      {error != null && (
-                        <span className={cn("error")}>{error.message}</span>
-                      )}
-                    </div>
-                  </div>
-                )}
+                        <div className="rc-collapse col-12">
+                          <div className="rc-collapse-item rc-collapse-item-active">
+                            <div
+                              className="rc-collapse-header"
+                              role="button"
+                              tabIndex="0"
+                              aria-expanded="true"
+                            >
+                              <i className="arrow" />
+                              <span className="mr-3">
+                                <img
+                                  className="market-avatar size-50"
+                                  alt="Position Icon"
+                                  src={positionGroup.icon}
+                                />
+                              </span>
+                              <div className="m-0 d-inline-block">
+                                <PositionGroupDetails
+                                  {...{
+                                    positionGroup,
+                                    collateral
+                                  }}
+                                />
+                                {marketStage !== "Closed" && (
+                                  <div className={cn("controls")}>
+                                    <button
+                                      className="jr-btn btn btn-primary m-0"
+                                      type="button"
+                                      onClick={() => {
+                                        setStagedTransactionType(
+                                          "sell outcome tokens"
+                                        );
+                                        setSalePositionGroup(
+                                          isSalePositionGroup
+                                            ? null
+                                            : positionGroup
+                                        );
+                                        setSaleAmount("");
+                                      }}
+                                    >
+                                      {(!isSalePositionGroup ||
+                                        marketStage === "Closed") &&
+                                        "Sell"}
+                                      {isSalePositionGroup &&
+                                        marketStage !== "Closed" &&
+                                        "Close"}
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="rc-collapse-content rc-collapse-content-active">
+                              <div className="rc-collapse-content-box">
+                                {isSalePositionGroup &&
+                                  marketStage !== "Closed" && (
+                                    <div className="form-group mt-3 row">
+                                      <div className="col-12">
+                                        <p>
+                                          You can sell a maximum amount of{" "}
+                                          {formatCollateral(
+                                            positionGroup.amount,
+                                            collateral
+                                          )}{" "}
+                                          of this position.
+                                        </p>
+                                      </div>
+                                      <div className="col-12">
+                                        <label htmlFor="amountTokenToSell">
+                                          Amount of tokens to sell
+                                        </label>
+                                      </div>
+                                      <div className="col-sm-2 col-12">
+                                        <input
+                                          type="text"
+                                          id="amountTokenToSell"
+                                          className="form-control"
+                                          placeholder="10"
+                                          value={saleAmount}
+                                          onChange={e => {
+                                            setStagedTransactionType(
+                                              "sell outcome tokens"
+                                            );
+                                            setSaleAmount(e.target.value);
+                                          }}
+                                        />
+                                      </div>
+                                      <div className="col-sm-auto col-12 pl-0">
+                                        <button
+                                          className="btn-sm btn btn-primary m-0"
+                                          type="button"
+                                          onClick={() => {
+                                            setStagedTransactionType(
+                                              "sell outcome tokens"
+                                            );
+                                            setSaleAmount(
+                                              collateral.fromUnitsMultiplier
+                                                .mul(
+                                                  positionGroup.amount.toString()
+                                                )
+                                                .toFixed()
+                                            );
+                                          }}
+                                        >
+                                          Max Amount
+                                        </button>
+                                      </div>
+                                      <div className="col-sm-auto col-12 pl-0">
+                                        <button
+                                          className="btn-sm btn btn-success m-0"
+                                          type="button"
+                                          disabled={
+                                            stagedTradeAmounts == null ||
+                                            stagedTransactionType !==
+                                              "sell outcome tokens" ||
+                                            ongoingTransactionType != null ||
+                                            marketStage !== "Running" ||
+                                            error != null
+                                          }
+                                          onClick={asWrappedTransaction(
+                                            "sell outcome tokens",
+                                            sellOutcomeTokens,
+                                            setError
+                                          )}
+                                        >
+                                          {ongoingTransactionType ===
+                                          "sell outcome tokens" ? (
+                                            <Spinner
+                                              inverted
+                                              width={12}
+                                              height={12}
+                                            />
+                                          ) : marketStage === "Paused" ? (
+                                            "[Market paused]"
+                                          ) : (
+                                            "Confirm"
+                                          )}
+                                        </button>
+                                      </div>
+                                      <div className="col-sm-auto col-12 pl-0 pt-1 pb-0">
+                                        <p>
+                                          {estimatedSaleEarnings &&
+                                            estimatedSaleEarnings > 0 && (
+                                              <span>
+                                                Estimated earnings from sale:{" "}
+                                                {formatCollateral(
+                                                  estimatedSaleEarnings,
+                                                  collateral
+                                                )}
+                                              </span>
+                                            )}
+                                          {error != null && (
+                                            <span className="text-danger">
+                                              {error.message}
+                                            </span>
+                                          )}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
-            );
-          })}
+            </div>
+          </div>
         </>
       )}
     </div>

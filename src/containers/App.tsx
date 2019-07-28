@@ -609,10 +609,6 @@ export default connect(
       marketDataActions.setLMSRAllowance,
       dispatch
     ),
-    setMarketSelections: bindActionCreators(
-      marketDataActions.setMarketSelections,
-      dispatch
-    ),
     setStagedTradeAmounts: bindActionCreators(
       marketDataActions.setStagedTradeAmounts,
       dispatch

@@ -2,15 +2,16 @@ import * as React from 'react';
 import cn from "classnames";
 import Decimal from "decimal.js-light";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import * as marketDataActions from "../actions/marketData";
 import Spinner from "../components/spinner";
 import Markets from "./markets";
 import Positions from "./Positions";
-import { getNetworkName, loadWeb3 } from "../utils/web3-helpers.js";
+import { getNetworkName/*, loadWeb3*/ } from "../utils/web3-helpers.js";
 import collateralInfo from "../utils/collateral-info";
+import { drizzleConnect } from 'drizzle-react';
 // @ts-ignore
 import TruffleContract from "truffle-contract";
 import '../style.scss';
@@ -251,7 +252,7 @@ export interface IProps {
   setCollateralBalance: any,
   setPositionBalances: any,
   setLMSRAllowance: any,
-  web3: Object,
+  web3: any,
   PMSystem: Object,
   LMSRMarketMaker: Object,
   positions: Array<any>,
@@ -260,7 +261,7 @@ export interface IProps {
   account: string,
   setLoading: Function,
   setNetworkId: Function,
-  setWeb3: Function,
+  // setWeb3: Function,
   setAccount: Function,
   setPMSystem: Function,
   setLMSRMarketMaker: Function,
@@ -268,7 +269,8 @@ export interface IProps {
   setMarkets: Function,
   setPositions: Function,
   networkId: number,
-  history: Object
+  history: Object,
+  drizzleStatus: any
 }
 
 export interface IState {
@@ -436,13 +438,14 @@ class App extends React.Component<IProps, IState> {
         const {
           setLoading,
           setNetworkId,
-          setWeb3,
+          // setWeb3,
           setAccount,
           setPMSystem,
           setLMSRMarketMaker,
           setCollateral,
           setMarkets,
-          setPositions
+          setPositions,
+          web3
         } = this.props;
 
         let networkIdInner = Number(config.networkId);
@@ -451,9 +454,17 @@ class App extends React.Component<IProps, IState> {
           networkIdInner = Number(process.env.REACT_APP_NETWORK_ID);
         }
 
-        const { web3, account } = await loadWeb3(networkIdInner);
-        setWeb3(web3);
-        setAccount(account);
+        // const { web3, account } = await loadWeb3(networkIdInner);
+        // setWeb3(web3);
+
+        // Get and set current account
+        if (web3.defaultAccount == null) {
+          const accounts = await web3.eth.getAccounts();
+          setAccount(accounts[0] || null);
+        } else {
+          setAccount(web3.defaultAccount);
+        }
+
         const {
           PMSystem,
           LMSRMarketMaker,
@@ -473,7 +484,11 @@ class App extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { loading, networkId, history } = this.props;
+    const { loading, networkId, history, drizzleStatus } = this.props;
+
+    if (drizzleStatus.initialized) {
+      return <div>Loading...</div>;
+    }
 
     if (loading === "SUCCESS") {
       return (
@@ -535,7 +550,14 @@ class App extends React.Component<IProps, IState> {
   }
 }
 
-export default connect(
+const mapStateToProps = state => {
+  return {
+    drizzleStatus: state.drizzleStatus,
+    web3: state.web3
+  }
+}
+
+export default drizzleConnect(connect(
   // @ts-ignore
   state => ({
     // @ts-ignore
@@ -543,7 +565,7 @@ export default connect(
     // @ts-ignore
     networkId: state.marketData.networkId,
     // @ts-ignore
-    web3: state.marketData.web3,
+    // web3: state.marketData.web3,
     // @ts-ignore
     account: state.marketData.account,
     // @ts-ignore
@@ -579,7 +601,7 @@ export default connect(
     setSyncTime: bindActionCreators(marketDataActions.setSyncTime, dispatch),
     setLoading: bindActionCreators(marketDataActions.setLoading, dispatch),
     setNetworkId: bindActionCreators(marketDataActions.setNetworkId, dispatch),
-    setWeb3: bindActionCreators(marketDataActions.setWeb3, dispatch),
+    // setWeb3: bindActionCreators(marketDataActions.setWeb3, dispatch),
     setAccount: bindActionCreators(marketDataActions.setAccount, dispatch),
     setPMSystem: bindActionCreators(marketDataActions.setPMSystem, dispatch),
     setLMSRMarketMaker: bindActionCreators(
@@ -618,4 +640,4 @@ export default connect(
       dispatch
     )
   })
-)(App);
+)(App), mapStateToProps);

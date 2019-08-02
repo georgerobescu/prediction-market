@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from 'redux';
 // import styles from './CurrentNetwork.scss';
 import * as web3Actions from '../../actions/web3Actions';
 import * as Web3Utils from '../../utils/web3-helpers';
-
+import { drizzleConnect } from 'drizzle-react';
 
 export interface IProps {
   web3: any,
@@ -12,7 +12,7 @@ export interface IProps {
   networkName: string;
 }
 
-class Header extends React.Component<IProps> {
+class CurrentNetwork extends React.Component<IProps> {
 
   public componentDidMount() {
     const { web3, setNetworkName } = this.props;
@@ -58,14 +58,20 @@ class Header extends React.Component<IProps> {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    web3: state.web3
+  }
+}
+
 export default connect(
   state => ({
     // @ts-ignore
-    web3: state.marketData.web3,
+    // web3: state.marketData.web3,
     // @ts-ignore
     networkName: state.web3.networkName
   }),
   dispatch => ({
     setNetworkName: bindActionCreators(web3Actions.setNetworkName, dispatch)
   })
-)(Header);
+)(drizzleConnect(CurrentNetwork, mapStateToProps));

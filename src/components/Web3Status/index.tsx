@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import * as web3Actions from '../../actions/web3Actions';
 import * as Web3Utils from '../../utils/web3-helpers';
+import { drizzleConnect } from 'drizzle-react';
 
 export interface IProps {
   web3: any;
@@ -53,10 +54,16 @@ class Header extends React.Component<IProps> {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    web3: state.web3
+  }
+}
+
 export default connect(
   state => ({
     // @ts-ignore
-    web3: state.marketData.web3,
+    // web3: state.marketData.web3,
     // @ts-ignore
     isAnyUnlockedAccount: state.web3.isAnyUnlockedAccount,
     // @ts-ignore
@@ -66,4 +73,4 @@ export default connect(
     setIsAnyUnlockedAccount: bindActionCreators(web3Actions.setIsAnyUnlockedAccount, dispatch),
     setWeb3Status: bindActionCreators(web3Actions.setWeb3Status, dispatch)
   })
-)(Header);
+)(drizzleConnect(Header, mapStateToProps));

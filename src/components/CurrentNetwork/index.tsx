@@ -4,21 +4,25 @@ import { bindActionCreators, compose } from 'redux';
 // import styles from './CurrentNetwork.scss';
 import * as web3Actions from '../../actions/web3Actions';
 import * as Web3Utils from '../../utils/web3-helpers';
-
+import { drizzleConnect } from 'drizzle-react';
+import PropTypes from 'prop-types';
 
 export interface IProps {
-  web3: any,
+  // web3: any,
   setNetworkName: (name: string) => any;
   networkName: string;
 }
 
-class Header extends React.Component<IProps> {
+class CurrentNetwork extends React.Component<IProps> {
+  constructor(props, context) {
+    super(props);
+  }
 
   public componentDidMount() {
-    const { web3, setNetworkName } = this.props;
+    const { /*web3, */setNetworkName } = this.props;
 
     // Get network name (e.g. rinkeby, main, etc.) using Web3Utils and then save result to Redux
-    Web3Utils.getNetworkNameOld(web3)
+    Web3Utils.getNetworkNameOld(this.context.drizzle.web3)
       .then(setNetworkName)
       .catch((name: string) => setNetworkName(''));
   }
@@ -58,14 +62,26 @@ class Header extends React.Component<IProps> {
   }
 }
 
-export default connect(
+// const mapStateToProps = state => {
+//   return {
+//     web3: state.web3
+//   }
+// }
+
+// @ts-ignore
+CurrentNetwork.contextTypes = {
+  drizzle: PropTypes.object
+};
+
+export default drizzleConnect(
+  CurrentNetwork,
   state => ({
     // @ts-ignore
-    web3: state.marketData.web3,
+    // web3: state.marketData.web3,
     // @ts-ignore
-    networkName: state.web3.networkName
+    networkName: state.web3Reducer.networkName
   }),
   dispatch => ({
     setNetworkName: bindActionCreators(web3Actions.setNetworkName, dispatch)
   })
-)(Header);
+);

@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   syncTime: null,
   loading: "LOADING",
   networkId: null,
-  web3: null,
+  // web3: null,
   account: null,
   PMSystem: null,
   LMSRMarketMaker: null,
@@ -39,11 +39,11 @@ export default function marketData(state = INITIAL_STATE, action) {
         ...state,
         networkId: action.networkId
       };
-    case types.SET_WEB3:
-      return {
-        ...state,
-        web3: action.web3
-      };
+    // case types.SET_WEB3:
+    //   return {
+    //     ...state,
+    //     web3: action.web3
+    //   };
     case types.SET_ACCOUNT:
       return {
         ...state,

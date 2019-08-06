@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import Web3 from "web3";
 import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import OutcomesBinary from "./outcomes-binary";
 import Spinner from "./spinner";
 import { formatProbability } from "../utils/formatting";
 import * as positionCreationActions from "../actions/positionCreation";
+import { drizzleConnect } from "drizzle-react";
 
 const { BN } = Web3.utils;
 
@@ -162,7 +162,8 @@ Market.defaultProps = {
   selectedOutcomes: {}
 };
 
-export default connect(
+export default drizzleConnect(
+  Market,
   // @ts-ignore
   null,
   dispatch => ({
@@ -171,4 +172,4 @@ export default connect(
       dispatch
     )
   })
-)(Market);
+);

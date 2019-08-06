@@ -1,16 +1,43 @@
 import React from "react";
 import { render } from "react-dom";
-import { Provider } from "react-redux";
+import { Provider, ReactReduxContext } from "react-redux";
 import App from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
 import configureStore, { history } from "./store";
+import DisplayIfWeb3Loaded from './containers/DisplayIfWeb3Loaded';
+
+// Import contracts
+import LMSRMarketMaker from './build/contracts/LMSRMarketMaker.json';
+
+import {/*Drizzle, */generateStore } from "drizzle";
+import { DrizzleContext, DrizzleProvider } from "drizzle-react";
 
 export const store = configureStore();
 
+// const drizzle_options = {
+//   contracts: [
+//     LMSRMarketMaker
+//   ]
+// };
+
+//define drizzle options. Include contracts here.
+const options = { /*contracts: [SimpleStorage, TutorialToken]*/ };
+//initialise drizzle store with options
+// const drizzleStore = generateStore(options);
+//initialise drizzle object, passing options and store
+// const drizzleProp = new Drizzle(options, store);
+
+console.log(history);
+
 const RootComponent = () => (
-  <Provider store={store}>
-    <App history={history} />
-  </Provider>
+  <>
+    {ReactReduxContext && <DrizzleProvider store={store} options={{contracts: []}} context={ReactReduxContext}>
+      <DisplayIfWeb3Loaded>
+        <App context={ReactReduxContext} {...(history ? { history } : { })} />
+      </DisplayIfWeb3Loaded>
+    </DrizzleProvider>}
+    {!ReactReduxContext && <div>Loading...</div>}
+  </>
 );
 
 const rootElement = document.getElementById("root");

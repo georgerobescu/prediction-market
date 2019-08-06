@@ -90,7 +90,7 @@ export const setSyncTime = syncTime => ({
   type: types.SET_SYNC_TIME
 });
 
-export const setWeb3 = web3 => ({
-  web3,
-  type: types.SET_WEB3
-});
+// export const setWeb3 = web3 => ({
+//   web3,
+//   type: types.SET_WEB3
+// });

@@ -2,22 +2,30 @@ import * as React from 'react';
 import cn from "classnames";
 import Decimal from "decimal.js-light";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
+import { bindActionCreators, compose } from "redux";
+// import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+// import { ConnectedRouter } from 'connected-react-router';
 import * as marketDataActions from "../actions/marketData";
 import Spinner from "../components/spinner";
 import Markets from "./markets";
 import Positions from "./Positions";
-import { getNetworkName, loadWeb3 } from "../utils/web3-helpers.js";
+import { getNetworkName/*, loadWeb3*/ } from "../utils/web3-helpers.js";
 import collateralInfo from "../utils/collateral-info";
+import { drizzleConnect } from 'drizzle-react';
 // @ts-ignore
 import TruffleContract from "truffle-contract";
+import { DrizzleContext } from "drizzle-react";
 import '../style.scss';
+import PropTypes from 'prop-types';
 
 // Design components
 import Header from './../components/Header/index';
 import Footer from './../components/Footer/index';
+
+// Disable cache to debug production
+import { unregister as unregisterServiceWorker } from './../registerServiceWorker'
+unregisterServiceWorker();
 
 // Functions
 async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) {
@@ -74,11 +82,13 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
 
   let curAtomicOutcomeSlotCount = 1;
   for (let i = 0; i < markets.length; i++) {
+
     const market = markets[i];
     const conditionId = await LMSRMarketMaker.conditionIds(i);
     const numSlots = (await PMSystem.getOutcomeSlotCount(
       conditionId
     )).toNumber();
+
 
     if (numSlots === 0) {
       throw new Error(`condition ${conditionId} not set up yet`);
@@ -89,9 +99,11 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
       );
     }
 
+
     market.marketIndex = i;
     market.conditionId = conditionId;
     market.outcomes.forEach((outcome, counter) => {
+  
       outcome.collectionId = soliditySha3(
         { t: "bytes32", v: conditionId },
         // tslint:disable-next-line:no-bitwise
@@ -126,22 +138,23 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
 
   let outcomes = iter.next();
 
+
+
+
   while (outcomes.value) {
     const positionId = soliditySha3(
       { t: "address", v: collateral.address },
-      {
-        t: "uint",
-        v: outcomes.value
-          .map(({ collectionId }) => collectionId)
-          .map(id => web3Inner.utils.toBN(id))
+      outcomes.value
+          .map(({ collectionId }) => web3Inner.utils.toBN(collectionId.toString()))
           .reduce((a, b) => a.add(b))
           .maskn(256)
-      }
     );
+
     positions.push({
       id: positionId,
       outcomes
     });
+
 
     outcomes = iter.next()
   }
@@ -197,7 +210,7 @@ async function getLMSRState(web3Inner, PMSystem, LMSRMarketMaker, positions) {
     LMSRMarketMaker.stage().then(
       stageInner => ["Running", "Paused", "Closed"][stageInner.toNumber()]
     ),
-    LMSRMarketMaker.fee().then(feeInner => fromWei(feeInner)),
+    LMSRMarketMaker.fee().then(feeInner => fromWei(feeInner.toString())),
     getPositionBalances(PMSystem, positions, LMSRMarketMaker.address)
   ]);
   return { owner, funding, stage, fee, positionBalances };
@@ -251,7 +264,7 @@ export interface IProps {
   setCollateralBalance: any,
   setPositionBalances: any,
   setLMSRAllowance: any,
-  web3: Object,
+  // web3: any,
   PMSystem: Object,
   LMSRMarketMaker: Object,
   positions: Array<any>,
@@ -260,7 +273,7 @@ export interface IProps {
   account: string,
   setLoading: Function,
   setNetworkId: Function,
-  setWeb3: Function,
+  // setWeb3: Function,
   setAccount: Function,
   setPMSystem: Function,
   setLMSRMarketMaker: Function,
@@ -268,21 +281,33 @@ export interface IProps {
   setMarkets: Function,
   setPositions: Function,
   networkId: number,
-  history: Object
+  history: Object,
+  drizzleStatus: any,
+  context: any
 }
 
 export interface IState {
   marketData: Object;
 }
 
-class App extends React.Component<IProps, IState> {
+type ContextProps = {
+  drizzle: any
+};
+
+class App extends React.Component<IProps, IState, ContextProps> {
+  constructor(props, context) {
+    super(props);
+  }
 
   async componentDidMount () {
+
     // @ts-ignore
     const { setSyncTime } = this.props;
 
     // Set current syncTime
     setSyncTime(moduleLoadTime);
+
+
 
     // Save current time
     const currentTime = Date.now();
@@ -292,10 +317,14 @@ class App extends React.Component<IProps, IState> {
       setSyncTime(currentTime);
     }, 2000);
 
+
+
     // Make initial setup calls
     await this.setInitialDataFromWeb3Calls();
 
     this.initialStateSetupCalls();
+
+
     // window.requestAnimationFrame(() => {
     // this.makeUpdatesWhenPropsChange({syncTime: currentTime});
     // });
@@ -317,7 +346,7 @@ class App extends React.Component<IProps, IState> {
       setCollateralBalance,
       setPositionBalances,
       setLMSRAllowance,
-      web3,
+      // web3,
       PMSystem,
       LMSRMarketMaker,
       positions,
@@ -327,7 +356,7 @@ class App extends React.Component<IProps, IState> {
     } = this.props;
 
     // LMSR State
-    getLMSRState(web3, PMSystem, LMSRMarketMaker, positions).then(setLMSRState);
+    getLMSRState(this.context.drizzle.web3, PMSystem, LMSRMarketMaker, positions).then(setLMSRState);
 
     // Market Resolution States
     getMarketResolutionStates(PMSystem, markets).then(
@@ -335,7 +364,7 @@ class App extends React.Component<IProps, IState> {
     );
 
     // Collateral Balance
-    getCollateralBalance(web3, collateral, account).then(setCollateralBalance);
+    getCollateralBalance(this.context.drizzle.web3, collateral, account).then(setCollateralBalance);
 
     // Position Balances
     getPositionBalances(PMSystem, positions, account).then(setPositionBalances);
@@ -355,7 +384,7 @@ class App extends React.Component<IProps, IState> {
       setCollateralBalance,
       setPositionBalances,
       setLMSRAllowance,
-      web3,
+      // web3,
       PMSystem,
       LMSRMarketMaker,
       positions,
@@ -371,13 +400,13 @@ class App extends React.Component<IProps, IState> {
 
     // LMSR State
     if (
-      web3 !== prevProps.web3 ||
+      // web3 !== prevProps.web3 ||
       PMSystem !== prevProps.PMSystem ||
       LMSRMarketMaker !== prevProps.LMSRMarketMaker ||
       positions !== prevProps.positions ||
       syncTime !== prevProps.syncTime
     ) {
-      getLMSRState(web3, PMSystem, LMSRMarketMaker, positions).then(
+      getLMSRState(this.context.drizzle.web3, PMSystem, LMSRMarketMaker, positions).then(
         setLMSRState
       );
     }
@@ -395,12 +424,12 @@ class App extends React.Component<IProps, IState> {
 
     // Collateral Balance
     if (
-      web3 !== prevProps.web3 ||
+      // web3 !== prevProps.web3 ||
       collateral !== prevProps.collateral ||
       account !== prevProps.account ||
       syncTime !== prevProps.syncTime
     ) {
-      getCollateralBalance(web3, collateral, account).then(
+      getCollateralBalance(this.context.drizzle.web3, collateral, account).then(
         setCollateralBalance
       );
     }
@@ -436,14 +465,17 @@ class App extends React.Component<IProps, IState> {
         const {
           setLoading,
           setNetworkId,
-          setWeb3,
+          // setWeb3,
           setAccount,
           setPMSystem,
           setLMSRMarketMaker,
           setCollateral,
           setMarkets,
-          setPositions
+          setPositions,
+          // web3
         } = this.props;
+
+    
 
         let networkIdInner = Number(config.networkId);
 
@@ -451,91 +483,109 @@ class App extends React.Component<IProps, IState> {
           networkIdInner = Number(process.env.REACT_APP_NETWORK_ID);
         }
 
-        const { web3, account } = await loadWeb3(networkIdInner);
-        setWeb3(web3);
-        setAccount(account);
+    
+
+        // const { web3, account } = await loadWeb3(networkIdInner);
+        // setWeb3(web3);
+
+        // Get and set current account
+        if (this.context.drizzle.web3.defaultAccount == null) {
+          const accounts = await this.context.drizzle.web3.eth.getAccounts();
+          setAccount(accounts[0] || null);
+        } else {
+          setAccount(this.context.drizzle.web3.defaultAccount);
+        }
+
+    
+
         const {
           PMSystem,
           LMSRMarketMaker,
           collateral,
           markets,
           positions
-        } = await loadBasicData(config, web3, Decimal);
+        } = await loadBasicData(config, this.context.drizzle.web3, Decimal);
+    
         setPMSystem(PMSystem);
         setLMSRMarketMaker(LMSRMarketMaker);
         setCollateral(collateral);
         setMarkets(markets);
         setPositions(positions);
 
+    
         setLoading("SUCCESS");
+    
         return;
       });
   };
 
   public render() {
-    const { loading, networkId, history } = this.props;
+    const { loading, networkId, history, context } = this.props;
 
-    if (loading === "SUCCESS") {
-      return (
+
+
+
+
+    return (
+      <>
+        {(loading === "SUCCESS") && (
           <div className="app-main">
             <div className="app-container">
               <div className="app-main-container">
-                <div className="app-header">
-                  <Header />
-                </div>
-                <main className="app-main-content-wrapper">
-                  <div className="app-main-content">
-                    <div className="app-wrapper">
-                      <ConnectedRouter history={history}>
-                        <Switch>
-                          <Route exact path="/" component={Markets} />
-                          <Route path="/positions" component={Positions} />
-                        </Switch>
-                      </ConnectedRouter>
-                    </div>
+                <Router>
+                  <div className="app-header">
+                    <Header />
                   </div>
-                </main>
-                <div className="app-footer">
-                  <Footer/>
-                </div>
+                  <main className="app-main-content-wrapper">
+                    <div className="app-main-content">
+                      <div className="app-wrapper">
+                        <Route exact path="/" component={Markets} />
+                        <Route path="/positions" component={Positions} />
+                      </div>
+                    </div>
+                  </main>
+                  <div className="app-footer">
+                    <Footer/>
+                  </div>
+                </Router>
               </div>
             </div>
           </div>
-      );
-    }
+        )}
 
-    if (loading === "LOADING") {
-      return (
-        <div className={cn("loading-page")}>
-          <Spinner centered inverted width={100} height={100} />
-        </div>
-      );
-    }
+        {(loading === "LOADING") && (
+          <div className={cn("loading-page")}>
+            <Spinner centered inverted width={100} height={100} />
+          </div>
+        )}
 
-    if (loading === "FAILURE") {
-      return (
-        <div className={cn("failure-page")}>
-          <h2>
-            Failed to load{" "}
-            <span role="img" aria-label="">
-              😞
-            </span>
-          </h2>
-          <h3>Please check the following:</h3>
-          <ul>
-            <li>Connect to correct network ({getNetworkName(networkId)})</li>
-            <li>Install/Unlock Metamask</li>
-          </ul>
-        </div>
-      );
-    }
-
-    // TODO Handle error messages
-    return;
+        {(loading === "FAILURE") && (
+          <div className={cn("failure-page")}>
+            <h2>
+              Failed to load{" "}
+              <span role="img" aria-label="">
+                😞
+              </span>
+            </h2>
+            <h3>Please check the following:</h3>
+            <ul>
+              <li>Connect to correct network ({getNetworkName(networkId)})</li>
+              <li>Install/Unlock Metamask</li>
+            </ul>
+          </div>
+        )}
+      </>
+    );
   }
 }
 
-export default connect(
+// @ts-ignore
+App.contextTypes = {
+  drizzle: PropTypes.object
+}
+
+export default drizzleConnect(
+  App,
   // @ts-ignore
   state => ({
     // @ts-ignore
@@ -543,7 +593,7 @@ export default connect(
     // @ts-ignore
     networkId: state.marketData.networkId,
     // @ts-ignore
-    web3: state.marketData.web3,
+    // web3: state.marketData.web3,
     // @ts-ignore
     account: state.marketData.account,
     // @ts-ignore
@@ -579,7 +629,7 @@ export default connect(
     setSyncTime: bindActionCreators(marketDataActions.setSyncTime, dispatch),
     setLoading: bindActionCreators(marketDataActions.setLoading, dispatch),
     setNetworkId: bindActionCreators(marketDataActions.setNetworkId, dispatch),
-    setWeb3: bindActionCreators(marketDataActions.setWeb3, dispatch),
+    // setWeb3: bindActionCreators(marketDataActions.setWeb3, dispatch),
     setAccount: bindActionCreators(marketDataActions.setAccount, dispatch),
     setPMSystem: bindActionCreators(marketDataActions.setPMSystem, dispatch),
     setLMSRMarketMaker: bindActionCreators(
@@ -609,10 +659,6 @@ export default connect(
       marketDataActions.setLMSRAllowance,
       dispatch
     ),
-    setMarketSelections: bindActionCreators(
-      marketDataActions.setMarketSelections,
-      dispatch
-    ),
     setStagedTradeAmounts: bindActionCreators(
       marketDataActions.setStagedTradeAmounts,
       dispatch
@@ -622,4 +668,4 @@ export default connect(
       dispatch
     )
   })
-)(App);
+);

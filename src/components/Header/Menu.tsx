@@ -2,6 +2,7 @@ import * as React from 'react';
 // import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 // import AboutModal from './../AboutModal';
 // import BountyModal from './../BountyModal';
+import { Link } from "react-router-dom";
 
 
 class Menu extends React.Component {
@@ -14,23 +15,23 @@ class Menu extends React.Component {
                       <BountyModal/>
                     </li> */}
                     <li className="nav-item">
-                        <a href="/#/">Markets</a>
+                        <Link to="/#/">Markets</Link>
                     </li>
                     <li className="nav-item">
-                        <a href="/#/positions">Positions</a>
-                        {/* <a href="javascript:void(0)">Oracles</a>
+                        <Link to="/#/positions">Positions</Link>
+                        {/* <Link to="javascript:void(0)">Oracles</Link>
                         <ul className="sub-menu">
                             <li>
-                                <a href="/app/oracles/add">
+                                <Link to="/app/oracles/add">
                                     <i className="zmdi zmdi-pin zmdi-hc-fw"/>
                                     <span className="nav-text">Add</span>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/app/oracles/mine">
+                                <Link to="/app/oracles/mine">
                                     <i className="zmdi zmdi-filter-list zmdi-hc-fw"/>
                                     <span className="nav-text">My list</span>
-                                </a>
+                                </Link>
                             </li>
                         </ul> */}
                     </li>

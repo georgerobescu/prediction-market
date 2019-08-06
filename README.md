@@ -68,6 +68,21 @@ Contracts are deployed on [https://rinkeby.etherscan.io/address/0xa145220002d328
 
 `.env` and `.env.production` can overwrite environnement variables such as networkID for deployment etc.
 
+## LMSRMarketMaker
+
+Contract address is saved into `src/build/contracts/Migrations.json`:
+
+```
+"networks": {
+  "1565085406360": {
+    "events": {},
+    "links": {
+      "Fixed192x64Math": "0xB349FB172D6D5f693b0aA1C6eEc4c61cFd6846f4"
+    }
+  }
+```
+
+If not saved during build process. The LSMR address needs to be saved into `src/config.json`. It changes everytime migration is run.
 
 ## Debug Instructions
 

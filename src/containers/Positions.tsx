@@ -7,6 +7,7 @@ import YourPositions from "../components/your-positions";
 import { getNetworkName } from "../utils/web3-helpers.js";
 import asWrappedTransaction from '../utils/asWrappedTransaction';
 import '../style.scss';
+import { drizzleConnect } from 'drizzle-react';
 
 export interface IProps {
   account: string,
@@ -45,7 +46,8 @@ class Positions extends React.Component<IProps, IState> {
   }
 }
 
-export default connect(
+export default drizzleConnect(
+  Positions,
   // @ts-ignore
   state => ({
     // @ts-ignore
@@ -61,4 +63,4 @@ export default connect(
       dispatch
     )
   })
-)(Positions);
+);

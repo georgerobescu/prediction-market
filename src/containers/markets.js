@@ -3,10 +3,10 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import * as marketDataActions from "../actions/marketData";
 import Market from "../components/market";
 import PositionCreation from "../components/PositionCreation";
+import { drizzleConnect } from "drizzle-react";
 
 import { zeroDecimal, oneDecimal } from "../utils/constants";
 
@@ -230,7 +230,8 @@ Markets.propTypes = {
   openMarketIndex: PropTypes.number.isRequired
 };
 
-export default connect(
+export default drizzleConnect(
+  Markets,
   state => ({
     markets: state.marketData.markets,
     positions: state.marketData.positions,
@@ -246,4 +247,4 @@ export default connect(
       dispatch
     )
   })
-)(Markets);
+);

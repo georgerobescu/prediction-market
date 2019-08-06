@@ -19,4 +19,4 @@ export const SET_STAGED_TRANSACTION_TYPE: string =
   "marketData/SET_STAGED_TRANSACTION_TYPE";
 export const SET_ONGOING_TRANSACTION_TYPE: string =
   "marketData/SET_ONGOING_TRANSACTION_TYPE";
-export const SET_WEB3: string = "marketData/SET_WEB3";
+// export const SET_WEB3: string = "marketData/SET_WEB3";

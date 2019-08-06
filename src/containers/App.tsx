@@ -23,6 +23,10 @@ import PropTypes from 'prop-types';
 import Header from './../components/Header/index';
 import Footer from './../components/Footer/index';
 
+// Disable cache to debug production
+import { unregister as unregisterServiceWorker } from './../registerServiceWorker'
+unregisterServiceWorker();
+
 // Functions
 async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) {
   const { soliditySha3 } = web3Inner.utils
@@ -62,9 +66,7 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
     Contract.setProvider(web3Inner.currentProvider);
   }
 
-  console.log(lmsrAddress);
   const LMSRMarketMaker = await LMSRMarketMakerTruffle.at(lmsrAddress);
-  console.log("CC1");
 
   const collateral = await collateralInfo(
     web3Inner,
@@ -72,24 +74,21 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
     { ERC20Detailed, IDSToken, WETH9 },
     LMSRMarketMaker
   );
-  console.log("CC2");
 
   const PMSystem = await PredictionMarketSystem.at(
     await LMSRMarketMaker.pmSystem()
   );
-  console.log("CC3");
   const atomicOutcomeSlotCount = (await LMSRMarketMaker.atomicOutcomeSlotCount()).toNumber();
-  console.log("CC4");
 
   let curAtomicOutcomeSlotCount = 1;
   for (let i = 0; i < markets.length; i++) {
-    console.log("CC5");
+
     const market = markets[i];
     const conditionId = await LMSRMarketMaker.conditionIds(i);
     const numSlots = (await PMSystem.getOutcomeSlotCount(
       conditionId
     )).toNumber();
-    console.log("CC6");
+
 
     if (numSlots === 0) {
       throw new Error(`condition ${conditionId} not set up yet`);
@@ -100,11 +99,11 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
       );
     }
 
-    console.log("CC7");
+
     market.marketIndex = i;
     market.conditionId = conditionId;
     market.outcomes.forEach((outcome, counter) => {
-      console.log("CC8");
+  
       outcome.collectionId = soliditySha3(
         { t: "bytes32", v: conditionId },
         // tslint:disable-next-line:no-bitwise
@@ -115,7 +114,6 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
     curAtomicOutcomeSlotCount *= numSlots;
   }
 
-  console.log("CC9");
   if (curAtomicOutcomeSlotCount !== atomicOutcomeSlotCount) {
     throw new Error(
       `mismatch in counted atomic outcome slot ${curAtomicOutcomeSlotCount} and contract reported value ${atomicOutcomeSlotCount}`
@@ -141,59 +139,35 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
   let outcomes = iter.next();
 
 
-  console.log("a through analysis:");
-  console.log(outcomes.value);
-  console.log(outcomes.value.map(({ collectionId }) => collectionId));
-  console.log(outcomes.value.map(({ collectionId }) => collectionId).map(id => web3Inner.utils.toBN(id)));
 
 
   while (outcomes.value) {
-    console.log("CC10");
-    console.log({ t: "address", v: collateral.address });
-    console.log(outcomes.value
-          .map(({ collectionId }) => collectionId)
-          .map(id => web3Inner.utils.toBN(id))
-          .reduce((a, b) => a.add(b))
-          .maskn(256)
-      );
-    console.log(soliditySha3(
-      { t: "address", v: collateral.address },
-      outcomes.value
-          .map(({ collectionId }) => collectionId)
-          .map(id => web3Inner.utils.toBN(id))
-          .reduce((a, b) => a.add(b))
-          .maskn(256)
-    ));
     const positionId = soliditySha3(
       { t: "address", v: collateral.address },
       outcomes.value
-          .map(({ collectionId }) => collectionId)
-          .map(id => web3Inner.utils.toBN(id))
+          .map(({ collectionId }) => web3Inner.utils.toBN(collectionId.toString()))
           .reduce((a, b) => a.add(b))
           .maskn(256)
     );
-    console.log("CC11");
+
     positions.push({
       id: positionId,
       outcomes
     });
-    console.log("CC12");
+
 
     outcomes = iter.next()
   }
-  console.log("CC13");
 
   positions.forEach((position, i) => {
     position.positionIndex = i;
   });
-  console.log("CC14");
 
   for (const market of markets) {
     for (const outcome of market.outcomes) {
       outcome.positions = [];
     }
   }
-  console.log("CC15");
   for (const position of positions) {
     for (const outcome of position.outcomes.value) {
       markets[outcome.marketIndex].outcomes[
@@ -201,7 +175,6 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
       ].positions.push(position);
     }
   }
-  console.log("CC16");
 
   return {
     PMSystem,
@@ -237,7 +210,7 @@ async function getLMSRState(web3Inner, PMSystem, LMSRMarketMaker, positions) {
     LMSRMarketMaker.stage().then(
       stageInner => ["Running", "Paused", "Closed"][stageInner.toNumber()]
     ),
-    LMSRMarketMaker.fee().then(feeInner => fromWei(feeInner)),
+    LMSRMarketMaker.fee().then(feeInner => fromWei(feeInner.toString())),
     getPositionBalances(PMSystem, positions, LMSRMarketMaker.address)
   ]);
   return { owner, funding, stage, fee, positionBalances };
@@ -317,7 +290,7 @@ export interface IState {
   marketData: Object;
 }
 
-type ContextProps = { 
+type ContextProps = {
   drizzle: any
 };
 
@@ -327,14 +300,14 @@ class App extends React.Component<IProps, IState, ContextProps> {
   }
 
   async componentDidMount () {
-    console.log("A");
+
     // @ts-ignore
     const { setSyncTime } = this.props;
 
     // Set current syncTime
     setSyncTime(moduleLoadTime);
 
-    console.log("B");
+
 
     // Save current time
     const currentTime = Date.now();
@@ -344,14 +317,14 @@ class App extends React.Component<IProps, IState, ContextProps> {
       setSyncTime(currentTime);
     }, 2000);
 
-    console.log("C");
+
 
     // Make initial setup calls
     await this.setInitialDataFromWeb3Calls();
 
     this.initialStateSetupCalls();
 
-    console.log("D");
+
     // window.requestAnimationFrame(() => {
     // this.makeUpdatesWhenPropsChange({syncTime: currentTime});
     // });
@@ -502,7 +475,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
           // web3
         } = this.props;
 
-        console.log("C1");
+    
 
         let networkIdInner = Number(config.networkId);
 
@@ -510,7 +483,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
           networkIdInner = Number(process.env.REACT_APP_NETWORK_ID);
         }
 
-        console.log("C2");
+    
 
         // const { web3, account } = await loadWeb3(networkIdInner);
         // setWeb3(web3);
@@ -523,7 +496,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
           setAccount(this.context.drizzle.web3.defaultAccount);
         }
 
-        console.log("C3");
+    
 
         const {
           PMSystem,
@@ -532,16 +505,16 @@ class App extends React.Component<IProps, IState, ContextProps> {
           markets,
           positions
         } = await loadBasicData(config, this.context.drizzle.web3, Decimal);
-        console.log("C4");
+    
         setPMSystem(PMSystem);
         setLMSRMarketMaker(LMSRMarketMaker);
         setCollateral(collateral);
         setMarkets(markets);
         setPositions(positions);
 
-        console.log("C5");
+    
         setLoading("SUCCESS");
-        console.log("C6");
+    
         return;
       });
   };
@@ -549,9 +522,9 @@ class App extends React.Component<IProps, IState, ContextProps> {
   public render() {
     const { loading, networkId, history, context } = this.props;
 
-    // console.log(loading);
-    // console.log(this.context.drizzle.web3);
-    // console.log(this.context.drizzle.store.getState);
+
+
+
 
     return (
       <>

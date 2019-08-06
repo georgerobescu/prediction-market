@@ -44,13 +44,13 @@ Contract address is saved into `src/build/contracts/Migrations.json`:
 "networks": {
   "1565085406360": {
     "events": {},
-    "links": {},
-    "address": "0x25D02115bd67258a406A0F676147E6C3598a91a9",
-    "transactionHash": "0x72f6947c4761641d52107669fea416056b95a74d216cd1065c7acd74366b9a5a"
+    "links": {
+      "Fixed192x64Math": "0xB349FB172D6D5f693b0aA1C6eEc4c61cFd6846f4"
+    }
   }
 ```
 
-If not saved during build process. The LSMR address needs to be saved into `src/config.json`. It changes everytime migration is run. 
+If not saved during build process. The LSMR address needs to be saved into `src/config.json`. It changes everytime migration is run.
 
 ## Debug Instructions
 

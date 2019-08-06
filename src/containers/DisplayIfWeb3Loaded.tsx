@@ -2,26 +2,25 @@ import * as React from 'react';
 import { drizzleConnect } from 'drizzle-react';
 
 export interface IProps {
-  web3: Object,
   children: any,
-  drizzleStatus: any
+  initialized: any
 }
 
 class DisplayIfWeb3Loaded extends React.Component<IProps> {
   public render() {
-    const { drizzleStatus, children } = this.props;
+    const { initialized, children } = this.props;
 
-    if (!drizzleStatus.initialized) {
+    if (!initialized) {
       return <div>Loading...</div>;
     }
 
-    return children;
+    return <>{children}</>;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    drizzleStatus: state.drizzleStatus
+    initialized: state.drizzleStatus.initialized
   }
 }
 

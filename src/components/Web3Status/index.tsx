@@ -4,21 +4,26 @@ import { bindActionCreators, compose } from 'redux';
 import * as web3Actions from '../../actions/web3Actions';
 import * as Web3Utils from '../../utils/web3-helpers';
 import { drizzleConnect } from 'drizzle-react';
+import PropTypes from 'prop-types';
 
 export interface IProps {
-  web3: any;
+  // web3: any;
   setIsAnyUnlockedAccount: (isUnlocked: boolean) => any;
   isAnyUnlockedAccount: boolean;
   setWeb3Status: Function;
   web3Status: string;
 }
 
-class Header extends React.Component<IProps> {
+class Web3Status extends React.Component<IProps> {
+  constructor(props, context) {
+    super(props);
+  }
+
   public componentDidMount() {
-    const { web3, setIsAnyUnlockedAccount } = this.props;
+    const { /*web3, */setIsAnyUnlockedAccount } = this.props;
 
     // Check if there are any unlocked accounts using Web3Utils and then save result to Redux
-    Web3Utils.isAnyUnlockedAccount(web3)
+    Web3Utils.isAnyUnlockedAccount(this.context.drizzle.web3)
       .then(() => setIsAnyUnlockedAccount(true))
       .catch(() => setIsAnyUnlockedAccount(false));
 
@@ -28,7 +33,7 @@ class Header extends React.Component<IProps> {
     setInterval(this.setWeb3StatusMessage, 1000 * 10);
   }
   setWeb3StatusMessage = () => {
-    const { web3, isAnyUnlockedAccount, setWeb3Status } = this.props;
+    const { /*web3, */isAnyUnlockedAccount, setWeb3Status } = this.props;
 
     const noWeb3Failure = 'Install MetaMask';
     const noUnlockedAccountFailure = 'Unlock MetaMask';
@@ -37,7 +42,7 @@ class Header extends React.Component<IProps> {
     if (!isAnyUnlockedAccount) { return setWeb3Status(noUnlockedAccountFailure); }
 
     try {
-      return web3.eth.net.isListening()
+      return this.context.drizzle.web3.eth.net.isListening()
        .then(() => setWeb3Status(success))
        .catch(() => setWeb3Status(noWeb3Failure));
     } catch (e) {
@@ -54,23 +59,29 @@ class Header extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    web3: state.web3
-  }
-}
+// const mapStateToProps = state => {
+//   return {
+//     web3: state.web3
+//   }
+// }
 
-export default connect(
+// @ts-ignore
+Web3Status.contextTypes = {
+  drizzle: PropTypes.object
+};
+
+export default drizzleConnect(
+  Web3Status,
   state => ({
     // @ts-ignore
     // web3: state.marketData.web3,
     // @ts-ignore
-    isAnyUnlockedAccount: state.web3.isAnyUnlockedAccount,
+    isAnyUnlockedAccount: state.web3Reducer.isAnyUnlockedAccount,
     // @ts-ignore
-    web3Status: state.web3.web3Status
+    web3Status: state.web3Reducer.web3Status
   }),
   dispatch => ({
     setIsAnyUnlockedAccount: bindActionCreators(web3Actions.setIsAnyUnlockedAccount, dispatch),
     setWeb3Status: bindActionCreators(web3Actions.setWeb3Status, dispatch)
   })
-)(drizzleConnect(Header, mapStateToProps));
+);

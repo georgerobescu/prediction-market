@@ -9,6 +9,7 @@ import * as marketDataActions from "../actions/marketData";
 import * as positionCreationActions from "../actions/positionCreation";
 import asWrappedTransaction from '../utils/asWrappedTransaction';
 import '../style.scss';
+import { drizzleConnect } from 'drizzle-react';
 
 export interface IProps {
   markets: Array<any>;
@@ -106,7 +107,8 @@ class PositionCreation extends React.Component<IProps, IState> {
   }
 }
 
-export default connect(
+export default drizzleConnect(
+  PositionCreation,
   // @ts-ignore
   state => ({
     // @ts-ignore
@@ -132,4 +134,4 @@ export default connect(
       dispatch
     )
   })
-)(PositionCreation);
+);

@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import Web3 from "web3";
 import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import * as marketDataActions from "../actions/marketData";
 import PositionGroupDetails from "./position-group-details";
 import Spinner from "./spinner";
 import { zeroDecimal } from "../utils/constants";
 import { formatCollateral } from "../utils/formatting";
 import { calcPositionGroups } from "../utils/position-groups";
+import { drizzleConnect } from "drizzle-react";
 
 import cn from "classnames";
 
@@ -549,7 +549,8 @@ YourPositions.propTypes = {
   asWrappedTransaction: PropTypes.func.isRequired
 };
 
-export default connect(
+export default drizzleConnect(
+  YourPositions,
   state => ({
     account: state.marketData.account,
     markets: state.marketData.markets,
@@ -574,4 +575,4 @@ export default connect(
       dispatch
     )
   })
-)(YourPositions);
+);

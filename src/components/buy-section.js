@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import * as marketDataActions from "../actions/marketData";
 import * as positionCreationActions from "../actions/positionCreation";
 import PositionGroupDetails from "./position-group-details";
@@ -10,6 +9,7 @@ import Spinner from "./spinner";
 import { maxUint256BN, zeroDecimal } from "../utils/constants";
 import { formatCollateral } from "../utils/formatting";
 import { calcPositionGroups } from "../utils/position-groups";
+import { drizzleConnect } from "drizzle-react";
 
 function calcOutcomeTokenCounts(
   positions,
@@ -463,7 +463,8 @@ BuySection.propTypes = {
   openMarketIndex: PropTypes.number.isRequired
 };
 
-export default connect(
+export default drizzleConnect(
+  BuySection,
   state => ({
     account: state.marketData.account,
     markets: state.marketData.markets,
@@ -493,4 +494,4 @@ export default connect(
       dispatch
     )
   })
-)(BuySection);
+);

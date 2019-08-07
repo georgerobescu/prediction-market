@@ -24,8 +24,8 @@ import Header from './../components/Header/index';
 import Footer from './../components/Footer/index';
 
 // Disable cache to debug production
-import { unregister as unregisterServiceWorker } from './../registerServiceWorker'
-unregisterServiceWorker();
+// import { unregister as unregisterServiceWorker } from './../registerServiceWorker'
+// unregisterServiceWorker();
 
 // Functions
 async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) {
@@ -103,7 +103,7 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
     market.marketIndex = i;
     market.conditionId = conditionId;
     market.outcomes.forEach((outcome, counter) => {
-  
+
       outcome.collectionId = soliditySha3(
         { t: "bytes32", v: conditionId },
         // tslint:disable-next-line:no-bitwise
@@ -475,7 +475,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
           // web3
         } = this.props;
 
-    
+
 
         let networkIdInner = Number(config.networkId);
 
@@ -483,7 +483,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
           networkIdInner = Number(process.env.REACT_APP_NETWORK_ID);
         }
 
-    
+
 
         // const { web3, account } = await loadWeb3(networkIdInner);
         // setWeb3(web3);
@@ -496,7 +496,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
           setAccount(this.context.drizzle.web3.defaultAccount);
         }
 
-    
+
 
         const {
           PMSystem,
@@ -505,16 +505,16 @@ class App extends React.Component<IProps, IState, ContextProps> {
           markets,
           positions
         } = await loadBasicData(config, this.context.drizzle.web3, Decimal);
-    
+
         setPMSystem(PMSystem);
         setLMSRMarketMaker(LMSRMarketMaker);
         setCollateral(collateral);
         setMarkets(markets);
         setPositions(positions);
 
-    
+
         setLoading("SUCCESS");
-    
+
         return;
       });
   };

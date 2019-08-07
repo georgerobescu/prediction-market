@@ -61,7 +61,7 @@ It will generate a build folder inside the root with the styles, JS assets and c
 
 Go to `pm.flyingcarpet.network`
 
-Contracts are deployed on [https://rinkeby.etherscan.io/address/0xa145220002d328361dfb37fc2448d4efdd0d59d6](0xa145220002d328361dfb37fc2448d4efdd0d59d6)
+LSMR Contract deployed on [https://rinkeby.etherscan.io/address/0xaf89C9677c69e11c15aB2651885387dfD4B2778F](0xaf89C9677c69e11c15aB2651885387dfD4B2778F)
 
 
 ## Environnement variables

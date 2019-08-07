@@ -15,10 +15,10 @@ class Menu extends React.Component {
                       <BountyModal/>
                     </li> */}
                     <li className="nav-item">
-                        <Link to="/#/">Markets</Link>
+                        <Link to="/">Markets</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/#/positions">Positions</Link>
+                        <Link to="/positions">Positions</Link>
                         {/* <Link to="javascript:void(0)">Oracles</Link>
                         <ul className="sub-menu">
                             <li>

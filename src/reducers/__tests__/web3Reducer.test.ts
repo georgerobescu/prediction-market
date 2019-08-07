@@ -1,5 +1,5 @@
-import web3Reducer from './web3Reducer';
-import * as types from '../actions/web3Actions-types';
+import web3Reducer from '../web3Reducer';
+import * as types from '../../actions/web3Actions-types';
 
 describe('web3Reducer reducer', () => {
   it('should set isAnyUnlockedAccount field', () => {

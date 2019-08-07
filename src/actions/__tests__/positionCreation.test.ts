@@ -1,5 +1,5 @@
-import * as actions from './positionCreation';
-import * as types from './positionCreation-types';
+import * as actions from '../positionCreation';
+import * as types from '../positionCreation-types';
 
 describe('positionCreation actions', () => {
   it('should set openMarketIndex field', () => {

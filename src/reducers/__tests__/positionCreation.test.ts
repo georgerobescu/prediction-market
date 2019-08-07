@@ -1,5 +1,5 @@
-import positionCreation from './positionCreation';
-import * as types from '../actions/positionCreation-types';
+import positionCreation from '../positionCreation';
+import * as types from '../../actions/positionCreation-types';
 
 describe('positionCreation reducer', () => {
   it('should set openMarketIndex field', () => {

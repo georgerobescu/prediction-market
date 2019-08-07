@@ -1,5 +1,5 @@
-import marketData from './marketData';
-import * as types from '../actions/marketData-types';
+import marketData from '../marketData';
+import * as types from '../../actions/marketData-types';
 
 describe('marketData reducer', () => {
   it('should set account field', () => {
@@ -109,11 +109,5 @@ describe('marketData reducer', () => {
     expect(marketData(undefined, {type: null})).toHaveProperty('syncTime', null);
     // Check with custom value
     expect(marketData(null, {type: types.SET_SYNC_TIME, syncTime: 15})).toHaveProperty('syncTime', 15);
-  });
-  it('should set web3 field', () => {
-    // Check default value
-    expect(marketData(undefined, {type: null})).toHaveProperty('web3', null);
-    // Check with custom value
-    expect(marketData(null, {type: types.SET_WEB3, web3: {largeObject: {manySubProperties: 'morethings'}}})).toHaveProperty('web3', {largeObject: {manySubProperties: 'morethings'}});
   });
 });

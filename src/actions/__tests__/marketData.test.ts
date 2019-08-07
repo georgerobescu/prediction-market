@@ -1,5 +1,5 @@
-import * as actions from './marketData';
-import * as types from './marketData-types';
+import * as actions from '../marketData';
+import * as types from '../marketData-types';
 
 describe('marketData actions', () => {
   it('should set account field', () => {
@@ -127,12 +127,5 @@ describe('marketData actions', () => {
       type: types.SET_SYNC_TIME
     };
     expect(actions.setSyncTime(15)).toEqual(expectedAction);
-  });
-  it('should set web3 field', () => {
-    const expectedAction = {
-      web3: {largeObject: {manySubProperties: 'morethings'}},
-      type: types.SET_WEB3
-    };
-    expect(actions.setWeb3({largeObject: {manySubProperties: 'morethings'}})).toEqual(expectedAction);
   });
 });

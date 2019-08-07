@@ -1,5 +1,5 @@
-import * as actions from './web3Actions';
-import * as types from './web3Actions-types';
+import * as actions from '../web3Actions';
+import * as types from '../web3Actions-types';
 
 describe('web3Actions actions', () => {
   it('should set isAnyUnlockedAccount field', () => {

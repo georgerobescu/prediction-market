@@ -5,7 +5,9 @@ import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
 import * as marketDataActions from "../actions/marketData";
 import Market from "../components/market";
+import Signal from "../components/signal";
 import PositionCreation from "../components/PositionCreation";
+import MarketSignaling from "../components/MarketSignaling";
 import { drizzleConnect } from "drizzle-react";
 
 import { zeroDecimal, oneDecimal } from "../utils/constants";
@@ -122,7 +124,7 @@ const Markets = ({
   return (
     <>
       {/* Display the position creation dialog (if it should be open) */}
-      {openMarketIndex >= 0 && (
+      {openMarketIndex >= 0 && openMarketIndex < 100 && (
         <PositionCreation
           {...{
             probabilities:
@@ -149,6 +151,7 @@ const Markets = ({
           }}
         />
       )}
+      {openMarketIndex >= 100 && <MarketSignaling />}
       <div className="row">
         <div className="offset-lg-3 col-sm-4 offset-md-2">
           <h1 className={cn("page-title")}>FCLA PREDICTION MARKET</h1>
@@ -186,6 +189,43 @@ const Markets = ({
               }}
             />
           ))}
+        </div>
+      </div>
+      <div className="row">
+        <div className="offset-lg-3 col-sm-4 offset-md-2">
+          <h1 className={cn("page-title")}>FUTURE MARKET SIGNALING</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className={cn("section", "market-section") + " col-sm-12"}>
+          <Signal
+            title={"Epicéa de Sitka (Coadou) - 1ere parcelle Dataset"}
+            size={45}
+            tokenStaked={1000}
+            support={40}
+            icon={"/assets/images/trees.jpg"}
+          />
+          <Signal
+            title={"Parcelle du vieux prêtre"}
+            size={60}
+            tokenStaked={700}
+            support={70}
+            icon={"/assets/images/trees.jpg"}
+          />
+          <Signal
+            title={"Douglas (Brokus)"}
+            size={40}
+            tokenStaked={200}
+            support={40}
+            icon={"/assets/images/trees.jpg"}
+          />
+          <Signal
+            title={"Épicéa de Sitka mature (Mevenez)"}
+            size={35}
+            tokenStaked={1150}
+            support={55}
+            icon={"/assets/images/trees.jpg"}
+          />
         </div>
         <div className={cn("separator")} />
       </div>

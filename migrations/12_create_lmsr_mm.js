@@ -64,7 +64,7 @@ module.exports = function(deployer, network, accounts) {
       lmsrAddress,
       markets: [
         {
-          title: `Will more than ${ecoTreeRegistrationTargetValue} acres of forest be registered on EcoTree by Jan 1, 2020?`,
+          title: `Will more than ${ecoTreeRegistrationTargetValue} metric tons of CO2 be absorbed by Epicea de Sitka (Bourrus) by Jan 1, 2020?`,
           resolutionDate: new Date(
             deployConfig.ecoTreeRegistrationTargetTime * 1000
           ).toISOString(),
@@ -72,12 +72,12 @@ module.exports = function(deployer, network, accounts) {
             {
               title: "Yes",
               short: "Yes",
-              when: `Acres of Forest > ${ecoTreeRegistrationTargetValue}`
+              when: `Metric Tons Absorbed > ${ecoTreeRegistrationTargetValue}`
             },
             {
               title: "No",
               short: "No",
-              when: `Acres of Forest ≤ ${ecoTreeRegistrationTargetValue}`
+              when: `Metric Tons Absorbed ≤ ${ecoTreeRegistrationTargetValue}`
             }
           ],
           oracle: "FCLA + Chainlink",

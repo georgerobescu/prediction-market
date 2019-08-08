@@ -7,7 +7,7 @@ import "chainlink/contracts/ChainlinkClient.sol";
 contract ChainlinkEcoTree is ChainlinkClient {
   bytes32 public forest;
 
-  constructor(address _link) public {
+  constructor(address _link, address _oracle) public {
     // Set the address for the LINK token for the network.
     if(_link == address(0)) {
       // Useful for deploying to public networks.
@@ -16,6 +16,12 @@ contract ChainlinkEcoTree is ChainlinkClient {
       // Useful if you're deploying to a local network.
       setChainlinkToken(_link);
     }
+    // Set the oracle that will be used for making requests
+    require(
+      _oracle != address(0),
+      "Please provide the address of a valid Chainlink oracle for the currently selected network."
+    );
+    setChainlinkOracle(_oracle);
   }
   
   // Creates a Chainlink request with the bytes32 job and returns the requestId
@@ -25,7 +31,7 @@ contract ChainlinkEcoTree is ChainlinkClient {
     // Adds a URL with the key "get" to the request parameters
     req.add("get", "http://private-486b5-leopoldjoy.apiary-mock.com/forests");
     // Adds a dot-delimited JSON path with the key "path" to the request parameters
-    req.add("path", "0.description");
+    req.add("path", "some");
     // Sends the request with 1 LINK to the oracle contract
     requestId = sendChainlinkRequest(req, 1 * LINK);
   }

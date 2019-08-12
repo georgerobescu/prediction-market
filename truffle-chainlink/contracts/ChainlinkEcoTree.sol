@@ -6,12 +6,6 @@ import "chainlink/contracts/ChainlinkClient.sol";
 // functionality of creating Chainlink requests.
 contract ChainlinkEcoTree is ChainlinkClient {
 
-  bytes32 public accessible;
-  uint public accessible1;
-  string public accessible2;
-  bytes32 public accessible3;
-  bytes32 public accessible4;
-
   struct Forest {
     bytes32 id;
     bytes32 essence_id;
@@ -47,17 +41,13 @@ contract ChainlinkEcoTree is ChainlinkClient {
 
   function makeSingleRequest(bytes32 _jobId, uint i, bytes32 typeName) internal returns (bool success) {
     // Takes a JobID, a callback address, and callback function
-    accessible = _jobId;
-    accessible1 = i;
     Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfillForest.selector);
     // A URL with the key "get" to the request parameters
     req.add("get", string(abi.encodePacked("http://private-486b5-leopoldjoy.apiary-mock.com/forests/", uint2str(i))));
     // Dot-delimited JSON key "path" to the desired parameters
-    accessible2 = bytes32ToString(typeName);
     req.add("path", bytes32ToString(typeName));
     // Send the request with 1 LINK to the oracle contract
     bytes32 requestId = sendChainlinkRequest(req, 1 * LINK);
-    accessible3 = requestId;
     // Save mapping of request ID to the corrosponding forest ID and data type
     requestIdToDataType[requestId] = DataType({forestId: i, typeName: typeName});
 
@@ -86,8 +76,7 @@ contract ChainlinkEcoTree is ChainlinkClient {
   function fulfillForest(bytes32 _requestId, bytes32 _forestDataField)
     // Use recordChainlinkFulfillment to ensure only the requesting oracle can fulfill
     public recordChainlinkFulfillment(_requestId) {
-    accessible4 = requestIdToDataType[_requestId].typeName;
-    // Set the forest's data based on retrieved forest ID
+    // Set the forest's data field based on the fulfilled data and its type
     if (requestIdToDataType[_requestId].typeName == "id") {
       forests[requestIdToDataType[_requestId].forestId].id = _forestDataField;
     } else if (requestIdToDataType[_requestId].typeName == "essence_id") {
@@ -101,7 +90,9 @@ contract ChainlinkEcoTree is ChainlinkClient {
     }
   }
 
-  // Helper functions
+  /* 
+   * HELPER FUNCTIONS
+   */
   function uint2str(uint i) internal pure returns (string){
     if (i == 0) return "0";
     uint j = i;

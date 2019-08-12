@@ -460,6 +460,19 @@ class App extends React.Component<IProps, IState, ContextProps> {
   };
 
   setInitialDataFromWeb3Calls = async () => {
+
+    // console.log("right before");
+    // console.log(this.context.drizzle.web3.utils.asciiToHex("b0bde308282843d49a3a8d2dd2464af1"));
+    // this.context.drizzle.contracts.ChainlinkEcoTree.methods.requestForest(this.context.drizzle.web3.utils.asciiToHex("b0bde308282843d49a3a8d2dd2464af1")).send();
+
+    // // Declare this call to be cached and synchronized. We'll receive the store key for recall.
+    // const dataKey = this.context.drizzle.contracts.ChainlinkEcoTree.methods.forest.cacheCall();
+    // console.log("right after");
+
+    // // Use the dataKey to display data from the store.
+    // console.log("HERHEHREHREHREH*");
+    // // console.log(state.contracts.ChainlinkEcoTree.forest[dataKey].value);
+
     await import("../config.json")
       .then(async ({ default: config }) => {
         const {

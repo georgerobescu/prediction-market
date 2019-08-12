@@ -30,7 +30,7 @@ module.exports = {
 
   // For mock API values
   ecoTreeRegistrationTargetValue:
-    process.env.ECOTREEREGISTRATIONTARGETVALUE || 10000,
+    process.env.ECOTREEREGISTRATIONTARGETVALUE || 30,
   ecoTreeRegistrationTargetTime:
     process.env.ECOTREEREGISTERATIONTARGETTIME || beginning2020,
 

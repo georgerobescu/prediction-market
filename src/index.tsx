@@ -12,6 +12,8 @@ import LMSRMarketMaker from './build/contracts/LMSRMarketMaker.json';
 import {/*Drizzle, */generateStore } from "drizzle";
 import { DrizzleContext, DrizzleProvider } from "drizzle-react";
 
+import ChainlinkEcoTree from './build-ecotree/contracts/ChainlinkEcoTree.json'
+
 export const store = configureStore();
 
 // const drizzle_options = {
@@ -20,8 +22,11 @@ export const store = configureStore();
 //   ]
 // };
 
-//define drizzle options. Include contracts here.
-const options = { /*contracts: [SimpleStorage, TutorialToken]*/ };
+//define drizzle options
+const options = {
+  contracts: [ChainlinkEcoTree]
+};
+
 //initialise drizzle store with options
 // const drizzleStore = generateStore(options);
 //initialise drizzle object, passing options and store
@@ -31,7 +36,7 @@ console.log(history);
 
 const RootComponent = () => (
   <>
-    {ReactReduxContext && <DrizzleProvider store={store} options={{contracts: []}} context={ReactReduxContext}>
+    {ReactReduxContext && <DrizzleProvider store={store} options={options} context={ReactReduxContext}>
       <DisplayIfWeb3Loaded>
         <App context={ReactReduxContext} {...(history ? { history } : { })} />
       </DisplayIfWeb3Loaded>

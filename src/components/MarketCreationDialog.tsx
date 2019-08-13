@@ -1,6 +1,6 @@
-import web3 from 'web3';
 import * as React from 'react';
 import cn from "classnames";
+import web3 from "web3";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import OutcomeSelection from "./outcome-selection";
@@ -8,22 +8,23 @@ import BuySection from "./buy-section";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import * as marketDataActions from "../actions/marketData";
 import * as positionCreationActions from "../actions/positionCreation";
+import * as marketCreationActions from "../actions/marketCreation";
 import asWrappedTransaction from '../utils/asWrappedTransaction';
 import '../style.scss';
 import { drizzleConnect } from 'drizzle-react';
 
 export interface IProps {
   markets: Array<any>;
-  openMarketIndex: number;
+  openCreationIndex: number;
   marketSelection: Array<any>;
   probabilities: Array<any>;
   stagedProbabilities: Array<any>;
   setMarketSelection: any;
   ongoingTransactionType: Object;
   setOngoingTransactionType: Function;
-  setOpenMarketIndex: Function;
   newlyCreatedTxn: any;
   setNewlyCreatedTxn: Function;
+  setOpenCreationIndex: Function;
   ChainlinkEcoTreeContract: any;
   chainlinkEcoTreeKeys: any;
 }
@@ -33,27 +34,26 @@ export interface IState {
   positionCreation: Object;
 }
 
-class PositionCreation extends React.Component<IProps, IState> {
+class MarketCreationDialog extends React.Component<IProps, IState> {
   closeModal = () => {
-    const { setOpenMarketIndex, setNewlyCreatedTxn } = this.props;
+    const { setOpenCreationIndex, setNewlyCreatedTxn } = this.props;
 
-    setOpenMarketIndex(-1);
+    setOpenCreationIndex(-1);
     setNewlyCreatedTxn(null);
   }
   public render() {
-    const { markets, openMarketIndex, probabilities, stagedProbabilities, marketSelection, setMarketSelection, newlyCreatedTxn, ChainlinkEcoTreeContract, chainlinkEcoTreeKeys } = this.props;
+    const { markets, openCreationIndex, probabilities, stagedProbabilities, marketSelection, setMarketSelection, newlyCreatedTxn, ChainlinkEcoTreeContract, chainlinkEcoTreeKeys } = this.props;
 
-    const outcomes = markets[openMarketIndex].outcomes;
-    const conditionId = markets[openMarketIndex].conditionId;
-    const rawTitle = markets[openMarketIndex].title;
-    const title = rawTitle.replace("{name}", '"' + web3.utils.toAscii(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openMarketIndex]].value.description) + '"');
+    // const outcomes = markets[openCreationIndex].outcomes;
+    // const conditionId = markets[openCreationIndex].conditionId;
+    // const title = markets[openCreationIndex].title;
 
     return (
       <div className="text-center">
         <Modal
-          isOpen={openMarketIndex >= 0}
+          isOpen={openCreationIndex >= 0}
           toggle={this.closeModal}>
-          <ModalHeader>Create a new Position</ModalHeader>
+          <ModalHeader>Create a {"New"} Market from {"This"} Dataset - UNDER CONSTRUCTION</ModalHeader>
 
           <ModalBody>
 
@@ -61,34 +61,28 @@ class PositionCreation extends React.Component<IProps, IState> {
 
               <div className="jr-card-header">
                 <h3 className="card-heading">
-                  <span>{title}</span>
+                  <span>
+                    {web3.utils.toAscii(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openCreationIndex]].value.description)}
+                  </span>
                 </h3>
               </div>
 
               <div className="jr-card-body">
 
-                {(newlyCreatedTxn === null) &&
-                  <div className="row">
-                    <div className={cn("outcome-selection") + " col-0 col-md-3"} />
-                    <div className={cn("outcome-selection") + " col-12 col-md-6"}>
-                      <OutcomeSelection
-                        {...{
-                          outcomes,
-                          conditionId,
-                          marketSelection,
-                          setMarketSelection
-                        }}
-                      />
-                      <BuySection asWrappedTransaction={asWrappedTransaction(this.props)} />
-                    </div>
+                <div className="row">
+                  <div className={cn("outcome-selection") + " col-12"}>
+                    Forest ID: {web3.utils.toAscii(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openCreationIndex]].value.id)}
                   </div>
-                }
-
-                {(newlyCreatedTxn !== null) &&
-                  <>
-                    Success! Your position has been created. Txn: {newlyCreatedTxn.tx}
-                  </>
-                }
+                  <div className={cn("outcome-selection") + " col-12"}>
+                    Emissions ID: {web3.utils.toAscii(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openCreationIndex]].value.essence_id)}
+                  </div>
+                  <div className={cn("outcome-selection") + " col-12"}>
+                    Parcel ID: {web3.utils.toAscii(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openCreationIndex]].value.parcelle_id)}
+                  </div>
+                  <div className={cn("outcome-selection") + " col-12"}>
+                    Date Planted: {web3.utils.toAscii(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openCreationIndex]].value.date_plantation)}
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -112,13 +106,13 @@ class PositionCreation extends React.Component<IProps, IState> {
 }
 
 export default drizzleConnect(
-  PositionCreation,
+  MarketCreationDialog,
   // @ts-ignore
   state => ({
     // @ts-ignore
     markets: state.marketData.markets,
     // @ts-ignore
-    openMarketIndex: state.positionCreation.openMarketIndex,
+    openCreationIndex: state.marketCreation.openCreationIndex,
     // @ts-ignore
     ongoingTransactionType: state.marketData.ongoingTransactionType,
     // @ts-ignore
@@ -133,8 +127,8 @@ export default drizzleConnect(
       marketDataActions.setOngoingTransactionType,
       dispatch
     ),
-    setOpenMarketIndex: bindActionCreators(
-      positionCreationActions.setOpenMarketIndex,
+    setOpenCreationIndex: bindActionCreators(
+      marketCreationActions.setOpenCreationIndex,
       dispatch
     ),
     setNewlyCreatedTxn: bindActionCreators(

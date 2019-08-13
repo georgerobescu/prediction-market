@@ -4,6 +4,7 @@ import marketDataReducer from "./marketData";
 import positionCreationReducer from "./positionCreation";
 import web3Reducer from "./web3Reducer";
 import contractFieldKeys from "./contractFieldKeys";
+import marketCreation from "./marketCreation";
 
 // export default history =>
 //   combineReducers({
@@ -18,6 +19,7 @@ export default history => ({
   positionCreation: positionCreationReducer,
   web3Reducer,
   contractFieldKeys,
+  marketCreation,
   ...(
     history
     && { router: connectRouter(history) }

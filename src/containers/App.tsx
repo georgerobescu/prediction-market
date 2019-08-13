@@ -11,6 +11,7 @@ import * as contractFieldKeysActions from "../actions/contractFieldKeys";
 import Spinner from "../components/spinner";
 import Markets from "./markets";
 import Positions from "./Positions";
+import MarketCreation from './marketCreation';
 import { getNetworkName/*, loadWeb3*/ } from "../utils/web3-helpers.js";
 import collateralInfo from "../utils/collateral-info";
 import { drizzleConnect } from 'drizzle-react';
@@ -471,8 +472,6 @@ class App extends React.Component<IProps, IState, ContextProps> {
       // Store the key for future recall in Redux store
       addChainlinkEcoTreeKey(dataKey);
     }
-    // console.log(ChainlinkEcoTreeContract.methods.forests[dataKey].value);
-    // console.log(this.context.drizzle.contracts.ChainlinkEcoTree.forests[dataKey].value);
 
     await import("../config.json")
       .then(async ({ default: config }) => {
@@ -536,10 +535,6 @@ class App extends React.Component<IProps, IState, ContextProps> {
   public render() {
     const { loading, networkId, history, context } = this.props;
 
-
-
-
-
     return (
       <>
         {(loading === "SUCCESS") && (
@@ -555,6 +550,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
                       <div className="app-wrapper">
                         <Route exact path="/" component={Markets} />
                         <Route path="/positions" component={Positions} />
+                        <Route path="/market-creation" component={MarketCreation} />
                       </div>
                     </div>
                   </main>
@@ -637,9 +633,7 @@ export default drizzleConnect(
     // @ts-ignore
     stagedTradeAmounts: state.marketData.stagedTradeAmounts,
     // @ts-ignore
-    stagedTransactionType: state.marketData.stagedTransactionType,
-    // @ts-ignore
-    // ChainlinkEcoTreeContract: state.contracts.ChainlinkEcoTree
+    stagedTransactionType: state.marketData.stagedTransactionType
   }),
   dispatch => ({
     setSyncTime: bindActionCreators(marketDataActions.setSyncTime, dispatch),

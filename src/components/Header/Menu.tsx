@@ -19,6 +19,9 @@ class Menu extends React.Component {
                     </li>
                     <li className="nav-item">
                         <Link to="/positions">Positions</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/market-creation">Market Creation</Link>
                         {/* <Link to="javascript:void(0)">Oracles</Link>
                         <ul className="sub-menu">
                             <li>

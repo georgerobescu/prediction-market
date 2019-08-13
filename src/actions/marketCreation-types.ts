@@ -1,0 +1,1 @@
+export const SET_OPEN_CREATION_INDEX = "marketCreation/SET_OPEN_CREATION_INDEX";

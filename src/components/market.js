@@ -23,7 +23,9 @@ const Market = ({
   setOpenMarketIndex,
   oracle,
   lastMarketListed,
-  icon
+  icon,
+  ChainlinkEcoTreeContract,
+  chainlinkEcoTreeKeys
 }) => {
   const marketStage = lmsrState && lmsrState.stage;
   const isResolved = resolutionState && resolutionState.isResolved;
@@ -58,7 +60,18 @@ const Market = ({
                       src={icon}
                     ></img>
                   </span>
-                  <p className="br-break mb-0 list-group-item-text">{title}</p>
+                  <p className="br-break mb-0 list-group-item-text">
+                    {title.replace(
+                      "{name}",
+                      '"' +
+                        Web3.utils.toAscii(
+                          ChainlinkEcoTreeContract.forests[
+                            chainlinkEcoTreeKeys[marketIndex]
+                          ].value.description
+                        ) +
+                        '"'
+                    )}
+                  </p>
                 </li>
                 <li className="d-flex align-items-center list-group-item border-left-0 border-right-0 border-bottom-0">
                   {marketStage !== "Closed" && (
@@ -86,9 +99,18 @@ const Market = ({
                           )}
                         </span>
                         <span className="d-block mb-1 text-muted">
-                          <i className="zmdi zmdi-calendar-check text-muted chart-f20"></i>
                           Oracles: {oracle}
                         </span>
+                        {title.includes("{name}") && (
+                          <span className="d-block mb-1 text-muted">
+                            {"Date Planted"}:{" "}
+                            {Web3.utils.toAscii(
+                              ChainlinkEcoTreeContract.forests[
+                                chainlinkEcoTreeKeys[marketIndex]
+                              ].value.date_plantation
+                            )}
+                          </span>
+                        )}
                         {isResolved ? (
                           <span className="h3 text-muted">
                             <span>
@@ -155,7 +177,9 @@ Market.propTypes = {
   ),
   oracle: PropTypes.string.isRequired,
   lastMarketListed: PropTypes.bool.isRequired,
-  icon: PropTypes.string.isRequired
+  icon: PropTypes.string.isRequired,
+  ChainlinkEcoTreeContract: PropTypes.any.isRequired,
+  chainlinkEcoTreeKeys: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 Market.defaultProps = {
@@ -165,7 +189,12 @@ Market.defaultProps = {
 export default drizzleConnect(
   Market,
   // @ts-ignore
-  null,
+  state => ({
+    // @ts-ignore
+    ChainlinkEcoTreeContract: state.contracts.ChainlinkEcoTree,
+    // @ts-ignore
+    chainlinkEcoTreeKeys: state.contractFieldKeys.chainlinkEcoTreeKeys
+  }),
   dispatch => ({
     setOpenMarketIndex: bindActionCreators(
       positionCreationActions.setOpenMarketIndex,

@@ -5,19 +5,44 @@ module.exports = function(deployer) {
     const pmSystem = await artifacts
       .require("PredictionMarketSystem")
       .deployed();
+    // await pmSystem.prepareCondition(
+    //   artifacts.require("DutchXTokenPriceOracle").address,
+    //   deployConfig.daiPriceQuestionID,
+    //   2
+    // );
+    // await pmSystem.prepareCondition(
+    //   artifacts.require("TokenSupplyOracle").address,
+    //   deployConfig.daiSupplyQuestionID,
+    //   2
+    // );
+    // await pmSystem.prepareCondition(
+    //   artifacts.require("DaiStabilityFeeOracle").address,
+    //   deployConfig.daiStabilityFeeQuestionID,
+    //   2
+    // );
     await pmSystem.prepareCondition(
-      artifacts.require("DutchXTokenPriceOracle").address,
-      deployConfig.daiPriceQuestionID,
+      deployConfig.ecoTreeContractAddress,
+      deployConfig.ecoTreeQuestion0ID,
       2
     );
     await pmSystem.prepareCondition(
-      artifacts.require("TokenSupplyOracle").address,
-      deployConfig.daiSupplyQuestionID,
+      deployConfig.ecoTreeContractAddress,
+      deployConfig.ecoTreeQuestion1ID,
       2
     );
     await pmSystem.prepareCondition(
-      artifacts.require("DaiStabilityFeeOracle").address,
-      deployConfig.daiStabilityFeeQuestionID,
+      deployConfig.ecoTreeContractAddress,
+      deployConfig.ecoTreeQuestion2ID,
+      2
+    );
+    await pmSystem.prepareCondition(
+      deployConfig.ecoTreeContractAddress,
+      deployConfig.ecoTreeQuestion3ID,
+      2
+    );
+    await pmSystem.prepareCondition(
+      deployConfig.ecoTreeContractAddress,
+      deployConfig.iceAliveQuestionID,
       2
     );
   });

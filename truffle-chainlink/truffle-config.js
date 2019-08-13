@@ -18,6 +18,7 @@
  *
  */
 
+import web3 from "web3";
 const fullPathBuildDirectory = `${__dirname}/../src/build-ecotree/contracts`;
 const HDWalletProvider = require("truffle-hdwallet-provider");
 const seed =
@@ -55,7 +56,8 @@ module.exports = {
       // See issues:
       //   https://github.com/trufflesuite/truffle/issues/1612
       //   https://github.com/trufflesuite/truffle/issues/1698
-      skipDryRun: true
+      skipDryRun: true,
+      gasPrice: web3.utils.toWei("50", "gwei")
     },
     mainnet: {
       provider: () =>

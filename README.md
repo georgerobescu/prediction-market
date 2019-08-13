@@ -48,6 +48,12 @@ FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-
   <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/positions.png" />
 </p>
 
+## Usage Instructions
+
+1. Ensure that your MetaMask is connected to the Rinkeby testnet and that you have some Rinkeby test ETH (you can get more here: https://faucet.rinkeby.io/).
+2. You need some test DAI to create positions on the FCLA PM. You can mint some to your MetaMask account via our faucet. Navigate [here](https://oneclickdapp.com/europe-package/), select the "mint" function, enter your MetaMask address and the amount of tstnet DAI you would like (NOTE: this number is denoted in Wei, for example if you enter `25000000000000000000` you will receive 25DAI on the testnet).
+3. Navigate to the [FCLA PM](http://pm.flyingcarpet.network/), after signing the MetaMask connection dialog, you can then trade on any of the avaliable markets using your testnet DAI.
+
 ## Development Instructions
 
 1. Run `yarn install`

@@ -51,8 +51,18 @@ FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-
 ## Usage Instructions
 
 1. Ensure that your MetaMask is connected to the Rinkeby testnet and that you have some Rinkeby test ETH (you can get more here: https://faucet.rinkeby.io/).
-2. You need some test DAI to create positions on the FCLA PM. You can mint some to your MetaMask account via our faucet. Navigate [here](https://oneclickdapp.com/europe-package/), select the "mint" function, enter your MetaMask address and the amount of tstnet DAI you would like (NOTE: this number is denoted in Wei, for example if you enter `25000000000000000000` you will receive 25DAI on the testnet).
+2. You need some test DAI to create positions on the FCLA PM. You can mint some to your MetaMask account via our faucet. Navigate [here](https://oneclickdapp.com/europe-package/), select the `mint` function, enter your MetaMask address and the amount of tstnet DAI you would like (NOTE: this number is denoted in Wei, for example if you enter `25000000000000000000` you will receive 25DAI on the testnet).
 3. Navigate to the [FCLA PM](http://pm.flyingcarpet.network/), after signing the MetaMask connection dialog, you can then trade on any of the avaliable markets using your testnet DAI.
+
+## Advanced Usage Instructions
+
+Although not necessary for most users, it is possible to refresh the Chainlinked data that is cached inside the FCLA smart contract (e.g. when the Chainlinked geospatial endpoints contain fresh information). To update the Chainlinked data, please follow these instructions:
+
+1. Obtain some Rinkeby LINK tokens from the Chainlink faucet here: https://rinkeby.chain.link/
+2. Inside the MetaMask dialog, send some newly acquired LINK tokens to the Rinkeby FCLA Chainlink contract address: `0xCe8Df5dae6cB62D934d7c2609A0fDC0e1BCAC3Ae`. NOTE: each forest update within the FCLA contract currently costs 5 LINK tokens, so to update all five forests costs: `5 * 5 = 25 LINK Tokens`.
+3. To refresh the cached data from Chainlink, call the `refreshForests` function from the FCLA Chainlink contract [here](https://oneclickdapp.com/stop-absurd/). In the `_jobId` field enter `b0bde308282843d49a3a8d2dd2464af1` (the correct `jobId` for Rinkeby `GET` requests, see [here](https://docs.chain.link/docs/testnet-oracles) for more information). In the `_numForests` field enter the number of forests you would like to refresh (in index order), currently the maximum supported by the contract is all five forests (to update all forests' data simply enter `5`).
+4. Submit the function call with a sufficent amount of gas (the current version may require as much as `7000000` gas). Once submitted it may take some time to process, monitor the transaction on [Etherscan](https://rinkeby.etherscan.io/address/0xCe8Df5dae6cB62D934d7c2609A0fDC0e1BCAC3Ae).
+5. Once confirmed, the forest data inside the FCLA contract will be refreshed and this will be reflected in the PM dApp: http://pm.flyingcarpet.network/
 
 ## Development Instructions
 

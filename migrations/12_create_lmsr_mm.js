@@ -7,12 +7,18 @@ const writeToConfig = require("./utils/writeToConfig");
 module.exports = function(deployer, network, accounts) {
   deployer.then(async () => {
     const conditionIds = [
-      ["DutchXTokenPriceOracle", deployConfig.daiPriceQuestionID],
-      ["TokenSupplyOracle", deployConfig.daiSupplyQuestionID],
-      ["DaiStabilityFeeOracle", deployConfig.daiStabilityFeeQuestionID]
-    ].map(([contractName, questionId]) =>
+      // ["DutchXTokenPriceOracle", deployConfig.daiPriceQuestionID],
+      // ["TokenSupplyOracle", deployConfig.daiSupplyQuestionID],
+      // ["DaiStabilityFeeOracle", deployConfig.daiStabilityFeeQuestionID]
+      [deployConfig.ecoTreeContractAddress, deployConfig.ecoTreeQuestion0ID],
+      [deployConfig.ecoTreeContractAddress, deployConfig.ecoTreeQuestion1ID],
+      [deployConfig.ecoTreeContractAddress, deployConfig.ecoTreeQuestion2ID],
+      [deployConfig.ecoTreeContractAddress, deployConfig.ecoTreeQuestion3ID],
+      [deployConfig.ecoTreeContractAddress, deployConfig.iceAliveQuestionID]
+    ].map(([address, questionId]) =>
       web3.utils.soliditySha3(
-        { t: "address", v: artifacts.require(contractName).address },
+        // { t: "address", v: artifacts.require(contractName).address },
+        { t: "address", v: address },
         { t: "bytes32", v: questionId },
         { t: "uint", v: 2 }
       )
@@ -54,35 +60,42 @@ module.exports = function(deployer, network, accounts) {
 
     const ecoTreeRegistrationTargetValue = deployConfig.ecoTreeRegistrationTargetValue.toLocaleString();
 
-    const formattedAXAParametricInsuranceTargetValue =
-      "$" +
-      deployConfig.AXAParametricInsuranceTargetValue.toLocaleString() +
-      " DAI";
+    // const formattedAXAParametricInsuranceTargetValue =
+    //   "$" +
+    //   deployConfig.AXAParametricInsuranceTargetValue.toLocaleString() +
+    //   " DAI";
+
+    const ecotreeForestMarketArchitype = {
+      title: `Will more than ${ecoTreeRegistrationTargetValue} metric tons of CO2 be absorbed by {name} by Jan 1, 2020?`,
+      resolutionDate: new Date(
+        deployConfig.ecoTreeRegistrationTargetTime * 1000
+      ).toISOString(),
+      outcomes: [
+        {
+          title: "Yes",
+          short: "Yes",
+          when: `Metric Tons Absorbed > ${ecoTreeRegistrationTargetValue}`
+        },
+        {
+          title: "No",
+          short: "No",
+          when: `Metric Tons Absorbed ≤ ${ecoTreeRegistrationTargetValue}`
+        }
+      ],
+      oracle: "FCLA + Chainlink",
+      icon: "/assets/images/trees.jpg"
+    };
 
     writeToConfig({
       networkId: await web3.eth.net.getId(),
       lmsrAddress,
       markets: [
-        {
-          title: `Will more than ${ecoTreeRegistrationTargetValue} metric tons of CO2 be absorbed by Epicea de Sitka (Bourrus) by Jan 1, 2020?`,
-          resolutionDate: new Date(
-            deployConfig.ecoTreeRegistrationTargetTime * 1000
-          ).toISOString(),
-          outcomes: [
-            {
-              title: "Yes",
-              short: "Yes",
-              when: `Metric Tons Absorbed > ${ecoTreeRegistrationTargetValue}`
-            },
-            {
-              title: "No",
-              short: "No",
-              when: `Metric Tons Absorbed ≤ ${ecoTreeRegistrationTargetValue}`
-            }
-          ],
-          oracle: "FCLA + Chainlink",
-          icon: "/assets/images/trees.jpg"
-        },
+        ...[].concat(
+          Array.apply(null, Array(4)).map(
+            ecotreeForestMarketArchitype.valueOf,
+            ecotreeForestMarketArchitype
+          )
+        ),
         {
           title: `Will the IceAlive Greeland ice sheet melt rate increase by at least a factor of ${deployConfig.iceAliveMeltRateTarget} from 2019 to 2020?`,
           resolutionDate: new Date(
@@ -102,26 +115,6 @@ module.exports = function(deployer, network, accounts) {
           ],
           oracle: "FCLA + Chainlink",
           icon: "/assets/images/ice.jpg"
-        },
-        {
-          title: `Will there be more than ${formattedAXAParametricInsuranceTargetValue} in AXA parametric insurance claims this year?`,
-          resolutionDate: new Date(
-            deployConfig.AXAParametricInsuranceTargetTime * 1000
-          ).toISOString(),
-          outcomes: [
-            {
-              title: "Yes",
-              short: "Yes",
-              when: `Parametric insurance claims > ${formattedAXAParametricInsuranceTargetValue}`
-            },
-            {
-              title: "No",
-              short: "No",
-              when: `Parametric insurance claims ≤ ${formattedAXAParametricInsuranceTargetValue}`
-            }
-          ],
-          oracle: "FCLA + Chainlink",
-          icon: "/assets/images/trees2.jpg"
         }
       ]
     });

@@ -3,6 +3,8 @@ import { combineReducers } from "redux";
 import marketDataReducer from "./marketData";
 import positionCreationReducer from "./positionCreation";
 import web3Reducer from "./web3Reducer";
+import contractFieldKeys from "./contractFieldKeys";
+import marketCreation from "./marketCreation";
 
 // export default history =>
 //   combineReducers({
@@ -15,7 +17,9 @@ import web3Reducer from "./web3Reducer";
 export default history => ({
   marketData: marketDataReducer,
   positionCreation: positionCreationReducer,
-  web3Reducer: web3Reducer,
+  web3Reducer,
+  contractFieldKeys,
+  marketCreation,
   ...(
     history
     && { router: connectRouter(history) }

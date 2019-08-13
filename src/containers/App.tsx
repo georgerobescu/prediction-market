@@ -7,9 +7,11 @@ import { bindActionCreators, compose } from "redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 // import { ConnectedRouter } from 'connected-react-router';
 import * as marketDataActions from "../actions/marketData";
+import * as contractFieldKeysActions from "../actions/contractFieldKeys";
 import Spinner from "../components/spinner";
 import Markets from "./markets";
 import Positions from "./Positions";
+import MarketCreation from './marketCreation';
 import { getNetworkName/*, loadWeb3*/ } from "../utils/web3-helpers.js";
 import collateralInfo from "../utils/collateral-info";
 import { drizzleConnect } from 'drizzle-react';
@@ -283,7 +285,8 @@ export interface IProps {
   networkId: number,
   history: Object,
   drizzleStatus: any,
-  context: any
+  context: any,
+  addChainlinkEcoTreeKey: any
 }
 
 export interface IState {
@@ -460,18 +463,15 @@ class App extends React.Component<IProps, IState, ContextProps> {
   };
 
   setInitialDataFromWeb3Calls = async () => {
+    const { addChainlinkEcoTreeKey } = this.props;
 
-    // console.log("right before");
-    // console.log(this.context.drizzle.web3.utils.asciiToHex("b0bde308282843d49a3a8d2dd2464af1"));
-    // this.context.drizzle.contracts.ChainlinkEcoTree.methods.requestForest(this.context.drizzle.web3.utils.asciiToHex("b0bde308282843d49a3a8d2dd2464af1")).send();
-
-    // // Declare this call to be cached and synchronized. We'll receive the store key for recall.
-    // const dataKey = this.context.drizzle.contracts.ChainlinkEcoTree.methods.forest.cacheCall();
-    // console.log("right after");
-
-    // // Use the dataKey to display data from the store.
-    // console.log("HERHEHREHREHREH*");
-    // // console.log(state.contracts.ChainlinkEcoTree.forest[dataKey].value);
+    // Make a call for each forest's data from the contract
+    for (let i = 0; i < 5; i++) {
+      // Declare this call to be cached and synchronized
+      const dataKey = await this.context.drizzle.contracts.ChainlinkEcoTree.methods.forests.cacheCall(i);
+      // Store the key for future recall in Redux store
+      addChainlinkEcoTreeKey(dataKey);
+    }
 
     await import("../config.json")
       .then(async ({ default: config }) => {
@@ -535,10 +535,6 @@ class App extends React.Component<IProps, IState, ContextProps> {
   public render() {
     const { loading, networkId, history, context } = this.props;
 
-
-
-
-
     return (
       <>
         {(loading === "SUCCESS") && (
@@ -554,6 +550,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
                       <div className="app-wrapper">
                         <Route exact path="/" component={Markets} />
                         <Route path="/positions" component={Positions} />
+                        <Route path="/market-creation" component={MarketCreation} />
                       </div>
                     </div>
                   </main>
@@ -636,7 +633,7 @@ export default drizzleConnect(
     // @ts-ignore
     stagedTradeAmounts: state.marketData.stagedTradeAmounts,
     // @ts-ignore
-    stagedTransactionType: state.marketData.stagedTransactionType,
+    stagedTransactionType: state.marketData.stagedTransactionType
   }),
   dispatch => ({
     setSyncTime: bindActionCreators(marketDataActions.setSyncTime, dispatch),
@@ -678,6 +675,10 @@ export default drizzleConnect(
     ),
     setStagedTransactionType: bindActionCreators(
       marketDataActions.setStagedTransactionType,
+      dispatch
+    ),
+    addChainlinkEcoTreeKey: bindActionCreators(
+      contractFieldKeysActions.addChainlinkEcoTreeKey,
       dispatch
     )
   })

@@ -1,3 +1,4 @@
+const web3 = require("web3");
 require("dotenv").config();
 
 var HDWalletProvider = require("truffle-hdwallet-provider");
@@ -20,6 +21,7 @@ const seed =
  *     gasPrice: 10000000000,
  *   },
  */
+
 const config = {
   contracts_build_directory: fullPathBuildDirectory,
   networks: {
@@ -39,7 +41,8 @@ const config = {
       // See issues:
       //   https://github.com/trufflesuite/truffle/issues/1612
       //   https://github.com/trufflesuite/truffle/issues/1698
-      skipDryRun: true
+      skipDryRun: true,
+      gasPrice: web3.utils.toWei("50", "gwei")
     },
     mainnet: {
       provider: () =>

@@ -6,7 +6,8 @@ console.log("web3:", Web3);
 
 const { toBN } = Web3.utils;
 
-export const maxUint256BN = toBN(`0x${"ff".repeat(32)}`);
+export const maxUint256Hex = `0x${"ff".repeat(32)}`;
+export const maxUint256BN = toBN(maxUint256Hex);
 
 export const zeroDecimal = new Decimal(0);
 export const oneDecimal = new Decimal(1);

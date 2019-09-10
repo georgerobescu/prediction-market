@@ -6,7 +6,7 @@ import * as marketDataActions from "../actions/marketData";
 import * as positionCreationActions from "../actions/positionCreation";
 import PositionGroupDetails from "./position-group-details";
 import Spinner from "./spinner";
-import { maxUint256BN, zeroDecimal } from "../utils/constants";
+import { maxUint256BN, maxUint256Hex, zeroDecimal } from "../utils/constants";
 import { formatCollateral } from "../utils/formatting";
 import { calcPositionGroups } from "../utils/position-groups";
 import { drizzleConnect } from "drizzle-react";
@@ -221,7 +221,7 @@ const BuySection = ({
   };
 
   async function setAllowance() {
-    await collateral.contract.approve(LMSRMarketMaker.address, maxUint256BN, {
+    await collateral.contract.approve(LMSRMarketMaker.address, maxUint256Hex, {
       from: account
     });
   }

@@ -10,6 +10,7 @@ import { maxUint256BN, maxUint256Hex, zeroDecimal } from "../utils/constants";
 import { formatCollateral } from "../utils/formatting";
 import { calcPositionGroups } from "../utils/position-groups";
 import { drizzleConnect } from "drizzle-react";
+import converter from "hex2dec";
 
 function calcOutcomeTokenCounts(
   positions,
@@ -74,18 +75,18 @@ function calcOutcomeTokenCounts(
     }
   });
 
-  const takenPositionsAmountEach = amount
-    .mul(invB)
-    .exp()
-    .sub(refundedTerm)
-    .sub(refusedTerm)
-    .div(takenTerm)
-    .ln()
-    .div(invB)
-    .toInteger();
-
   return positionTypes.map(type => {
     if (type === "taken") {
+      const takenPositionsAmountEach = amount
+        .mul(invB)
+        .exp()
+        .sub(refundedTerm)
+        .sub(refusedTerm)
+        .div(takenTerm)
+        .ln()
+        .div(invB)
+        .toInteger();
+
       return takenPositionsAmountEach;
     }
     if (type === "refunded") {
@@ -205,6 +206,7 @@ const BuySection = ({
         `Can't buy outcome tokens while staged transaction is to ${stagedTransactionType}`
       );
     }
+
     const tradeAmounts = stagedTradeAmounts.map(amount => amount.toString());
     const collateralLimit = await LMSRMarketMaker.calcNetCost(tradeAmounts);
 
@@ -215,9 +217,13 @@ const BuySection = ({
       });
     }
 
-    await LMSRMarketMaker.trade(tradeAmounts, collateralLimit, {
-      from: account
-    }).then(setNewlyCreatedTxn);
+    await LMSRMarketMaker.trade(
+      tradeAmounts,
+      converter.decToHex(String(collateralLimit.toString())),
+      {
+        from: account
+      }
+    ).then(setNewlyCreatedTxn);
   };
 
   async function setAllowance() {

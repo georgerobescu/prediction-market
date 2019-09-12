@@ -20,6 +20,8 @@ import TruffleContract from "truffle-contract";
 import { DrizzleContext } from "drizzle-react";
 import '../style.scss';
 import PropTypes from 'prop-types';
+import Web3 from 'web3';
+import converter from 'hex2dec';
 
 // Design components
 import Header from './../components/Header/index';
@@ -80,6 +82,7 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
   const PMSystem = await PredictionMarketSystem.at(
     await LMSRMarketMaker.pmSystem()
   );
+
   const atomicOutcomeSlotCount = (await LMSRMarketMaker.atomicOutcomeSlotCount()).toNumber();
 
   let curAtomicOutcomeSlotCount = 1;
@@ -146,10 +149,10 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
   while (outcomes.value) {
     const positionId = soliditySha3(
       { t: "address", v: collateral.address },
-      outcomes.value
-          .map(({ collectionId }) => web3Inner.utils.toBN(collectionId.toString()))
+      { t: "uint256", v: converter.decToHex(String(outcomes.value
+          .map(({ collectionId }) => Web3.utils.toBN(collectionId.toString()))
           .reduce((a, b) => a.add(b))
-          .maskn(256)
+          .maskn(256))) }
     );
 
     positions.push({
@@ -215,6 +218,7 @@ async function getLMSRState(web3Inner, PMSystem, LMSRMarketMaker, positions) {
     LMSRMarketMaker.fee().then(feeInner => fromWei(feeInner.toString())),
     getPositionBalances(PMSystem, positions, LMSRMarketMaker.address)
   ]);
+
   return { owner, funding, stage, fee, positionBalances };
 }
 

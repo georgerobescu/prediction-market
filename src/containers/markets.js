@@ -7,6 +7,7 @@ import * as marketDataActions from "../actions/marketData";
 import Market from "../components/market";
 import PositionCreation from "../components/PositionCreation";
 import { drizzleConnect } from "drizzle-react";
+import Web3 from "web3";
 
 import { zeroDecimal, oneDecimal } from "../utils/constants";
 
@@ -57,7 +58,9 @@ const Markets = ({
   marketSelections,
   setMarketSelections,
   stagedTradeAmounts,
-  openMarketIndex
+  openMarketIndex,
+  ChainlinkEcoTreeContract,
+  chainlinkEcoTreeKeys
 }) => {
   useEffect(() => {
     setMarketSelections(
@@ -156,36 +159,44 @@ const Markets = ({
       </div>
       <div className="row">
         <div className={cn("section", "market-section") + " col-sm-12"}>
-          {markets.map((market, i) => (
-            <Market
-              marketIndex={i}
-              lastMarketListed={i === markets.length - 1}
-              key={market.conditionId}
-              {...{
-                ...market,
-                LMSRState,
-                resolutionState:
-                  marketResolutionStates != null
-                    ? marketResolutionStates[i]
-                    : null,
-                probabilities:
-                  marketProbabilities != null ? marketProbabilities[i] : null,
-                stagedProbabilities:
-                  marketProbabilitiesAfterStagedTrade != null
-                    ? marketProbabilitiesAfterStagedTrade[i]
-                    : null,
-                marketSelection:
-                  marketSelections != null ? marketSelections[i] : null,
-                setMarketSelection(marketSelection) {
-                  setMarketSelections(
-                    marketSelections.map((originalMarketSelection, j) =>
-                      i === j ? marketSelection : originalMarketSelection
-                    )
-                  );
-                }
-              }}
-            />
-          ))}
+          {markets.map(
+            (market, i) =>
+              Web3.utils.hexToUtf8(
+                ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[i]].value
+                  .description
+              ).length > 0 && (
+                <Market
+                  marketIndex={i}
+                  lastMarketListed={i === markets.length - 1}
+                  key={market.conditionId}
+                  {...{
+                    ...market,
+                    LMSRState,
+                    resolutionState:
+                      marketResolutionStates != null
+                        ? marketResolutionStates[i]
+                        : null,
+                    probabilities:
+                      marketProbabilities != null
+                        ? marketProbabilities[i]
+                        : null,
+                    stagedProbabilities:
+                      marketProbabilitiesAfterStagedTrade != null
+                        ? marketProbabilitiesAfterStagedTrade[i]
+                        : null,
+                    marketSelection:
+                      marketSelections != null ? marketSelections[i] : null,
+                    setMarketSelection(marketSelection) {
+                      setMarketSelections(
+                        marketSelections.map((originalMarketSelection, j) =>
+                          i === j ? marketSelection : originalMarketSelection
+                        )
+                      );
+                    }
+                  }}
+                />
+              )
+          )}
         </div>
       </div>
     </>
@@ -226,7 +237,9 @@ Markets.propTypes = {
   stagedTradeAmounts: PropTypes.arrayOf(
     PropTypes.instanceOf(Decimal).isRequired
   ),
-  openMarketIndex: PropTypes.number.isRequired
+  openMarketIndex: PropTypes.number.isRequired,
+  ChainlinkEcoTreeContract: PropTypes.any.isRequired,
+  chainlinkEcoTreeKeys: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default drizzleConnect(
@@ -238,7 +251,11 @@ export default drizzleConnect(
     marketResolutionStates: state.marketData.marketResolutionStates,
     marketSelections: state.marketData.marketSelections,
     stagedTradeAmounts: state.marketData.stagedTradeAmounts,
-    openMarketIndex: state.positionCreation.openMarketIndex
+    openMarketIndex: state.positionCreation.openMarketIndex,
+    // @ts-ignore
+    ChainlinkEcoTreeContract: state.contracts.ChainlinkEcoTree,
+    // @ts-ignore
+    chainlinkEcoTreeKeys: state.contractFieldKeys.chainlinkEcoTreeKeys
   }),
   dispatch => ({
     setMarketSelections: bindActionCreators(

@@ -51,8 +51,9 @@ FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-
 ## Usage Instructions
 
 1. Ensure that your MetaMask is connected to the Rinkeby testnet and that you have some Rinkeby test ETH (you can get more here: https://faucet.rinkeby.io/).
-2. You need some test DAI to create positions on the FCLA PM. You can mint some to your MetaMask account via our faucet. Navigate [here](https://oneclickdapp.com/europe-package/), select the `mint` function, enter your MetaMask address and the amount of tstnet DAI you would like (NOTE: this number is denoted in Wei, for example if you enter `25000000000000000000` you will receive 25DAI on the testnet).
+2. You need some test DAI to create positions on the FCLA PM. You can mint some to your MetaMask account via our faucet. Navigate [here](https://oneclickdapp.com/europe-package/), select the `mint` function, enter your MetaMask address and the amount of testnet DAI you would like (NOTE: this number is denoted in Wei, for example if you enter `25000000000000000000` you will receive 25DAI on the testnet).
 3. Navigate to the [FCLA PM](http://pm.flyingcarpet.network/), after signing the MetaMask connection dialog, you can then trade on any of the avaliable markets using your testnet DAI.
+4. (Optional) If you would like to display your testnet DAI balance inside of your MetaMask currency list, open the MetaMask dialog, click the three horizontal bars in the upper left, and then click `Add Token` at the bottom of that dialog. Next, click the `Custom Token` tab and enter the testnet DAI address (`0x87fab5010ce45498627948572bcfff91975fd6ff`) in the `Token Contract Address` field, `DAI` as the `Token Symbol`, and `18` in the `Decimals of Precision` field. You will now see your testnet DAI balance in the list of tokens when you click the three horizontal bars on the upper left of the MetaMask dialog.
 
 ## Advanced Usage Instructions
 

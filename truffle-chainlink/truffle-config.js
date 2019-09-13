@@ -18,7 +18,7 @@
  *
  */
 
-import web3 from "web3";
+const web3 = require("web3");
 const fullPathBuildDirectory = `${__dirname}/../src/build-ecotree/contracts`;
 const HDWalletProvider = require("truffle-hdwallet-provider");
 const seed =

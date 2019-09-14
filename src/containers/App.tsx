@@ -11,7 +11,8 @@ import * as contractFieldKeysActions from "../actions/contractFieldKeys";
 import Spinner from "../components/spinner";
 import Markets from "./markets";
 import Positions from "./Positions";
-import MarketCreation from './marketCreation';
+// import MarketCreation from './marketCreation';
+import FAQ from './FAQ';
 import { getNetworkName/*, loadWeb3*/ } from "../utils/web3-helpers.js";
 import collateralInfo from "../utils/collateral-info";
 import { drizzleConnect } from 'drizzle-react';
@@ -554,7 +555,8 @@ class App extends React.Component<IProps, IState, ContextProps> {
                       <div className="app-wrapper">
                         <Route exact path="/" component={Markets} />
                         <Route path="/positions" component={Positions} />
-                        <Route path="/market-creation" component={MarketCreation} />
+                        <Route path="/faq" component={FAQ} />
+                        {/* <Route path="/market-creation" component={MarketCreation} />*/ }
                       </div>
                     </div>
                   </main>

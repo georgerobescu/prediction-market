@@ -60,11 +60,11 @@ const Market = ({
                       src={icon}
                     ></img>
                   </span>
-                  <p className="br-break mb-0 list-group-item-text">
+                  <p className="mb-0 list-group-item-text">
                     {title.replace(
                       "{name}",
                       '"' +
-                        Web3.utils.toAscii(
+                        Web3.utils.hexToUtf8(
                           ChainlinkEcoTreeContract.forests[
                             chainlinkEcoTreeKeys[marketIndex]
                           ].value.description
@@ -104,7 +104,7 @@ const Market = ({
                         {title.includes("{name}") && (
                           <span className="d-block mb-1 text-muted">
                             {"Date Planted"}:{" "}
-                            {Web3.utils.toAscii(
+                            {Web3.utils.hexToUtf8(
                               ChainlinkEcoTreeContract.forests[
                                 chainlinkEcoTreeKeys[marketIndex]
                               ].value.date_plantation

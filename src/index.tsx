@@ -37,7 +37,7 @@ console.log(history);
 const RootComponent = () => (
   <>
     {ReactReduxContext && <DrizzleProvider store={store} options={options} context={ReactReduxContext}>
-      <DisplayIfWeb3Loaded>
+      <DisplayIfWeb3Loaded context={ReactReduxContext}>
         <App context={ReactReduxContext} {...(history ? { history } : { })} />
       </DisplayIfWeb3Loaded>
     </DrizzleProvider>}

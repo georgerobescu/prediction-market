@@ -2,9 +2,16 @@ import Menu from "./Menu";
 import * as React from 'react';
 import CurrentNetwork from './../CurrentNetwork';
 import Web3Status from './../Web3Status';
+import { EthAddress } from "rimble-ui";
+import NetworkIndicator from "@rimble/network-indicator";
 
-class Header extends React.Component {
+export interface IProps {
+  networkId: number;
+}
+
+class Header extends React.Component<IProps> {
   public render() {
+    const { networkId } = this.props;
     return (
       <div className="app-main-header">
         <div className="d-flex app-toolbar align-items-center">
@@ -21,7 +28,8 @@ class Header extends React.Component {
                 <Web3Status />
               </li>
               <li className="list-inline-item user-nav">
-                <CurrentNetwork />
+                <NetworkIndicator currentNetwork={networkId} requiredNetwork={4} />
+                {/* <CurrentNetwork /> */}
               </li>
           </ul>
         </div>

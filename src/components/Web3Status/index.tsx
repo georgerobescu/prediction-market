@@ -53,7 +53,9 @@ class Web3Status extends React.Component<IProps> {
     const { web3Status } = this.props;
     return (
       <div>
-        <button className="jr-btn jr-btn-xs jr-btn-primary btn btn-default">{web3Status}</button>
+        {/*<button className="jr-btn jr-btn-xs jr-btn-primary btn btn-default">*/}
+        {web3Status}
+        {/*</button>*/}
       </div>
     );
   }

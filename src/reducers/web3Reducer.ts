@@ -3,7 +3,8 @@ import * as types from '../actions/web3Actions-types';
 const INITIAL_STATE = {
   isAnyUnlockedAccount: false,
   networkName: '',
-  web3Status: ''
+  web3Status: '',
+  loadingAttempted: false
 };
 
 export default function web3(state = INITIAL_STATE, action) {
@@ -22,6 +23,11 @@ export default function web3(state = INITIAL_STATE, action) {
       return {
         ...state,
         web3Status: action.web3Status
+      };
+    case types.SET_LOADING_ATTEMPTED:
+      return {
+        ...state,
+        loadingAttempted: action.loadingAttempted
       };
     default:
       return state;

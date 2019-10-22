@@ -32,8 +32,6 @@ const options = {
 //initialise drizzle object, passing options and store
 // const drizzleProp = new Drizzle(options, store);
 
-console.log(history);
-
 const RootComponent = () => (
   <>
     {ReactReduxContext && <DrizzleProvider store={store} options={options} context={ReactReduxContext}>

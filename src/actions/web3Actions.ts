@@ -20,3 +20,10 @@ export const setWeb3Status = (web3Status: string) => (
     type: types.SET_WEB3_STATUS
   }
 );
+
+export const setLoadingAttempted = (loadingAttempted: boolean) => (
+  {
+    loadingAttempted,
+    type: types.SET_LOADING_ATTEMPTED
+  }
+);

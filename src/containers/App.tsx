@@ -13,6 +13,7 @@ import Markets from "./markets";
 import Positions from "./Positions";
 // import MarketCreation from './marketCreation';
 import FAQ from './FAQ';
+import Faucets from './Faucets';
 import { getNetworkName/*, loadWeb3*/ } from "../utils/web3-helpers.js";
 import collateralInfo from "../utils/collateral-info";
 import { drizzleConnect } from 'drizzle-react';
@@ -493,15 +494,11 @@ class App extends React.Component<IProps, IState, ContextProps> {
           // web3
         } = this.props;
 
-
-
         let networkIdInner = Number(config.networkId);
 
         if (process.env.REACT_APP_NETWORK_ID !== undefined) {
           networkIdInner = Number(process.env.REACT_APP_NETWORK_ID);
         }
-
-
 
         // const { web3, account } = await loadWeb3(networkIdInner);
         // setWeb3(web3);
@@ -514,8 +511,6 @@ class App extends React.Component<IProps, IState, ContextProps> {
           setAccount(this.context.drizzle.web3.defaultAccount);
         }
 
-
-
         const {
           PMSystem,
           LMSRMarketMaker,
@@ -524,6 +519,9 @@ class App extends React.Component<IProps, IState, ContextProps> {
           positions
         } = await loadBasicData(config, this.context.drizzle.web3, Decimal);
 
+        this.context.drizzle.web3.eth.net.getId((_, networkId) => {
+          setNetworkId(networkId);
+        });
         setPMSystem(PMSystem);
         setLMSRMarketMaker(LMSRMarketMaker);
         setCollateral(collateral);
@@ -548,7 +546,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
               <div className="app-main-container">
                 <Router>
                   <div className="app-header">
-                    <Header />
+                    <Header networkId={networkId} />
                   </div>
                   <main className="app-main-content-wrapper">
                     <div className="app-main-content">
@@ -556,6 +554,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
                         <Route exact path="/" component={Markets} />
                         <Route path="/positions" component={Positions} />
                         <Route path="/faq" component={FAQ} />
+                        <Route path="/faucets" component={Faucets} />
                         {/* <Route path="/market-creation" component={MarketCreation} />*/ }
                       </div>
                     </div>
@@ -566,28 +565,6 @@ class App extends React.Component<IProps, IState, ContextProps> {
                 </Router>
               </div>
             </div>
-          </div>
-        )}
-
-        {(loading === "LOADING") && (
-          <div className={cn("loading-page")}>
-            <Spinner centered inverted width={100} height={100} />
-          </div>
-        )}
-
-        {(loading === "FAILURE") && (
-          <div className={cn("failure-page")}>
-            <h2>
-              Failed to load{" "}
-              <span role="img" aria-label="">
-                😞
-              </span>
-            </h2>
-            <h3>Please check the following:</h3>
-            <ul>
-              <li>Connect to correct network ({getNetworkName(networkId)})</li>
-              <li>Install/Unlock Metamask</li>
-            </ul>
           </div>
         )}
       </>

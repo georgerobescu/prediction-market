@@ -28,6 +28,16 @@ FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-
   <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/markets.png" />
 </p>
 
+#### Carbon market
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/carbon-market.png" />
+</p>
+
+#### Carbon info box
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/carbon-info-box.png" />
+</p>
+
 #### Create New Trade
 <p align="center">
   <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/create_new_position.png" />

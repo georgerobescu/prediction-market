@@ -13,6 +13,7 @@ import {/*Drizzle, */generateStore } from "drizzle";
 import { DrizzleContext, DrizzleProvider } from "drizzle-react";
 
 import ChainlinkEcoTree from './build-ecotree/contracts/ChainlinkEcoTree.json'
+import DaiStandin from './build/contracts/DaiStandin.json'
 
 export const store = configureStore();
 
@@ -24,7 +25,7 @@ export const store = configureStore();
 
 //define drizzle options
 const options = {
-  contracts: [ChainlinkEcoTree]
+  contracts: [ChainlinkEcoTree, DaiStandin]
 };
 
 //initialise drizzle store with options

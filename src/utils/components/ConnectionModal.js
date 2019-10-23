@@ -133,9 +133,9 @@ class ConnectionModal extends React.Component {
 
 // @ts-ignore
 ConnectionModal.propTypes = {
-  validateAccount: PropTypes.Function,
+  validateAccount: PropTypes.func,
   isOpen: PropTypes.bool,
-  closeModal: PropTypes.Function
+  closeModal: PropTypes.func
 };
 
 export default ConnectionModal;

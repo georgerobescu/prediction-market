@@ -13,6 +13,7 @@ import Markets from "./markets";
 import Positions from "./Positions";
 // import MarketCreation from './marketCreation';
 import FAQ from './FAQ';
+import Faucets from './Faucets';
 import { getNetworkName/*, loadWeb3*/ } from "../utils/web3-helpers.js";
 import collateralInfo from "../utils/collateral-info";
 import { drizzleConnect } from 'drizzle-react';
@@ -553,6 +554,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
                         <Route exact path="/" component={Markets} />
                         <Route path="/positions" component={Positions} />
                         <Route path="/faq" component={FAQ} />
+                        <Route path="/faucets" component={Faucets} />
                         {/* <Route path="/market-creation" component={MarketCreation} />*/ }
                       </div>
                     </div>

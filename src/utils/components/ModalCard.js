@@ -39,7 +39,7 @@ const ModalCard = ({ children, closeFunc }) => (
 // @ts-ignore
 ModalCard.propTypes = {
   children: PropTypes.any,
-  closeFunc: PropTypes.Function
+  closeFunc: PropTypes.func
 };
 
 const Body = ({ children }) => (
@@ -86,7 +86,7 @@ const BackButton = ({ onClick }) => (
 );
 // @ts-ignore
 BackButton.propTypes = {
-  onClick: PropTypes.Function
+  onClick: PropTypes.func
 };
 ModalCard.BackButton = BackButton;
 

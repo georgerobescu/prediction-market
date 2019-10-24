@@ -21,6 +21,7 @@ const Market = ({
   stagedProbabilities,
   marketIndex,
   setOpenMarketIndex,
+  setOpenInfoIndex,
   oracle,
   lastMarketListed,
   icon,
@@ -137,7 +138,19 @@ const Market = ({
                         )}
                       </div>
                     </div>
-                    <div className="col-lg-6 col-md-6 col-sm-6">
+                    <div className="col-lg-3 col-md-3 col-sm-3">
+                      <div className="stack-order  py-4 px-2">
+                        {marketStage !== "Closed" && (
+                          <button
+                            className="jr-btn jr-btn-secondary text-uppercase btn-block btn btn-default"
+                            onClick={() => setOpenInfoIndex(marketIndex)}
+                          >
+                            <span>Info</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="col-lg-3 col-md-3 col-sm-3">
                       <div className="stack-order  py-4 px-2">
                         {marketStage !== "Closed" && (
                           <button
@@ -179,6 +192,7 @@ Market.propTypes = {
   probabilities: PropTypes.arrayOf(PropTypes.instanceOf(Decimal)),
   marketIndex: PropTypes.number.isRequired,
   setOpenMarketIndex: PropTypes.func.isRequired,
+  setOpenInfoIndex: PropTypes.func.isRequired,
   stagedProbabilities: PropTypes.arrayOf(
     PropTypes.instanceOf(Decimal).isRequired
   ),
@@ -205,6 +219,10 @@ export default drizzleConnect(
   dispatch => ({
     setOpenMarketIndex: bindActionCreators(
       positionCreationActions.setOpenMarketIndex,
+      dispatch
+    ),
+    setOpenInfoIndex: bindActionCreators(
+      positionCreationActions.setOpenInfoIndex,
       dispatch
     )
   })

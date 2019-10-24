@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import * as marketDataActions from "../actions/marketData";
 import Market from "../components/market";
 import PositionCreation from "../components/PositionCreation";
+import PositionInfo from "../components/PositionInfo";
 import { drizzleConnect } from "drizzle-react";
 import Web3 from "web3";
 
@@ -59,6 +60,7 @@ const Markets = ({
   setMarketSelections,
   stagedTradeAmounts,
   openMarketIndex,
+  openInfoIndex,
   ChainlinkEcoTreeContract,
   chainlinkEcoTreeKeys
 }) => {
@@ -144,6 +146,31 @@ const Markets = ({
               setMarketSelections(
                 marketSelections.map((originalMarketSelection, j) =>
                   openMarketIndex === j
+                    ? marketSelection
+                    : originalMarketSelection
+                )
+              );
+            }
+          }}
+        />
+      )}
+      {openInfoIndex >= 0 && openInfoIndex < 100 && (
+        <PositionInfo
+          {...{
+            probabilities:
+              marketProbabilities != null
+                ? marketProbabilities[openInfoIndex]
+                : null,
+            stagedProbabilities:
+              marketProbabilitiesAfterStagedTrade != null
+                ? marketProbabilitiesAfterStagedTrade[openInfoIndex]
+                : null,
+            marketSelection:
+              marketSelections != null ? marketSelections[openInfoIndex] : null,
+            setMarketSelection(marketSelection) {
+              setMarketSelections(
+                marketSelections.map((originalMarketSelection, j) =>
+                  openInfoIndex === j
                     ? marketSelection
                     : originalMarketSelection
                 )
@@ -238,6 +265,7 @@ Markets.propTypes = {
     PropTypes.instanceOf(Decimal).isRequired
   ),
   openMarketIndex: PropTypes.number.isRequired,
+  openInfoIndex: PropTypes.number.isRequired,
   ChainlinkEcoTreeContract: PropTypes.any.isRequired,
   chainlinkEcoTreeKeys: PropTypes.arrayOf(PropTypes.string).isRequired
 };
@@ -252,6 +280,7 @@ export default drizzleConnect(
     marketSelections: state.marketData.marketSelections,
     stagedTradeAmounts: state.marketData.stagedTradeAmounts,
     openMarketIndex: state.positionCreation.openMarketIndex,
+    openInfoIndex: state.positionCreation.openInfoIndex,
     // @ts-ignore
     ChainlinkEcoTreeContract: state.contracts.ChainlinkEcoTree,
     // @ts-ignore

@@ -99,7 +99,14 @@ const Market = ({
                           )}
                         </span>
                         <span className="d-block mb-1 text-muted">
-                          Oracles: {oracle}
+                          Oracles:{" "}
+                          <a
+                            href="https://rinkeby.etherscan.io/address/0x9fd33d8c2a5c117a86c2fe8efe393ef0424b3e00"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {oracle}
+                          </a>
                         </span>
                         {title.includes("{name}") && (
                           <span className="d-block mb-1 text-muted">

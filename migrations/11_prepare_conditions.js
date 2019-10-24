@@ -42,7 +42,7 @@ module.exports = function(deployer) {
     );
     await pmSystem.prepareCondition(
       deployConfig.ecoTreeContractAddress,
-      deployConfig.iceAliveQuestionID,
+      deployConfig.ecoTreeQuestion4ID,
       2
     );
   });

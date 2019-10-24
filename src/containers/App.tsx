@@ -96,7 +96,6 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
       conditionId
     )).toNumber();
 
-
     if (numSlots === 0) {
       throw new Error(`condition ${conditionId} not set up yet`);
     }

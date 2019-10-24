@@ -19,8 +19,6 @@ class Faucets extends React.Component<IProps> {
   public render() {
     const {transactionStack, transactions} = this.props;
 
-    console.log("**********");
-    console.log(transactions[transactionStack[0]]);
     return (
       <>
         <div className="row">

@@ -9,3 +9,13 @@ export const setNewlyCreatedTxn = newlyCreatedTxn => ({
   newlyCreatedTxn,
   type: types.SET_NEWLY_CREATED_TXN
 });
+
+export const setOpenInfoIndex = openInfoIndex => ({
+  openInfoIndex,
+  type: types.SET_OPEN_INFO_INDEX
+});
+
+export const setOpenInfoData = openInfoData => ({
+  openInfoData,
+  type: types.SET_OPEN_INFO_DATA
+});

@@ -46,7 +46,7 @@ class PositionCreation extends React.Component<IProps, IState> {
     const outcomes = markets[openMarketIndex].outcomes;
     const conditionId = markets[openMarketIndex].conditionId;
     const rawTitle = markets[openMarketIndex].title;
-    const title = rawTitle.replace("{name}", '"' + web3.utils.toAscii(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openMarketIndex]].value.description) + '"');
+    const title = rawTitle.replace("{name}", '"' + web3.utils.hexToUtf8(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openMarketIndex]].value.description) + '"');
 
     return (
       <div className="text-center">

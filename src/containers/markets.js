@@ -179,9 +179,32 @@ const Markets = ({
           }}
         />
       )}
-      <div className="row">
+      {/* <div className="row">
         <div className="offset-sm-4 col-sm-4">
           <h1 className={cn("page-title")}>FCLA PREDICTION MARKET</h1>
+        </div>
+      </div> */}
+      <div className="row">
+        <div className="col-sm-9">
+          <div className="app-main-menu d-none d-md-block">
+            <ul className="navbar-nav navbar-nav-mega">
+              <li className="nav-item">
+                <a href="#" className="pt-2 pb-2" style={{ color: "#3f51b5" }}>
+                  Carbon
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="#" className="pt-2 pb-2" style={{ color: "#868e96" }}>
+                  Commodities
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="#" className="pt-2 pb-2" style={{ color: "#868e96" }}>
+                  Ice
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="row">

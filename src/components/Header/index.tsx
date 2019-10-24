@@ -4,6 +4,7 @@ import CurrentNetwork from './../CurrentNetwork';
 import Web3Status from './../Web3Status';
 import { EthAddress } from "rimble-ui";
 import NetworkIndicator from "@rimble/network-indicator";
+import { Link } from "react-router-dom";
 
 export interface IProps {
   networkId: number;
@@ -24,13 +25,16 @@ class Header extends React.Component<IProps> {
           <Menu/>
 
           <ul className="header-notifications list-inline ml-auto">
-              <li className="list-inline-item user-nav">
-                <Web3Status />
-              </li>
-              <li className="list-inline-item user-nav">
-                <NetworkIndicator currentNetwork={networkId} requiredNetwork={4} />
-                {/* <CurrentNetwork /> */}
-              </li>
+            <li className="list-inline-item user-nav">
+              <Web3Status />
+            </li>
+            <li className="list-inline-item user-nav">
+              <Link to="/faucets" style={{color: "#868e96", textDecoration: "none"}}>Faucets</Link>
+            </li>
+            <li className="list-inline-item user-nav">
+              <NetworkIndicator currentNetwork={networkId} requiredNetwork={4} />
+              {/* <CurrentNetwork />  */}
+            </li>
           </ul>
         </div>
       </div>

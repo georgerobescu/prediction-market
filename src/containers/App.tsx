@@ -105,6 +105,20 @@ async function loadBasicData({ lmsrAddress, markets }, web3Inner, DecimalInner) 
       );
     }
 
+    // Get polygon assocaited with this division and add it to the market data
+    try {
+      const response = await fetch('http://private-486b5-leopoldjoy.apiary-mock.com/forests/' + i);
+      if (response.ok) {
+        const json = await response.json();
+        market.polygone = json.polygone;
+      } else {
+        console.error("Error fetching the polygon location of one of the division!");
+        console.error("HTTP-Error: " + response.status);
+      }
+    } catch (e) {
+      console.error("Error fetching the polygon location of one of the division!");
+      console.error(e);
+    }
 
     market.marketIndex = i;
     market.conditionId = conditionId;

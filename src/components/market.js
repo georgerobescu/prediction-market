@@ -8,6 +8,7 @@ import Spinner from "./spinner";
 import { formatProbability } from "../utils/formatting";
 import * as positionCreationActions from "../actions/positionCreation";
 import { drizzleConnect } from "drizzle-react";
+import GoogleMap from "google-map-react";
 
 const { BN } = Web3.utils;
 
@@ -26,7 +27,8 @@ const Market = ({
   lastMarketListed,
   icon,
   ChainlinkEcoTreeContract,
-  chainlinkEcoTreeKeys
+  chainlinkEcoTreeKeys,
+  polygone
 }) => {
   const marketStage = lmsrState && lmsrState.stage;
   const isResolved = resolutionState && resolutionState.isResolved;
@@ -46,10 +48,24 @@ const Market = ({
     }
   }
 
+  let marketDataPolygonPoint;
+  try {
+    const pointParts = polygone
+      .split("[[")[1]
+      .split("]")[0]
+      .split(",");
+    marketDataPolygonPoint = [
+      parseFloat(pointParts[0]),
+      parseFloat(pointParts[1])
+    ];
+  } catch (e) {
+    marketDataPolygonPoint = [45.294384, 3.810003];
+  }
+
   return (
     <>
       <div className="row mt-4">
-        <div className="offset-lg-3 offset-md-2 col-lg-6 col-md-8 col-sm-12">
+        <div className="col-sm-9">
           <div className="jr-card p-0 jr-card-full-height border-0">
             <div className="jr-card-body ">
               <ul className="overflow-hidden list-group">
@@ -168,6 +184,15 @@ const Market = ({
             </div>
           </div>
         </div>
+        <div className="col-sm-3">
+          <div className="jr-card p-0 jr-card-full-height border-0">
+            <GoogleMap
+              apiKey={"AIzaSyCB8GPW0wUUUEWTJ83kUf467EK56WnYZcc"} // set if you need stats etc ...
+              center={marketDataPolygonPoint}
+              zoom={14}
+            />
+          </div>
+        </div>
       </div>
       {!lastMarketListed && <div className="col-12 border-bottom-0 m-0" />}
     </>
@@ -200,7 +225,8 @@ Market.propTypes = {
   lastMarketListed: PropTypes.bool.isRequired,
   icon: PropTypes.string.isRequired,
   ChainlinkEcoTreeContract: PropTypes.any.isRequired,
-  chainlinkEcoTreeKeys: PropTypes.arrayOf(PropTypes.string).isRequired
+  chainlinkEcoTreeKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  polygone: PropTypes.string
 };
 
 Market.defaultProps = {

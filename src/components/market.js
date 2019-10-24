@@ -173,7 +173,7 @@ const Market = ({
                       <div className="stack-order  py-4 px-2">
                         {marketStage !== "Closed" && (
                           <button
-                            className="jr-btn jr-btn-secondary text-uppercase btn-block btn btn-default"
+                            className="jr-btn jr-btn-default text-uppercase btn-block btn btn-default"
                             onClick={() => setOpenInfoIndex(marketIndex)}
                           >
                             <span>Info</span>
@@ -185,7 +185,7 @@ const Market = ({
                       <div className="stack-order  py-4 px-2">
                         {marketStage !== "Closed" && (
                           <button
-                            className="jr-btn jr-btn-secondary text-uppercase btn-block btn btn-default"
+                            className="jr-btn jr-btn-default text-uppercase btn-block btn btn-default"
                             onClick={() => setOpenMarketIndex(marketIndex)}
                           >
                             <span>Trade</span>

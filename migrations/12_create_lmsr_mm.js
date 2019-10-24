@@ -14,15 +14,15 @@ module.exports = function(deployer, network, accounts) {
       [deployConfig.ecoTreeContractAddress, deployConfig.ecoTreeQuestion1ID],
       [deployConfig.ecoTreeContractAddress, deployConfig.ecoTreeQuestion2ID],
       [deployConfig.ecoTreeContractAddress, deployConfig.ecoTreeQuestion3ID],
-      [deployConfig.ecoTreeContractAddress, deployConfig.iceAliveQuestionID]
-    ].map(([address, questionId]) =>
-      web3.utils.soliditySha3(
+      [deployConfig.ecoTreeContractAddress, deployConfig.ecoTreeQuestion4ID]
+    ].map(([address, questionId]) => {
+      return web3.utils.soliditySha3(
         // { t: "address", v: artifacts.require(contractName).address },
         { t: "address", v: address },
         { t: "bytes32", v: questionId },
         { t: "uint", v: 2 }
-      )
-    );
+      );
+    });
 
     const DaiStandin = artifacts.require("DaiStandin");
     const collateralToken = await DaiStandin.deployed();
@@ -58,15 +58,38 @@ module.exports = function(deployer, network, accounts) {
     )).logs.find(({ event }) => event === "LMSRMarketMakerCreation").args
       .lmsrMarketMaker;
 
-    const ecoTreeRegistrationTargetValue = deployConfig.ecoTreeRegistrationTargetValue.toLocaleString();
+    // const ecoTreeRegistrationTargetValue = deployConfig.ecoTreeRegistrationTargetValue.toLocaleString();
 
     // const formattedAXAParametricInsuranceTargetValue =
     //   "$" +
     //   deployConfig.AXAParametricInsuranceTargetValue.toLocaleString() +
     //   " DAI";
 
-    const ecotreeForestMarketArchitype = {
-      title: `Will more than ${ecoTreeRegistrationTargetValue} metric tons of CO2 be absorbed by {name} by Jan 1, 2020?`,
+    // const ecotreeForestMarketArchitype = {
+    //   title: `Will more than ${ecoTreeRegistrationTargetValue} metric tons of CO2 be absorbed by {name} by Jan 1, 2020?`,
+    //   resolutionDate: new Date(
+    //     deployConfig.ecoTreeRegistrationTargetTime * 1000
+    //   ).toISOString(),
+    //   outcomes: [
+    //     {
+    //       title: "Yes",
+    //       short: "Yes",
+    //       when: `Metric Tons Absorbed > ${ecoTreeRegistrationTargetValue}`
+    //     },
+    //     {
+    //       title: "No",
+    //       short: "No",
+    //       when: `Metric Tons Absorbed ≤ ${ecoTreeRegistrationTargetValue}`
+    //     }
+    //   ],
+    //   oracle: "FCLA + Chainlink",
+    //   icon: "/assets/images/trees.jpg"
+    // };
+
+    // - Carbon offet price speculation (averaged across a parcelle area)
+
+    const ecotreeCarbonOffetPriceArchitype = {
+      title: `Will one carbon offset (one metric tonne of CO2) in the EcoTree parcelle containing {name} cost more than 4EUR on Jan 1, 2020?`,
       resolutionDate: new Date(
         deployConfig.ecoTreeRegistrationTargetTime * 1000
       ).toISOString(),
@@ -74,15 +97,38 @@ module.exports = function(deployer, network, accounts) {
         {
           title: "Yes",
           short: "Yes",
-          when: `Metric Tons Absorbed > ${ecoTreeRegistrationTargetValue}`
+          when: `Carbon Offset Cost > $4`
         },
         {
           title: "No",
           short: "No",
-          when: `Metric Tons Absorbed ≤ ${ecoTreeRegistrationTargetValue}`
+          when: `Carbon Offset Cost ≤ $4`
         }
       ],
-      oracle: "FCLA + Chainlink",
+      oracle: "Chainlink",
+      icon: "/assets/images/trees.jpg"
+    };
+
+    // - Deviation of division cubage projection from future reality
+
+    const ecotreeForestMarketArchitype = {
+      title: `Will the EcoTree division containing {name} deviate above the projected cubage by more than 1.5x at harvest?`,
+      resolutionDate: new Date(
+        deployConfig.ecoTreeHarvestTime * 1000
+      ).toISOString(),
+      outcomes: [
+        {
+          title: "Yes",
+          short: "Yes",
+          when: `Upward Deviation of Division Cubage at Harvest > 1.5x`
+        },
+        {
+          title: "No",
+          short: "No",
+          when: `Upward Deviation of Division Cubage at Harvest ≤ 1.5x`
+        }
+      ],
+      oracle: "Chainlink",
       icon: "/assets/images/trees.jpg"
     };
 
@@ -91,13 +137,19 @@ module.exports = function(deployer, network, accounts) {
       lmsrAddress,
       markets: [
         ...[].concat(
-          Array.apply(null, Array(4)).map(
+          Array.apply(null, Array(2)).map(
+            ecotreeCarbonOffetPriceArchitype.valueOf,
+            ecotreeCarbonOffetPriceArchitype
+          )
+        ),
+        ...[].concat(
+          Array.apply(null, Array(2)).map(
             ecotreeForestMarketArchitype.valueOf,
             ecotreeForestMarketArchitype
           )
         ),
         {
-          title: `Will the IceAlive Greeland ice sheet melt rate increase by at least a factor of ${deployConfig.iceAliveMeltRateTarget} from 2019 to 2020?`,
+          title: `Will total EcoTree forestry metric cubage exceed 400,000 cubic meters by Jan 1, 2021?`,
           resolutionDate: new Date(
             deployConfig.iceAliveMeltRateTargetTime * 1000
           ).toISOString(),
@@ -105,17 +157,37 @@ module.exports = function(deployer, network, accounts) {
             {
               title: "Yes",
               short: "Yes",
-              when: `Melt Rate > ${deployConfig.iceAliveMeltRateTarget}`
+              when: `EcoTree metric cubage > 400k`
             },
             {
               title: "No",
               short: "No",
-              when: `Melt Rate ≤ ${deployConfig.iceAliveMeltRateTarget}`
+              when: `EcoTree metric cubage ≤ 400k`
             }
           ],
-          oracle: "FCLA + Chainlink",
-          icon: "/assets/images/ice.jpg"
+          oracle: "Chainlink",
+          icon: "/assets/images/trees.jpg"
         }
+        // {
+        //   title: `Will the IceAlive Greeland ice sheet melt rate increase by at least a factor of ${deployConfig.iceAliveMeltRateTarget} from 2019 to 2020?`,
+        //   resolutionDate: new Date(
+        //     deployConfig.iceAliveMeltRateTargetTime * 1000
+        //   ).toISOString(),
+        //   outcomes: [
+        //     {
+        //       title: "Yes",
+        //       short: "Yes",
+        //       when: `Melt Rate > ${deployConfig.iceAliveMeltRateTarget}`
+        //     },
+        //     {
+        //       title: "No",
+        //       short: "No",
+        //       when: `Melt Rate ≤ ${deployConfig.iceAliveMeltRateTarget}`
+        //     }
+        //   ],
+        //   oracle: "FCLA + Chainlink",
+        //   icon: "/assets/images/ice.jpg"
+        // }
       ]
     });
   });

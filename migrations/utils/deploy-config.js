@@ -8,6 +8,8 @@ const beginning2020 =
   Math.floor(Date.now() / 1000) + (new Date(2020, 1, 1) - Date.now()) / 1000;
 const beginning2021 =
   Math.floor(Date.now() / 1000) + (new Date(2021, 1, 1) - Date.now()) / 1000;
+const beginning2094 =
+  Math.floor(Date.now() / 1000) + (new Date(2094, 1, 1) - Date.now()) / 1000;
 
 module.exports = {
   // Dai Deployment Configs
@@ -33,11 +35,15 @@ module.exports = {
   ecoTreeQuestion2ID: process.env.ECOTREEQUESTION2ID || "0x06",
   ecoTreeQuestion3ID: process.env.ECOTREEQUESTION3ID || "0x07",
   ecoTreeQuestion4ID: process.env.ECOTREEQUESTION4ID || "0x08",
-  iceAliveQuestionID: process.env.ICEALIVEQUESTIONID || "0x09",
+  ecoTreeQuestion5ID: process.env.ECOTREEQUESTION5ID || "0x09",
+  ecoTreeQuestion6ID: process.env.ECOTREEQUESTION6ID || "0x10",
+  ecoTreeQuestion7ID: process.env.ECOTREEQUESTION7ID || "0x11",
+  ecoTreeQuestion8ID: process.env.ECOTREEQUESTION8ID || "0x12",
+  // iceAliveQuestionID: process.env.ICEALIVEQUESTIONID || "0x09",
 
   ecoTreeContractAddress:
     process.env.ECOTREECONTRACTADDRESS ||
-    web3.utils.toChecksumAddress("0xCe8Df5dae6cB62D934d7c2609A0fDC0e1BCAC3Ae"),
+    web3.utils.toChecksumAddress("0xd8E1E592f77969607c65DA1683769614ACf6b4fC"),
   iceAliveContractAddress:
     process.env.ICEALIVECONTRACTADDRESS ||
     web3.utils.toChecksumAddress(`0x${"00".repeat(20)}`),
@@ -53,6 +59,8 @@ module.exports = {
   iceAliveMeltRateTarget: process.env.ICEALIVEMELTRATETARGET || 1.2,
   iceAliveMeltRateTargetTime:
     process.env.ICEALIVEMELTRATETARGETTIME || beginning2021,
+
+  ecoTreeHarvestTime: process.env.ECOTREEHARVESTTIME || beginning2094,
 
   AXAParametricInsuranceTargetValue: 100000,
   AXAParametricInsuranceTargetTime: beginning2020

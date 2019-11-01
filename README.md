@@ -1,5 +1,5 @@
-# prediction-market
-FCLA decentralized prediction markets.
+# Prediction Market
+A prediction market for carbon offsets powered by Chainlink oracles. Users take carbon offset positions based on CO2 emissions being offset by the planting and growth of trees.
 
 ## Code Structure
 
@@ -7,9 +7,7 @@ The FCLA Carbon Offsets Prediction Market enables environmentally conscious user
 
 
 ## Available markets
-1. Carbon credits
-2. Ice Melting
-3. Coffee production
+Carbon offset
 
 ## Workflow
 

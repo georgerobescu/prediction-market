@@ -38,7 +38,7 @@ The FCLA Carbon Offsets Prediction Market enables environmentally conscious user
 ### Screenshots
 
 <p align="center">
-  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/dashboard.jpeg" />
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/dashboard.jpg" />
 </p>
 
 <p align="center">

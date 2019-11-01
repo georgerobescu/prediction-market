@@ -38,23 +38,23 @@ The FCLA Carbon Offsets Prediction Market enables environmentally conscious user
 ### Screenshots
 
 <p align="center">
-  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/dashboard.png" />
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/dashboard.jpeg" />
 </p>
 
 <p align="center">
-  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/position.png" />
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/position.jpeg" />
 </p>
 
 <p align="center">
-  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/market_information.png" />
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/market_information.jpeg" />
 </p>
 
 <p align="center">
-  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/new_position.png" />
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/new_position.jpeg" />
 </p>
 
 <p align="center">
-  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/faucet.png" />
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/faucet.jpeg" />
 </p>
 
 #### Dashboard / Markets

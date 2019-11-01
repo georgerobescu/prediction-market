@@ -1,5 +1,5 @@
 # Prediction Market
-A prediction market for carbon offsets powered by Chainlink oracles. Users take carbon offset positions based on CO2 emissions being offset by the planting and growth of trees.
+A prediction market for carbon offsets powered by Chainlink oracles and Gnosis’ new Mercury v2 smart contracts and conditional market makers. Users take carbon offset positions based on CO2 emissions being offset by the planting and growth of trees.
 
 ## Code Structure
 

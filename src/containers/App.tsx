@@ -580,6 +580,17 @@ class App extends React.Component<IProps, IState, ContextProps> {
             </div>
           </div>
         )}
+        {(loading !== "SUCCESS") && (
+          <div className="column mt-5" style={{textAlign: "center"}}>
+            <div style={{display: "inline-block"}}>
+              <Spinner width={100} height={100} />
+            </div>
+            <br />
+            <div style={{display: "inline-block"}}>
+              Loading...
+            </div>
+          </div>
+        )}
       </>
     );
   }

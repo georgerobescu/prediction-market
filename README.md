@@ -2,7 +2,9 @@
 FCLA decentralized prediction markets.
 
 ## Code Structure
-FCLA decentralized prediction markets is based on Gnosis hg-first-decentralized-market core which has been completely rewritten to use React modern build setup with no configuration, typescript, drizzle, redux and proper components architecture.
+
+The FCLA Carbon Offsets Prediction Market enables environmentally conscious users to leverage carbon offset data to bet for or against the continued growth of specific forests. Via Chainlink’s network of Oracle Node Operators, forestry data is brought on-chain in an appropriately distributed manner. Forestry data is sourced via a (Chainlink-enabled) integration with EcoTree (see https://EcoTree.fr), a French forestry company which tracks and sells plots of forest throughout France. The prediction market architecture is based on Gnosis’ new Mercury v2 smart contracts and conditional market makers. The UI was built using React and Web3 best practices, including no built configuration, Typescript, Drizzle, Redux, Rimble and proper components architecture.
+
 
 ## Available markets
 1. Carbon credits

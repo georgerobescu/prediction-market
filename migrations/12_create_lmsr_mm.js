@@ -150,8 +150,11 @@ module.exports = function(deployer, network, accounts) {
         ),
         {
           title: `Will total EcoTree forestry metric cubage exceed 400,000 cubic meters by Jan 1, 2021?`,
+          // resolutionDate: new Date(
+          //   deployConfig.iceAliveMeltRateTargetTime * 1000
+          // ).toISOString(),
           resolutionDate: new Date(
-            deployConfig.iceAliveMeltRateTargetTime * 1000
+            new Date().getTime() + 10 * 60 * 1000
           ).toISOString(),
           outcomes: [
             {

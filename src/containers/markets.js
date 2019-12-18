@@ -209,8 +209,8 @@ const Markets = ({
       </div>
       <div className="row">
         <div className={cn("section", "market-section") + " col-sm-12"}>
-          {markets.map(
-            (market, i) =>
+          {markets.map((market, i) => {
+            return (
               Web3.utils.hexToUtf8(
                 ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[i]].value
                   .description
@@ -246,7 +246,8 @@ const Markets = ({
                   }}
                 />
               )
-          )}
+            );
+          })}
         </div>
       </div>
     </>

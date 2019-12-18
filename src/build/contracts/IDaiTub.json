@@ -1,0 +1,1231 @@
+{
+  "contractName": "IDaiTub",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "fee",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.1;\nimport { PredictionMarketSystem } from \"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\";\nimport { TargetValueOracle } from \"./TargetValueOracle.sol\";\n\ninterface IDaiTub {\n    function fee() external view returns (uint);\n}\n\ncontract DaiStabilityFeeOracle is TargetValueOracle {\n    IDaiTub public daiTub;\n\n    constructor (\n        PredictionMarketSystem pmSystem,\n        uint resolutionTime,\n        uint targetETHPrice,\n        bytes32 questionId,\n        IDaiTub _daiTub\n    ) public TargetValueOracle(pmSystem, resolutionTime, targetETHPrice, questionId) {\n        daiTub = _daiTub;\n    }\n\n    function readValue() internal returns(uint) {\n        return daiTub.fee();\n    }\n}\n",
+  "sourcePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol",
+  "ast": {
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol",
+    "exportedSymbols": {
+      "DaiStabilityFeeOracle": [
+        58
+      ],
+      "IDaiTub": [
+        19
+      ]
+    },
+    "id": 59,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 9,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "absolutePath": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "file": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "id": 11,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 3044,
+        "src": "24:102:1",
+        "symbolAliases": [
+          {
+            "foreign": 10,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol",
+        "file": "./TargetValueOracle.sol",
+        "id": 13,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 621,
+        "src": "127:60:1",
+        "symbolAliases": [
+          {
+            "foreign": 12,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 19,
+        "linearizedBaseContracts": [
+          19
+        ],
+        "name": "IDaiTub",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 18,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "fee",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 14,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "225:2:1"
+            },
+            "returnParameters": {
+              "id": 17,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 18,
+                  "src": "251:4:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 15,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "251:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "250:6:1"
+            },
+            "scope": 19,
+            "src": "213:44:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 59,
+        "src": "189:70:1"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 20,
+              "name": "TargetValueOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 620,
+              "src": "295:17:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_TargetValueOracle_$620",
+                "typeString": "contract TargetValueOracle"
+              }
+            },
+            "id": 21,
+            "nodeType": "InheritanceSpecifier",
+            "src": "295:17:1"
+          }
+        ],
+        "contractDependencies": [
+          620
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 58,
+        "linearizedBaseContracts": [
+          58,
+          620
+        ],
+        "name": "DaiStabilityFeeOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 23,
+            "name": "daiTub",
+            "nodeType": "VariableDeclaration",
+            "scope": 58,
+            "src": "319:21:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IDaiTub_$19",
+              "typeString": "contract IDaiTub"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 22,
+              "name": "IDaiTub",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 19,
+              "src": "319:7:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IDaiTub_$19",
+                "typeString": "contract IDaiTub"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 46,
+              "nodeType": "Block",
+              "src": "597:33:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 44,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 42,
+                      "name": "daiTub",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 23,
+                      "src": "607:6:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IDaiTub_$19",
+                        "typeString": "contract IDaiTub"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 43,
+                      "name": "_daiTub",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33,
+                      "src": "616:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IDaiTub_$19",
+                        "typeString": "contract IDaiTub"
+                      }
+                    },
+                    "src": "607:16:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IDaiTub_$19",
+                      "typeString": "contract IDaiTub"
+                    }
+                  },
+                  "id": 45,
+                  "nodeType": "ExpressionStatement",
+                  "src": "607:16:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 47,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 36,
+                    "name": "pmSystem",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 25,
+                    "src": "543:8:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 37,
+                    "name": "resolutionTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 27,
+                    "src": "553:14:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 38,
+                    "name": "targetETHPrice",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 29,
+                    "src": "569:14:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 39,
+                    "name": "questionId",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 31,
+                    "src": "585:10:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 40,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 35,
+                  "name": "TargetValueOracle",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 620,
+                  "src": "525:17:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$620_$",
+                    "typeString": "type(contract TargetValueOracle)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "525:71:1"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 34,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 25,
+                  "name": "pmSystem",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "369:31:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                    "typeString": "contract PredictionMarketSystem"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 24,
+                    "name": "PredictionMarketSystem",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3043,
+                    "src": "369:22:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 27,
+                  "name": "resolutionTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "410:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 26,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "410:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 29,
+                  "name": "targetETHPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "439:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 28,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "439:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 31,
+                  "name": "questionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "468:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 30,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "468:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33,
+                  "name": "_daiTub",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "496:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IDaiTub_$19",
+                    "typeString": "contract IDaiTub"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 32,
+                    "name": "IDaiTub",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 19,
+                    "src": "496:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IDaiTub_$19",
+                      "typeString": "contract IDaiTub"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "359:158:1"
+            },
+            "returnParameters": {
+              "id": 41,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "597:0:1"
+            },
+            "scope": 58,
+            "src": "347:283:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 56,
+              "nodeType": "Block",
+              "src": "680:36:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 52,
+                        "name": "daiTub",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 23,
+                        "src": "697:6:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IDaiTub_$19",
+                          "typeString": "contract IDaiTub"
+                        }
+                      },
+                      "id": 53,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "fee",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 18,
+                      "src": "697:10:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                        "typeString": "function () view external returns (uint256)"
+                      }
+                    },
+                    "id": 54,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "697:12:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 51,
+                  "id": 55,
+                  "nodeType": "Return",
+                  "src": "690:19:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 57,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "readValue",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 48,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "654:2:1"
+            },
+            "returnParameters": {
+              "id": 51,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 50,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 57,
+                  "src": "674:4:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 49,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "674:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "673:6:1"
+            },
+            "scope": 58,
+            "src": "636:80:1",
+            "stateMutability": "nonpayable",
+            "superFunction": 567,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 59,
+        "src": "261:457:1"
+      }
+    ],
+    "src": "0:719:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol",
+    "exportedSymbols": {
+      "DaiStabilityFeeOracle": [
+        58
+      ],
+      "IDaiTub": [
+        19
+      ]
+    },
+    "id": 59,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 9,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "absolutePath": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "file": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "id": 11,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 3044,
+        "src": "24:102:1",
+        "symbolAliases": [
+          {
+            "foreign": 10,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol",
+        "file": "./TargetValueOracle.sol",
+        "id": 13,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 621,
+        "src": "127:60:1",
+        "symbolAliases": [
+          {
+            "foreign": 12,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 19,
+        "linearizedBaseContracts": [
+          19
+        ],
+        "name": "IDaiTub",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 18,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "fee",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 14,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "225:2:1"
+            },
+            "returnParameters": {
+              "id": 17,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 18,
+                  "src": "251:4:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 15,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "251:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "250:6:1"
+            },
+            "scope": 19,
+            "src": "213:44:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 59,
+        "src": "189:70:1"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 20,
+              "name": "TargetValueOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 620,
+              "src": "295:17:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_TargetValueOracle_$620",
+                "typeString": "contract TargetValueOracle"
+              }
+            },
+            "id": 21,
+            "nodeType": "InheritanceSpecifier",
+            "src": "295:17:1"
+          }
+        ],
+        "contractDependencies": [
+          620
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 58,
+        "linearizedBaseContracts": [
+          58,
+          620
+        ],
+        "name": "DaiStabilityFeeOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 23,
+            "name": "daiTub",
+            "nodeType": "VariableDeclaration",
+            "scope": 58,
+            "src": "319:21:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IDaiTub_$19",
+              "typeString": "contract IDaiTub"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 22,
+              "name": "IDaiTub",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 19,
+              "src": "319:7:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IDaiTub_$19",
+                "typeString": "contract IDaiTub"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 46,
+              "nodeType": "Block",
+              "src": "597:33:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 44,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 42,
+                      "name": "daiTub",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 23,
+                      "src": "607:6:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IDaiTub_$19",
+                        "typeString": "contract IDaiTub"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 43,
+                      "name": "_daiTub",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33,
+                      "src": "616:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IDaiTub_$19",
+                        "typeString": "contract IDaiTub"
+                      }
+                    },
+                    "src": "607:16:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IDaiTub_$19",
+                      "typeString": "contract IDaiTub"
+                    }
+                  },
+                  "id": 45,
+                  "nodeType": "ExpressionStatement",
+                  "src": "607:16:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 47,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 36,
+                    "name": "pmSystem",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 25,
+                    "src": "543:8:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 37,
+                    "name": "resolutionTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 27,
+                    "src": "553:14:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 38,
+                    "name": "targetETHPrice",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 29,
+                    "src": "569:14:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 39,
+                    "name": "questionId",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 31,
+                    "src": "585:10:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 40,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 35,
+                  "name": "TargetValueOracle",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 620,
+                  "src": "525:17:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$620_$",
+                    "typeString": "type(contract TargetValueOracle)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "525:71:1"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 34,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 25,
+                  "name": "pmSystem",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "369:31:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                    "typeString": "contract PredictionMarketSystem"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 24,
+                    "name": "PredictionMarketSystem",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3043,
+                    "src": "369:22:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 27,
+                  "name": "resolutionTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "410:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 26,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "410:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 29,
+                  "name": "targetETHPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "439:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 28,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "439:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 31,
+                  "name": "questionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "468:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 30,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "468:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33,
+                  "name": "_daiTub",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "496:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IDaiTub_$19",
+                    "typeString": "contract IDaiTub"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 32,
+                    "name": "IDaiTub",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 19,
+                    "src": "496:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IDaiTub_$19",
+                      "typeString": "contract IDaiTub"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "359:158:1"
+            },
+            "returnParameters": {
+              "id": 41,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "597:0:1"
+            },
+            "scope": 58,
+            "src": "347:283:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 56,
+              "nodeType": "Block",
+              "src": "680:36:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 52,
+                        "name": "daiTub",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 23,
+                        "src": "697:6:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IDaiTub_$19",
+                          "typeString": "contract IDaiTub"
+                        }
+                      },
+                      "id": 53,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "fee",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 18,
+                      "src": "697:10:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                        "typeString": "function () view external returns (uint256)"
+                      }
+                    },
+                    "id": 54,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "697:12:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 51,
+                  "id": 55,
+                  "nodeType": "Return",
+                  "src": "690:19:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 57,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "readValue",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 48,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "654:2:1"
+            },
+            "returnParameters": {
+              "id": 51,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 50,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 57,
+                  "src": "674:4:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 49,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "674:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "673:6:1"
+            },
+            "scope": 58,
+            "src": "636:80:1",
+            "stateMutability": "nonpayable",
+            "superFunction": 567,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 59,
+        "src": "261:457:1"
+      }
+    ],
+    "src": "0:719:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.18",
+  "updatedAt": "2019-12-09T06:29:31.231Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

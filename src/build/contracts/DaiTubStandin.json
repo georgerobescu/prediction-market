@@ -1,0 +1,373 @@
+{
+  "contractName": "DaiTubStandin",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "fee",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"fee\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/leo/flyingcarpet/prediction-market/contracts/DaiTubStandin.sol\":\"DaiTubStandin\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol\":{\"keccak256\":\"0xcfe42e530f37a6ff57d70e033126f4e5a16b53856d09c0de9dbba2be76df9979\",\"urls\":[\"bzzr://55718644e941b2d0613c7afa1d5054c20088aac4c42e30b738e3040a1c76e20e\"]},\"/Users/leo/flyingcarpet/prediction-market/contracts/DaiTubStandin.sol\":{\"keccak256\":\"0xbb076539d6c170d75bd4f170b37775ab6bd9c6d152bf858efd2e0d6c1322ef08\",\"urls\":[\"bzzr://a6bc89278ab73ee998df9a21e3cb84bbe3ad67ffade67c9d598b89ca4d298ad8\"]},\"/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol\":{\"keccak256\":\"0xd509be0414f136bed7c27df14064d194a48b85221e04b66716c9fc82bb2be6b5\",\"urls\":[\"bzzr://ef73cfc3d49e6ce991c0d499f83e2a4655b92ddc0fe4e6b16450247b712912c3\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/ERC1155.sol\":{\"keccak256\":\"0x10343cd2da9bec10446451aa4f5fefc2fdd01f691d279b71e2f806f3a25c6b3d\",\"urls\":[\"bzzr://a76eaacc5082f5f83f6bf8f2a44eca80761551e2c119e2013944535ef7c87e30\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/IERC1155.sol\":{\"keccak256\":\"0x4971631d7de74464fed3e0abac04553e917be5e8cd10b3f825e2e7c39ccc2734\",\"urls\":[\"bzzr://e1e88dfe7440ceab59d4cd604d12e5dc93409a3c5058e497763703027ea7b9e6\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/IERC1155TokenReceiver.sol\":{\"keccak256\":\"0x675eaf04410e936cbd50325aa661216666214ca89f113b0880b917e3d00dda26\",\"urls\":[\"bzzr://e6d4db28e3180f99029df28a1df07988e1d313d6981725ec22af84f799ccdf6a\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1820Registry.sol\":{\"keccak256\":\"0x5a98e0985b1c43c8fe355ea4ca5d2f434ffbf24c8b77bf0c1a0b405fbd728dee\",\"urls\":[\"bzzr://15b63f9b61ed5c19993149654f5bdc1a71909973f510fa858d094a2dae9af512\"]},\"@gnosis.pm/hg-contracts/contracts/OracleConsumer.sol\":{\"keccak256\":\"0xf54ac4060959a5e1c1714933711c90cd62bbbf127d5e37dc6cbcbb3711b3c186\",\"urls\":[\"bzzr://2efcd8089b7f032f4cc05e4a00304eb01bad0edbc43388332c79b010df532ffc\"]},\"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\":{\"keccak256\":\"0x18e0ce1f7e728a9f38b1d309bd3a44e5b988779131922d6b85777582d8222e6f\",\"urls\":[\"bzzr://d55af5598b18264cc1b02beee0f2123f8f27e6cea3f6cc0b3a6d34246bfc5542\"]},\"openzeppelin-solidity/contracts/introspection/ERC165.sol\":{\"keccak256\":\"0xac2eacd7e7762e275442f28f21d821544df5aae2ed7698af13be8c41b7005e2e\",\"urls\":[\"bzzr://43e901f6f210568ebc1d3591da3ce6a9d10796b854767a9c6e3da10305a8a332\"]},\"openzeppelin-solidity/contracts/introspection/IERC165.sol\":{\"keccak256\":\"0x661553e43d7c4fbb2de504e5999fd5c104d367488350ed5bf023031bd1ba5ac5\",\"urls\":[\"bzzr://fc2ba15143ce3a00268ecd15fc98eb2469b18bfe27a64bbab0ac6446f161c739\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x90e8c2521653bbb1768b05889c5760031e688d9cd361f167489b89215e201b95\",\"urls\":[\"bzzr://aa8b45b57edafc3d67bc5d916327ea16807fae33f753ca163ae0c4061b789766\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0xf3358e5819ca73357abd6c90bdfffd0474af54364897f6b3e3234c4b71fbe9a1\",\"urls\":[\"bzzr://f7f6da60a184233fd666ac44e6fb2bd51ca6ebdc4867a310d368049aa4e62786\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060a68061001e6000396000f3fe6080604052600436106039576000357c010000000000000000000000000000000000000000000000000000000090048063ddca3f4314603e575b600080fd5b348015604957600080fd5b5060506066565b6040518082815260200191505060405180910390f35b60006b033b2e3ce6c84b886361607c90509056fea165627a7a72305820f12b067ab5927bdec48d4eec83ee03b446846e58757115e0516496d2ab257a190029",
+  "deployedBytecode": "0x6080604052600436106039576000357c010000000000000000000000000000000000000000000000000000000090048063ddca3f4314603e575b600080fd5b348015604957600080fd5b5060506066565b6040518082815260200191505060405180910390f35b60006b033b2e3ce6c84b886361607c90509056fea165627a7a72305820f12b067ab5927bdec48d4eec83ee03b446846e58757115e0516496d2ab257a190029",
+  "sourceMap": "81:251:3:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;81:251:3;;;;;;;",
+  "deployedSourceMap": "81:251:3:-;;;;;;;;;;;;;;;;;;;;;;121:209;;8:9:-1;5:2;;;30:1;27;20:12;5:2;121:209:3;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;159:4;295:28;288:35;;121:209;:::o",
+  "source": "pragma solidity ^0.5.1;\n\nimport { IDaiTub } from \"./DaiStabilityFeeOracle.sol\";\n\ncontract DaiTubStandin is IDaiTub {\n    function fee() external view returns (uint) {\n        // 1.175^(1/(60*60*24*365)) rounded to 27 decimal places\n        // corresponds to a 17.5% stability fee\n        return 1000000005113779426955452540;\n    }\n}\n",
+  "sourcePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiTubStandin.sol",
+  "ast": {
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiTubStandin.sol",
+    "exportedSymbols": {
+      "DaiTubStandin": [
+        116
+      ]
+    },
+    "id": 117,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 103,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:3"
+      },
+      {
+        "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol",
+        "file": "./DaiStabilityFeeOracle.sol",
+        "id": 105,
+        "nodeType": "ImportDirective",
+        "scope": 117,
+        "sourceUnit": 59,
+        "src": "25:54:3",
+        "symbolAliases": [
+          {
+            "foreign": 104,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 106,
+              "name": "IDaiTub",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 19,
+              "src": "107:7:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IDaiTub_$19",
+                "typeString": "contract IDaiTub"
+              }
+            },
+            "id": 107,
+            "nodeType": "InheritanceSpecifier",
+            "src": "107:7:3"
+          }
+        ],
+        "contractDependencies": [
+          19
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 116,
+        "linearizedBaseContracts": [
+          116,
+          19
+        ],
+        "name": "DaiTubStandin",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 114,
+              "nodeType": "Block",
+              "src": "165:165:3",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "31303030303030303035313133373739343236393535343532353430",
+                    "id": 112,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "295:28:3",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1000000005113779426955452540_by_1",
+                      "typeString": "int_const 1000000005113779426955452540"
+                    },
+                    "value": "1000000005113779426955452540"
+                  },
+                  "functionReturnParameters": 111,
+                  "id": 113,
+                  "nodeType": "Return",
+                  "src": "288:35:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 115,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "fee",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 108,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "133:2:3"
+            },
+            "returnParameters": {
+              "id": 111,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 110,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 115,
+                  "src": "159:4:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 109,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "159:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "158:6:3"
+            },
+            "scope": 116,
+            "src": "121:209:3",
+            "stateMutability": "view",
+            "superFunction": 18,
+            "visibility": "external"
+          }
+        ],
+        "scope": 117,
+        "src": "81:251:3"
+      }
+    ],
+    "src": "0:333:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiTubStandin.sol",
+    "exportedSymbols": {
+      "DaiTubStandin": [
+        116
+      ]
+    },
+    "id": 117,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 103,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:3"
+      },
+      {
+        "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol",
+        "file": "./DaiStabilityFeeOracle.sol",
+        "id": 105,
+        "nodeType": "ImportDirective",
+        "scope": 117,
+        "sourceUnit": 59,
+        "src": "25:54:3",
+        "symbolAliases": [
+          {
+            "foreign": 104,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 106,
+              "name": "IDaiTub",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 19,
+              "src": "107:7:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IDaiTub_$19",
+                "typeString": "contract IDaiTub"
+              }
+            },
+            "id": 107,
+            "nodeType": "InheritanceSpecifier",
+            "src": "107:7:3"
+          }
+        ],
+        "contractDependencies": [
+          19
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 116,
+        "linearizedBaseContracts": [
+          116,
+          19
+        ],
+        "name": "DaiTubStandin",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 114,
+              "nodeType": "Block",
+              "src": "165:165:3",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "31303030303030303035313133373739343236393535343532353430",
+                    "id": 112,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "295:28:3",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1000000005113779426955452540_by_1",
+                      "typeString": "int_const 1000000005113779426955452540"
+                    },
+                    "value": "1000000005113779426955452540"
+                  },
+                  "functionReturnParameters": 111,
+                  "id": 113,
+                  "nodeType": "Return",
+                  "src": "288:35:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 115,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "fee",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 108,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "133:2:3"
+            },
+            "returnParameters": {
+              "id": 111,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 110,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 115,
+                  "src": "159:4:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 109,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "159:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "158:6:3"
+            },
+            "scope": 116,
+            "src": "121:209:3",
+            "stateMutability": "view",
+            "superFunction": 18,
+            "visibility": "external"
+          }
+        ],
+        "scope": 117,
+        "src": "81:251:3"
+      }
+    ],
+    "src": "0:333:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {
+    "4": {
+      "events": {},
+      "links": {},
+      "address": "0x130e8076C3112c1C6729eB08C3f5C5acd1773504",
+      "transactionHash": "0x993dc81b47b9574595f56fbed559b053866f5ef52665b330c8d65568fb1fa542"
+    }
+  },
+  "schemaVersion": "3.0.18",
+  "updatedAt": "2019-12-09T06:34:35.910Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

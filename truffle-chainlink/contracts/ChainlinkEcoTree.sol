@@ -1,10 +1,22 @@
 pragma solidity ^0.4.24;
 
 import "chainlink/contracts/ChainlinkClient.sol";
+// import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
+
+interface Division {
+  // mapping (uint256 => string) public _tokenMetadataIpfsHashes;
+  function _tokenMetadataIpfsHashes(uint256 arg) external returns (string a);
+}
 
 // ChainlinkEcoTree inherits the Chainlinked contract to gain the
 // functionality of creating Chainlink requests.
 contract ChainlinkEcoTree is ChainlinkClient {
+  using SafeMath for uint256;
+
+  Division internal deployedDivisionNFTContract;
+
+  uint256 public sumNbrArbres;
+  uint256 public sumPrixTtc;
 
   struct DivisionValueData {
     bytes32 nbrArbres;
@@ -19,7 +31,7 @@ contract ChainlinkEcoTree is ChainlinkClient {
   mapping (uint256 => DivisionValueData) public divisionsValueData;
   mapping (bytes32 => DataType) internal requestIdToDataType;
 
-  constructor(address _link, address _oracle) public {
+  constructor(address _link, address _oracle, address _etDivision) public {
     // Set the address for the LINK token for the network.
     if(_link == address(0)) {
       // Useful for deploying to public networks.
@@ -34,6 +46,11 @@ contract ChainlinkEcoTree is ChainlinkClient {
       "Please provide the address of a valid Chainlink oracle for the currently selected network."
     );
     setChainlinkOracle(_oracle);
+    // Set address of existing (deployed) Division NFT smart contract
+    deployedDivisionNFTContract = Division(_etDivision);
+    // Set intial sum values
+    sumNbrArbres = 0;
+    sumPrixTtc = 0;
   }
 
   function makeSingleRequest(bytes32 _jobId, uint256 _divisionId, bytes32 _typeName) internal returns (bool success) {
@@ -65,11 +82,20 @@ contract ChainlinkEcoTree is ChainlinkClient {
   function fulfillDivisionValueData(bytes32 _requestId, bytes32 _divisionDataField)
     // Use recordChainlinkFulfillment to ensure only the requesting oracle can fulfill
     public recordChainlinkFulfillment(_requestId) {
+    // Only allow fulfillment of the division's data if the data has definitely been minted
+    bytes memory checkHashEmpty = bytes(deployedDivisionNFTContract._tokenMetadataIpfsHashes(requestIdToDataType[_requestId].divisionId)); // Uses memory
+    if (checkHashEmpty.length == 0) {
+      return; // Since the hash is empty for that divisionId, we know this division hasn't been minted yet
+    }
     // Set the forest's data field based on the fulfilled data and its type
     if (requestIdToDataType[_requestId].typeName == "nbrArbres") {
       divisionsValueData[requestIdToDataType[_requestId].divisionId].nbrArbres = _divisionDataField;
+      // Update sum counter also
+      sumNbrArbres = sumNbrArbres.add(uint(_divisionDataField));
     } else if (requestIdToDataType[_requestId].typeName == "prixTtc") {
       divisionsValueData[requestIdToDataType[_requestId].divisionId].prixTtc = _divisionDataField;
+      // Update sum counter also
+      sumPrixTtc = sumPrixTtc.add(uint(_divisionDataField));
     }
   }
 

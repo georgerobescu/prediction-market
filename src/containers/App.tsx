@@ -247,13 +247,13 @@ async function getMarketResolutionStates(PMSystem, markets) {
             PMSystem.payoutNumerators(conditionId, outcomeIndex)
           )
         );
-        return Object.create({
+        return Object.assign({}, {
           isResolved: true,
           payoutNumerators,
           payoutDenominator
         });
       } else {
-        return Object.create({isResolved: false });
+        return {isResolved: false };
       }
     })
   );
@@ -305,7 +305,9 @@ export interface IProps {
   history: Object,
   drizzleStatus: any,
   context: any,
-  addChainlinkEcoTreeKey: any
+  setOracleReportedValueLocationKey: any,
+  setMarketSelections: any,
+
 }
 
 export interface IState {
@@ -344,12 +346,26 @@ class App extends React.Component<IProps, IState, ContextProps> {
     // Make initial setup calls
     await this.setInitialDataFromWeb3Calls();
 
-    this.initialStateSetupCalls();
+    await this.initialStateSetupCalls();
 
 
     // window.requestAnimationFrame(() => {
     // this.makeUpdatesWhenPropsChange({syncTime: currentTime});
     // });
+
+    // React.useEffect(() => {
+    // setMarketSelections(
+    //   Array.from({ length: markets.length }, () => ({
+    //     selectedOutcomeIndex: null,
+    //     isAssumed: false
+    //   }))
+    // );
+    // return () => {
+    //   setMarketSelections(null);
+    // };
+    // }, [markets, setMarketSelections]);
+
+    return;
   }
 
   async componentDidUpdate(prevProps) {
@@ -361,7 +377,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
    * however it doesn't have the conditionals. It simply makes the inital
    * calls without any checks.
    */
-  initialStateSetupCalls = () => {
+  initialStateSetupCalls = async () => {
     const {
       setLMSRState,
       setMarketResolutionStates,
@@ -381,18 +397,17 @@ class App extends React.Component<IProps, IState, ContextProps> {
     getLMSRState(this.context.drizzle.web3, PMSystem, LMSRMarketMaker, positions).then(setLMSRState);
 
     // Market Resolution States
-    getMarketResolutionStates(PMSystem, markets).then(
-      setMarketResolutionStates
-    );
+    const promisedMarketResolutionStates = await getMarketResolutionStates(PMSystem, markets);
+    setMarketResolutionStates(promisedMarketResolutionStates);
 
     // Collateral Balance
-    getCollateralBalance(this.context.drizzle.web3, collateral, account).then(setCollateralBalance);
+    await getCollateralBalance(this.context.drizzle.web3, collateral, account).then(setCollateralBalance);
 
     // Position Balances
-    getPositionBalances(PMSystem, positions, account).then(setPositionBalances);
+    await getPositionBalances(PMSystem, positions, account).then(setPositionBalances);
 
     // LMSR Allowance
-    getLMSRAllowance(collateral, LMSRMarketMaker, account).then(
+    await getLMSRAllowance(collateral, LMSRMarketMaker, account).then(
       setLMSRAllowance
     );
   };
@@ -439,9 +454,8 @@ class App extends React.Component<IProps, IState, ContextProps> {
       markets !== prevProps.markets ||
       syncTime !== prevProps.syncTime
     ) {
-      getMarketResolutionStates(PMSystem, markets).then(
-        setMarketResolutionStates
-      );
+      const promisedMarketResolutionStates = await getMarketResolutionStates(PMSystem, markets);
+      setMarketResolutionStates(promisedMarketResolutionStates);
     }
 
     // Collateral Balance
@@ -481,18 +495,8 @@ class App extends React.Component<IProps, IState, ContextProps> {
     }
   };
 
-  setInitialDataFromWeb3Calls = async () => {
-    const { addChainlinkEcoTreeKey } = this.props;
-
-    // Make a call for each forest's data from the contract
-    for (let i = 0; i < 5; i++) {
-      // Declare this call to be cached and synchronized
-      const dataKey = await this.context.drizzle.contracts.ChainlinkEcoTree.methods.forests.cacheCall(i);
-      // Store the key for future recall in Redux store
-      addChainlinkEcoTreeKey(dataKey);
-    }
-
-    await import("../config.json")
+  callLoadBasicDataAndRefresh = async () => {
+    return await import("../config.json")
       .then(async ({ default: config }) => {
         const {
           setLoading,
@@ -504,6 +508,7 @@ class App extends React.Component<IProps, IState, ContextProps> {
           setCollateral,
           setMarkets,
           setPositions,
+          setMarketSelections
           // web3
         } = this.props;
 
@@ -544,8 +549,48 @@ class App extends React.Component<IProps, IState, ContextProps> {
 
         setLoading("SUCCESS");
 
+        setMarketSelections(
+          Array.from({ length: markets.length }, () => ({
+            selectedOutcomeIndex: null,
+            isAssumed: false
+          }))
+        );
+
         return;
       });
+  }
+
+  setInitialDataFromWeb3Calls = async () => {
+    const { setOracleReportedValueLocationKey, setMarketSelections, markets } = this.props;
+
+    // Make a call for each oracle's currently reported data from the contract
+
+    // for (let i = 0; i < 5; i++) {
+    /**** Cache a call to the SumValueMintedAssetsOracle contract and save the cached data key to Redux ****/
+    // Declare this call to be cached and synchronized
+    const dataKey_current = await this.context.drizzle.contracts.ChainlinkEcoTree.methods.sumPrixTtc.cacheCall();
+    // Store the key for future recall in Redux store
+    setOracleReportedValueLocationKey('SumValueMintedAssetsOracle_current', dataKey_current);
+
+    const dataKey_target = await this.context.drizzle.contracts.SumValueMintedAssetsOracle.methods.targetValue.cacheCall();
+    // Store the key for future recall in Redux store
+    setOracleReportedValueLocationKey('SumValueMintedAssetsOracle_target', dataKey_target);
+    // }
+
+
+
+    await this.callLoadBasicDataAndRefresh();
+
+    setInterval(this.callLoadBasicDataAndRefresh, 15000);
+
+    // setMarketSelections(
+    //   Array.from({ length: markets.length }, () => ({
+    //     selectedOutcomeIndex: null,
+    //     isAssumed: false
+    //   }))
+    // );
+
+    return;
   };
 
   public render() {
@@ -684,8 +729,12 @@ export default drizzleConnect(
       marketDataActions.setStagedTransactionType,
       dispatch
     ),
-    addChainlinkEcoTreeKey: bindActionCreators(
-      contractFieldKeysActions.addChainlinkEcoTreeKey,
+    setOracleReportedValueLocationKey: bindActionCreators(
+      contractFieldKeysActions.setOracleReportedValueLocationKey,
+      dispatch
+    ),
+    setMarketSelections: bindActionCreators(
+      marketDataActions.setMarketSelections,
       dispatch
     )
   })

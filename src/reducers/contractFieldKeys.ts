@@ -1,18 +1,18 @@
 import * as types from '../actions/contractFieldKeys-types';
 
 const INITIAL_STATE = {
-  chainlinkEcoTreeKeys: []
+  oracleReportedValueLocationKeys: {}
 };
 
 export default function contractFieldKeys(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case types.ADD_CHAINLINK_ECO_TREE_KEY:
+    case types.SET_ORACLE_REPORTED_VALUE_LOCATION_KEY:
       return {
         ...state,
-        chainlinkEcoTreeKeys: [
-          ...(state.chainlinkEcoTreeKeys),
-          action.chainlinkEcoTreeKey
-        ]
+        oracleReportedValueLocationKeys: {
+          ...(state.oracleReportedValueLocationKeys),
+          [action.oracleReportedKey]: action.oracleReportedValueLocationKey
+        }
       };
     default:
       return state;

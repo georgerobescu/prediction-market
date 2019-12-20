@@ -13,7 +13,7 @@ import { drizzleConnect } from "drizzle-react";
 
 import cn from "classnames";
 
-const { BN, toBN, padLeft, soliditySha3, toHex } = Web3.utils;
+const { /*BN,*/ toBN, padLeft, soliditySha3, toHex } = Web3.utils;
 
 function calcNetCost({ funding, positionBalances }, tradeAmounts) {
   const invB = new Decimal(positionBalances.length)
@@ -182,29 +182,31 @@ const YourPositions = ({
     marketResolutionStates.every(({ isResolved }) => isResolved);
   const [redemptionAmount, setRedemptionAmount] = useState(null);
   useEffect(() => {
-    setRedemptionAmount(
-      allMarketsResolved
-        ? positionBalances.reduce(
-            (payoutSum, balance, positionIndex) =>
-              payoutSum.add(
-                positions[positionIndex].outcomes.reduce(
-                  (payoutProduct, { marketIndex, outcomeIndex }) =>
-                    payoutProduct
-                      .mul(
-                        marketResolutionStates[marketIndex].payoutNumerators[
-                          outcomeIndex
-                        ]
-                      )
-                      .div(
-                        marketResolutionStates[marketIndex].payoutDenominator
-                      ),
-                  balance
-                )
-              ),
-            toBN(0)
-          )
-        : null
-    );
+    positionBalances &&
+      positionBalances.length > 0 &&
+      setRedemptionAmount(
+        allMarketsResolved
+          ? positionBalances.reduce(
+              (payoutSum, balance, positionIndex) =>
+                payoutSum.add(
+                  positions[positionIndex].outcomes.value.reduce(
+                    (payoutProduct, { marketIndex, outcomeIndex }) =>
+                      payoutProduct
+                        .mul(
+                          marketResolutionStates[marketIndex].payoutNumerators[
+                            outcomeIndex
+                          ]
+                        )
+                        .div(
+                          marketResolutionStates[marketIndex].payoutDenominator
+                        ),
+                    balance
+                  )
+                ),
+              toBN(0)
+            )
+          : null
+      );
   }, [positions, positionBalances, marketResolutionStates, allMarketsResolved]);
 
   async function redeemPositions() {
@@ -518,8 +520,8 @@ YourPositions.propTypes = {
   marketResolutionStates: PropTypes.arrayOf(
     PropTypes.shape({
       isResolved: PropTypes.bool.isRequired,
-      payoutNumerators: PropTypes.arrayOf(PropTypes.instanceOf(BN).isRequired),
-      payoutDenominator: PropTypes.instanceOf(BN)
+      payoutNumerators: PropTypes.arrayOf(PropTypes.any.isRequired),
+      payoutDenominator: PropTypes.any
     }).isRequired
   ),
   positions: PropTypes.arrayOf(

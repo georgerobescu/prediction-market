@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Web3 from "web3";
 import Decimal from "decimal.js-light";
 import { bindActionCreators } from "redux";
 import OutcomesBinary from "./outcomes-binary";
 import Spinner from "./spinner";
-// import { formatProbability } from "../utils/formatting";
+import { formatProbability } from "../utils/formatting";
 import * as positionCreationActions from "../actions/positionCreation";
 import { drizzleConnect } from "drizzle-react";
 import GoogleMap from "google-map-react";
 
-const { BN } = Web3.utils;
+// const { BN } = Web3.utils;
 
 const Market = ({
   title,
@@ -23,11 +22,12 @@ const Market = ({
   marketIndex,
   setOpenMarketIndex,
   setOpenInfoIndex,
-  oracle,
+  // oracle,
   lastMarketListed,
   icon,
+  SumValueMintedAssetsOracleContract,
   ChainlinkEcoTreeContract,
-  chainlinkEcoTreeKeys,
+  oracleReportedValueLocationKeys,
   polygone
 }) => {
   const marketStage = lmsrState && lmsrState.stage;
@@ -78,7 +78,8 @@ const Market = ({
                     ></img>
                   </span>
                   <p className="mb-0 list-group-item-text">
-                    {title.replace(
+                    {
+                      title /*title.replace(
                       "{name}",
                       '"' +
                         Web3.utils.hexToUtf8(
@@ -87,7 +88,8 @@ const Market = ({
                           ].value.description
                         ) +
                         '"'
-                    )}
+                    )*/
+                    }
                   </p>
                 </li>
                 <li className="d-flex align-items-center list-group-item border-left-0 border-right-0 border-bottom-0">
@@ -107,29 +109,45 @@ const Market = ({
                   <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-6">
                       <div className="chart-header">
-                        {/* <span className="d-block mb-1 text-muted">
+                        <span className="d-block mb-1 text-muted">
                           Probability:{" "}
                           {probabilities == null ? (
                             <Spinner width={25} height={25} />
                           ) : (
                             formatProbability(probabilities[0])
                           )}
-                        </span> */}
+                        </span>
                         <span className="d-block mb-1 text-muted">
                           Oracles:{" "}
-                          {probabilities == null ? (
-                            <Spinner width={25} height={25} />
-                          ) : (
-                            <a
-                              href="https://rinkeby.etherscan.io/address/0x9fd33d8c2a5c117a86c2fe8efe393ef0424b3e00"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {oracle}
-                            </a>
-                          )}
+                          <a
+                            href="https://rinkeby.etherscan.io/address/0xCCccCb48132191636B95aBF45e32BaFbf5A77f5c"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            EcoTree
+                          </a>
                         </span>
-                        {title.includes("{name}") && (
+                        <span className="d-block mb-1 text-muted">
+                          Current Reporting Value:{" "}
+                          {
+                            ChainlinkEcoTreeContract.sumPrixTtc[
+                              oracleReportedValueLocationKeys[
+                                "SumValueMintedAssetsOracle_current"
+                              ]
+                            ].value
+                          }
+                        </span>
+                        <span className="d-block mb-1 text-muted">
+                          Target Value:{" "}
+                          {
+                            SumValueMintedAssetsOracleContract.targetValue[
+                              oracleReportedValueLocationKeys[
+                                "SumValueMintedAssetsOracle_target"
+                              ]
+                            ].value
+                          }
+                        </span>
+                        {/*title.includes("{name}") && (
                           <span className="d-block mb-1 text-muted">
                             {"Date Planted"}:{" "}
                             <a
@@ -143,28 +161,24 @@ const Market = ({
                               )}
                             </a>
                           </span>
-                        )}
+                        )*/}
                         {isResolved ? (
-                          <span className="h3 text-muted">
-                            <span>
-                              eported Outcome:{" "}
-                              {resultOutcomeIndex != null
-                                ? outcomes[resultOutcomeIndex].title
-                                : "Mixed"}
-                            </span>
+                          <span className="d-block mb-1 text-muted">
+                            Reported Outcome:{" "}
+                            {resultOutcomeIndex != null
+                              ? outcomes[resultOutcomeIndex].title
+                              : "Mixed"}
                           </span>
                         ) : (
-                          <span className="h6 text-muted">
-                            <span>
-                              Resolves:{" "}
-                              <a
-                                href="https://rinkeby.etherscan.io/address/0x07cF53cD6616C49303227f62E46bC8abD4f2D1f0#internaltx"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {new Date(resolutionDate).toLocaleString()}
-                              </a>
-                            </span>
+                          <span className="d-block mb-1 text-muted">
+                            Resolves:{" "}
+                            <a
+                              href="https://rinkeby.etherscan.io/address/0x07cF53cD6616C49303227f62E46bC8abD4f2D1f0#internaltx"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {new Date(resolutionDate).toLocaleString()}
+                            </a>
                           </span>
                         )}
                       </div>
@@ -176,23 +190,25 @@ const Market = ({
                             className="jr-btn jr-btn-default text-uppercase btn-block btn btn-default"
                             onClick={() => setOpenInfoIndex(marketIndex)}
                           >
-                            <span>Info</span>
+                            <span>Oracle Info</span>
                           </button>
                         )}
                       </div>
                     </div>
-                    <div className="col-lg-3 col-md-3 col-sm-3">
-                      <div className="stack-order  py-4 px-2">
-                        {marketStage !== "Closed" && (
-                          <button
-                            className="jr-btn jr-btn-default text-uppercase btn-block btn btn-default"
-                            onClick={() => setOpenMarketIndex(marketIndex)}
-                          >
-                            <span>Trade</span>
-                          </button>
-                        )}
+                    {!isResolved && (
+                      <div className="col-lg-3 col-md-3 col-sm-3">
+                        <div className="stack-order  py-4 px-2">
+                          {marketStage !== "Closed" && (
+                            <button
+                              className="jr-btn jr-btn-default text-uppercase btn-block btn btn-default"
+                              onClick={() => setOpenMarketIndex(marketIndex)}
+                            >
+                              <span>Trade</span>
+                            </button>
+                          )}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </li>
               </ul>
@@ -227,7 +243,7 @@ Market.propTypes = {
   }),
   resolutionState: PropTypes.shape({
     isResolved: PropTypes.bool.isRequired,
-    payoutNumerators: PropTypes.arrayOf(PropTypes.instanceOf(BN).isRequired)
+    payoutNumerators: PropTypes.arrayOf(PropTypes.any.isRequired)
   }),
   probabilities: PropTypes.arrayOf(PropTypes.instanceOf(Decimal)),
   marketIndex: PropTypes.number.isRequired,
@@ -236,11 +252,12 @@ Market.propTypes = {
   stagedProbabilities: PropTypes.arrayOf(
     PropTypes.instanceOf(Decimal).isRequired
   ),
-  oracle: PropTypes.string.isRequired,
+  // oracle: PropTypes.string.isRequired,
   lastMarketListed: PropTypes.bool.isRequired,
   icon: PropTypes.string.isRequired,
+  SumValueMintedAssetsOracleContract: PropTypes.any.isRequired,
   ChainlinkEcoTreeContract: PropTypes.any.isRequired,
-  chainlinkEcoTreeKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  oracleReportedValueLocationKeys: PropTypes.any.isRequired,
   polygone: PropTypes.string
 };
 
@@ -253,9 +270,13 @@ export default drizzleConnect(
   // @ts-ignore
   state => ({
     // @ts-ignore
+    SumValueMintedAssetsOracleContract:
+      state.contracts.SumValueMintedAssetsOracle,
+    // @ts-ignore
     ChainlinkEcoTreeContract: state.contracts.ChainlinkEcoTree,
     // @ts-ignore
-    chainlinkEcoTreeKeys: state.contractFieldKeys.chainlinkEcoTreeKeys
+    oracleReportedValueLocationKeys:
+      state.contractFieldKeys.oracleReportedValueLocationKeys
   }),
   dispatch => ({
     setOpenMarketIndex: bindActionCreators(

@@ -7,6 +7,7 @@ import Web3 from 'web3';
 export interface IProps {
   transactionStack: any;
   transactions: any;
+  connectedAccounts: any;
 }
 
 class Faucets extends React.Component<IProps> {
@@ -17,7 +18,7 @@ class Faucets extends React.Component<IProps> {
     this.input = React.createRef();
   }
   public render() {
-    const {transactionStack, transactions} = this.props;
+    const {transactionStack, transactions, connectedAccounts} = this.props;
 
     return (
       <>
@@ -39,7 +40,7 @@ class Faucets extends React.Component<IProps> {
             <h2 className="font-weight-light">Get Test DAI</h2>
             {(transactionStack.length === 0) && (
               <p className="card-text">
-                <Input placeholder="0x0000000000000000000000000000000000000000" required={true} ref={this.input} className="col-sm-12" />
+                <Input value={connectedAccounts[0]} required={true} ref={this.input} className="col-sm-12" />
                 <button
                   className="jr-btn jr-btn-default text-uppercase btn-block btn btn-default mt-1"
                   onClick={async () => {
@@ -73,7 +74,8 @@ Faucets.contextTypes = {
 const mapStateToProps = state => {
   return {
     transactionStack: state.transactionStack,
-    transactions: state.transactions
+    transactions: state.transactions,
+    connectedAccounts: state.accounts
   }
 }
 

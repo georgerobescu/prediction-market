@@ -1,8 +1,9 @@
 import * as types from './contractFieldKeys-types';
 
-export const addChainlinkEcoTreeKey = (chainlinkEcoTreeKey: string) => (
+export const setOracleReportedValueLocationKey = (oracleReportedKey: string, oracleReportedValueLocationKey: number) => (
   {
-    chainlinkEcoTreeKey,
-    type: types.ADD_CHAINLINK_ECO_TREE_KEY
+  	oracleReportedKey,
+    oracleReportedValueLocationKey,
+    type: types.SET_ORACLE_REPORTED_VALUE_LOCATION_KEY
   }
 );

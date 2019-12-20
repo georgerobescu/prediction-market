@@ -5,6 +5,12 @@ A prediction market for carbon offsets powered by Chainlink oracles and Gnosis�
 
 The FCLA Carbon Offsets Prediction Market enables environmentally conscious users to leverage carbon offset data to bet for or against the continued growth of specific forests. Via Chainlink’s network of Oracle Node Operators, forestry data is brought on-chain in an appropriately distributed manner. Forestry data is sourced via a (Chainlink-enabled) integration with EcoTree (see https://EcoTree.fr), a French forestry company which tracks and sells plots of forest throughout France. The prediction market architecture is based on Gnosis’ new Mercury v2 smart contracts and conditional market makers. The UI was built using React and Web3 best practices, including no built configuration, Typescript, Drizzle, Redux, Rimble and proper components architecture.
 
+## Smartcontracts
+
+Gnosis uses the EcoTree Chainlinked Contract: https://rinkeby.etherscan.io/address/0xCCccCb48132191636B95aBF45e32BaFbf5A77f5c
+
+Gnosis uses this Division Contract where EcoTree / AMF attest to divisions: https://rinkeby.etherscan.io/address/0x76b8e6AcB389090f38d37A82d521d8ef0D6E2318
+
 
 ## Available markets
 Carbon offset

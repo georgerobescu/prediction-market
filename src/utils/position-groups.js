@@ -54,8 +54,8 @@ export function calcPositionGroups(markets, positions, positionAmounts) {
             outcomeSet,
             amount: groupAmount,
             runningAmount: groupRunningAmount,
-            positions: groupPositions,
-            icon: markets[numMarkets].icon
+            positions: groupPositions
+            // icon: markets[numMarkets].icon
           });
 
           for (const { positionIndex } of groupPositions) {

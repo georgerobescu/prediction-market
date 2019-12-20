@@ -1,0 +1,1307 @@
+{
+  "contractName": "Medianizer",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "read",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.1;\nimport { PredictionMarketSystem } from \"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\";\nimport { TargetValueOracle } from \"./TargetValueOracle.sol\";\n\ninterface Medianizer {\n    function read() external view returns (bytes32);\n}\n\ncontract ETHValueOracle is TargetValueOracle {\n    /// Price feed which this oracle uses to price Ether\n    Medianizer public priceFeed;\n\n    constructor (\n        PredictionMarketSystem pmSystem,\n        Medianizer _priceFeed,\n        uint resolutionTime,\n        uint targetETHPrice,\n        bytes32 questionId\n    ) public TargetValueOracle(pmSystem, resolutionTime, targetETHPrice, questionId) {\n        priceFeed = _priceFeed;\n    }\n\n    function readValue() internal returns(uint) {\n        return uint(priceFeed.read());\n    }\n}\n",
+  "sourcePath": "/Users/leo/flyingcarpet/prediction-market/contracts/ETHValueOracle.sol",
+  "ast": {
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/ETHValueOracle.sol",
+    "exportedSymbols": {
+      "ETHValueOracle": [
+        399
+      ],
+      "Medianizer": [
+        358
+      ]
+    },
+    "id": 400,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 348,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:7"
+      },
+      {
+        "absolutePath": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "file": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "id": 350,
+        "nodeType": "ImportDirective",
+        "scope": 400,
+        "sourceUnit": 3099,
+        "src": "24:102:7",
+        "symbolAliases": [
+          {
+            "foreign": 349,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol",
+        "file": "./TargetValueOracle.sol",
+        "id": 352,
+        "nodeType": "ImportDirective",
+        "scope": 400,
+        "sourceUnit": 676,
+        "src": "127:60:7",
+        "symbolAliases": [
+          {
+            "foreign": 351,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 358,
+        "linearizedBaseContracts": [
+          358
+        ],
+        "name": "Medianizer",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 357,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "read",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 353,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "229:2:7"
+            },
+            "returnParameters": {
+              "id": 356,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 355,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 357,
+                  "src": "255:7:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 354,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "255:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "254:9:7"
+            },
+            "scope": 358,
+            "src": "216:48:7",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 400,
+        "src": "189:77:7"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 359,
+              "name": "TargetValueOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 675,
+              "src": "295:17:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
+                "typeString": "contract TargetValueOracle"
+              }
+            },
+            "id": 360,
+            "nodeType": "InheritanceSpecifier",
+            "src": "295:17:7"
+          }
+        ],
+        "contractDependencies": [
+          675
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 399,
+        "linearizedBaseContracts": [
+          399,
+          675
+        ],
+        "name": "ETHValueOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 362,
+            "name": "priceFeed",
+            "nodeType": "VariableDeclaration",
+            "scope": 399,
+            "src": "376:27:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_Medianizer_$358",
+              "typeString": "contract Medianizer"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 361,
+              "name": "Medianizer",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 358,
+              "src": "376:10:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Medianizer_$358",
+                "typeString": "contract Medianizer"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 385,
+              "nodeType": "Block",
+              "src": "666:39:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 383,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 381,
+                      "name": "priceFeed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 362,
+                      "src": "676:9:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Medianizer_$358",
+                        "typeString": "contract Medianizer"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 382,
+                      "name": "_priceFeed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 366,
+                      "src": "688:10:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Medianizer_$358",
+                        "typeString": "contract Medianizer"
+                      }
+                    },
+                    "src": "676:22:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Medianizer_$358",
+                      "typeString": "contract Medianizer"
+                    }
+                  },
+                  "id": 384,
+                  "nodeType": "ExpressionStatement",
+                  "src": "676:22:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 386,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 375,
+                    "name": "pmSystem",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 364,
+                    "src": "612:8:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 376,
+                    "name": "resolutionTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 368,
+                    "src": "622:14:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 377,
+                    "name": "targetETHPrice",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 370,
+                    "src": "638:14:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 378,
+                    "name": "questionId",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 372,
+                    "src": "654:10:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 379,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 374,
+                  "name": "TargetValueOracle",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 675,
+                  "src": "594:17:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
+                    "typeString": "type(contract TargetValueOracle)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "594:71:7"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 373,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 364,
+                  "name": "pmSystem",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "432:31:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                    "typeString": "contract PredictionMarketSystem"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 363,
+                    "name": "PredictionMarketSystem",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3098,
+                    "src": "432:22:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 366,
+                  "name": "_priceFeed",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "473:21:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Medianizer_$358",
+                    "typeString": "contract Medianizer"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 365,
+                    "name": "Medianizer",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 358,
+                    "src": "473:10:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Medianizer_$358",
+                      "typeString": "contract Medianizer"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 368,
+                  "name": "resolutionTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "504:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 367,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "504:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 370,
+                  "name": "targetETHPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "533:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 369,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "533:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 372,
+                  "name": "questionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "562:18:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 371,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "562:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "422:164:7"
+            },
+            "returnParameters": {
+              "id": 380,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "666:0:7"
+            },
+            "scope": 399,
+            "src": "410:295:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 397,
+              "nodeType": "Block",
+              "src": "755:46:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 392,
+                            "name": "priceFeed",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 362,
+                            "src": "777:9:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Medianizer_$358",
+                              "typeString": "contract Medianizer"
+                            }
+                          },
+                          "id": 393,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "read",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 357,
+                          "src": "777:14:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$__$returns$_t_bytes32_$",
+                            "typeString": "function () view external returns (bytes32)"
+                          }
+                        },
+                        "id": 394,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "777:16:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 391,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "772:4:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_uint256_$",
+                        "typeString": "type(uint256)"
+                      },
+                      "typeName": "uint"
+                    },
+                    "id": 395,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "772:22:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 390,
+                  "id": 396,
+                  "nodeType": "Return",
+                  "src": "765:29:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 398,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "readValue",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 387,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "729:2:7"
+            },
+            "returnParameters": {
+              "id": 390,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 389,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 398,
+                  "src": "749:4:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 388,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "749:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "748:6:7"
+            },
+            "scope": 399,
+            "src": "711:90:7",
+            "stateMutability": "nonpayable",
+            "superFunction": 622,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 400,
+        "src": "268:535:7"
+      }
+    ],
+    "src": "0:804:7"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/ETHValueOracle.sol",
+    "exportedSymbols": {
+      "ETHValueOracle": [
+        399
+      ],
+      "Medianizer": [
+        358
+      ]
+    },
+    "id": 400,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 348,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:7"
+      },
+      {
+        "absolutePath": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "file": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "id": 350,
+        "nodeType": "ImportDirective",
+        "scope": 400,
+        "sourceUnit": 3099,
+        "src": "24:102:7",
+        "symbolAliases": [
+          {
+            "foreign": 349,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol",
+        "file": "./TargetValueOracle.sol",
+        "id": 352,
+        "nodeType": "ImportDirective",
+        "scope": 400,
+        "sourceUnit": 676,
+        "src": "127:60:7",
+        "symbolAliases": [
+          {
+            "foreign": 351,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 358,
+        "linearizedBaseContracts": [
+          358
+        ],
+        "name": "Medianizer",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 357,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "read",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 353,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "229:2:7"
+            },
+            "returnParameters": {
+              "id": 356,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 355,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 357,
+                  "src": "255:7:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 354,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "255:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "254:9:7"
+            },
+            "scope": 358,
+            "src": "216:48:7",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 400,
+        "src": "189:77:7"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 359,
+              "name": "TargetValueOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 675,
+              "src": "295:17:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
+                "typeString": "contract TargetValueOracle"
+              }
+            },
+            "id": 360,
+            "nodeType": "InheritanceSpecifier",
+            "src": "295:17:7"
+          }
+        ],
+        "contractDependencies": [
+          675
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 399,
+        "linearizedBaseContracts": [
+          399,
+          675
+        ],
+        "name": "ETHValueOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 362,
+            "name": "priceFeed",
+            "nodeType": "VariableDeclaration",
+            "scope": 399,
+            "src": "376:27:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_Medianizer_$358",
+              "typeString": "contract Medianizer"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 361,
+              "name": "Medianizer",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 358,
+              "src": "376:10:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Medianizer_$358",
+                "typeString": "contract Medianizer"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 385,
+              "nodeType": "Block",
+              "src": "666:39:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 383,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 381,
+                      "name": "priceFeed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 362,
+                      "src": "676:9:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Medianizer_$358",
+                        "typeString": "contract Medianizer"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 382,
+                      "name": "_priceFeed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 366,
+                      "src": "688:10:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Medianizer_$358",
+                        "typeString": "contract Medianizer"
+                      }
+                    },
+                    "src": "676:22:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Medianizer_$358",
+                      "typeString": "contract Medianizer"
+                    }
+                  },
+                  "id": 384,
+                  "nodeType": "ExpressionStatement",
+                  "src": "676:22:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 386,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 375,
+                    "name": "pmSystem",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 364,
+                    "src": "612:8:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 376,
+                    "name": "resolutionTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 368,
+                    "src": "622:14:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 377,
+                    "name": "targetETHPrice",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 370,
+                    "src": "638:14:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 378,
+                    "name": "questionId",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 372,
+                    "src": "654:10:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 379,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 374,
+                  "name": "TargetValueOracle",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 675,
+                  "src": "594:17:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
+                    "typeString": "type(contract TargetValueOracle)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "594:71:7"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 373,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 364,
+                  "name": "pmSystem",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "432:31:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                    "typeString": "contract PredictionMarketSystem"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 363,
+                    "name": "PredictionMarketSystem",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3098,
+                    "src": "432:22:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 366,
+                  "name": "_priceFeed",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "473:21:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Medianizer_$358",
+                    "typeString": "contract Medianizer"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 365,
+                    "name": "Medianizer",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 358,
+                    "src": "473:10:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Medianizer_$358",
+                      "typeString": "contract Medianizer"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 368,
+                  "name": "resolutionTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "504:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 367,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "504:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 370,
+                  "name": "targetETHPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "533:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 369,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "533:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 372,
+                  "name": "questionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 386,
+                  "src": "562:18:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 371,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "562:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "422:164:7"
+            },
+            "returnParameters": {
+              "id": 380,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "666:0:7"
+            },
+            "scope": 399,
+            "src": "410:295:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 397,
+              "nodeType": "Block",
+              "src": "755:46:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 392,
+                            "name": "priceFeed",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 362,
+                            "src": "777:9:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Medianizer_$358",
+                              "typeString": "contract Medianizer"
+                            }
+                          },
+                          "id": 393,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "read",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 357,
+                          "src": "777:14:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$__$returns$_t_bytes32_$",
+                            "typeString": "function () view external returns (bytes32)"
+                          }
+                        },
+                        "id": 394,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "777:16:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 391,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "772:4:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_uint256_$",
+                        "typeString": "type(uint256)"
+                      },
+                      "typeName": "uint"
+                    },
+                    "id": 395,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "772:22:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 390,
+                  "id": 396,
+                  "nodeType": "Return",
+                  "src": "765:29:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 398,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "readValue",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 387,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "729:2:7"
+            },
+            "returnParameters": {
+              "id": 390,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 389,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 398,
+                  "src": "749:4:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 388,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "749:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "748:6:7"
+            },
+            "scope": 399,
+            "src": "711:90:7",
+            "stateMutability": "nonpayable",
+            "superFunction": 622,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 400,
+        "src": "268:535:7"
+      }
+    ],
+    "src": "0:804:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.18",
+  "updatedAt": "2019-12-20T11:45:35.948Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

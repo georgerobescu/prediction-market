@@ -1,167 +1,21 @@
 {
-  "lmsrAddress": "0xEc862A917A2b19332eef2eC9538CDAc80Fb95193",
+  "lmsrAddress": "0x5a9F8C80e32BE28076f553bAe9EaB16c6C0af0aF",
   "markets": [
     {
-      "title": "Will one carbon offset (one metric tonne of CO2) in the EcoTree parcelle containing {name} cost more than 4EUR on Jan 1, 2020?",
-      "resolutionDate": "2020-01-31T22:59:59.290Z",
+      "title": "Will the total value of all EcoTree forestry division assets exceed 1000 according to the EcoTree API (via Chainlink)?",
+      "resolutionDate": "2019-12-20T11:18:56.000Z",
       "outcomes": [
         {
           "title": "Yes",
           "short": "Yes",
-          "when": "Carbon Offset Cost > $4"
+          "when": "Sum Divisions Value > 1000"
         },
         {
           "title": "No",
           "short": "No",
-          "when": "Carbon Offset Cost ≤ $4"
+          "when": "Sum Divisions Value ≤ 1000"
         }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
-    },
-    {
-      "title": "Will one carbon offset (one metric tonne of CO2) in the EcoTree parcelle containing {name} cost more than 4EUR on Jan 1, 2020?",
-      "resolutionDate": "2020-01-31T22:59:59.290Z",
-      "outcomes": [
-        {
-          "title": "Yes",
-          "short": "Yes",
-          "when": "Carbon Offset Cost > $4"
-        },
-        {
-          "title": "No",
-          "short": "No",
-          "when": "Carbon Offset Cost ≤ $4"
-        }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
-    },
-    {
-      "title": "Will one carbon offset (one metric tonne of CO2) in the EcoTree parcelle containing {name} cost more than 4EUR on Jan 1, 2020?",
-      "resolutionDate": "2020-01-31T22:59:59.290Z",
-      "outcomes": [
-        {
-          "title": "Yes",
-          "short": "Yes",
-          "when": "Carbon Offset Cost > $4"
-        },
-        {
-          "title": "No",
-          "short": "No",
-          "when": "Carbon Offset Cost ≤ $4"
-        }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
-    },
-    {
-      "title": "Will one carbon offset (one metric tonne of CO2) in the EcoTree parcelle containing {name} cost more than 4EUR on Jan 1, 2020?",
-      "resolutionDate": "2020-01-31T22:59:59.290Z",
-      "outcomes": [
-        {
-          "title": "Yes",
-          "short": "Yes",
-          "when": "Carbon Offset Cost > $4"
-        },
-        {
-          "title": "No",
-          "short": "No",
-          "when": "Carbon Offset Cost ≤ $4"
-        }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
-    },
-    {
-      "title": "Will the EcoTree division containing {name} deviate above the projected cubage by more than 1.5x at harvest?",
-      "resolutionDate": "2094-01-31T22:59:59.290Z",
-      "outcomes": [
-        {
-          "title": "Yes",
-          "short": "Yes",
-          "when": "Upward Deviation of Division Cubage at Harvest > 1.5x"
-        },
-        {
-          "title": "No",
-          "short": "No",
-          "when": "Upward Deviation of Division Cubage at Harvest ≤ 1.5x"
-        }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
-    },
-    {
-      "title": "Will the EcoTree division containing {name} deviate above the projected cubage by more than 1.5x at harvest?",
-      "resolutionDate": "2094-01-31T22:59:59.290Z",
-      "outcomes": [
-        {
-          "title": "Yes",
-          "short": "Yes",
-          "when": "Upward Deviation of Division Cubage at Harvest > 1.5x"
-        },
-        {
-          "title": "No",
-          "short": "No",
-          "when": "Upward Deviation of Division Cubage at Harvest ≤ 1.5x"
-        }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
-    },
-    {
-      "title": "Will the EcoTree division containing {name} deviate above the projected cubage by more than 1.5x at harvest?",
-      "resolutionDate": "2094-01-31T22:59:59.290Z",
-      "outcomes": [
-        {
-          "title": "Yes",
-          "short": "Yes",
-          "when": "Upward Deviation of Division Cubage at Harvest > 1.5x"
-        },
-        {
-          "title": "No",
-          "short": "No",
-          "when": "Upward Deviation of Division Cubage at Harvest ≤ 1.5x"
-        }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
-    },
-    {
-      "title": "Will the EcoTree division containing {name} deviate above the projected cubage by more than 1.5x at harvest?",
-      "resolutionDate": "2094-01-31T22:59:59.290Z",
-      "outcomes": [
-        {
-          "title": "Yes",
-          "short": "Yes",
-          "when": "Upward Deviation of Division Cubage at Harvest > 1.5x"
-        },
-        {
-          "title": "No",
-          "short": "No",
-          "when": "Upward Deviation of Division Cubage at Harvest ≤ 1.5x"
-        }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
-    },
-    {
-      "title": "Will total EcoTree forestry metric cubage exceed 400,000 cubic meters by Jan 1, 2021?",
-      "resolutionDate": "2021-01-31T22:59:59.290Z",
-      "outcomes": [
-        {
-          "title": "Yes",
-          "short": "Yes",
-          "when": "EcoTree metric cubage > 400k"
-        },
-        {
-          "title": "No",
-          "short": "No",
-          "when": "EcoTree metric cubage ≤ 400k"
-        }
-      ],
-      "oracle": "Chainlink",
-      "icon": "/assets/images/trees.jpg"
+      ]
     }
   ],
   "networkId": 4

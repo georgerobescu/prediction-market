@@ -12,8 +12,9 @@ import LMSRMarketMaker from './build/contracts/LMSRMarketMaker.json';
 import {/*Drizzle, */generateStore } from "drizzle";
 import { DrizzleContext, DrizzleProvider } from "drizzle-react";
 
-import ChainlinkEcoTree from './build-ecotree/contracts/ChainlinkEcoTree.json'
-import DaiStandin from './build/contracts/DaiStandin.json'
+import ChainlinkEcoTree from './build-ecotree/contracts/ChainlinkEcoTree.json';
+import DaiStandin from './build/contracts/DaiStandin.json';
+import SumValueMintedAssetsOracle from './build/contracts/SumValueMintedAssetsOracle.json';
 
 export const store = configureStore();
 
@@ -25,7 +26,7 @@ export const store = configureStore();
 
 //define drizzle options
 const options = {
-  contracts: [ChainlinkEcoTree, DaiStandin]
+  contracts: [ChainlinkEcoTree, DaiStandin, SumValueMintedAssetsOracle]
 };
 
 //initialise drizzle store with options

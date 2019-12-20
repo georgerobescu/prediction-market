@@ -24,7 +24,7 @@ export interface IProps {
   setOpenMarketIndex: Function;
   newlyCreatedTxn: any;
   setNewlyCreatedTxn: Function;
-  ChainlinkEcoTreeContract: any;
+  // ChainlinkEcoTreeContract: any;
   chainlinkEcoTreeKeys: any;
 }
 
@@ -41,12 +41,12 @@ class PositionCreation extends React.Component<IProps, IState> {
     setNewlyCreatedTxn(null);
   }
   public render() {
-    const { markets, openMarketIndex, probabilities, stagedProbabilities, marketSelection, setMarketSelection, newlyCreatedTxn, ChainlinkEcoTreeContract, chainlinkEcoTreeKeys } = this.props;
+    const { markets, openMarketIndex, probabilities, stagedProbabilities, marketSelection, setMarketSelection, newlyCreatedTxn, /*ChainlinkEcoTreeContract, */chainlinkEcoTreeKeys } = this.props;
 
     const outcomes = markets[openMarketIndex].outcomes;
     const conditionId = markets[openMarketIndex].conditionId;
-    const rawTitle = markets[openMarketIndex].title;
-    const title = rawTitle.replace("{name}", '"' + web3.utils.hexToUtf8(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openMarketIndex]].value.description) + '"');
+    const title = markets[openMarketIndex].title;
+    // const title = rawTitle.replace("{name}", '"' + web3.utils.hexToUtf8(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openMarketIndex]].value.description) + '"');
 
     return (
       <div className="text-center">
@@ -124,7 +124,7 @@ export default drizzleConnect(
     // @ts-ignore
     newlyCreatedTxn: state.positionCreation.newlyCreatedTxn,
     // @ts-ignore
-    ChainlinkEcoTreeContract: state.contracts.ChainlinkEcoTree,
+    // ChainlinkEcoTreeContract: state.contracts.ChainlinkEcoTree,
     // @ts-ignore
     chainlinkEcoTreeKeys: state.contractFieldKeys.chainlinkEcoTreeKeys
   }),

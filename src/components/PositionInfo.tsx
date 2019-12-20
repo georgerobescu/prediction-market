@@ -16,7 +16,7 @@ export interface IProps {
   markets: Array<any>;
   openInfoIndex: number;
   setOpenInfoIndex: Function;
-  ChainlinkEcoTreeContract: any;
+  SumValueMintedAssetsOracle: any;
   chainlinkEcoTreeKeys: any;
   setOpenInfoData: Function;
   openInfoData: any;
@@ -45,10 +45,10 @@ class PositionInfo extends React.Component<IProps, IState> {
     setOpenInfoIndex(-1);
   }
   public render() {
-    const { markets, openInfoIndex, ChainlinkEcoTreeContract, chainlinkEcoTreeKeys, openInfoData } = this.props;
+    const { markets, openInfoIndex, SumValueMintedAssetsOracle, chainlinkEcoTreeKeys, openInfoData } = this.props;
 
-    const rawTitle = markets[openInfoIndex].title;
-    const title = rawTitle.replace("{name}", '"' + web3.utils.hexToUtf8(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openInfoIndex]].value.description) + '"');
+    const title /*rawTitle */= markets[openInfoIndex].title;
+    // const title = rawTitle.replace("{name}", '"' + web3.utils.hexToUtf8(ChainlinkEcoTreeContract.forests[chainlinkEcoTreeKeys[openInfoIndex]].value.description) + '"');
 
     return (
       <div className="text-center">
@@ -72,7 +72,7 @@ class PositionInfo extends React.Component<IProps, IState> {
                   <div className={cn("outcome-selection") + " col-0 col-md-3"} />
                   <div className={cn("outcome-selection") + " col-10 offset-1"}>
                     <pre>
-                      {JSON.stringify(openInfoData, null, 4)}
+                      {JSON.stringify(SumValueMintedAssetsOracle, null, 4)}
                     </pre>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export default drizzleConnect(
     // @ts-ignore
     openInfoIndex: state.positionCreation.openInfoIndex,
     // @ts-ignore
-    ChainlinkEcoTreeContract: state.contracts.ChainlinkEcoTree,
+    SumValueMintedAssetsOracle: state.contracts.SumValueMintedAssetsOracle,
     // @ts-ignore
     chainlinkEcoTreeKeys: state.contractFieldKeys.chainlinkEcoTreeKeys,
     // @ts-ignore

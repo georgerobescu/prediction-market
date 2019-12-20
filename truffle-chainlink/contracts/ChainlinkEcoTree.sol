@@ -1,28 +1,37 @@
 pragma solidity ^0.4.24;
 
 import "chainlink/contracts/ChainlinkClient.sol";
+// import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
+
+interface Division {
+  // mapping (uint256 => string) public _tokenMetadataIpfsHashes;
+  function _tokenMetadataIpfsHashes(uint256 arg) external returns (string a);
+}
 
 // ChainlinkEcoTree inherits the Chainlinked contract to gain the
 // functionality of creating Chainlink requests.
 contract ChainlinkEcoTree is ChainlinkClient {
+  using SafeMath for uint256;
 
-  struct Forest {
-    bytes32 id;
-    bytes32 essence_id;
-    bytes32 parcelle_id;
-    bytes32 description;
-    bytes32 date_plantation;
+  Division internal deployedDivisionNFTContract;
+
+  uint256 public sumNbrArbres;
+  uint256 public sumPrixTtc;
+
+  struct DivisionValueData {
+    bytes32 nbrArbres;
+    bytes32 prixTtc;
   }
 
   struct DataType {
-    uint256 forestId;
+    uint256 divisionId;
     bytes32 typeName;
   }
 
-  mapping (uint256 => Forest) public forests;
+  mapping (uint256 => DivisionValueData) public divisionsValueData;
   mapping (bytes32 => DataType) internal requestIdToDataType;
 
-  constructor(address _link, address _oracle) public {
+  constructor(address _link, address _oracle, address _etDivision) public {
     // Set the address for the LINK token for the network.
     if(_link == address(0)) {
       // Useful for deploying to public networks.
@@ -37,78 +46,62 @@ contract ChainlinkEcoTree is ChainlinkClient {
       "Please provide the address of a valid Chainlink oracle for the currently selected network."
     );
     setChainlinkOracle(_oracle);
+    // Set address of existing (deployed) Division NFT smart contract
+    deployedDivisionNFTContract = Division(_etDivision);
+    // Set intial sum values
+    sumNbrArbres = 0;
+    sumPrixTtc = 0;
   }
 
-  function makeSingleRequest(bytes32 _jobId, uint i, bytes32 typeName) internal returns (bool success) {
+  function makeSingleRequest(bytes32 _jobId, uint256 _divisionId, bytes32 _typeName) internal returns (bool success) {
     // Takes a JobID, a callback address, and callback function
-    Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfillForest.selector);
+    Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfillDivisionValueData.selector);
     // A URL with the key "get" to the request parameters
-    req.add("get", string(abi.encodePacked("http://private-486b5-leopoldjoy.apiary-mock.com/forests/", uint2str(i))));
+    req.add("get", string(abi.encodePacked("https://ecotree.fr/api/divisions/", uint2str(_divisionId))));
     // Dot-delimited JSON key "path" to the desired parameters
-    req.add("path", bytes32ToString(typeName));
+    req.add("path", bytes32ToString(_typeName));
     // Send the request with 1 LINK to the oracle contract
     bytes32 requestId = sendChainlinkRequest(req, 1 * LINK);
     // Save mapping of request ID to the corrosponding forest ID and data type
-    requestIdToDataType[requestId] = DataType({forestId: i, typeName: typeName});
+    requestIdToDataType[requestId] = DataType({divisionId: _divisionId, typeName: _typeName});
 
     return true;
   }
   
   // Creates a Chainlink request with the bytes32 job and returns the requestId
-  function requestForests(bytes32 _jobId, uint256 _numForests) public returns (bool success) {
-    for (uint i = 0; i < _numForests; i++) {
-      // Make request for ID field of this forest
-      makeSingleRequest(_jobId, i, "id");
-      // Make request for essence_id field of this forest
-      makeSingleRequest(_jobId, i, "essence_id");
-      // Make request for parcelle_id field of this forest
-      makeSingleRequest(_jobId, i, "parcelle_id");
-      // Make request for description field of this forest
-      makeSingleRequest(_jobId, i, "description");
-      // Make request for date_plantation field of this forest
-      makeSingleRequest(_jobId, i, "date_plantation");
-    }
+  function requestDivisionValueData(bytes32 _jobId, uint256 _divisionId) public returns (bool success) {
+    // Make request for ID field of this forest
+    makeSingleRequest(_jobId, _divisionId, "nbrArbres"); // nbrArbres attributes.12.value
+    // Make request for essence_id field of this forest
+    makeSingleRequest(_jobId, _divisionId, "prixTtc"); // prixTtc attributes.13.value
 
     return true;
   }
 
-  // fulfillForest receives a bytes32 data type
-  function fulfillForest(bytes32 _requestId, bytes32 _forestDataField)
+  // fulfillDivisionValueData receives a bytes32 data type
+  function fulfillDivisionValueData(bytes32 _requestId, bytes32 _divisionDataField)
     // Use recordChainlinkFulfillment to ensure only the requesting oracle can fulfill
     public recordChainlinkFulfillment(_requestId) {
+    // Only allow fulfillment of the division's data if the data has definitely been minted
+    bytes memory checkHashEmpty = bytes(deployedDivisionNFTContract._tokenMetadataIpfsHashes(requestIdToDataType[_requestId].divisionId)); // Uses memory
+    if (checkHashEmpty.length == 0) {
+      return; // Since the hash is empty for that divisionId, we know this division hasn't been minted yet
+    }
     // Set the forest's data field based on the fulfilled data and its type
-    if (requestIdToDataType[_requestId].typeName == "id") {
-      forests[requestIdToDataType[_requestId].forestId].id = _forestDataField;
-    } else if (requestIdToDataType[_requestId].typeName == "essence_id") {
-      forests[requestIdToDataType[_requestId].forestId].essence_id = _forestDataField;
-    } else if (requestIdToDataType[_requestId].typeName == "parcelle_id") {
-      forests[requestIdToDataType[_requestId].forestId].parcelle_id = _forestDataField;
-    } else if (requestIdToDataType[_requestId].typeName == "description") {
-      forests[requestIdToDataType[_requestId].forestId].description = _forestDataField;
-    } else if (requestIdToDataType[_requestId].typeName == "date_plantation") {
-      forests[requestIdToDataType[_requestId].forestId].date_plantation = _forestDataField;
+    if (requestIdToDataType[_requestId].typeName == "nbrArbres") {
+      divisionsValueData[requestIdToDataType[_requestId].divisionId].nbrArbres = _divisionDataField;
+      // Update sum counter also
+      sumNbrArbres = sumNbrArbres.add(stringToUint(bytes32ToString(_divisionDataField)));
+    } else if (requestIdToDataType[_requestId].typeName == "prixTtc") {
+      divisionsValueData[requestIdToDataType[_requestId].divisionId].prixTtc = _divisionDataField;
+      // Update sum counter also
+      sumPrixTtc = sumPrixTtc.add(stringToUint(bytes32ToString(_divisionDataField)));
     }
   }
 
   /* 
    * HELPER FUNCTIONS
    */
-  function uint2str(uint i) internal pure returns (string){
-    if (i == 0) return "0";
-    uint j = i;
-    uint length;
-    while (j != 0){
-      length++;
-      j /= 10;
-    }
-    bytes memory bstr = new bytes(length);
-    uint k = length - 1;
-    while (i != 0){
-      bstr[k--] = byte(48 + i % 10);
-      i /= 10;
-    }
-    return string(bstr);
-  }
 
   function bytes32ToString(bytes32 x) internal pure returns (string) {
     bytes memory bytesString = new bytes(32);
@@ -125,5 +118,34 @@ contract ChainlinkEcoTree is ChainlinkClient {
         bytesStringTrimmed[j] = bytesString[j];
     }
     return string(bytesStringTrimmed);
+  }
+
+  function uint2str(uint i) internal pure returns (string) {
+    if (i == 0) return "0";
+    uint j = i;
+    uint length;
+    while (j != 0){
+      length++;
+      j /= 10;
+    }
+    bytes memory bstr = new bytes(length);
+    uint k = length - 1;
+    while (i != 0){
+      bstr[k--] = byte(48 + i % 10);
+      i /= 10;
+    }
+    return string(bstr);
+  }
+
+  function stringToUint(string s) internal pure returns (uint result) {
+    bytes memory b = bytes(s);
+    uint i;
+    result = 0;
+    for (i = 0; i < b.length; i++) {
+      uint c = uint(b[i]);
+      if (c >= 48 && c <= 57) {
+        result = result * 10 + (c - 48);
+      }
+    }
   }
 }

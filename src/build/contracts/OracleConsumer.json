@@ -31,14 +31,14 @@
     "absolutePath": "@gnosis.pm/hg-contracts/contracts/OracleConsumer.sol",
     "exportedSymbols": {
       "OracleConsumer": [
-        1872
+        1927
       ]
     },
-    "id": 1873,
+    "id": 1928,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1864,
+        "id": 1919,
         "literals": [
           "solidity",
           "^",
@@ -46,7 +46,7 @@
           ".1"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:18"
+        "src": "0:23:19"
       },
       {
         "baseContracts": [],
@@ -54,9 +54,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1872,
+        "id": 1927,
         "linearizedBaseContracts": [
-          1872
+          1927
         ],
         "name": "OracleConsumer",
         "nodeType": "ContractDefinition",
@@ -64,23 +64,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 1871,
+            "id": 1926,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveResult",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1869,
+              "id": 1924,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1866,
+                  "id": 1921,
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1871,
-                  "src": "80:10:18",
+                  "scope": 1926,
+                  "src": "80:10:19",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -88,10 +88,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1865,
+                    "id": 1920,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "80:7:18",
+                    "src": "80:7:19",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -102,11 +102,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 1868,
+                  "id": 1923,
                   "name": "result",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1871,
-                  "src": "92:21:18",
+                  "scope": 1926,
+                  "src": "92:21:19",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -114,10 +114,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1867,
+                    "id": 1922,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "92:5:18",
+                    "src": "92:5:19",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -127,39 +127,39 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "79:35:18"
+              "src": "79:35:19"
             },
             "returnParameters": {
-              "id": 1870,
+              "id": 1925,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "123:0:18"
+              "src": "123:0:19"
             },
-            "scope": 1872,
-            "src": "57:67:18",
+            "scope": 1927,
+            "src": "57:67:19",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1873,
-        "src": "26:100:18"
+        "scope": 1928,
+        "src": "26:100:19"
       }
     ],
-    "src": "0:127:18"
+    "src": "0:127:19"
   },
   "legacyAST": {
     "absolutePath": "@gnosis.pm/hg-contracts/contracts/OracleConsumer.sol",
     "exportedSymbols": {
       "OracleConsumer": [
-        1872
+        1927
       ]
     },
-    "id": 1873,
+    "id": 1928,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1864,
+        "id": 1919,
         "literals": [
           "solidity",
           "^",
@@ -167,7 +167,7 @@
           ".1"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:18"
+        "src": "0:23:19"
       },
       {
         "baseContracts": [],
@@ -175,9 +175,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1872,
+        "id": 1927,
         "linearizedBaseContracts": [
-          1872
+          1927
         ],
         "name": "OracleConsumer",
         "nodeType": "ContractDefinition",
@@ -185,23 +185,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 1871,
+            "id": 1926,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveResult",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1869,
+              "id": 1924,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1866,
+                  "id": 1921,
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1871,
-                  "src": "80:10:18",
+                  "scope": 1926,
+                  "src": "80:10:19",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -209,10 +209,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1865,
+                    "id": 1920,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "80:7:18",
+                    "src": "80:7:19",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -223,11 +223,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 1868,
+                  "id": 1923,
                   "name": "result",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1871,
-                  "src": "92:21:18",
+                  "scope": 1926,
+                  "src": "92:21:19",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -235,10 +235,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1867,
+                    "id": 1922,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "92:5:18",
+                    "src": "92:5:19",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -248,26 +248,26 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "79:35:18"
+              "src": "79:35:19"
             },
             "returnParameters": {
-              "id": 1870,
+              "id": 1925,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "123:0:18"
+              "src": "123:0:19"
             },
-            "scope": 1872,
-            "src": "57:67:18",
+            "scope": 1927,
+            "src": "57:67:19",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1873,
-        "src": "26:100:18"
+        "scope": 1928,
+        "src": "26:100:19"
       }
     ],
-    "src": "0:127:18"
+    "src": "0:127:19"
   },
   "compiler": {
     "name": "solc",
@@ -275,7 +275,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.18",
-  "updatedAt": "2019-12-09T06:29:31.342Z",
+  "updatedAt": "2019-12-20T11:45:36.118Z",
   "devdoc": {
     "methods": {}
   },

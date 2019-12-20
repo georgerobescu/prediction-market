@@ -91,11 +91,11 @@ contract ChainlinkEcoTree is ChainlinkClient {
     if (requestIdToDataType[_requestId].typeName == "nbrArbres") {
       divisionsValueData[requestIdToDataType[_requestId].divisionId].nbrArbres = _divisionDataField;
       // Update sum counter also
-      sumNbrArbres = sumNbrArbres.add(uint(_divisionDataField));
+      sumNbrArbres = sumNbrArbres.add(stringToUint(bytes32ToString(_divisionDataField)));
     } else if (requestIdToDataType[_requestId].typeName == "prixTtc") {
       divisionsValueData[requestIdToDataType[_requestId].divisionId].prixTtc = _divisionDataField;
       // Update sum counter also
-      sumPrixTtc = sumPrixTtc.add(uint(_divisionDataField));
+      sumPrixTtc = sumPrixTtc.add(stringToUint(bytes32ToString(_divisionDataField)));
     }
   }
 
@@ -135,5 +135,17 @@ contract ChainlinkEcoTree is ChainlinkClient {
       i /= 10;
     }
     return string(bstr);
+  }
+
+  function stringToUint(string s) internal pure returns (uint result) {
+    bytes memory b = bytes(s);
+    uint i;
+    result = 0;
+    for (i = 0; i < b.length; i++) {
+      uint c = uint(b[i]);
+      if (c >= 48 && c <= 57) {
+        result = result * 10 + (c - 48);
+      }
+    }
   }
 }

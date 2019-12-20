@@ -53,7 +53,7 @@
         "id": 11,
         "nodeType": "ImportDirective",
         "scope": 59,
-        "sourceUnit": 3044,
+        "sourceUnit": 3099,
         "src": "24:102:1",
         "symbolAliases": [
           {
@@ -69,7 +69,7 @@
         "id": 13,
         "nodeType": "ImportDirective",
         "scope": 59,
-        "sourceUnit": 621,
+        "sourceUnit": 676,
         "src": "127:60:1",
         "symbolAliases": [
           {
@@ -159,10 +159,10 @@
               "id": 20,
               "name": "TargetValueOracle",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 620,
+              "referencedDeclaration": 675,
               "src": "295:17:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TargetValueOracle_$620",
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
                 "typeString": "contract TargetValueOracle"
               }
             },
@@ -172,7 +172,7 @@
           }
         ],
         "contractDependencies": [
-          620
+          675
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -180,7 +180,7 @@
         "id": 58,
         "linearizedBaseContracts": [
           58,
-          620
+          675
         ],
         "name": "DaiStabilityFeeOracle",
         "nodeType": "ContractDefinition",
@@ -283,7 +283,7 @@
                     "referencedDeclaration": 25,
                     "src": "543:8:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -334,10 +334,10 @@
                   "name": "TargetValueOracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 620,
+                  "referencedDeclaration": 675,
                   "src": "525:17:1",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$620_$",
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
                     "typeString": "type(contract TargetValueOracle)"
                   }
                 },
@@ -361,7 +361,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                     "typeString": "contract PredictionMarketSystem"
                   },
                   "typeName": {
@@ -369,10 +369,10 @@
                     "id": 24,
                     "name": "PredictionMarketSystem",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3043,
+                    "referencedDeclaration": 3098,
                     "src": "369:22:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -609,7 +609,7 @@
             "scope": 58,
             "src": "636:80:1",
             "stateMutability": "nonpayable",
-            "superFunction": 567,
+            "superFunction": 622,
             "visibility": "internal"
           }
         ],
@@ -649,7 +649,7 @@
         "id": 11,
         "nodeType": "ImportDirective",
         "scope": 59,
-        "sourceUnit": 3044,
+        "sourceUnit": 3099,
         "src": "24:102:1",
         "symbolAliases": [
           {
@@ -665,7 +665,7 @@
         "id": 13,
         "nodeType": "ImportDirective",
         "scope": 59,
-        "sourceUnit": 621,
+        "sourceUnit": 676,
         "src": "127:60:1",
         "symbolAliases": [
           {
@@ -755,10 +755,10 @@
               "id": 20,
               "name": "TargetValueOracle",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 620,
+              "referencedDeclaration": 675,
               "src": "295:17:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TargetValueOracle_$620",
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
                 "typeString": "contract TargetValueOracle"
               }
             },
@@ -768,7 +768,7 @@
           }
         ],
         "contractDependencies": [
-          620
+          675
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -776,7 +776,7 @@
         "id": 58,
         "linearizedBaseContracts": [
           58,
-          620
+          675
         ],
         "name": "DaiStabilityFeeOracle",
         "nodeType": "ContractDefinition",
@@ -879,7 +879,7 @@
                     "referencedDeclaration": 25,
                     "src": "543:8:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -930,10 +930,10 @@
                   "name": "TargetValueOracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 620,
+                  "referencedDeclaration": 675,
                   "src": "525:17:1",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$620_$",
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
                     "typeString": "type(contract TargetValueOracle)"
                   }
                 },
@@ -957,7 +957,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                     "typeString": "contract PredictionMarketSystem"
                   },
                   "typeName": {
@@ -965,10 +965,10 @@
                     "id": 24,
                     "name": "PredictionMarketSystem",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3043,
+                    "referencedDeclaration": 3098,
                     "src": "369:22:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -1205,7 +1205,7 @@
             "scope": 58,
             "src": "636:80:1",
             "stateMutability": "nonpayable",
-            "superFunction": 567,
+            "superFunction": 622,
             "visibility": "internal"
           }
         ],
@@ -1221,7 +1221,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.18",
-  "updatedAt": "2019-12-09T06:29:31.231Z",
+  "updatedAt": "2019-12-20T11:45:35.897Z",
   "devdoc": {
     "methods": {}
   },

@@ -82,7 +82,7 @@
         "id": 243,
         "nodeType": "ImportDirective",
         "scope": 347,
-        "sourceUnit": 3044,
+        "sourceUnit": 3099,
         "src": "25:102:6",
         "symbolAliases": [
           {
@@ -98,7 +98,7 @@
         "id": 245,
         "nodeType": "ImportDirective",
         "scope": 347,
-        "sourceUnit": 621,
+        "sourceUnit": 676,
         "src": "128:60:6",
         "symbolAliases": [
           {
@@ -114,7 +114,7 @@
         "id": 247,
         "nodeType": "ImportDirective",
         "scope": 347,
-        "sourceUnit": 7007,
+        "sourceUnit": 7062,
         "src": "189:80:6",
         "symbolAliases": [
           {
@@ -386,7 +386,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IERC20_$7006",
+                    "typeIdentifier": "t_contract$_IERC20_$7061",
                     "typeString": "contract IERC20"
                   },
                   "typeName": {
@@ -394,10 +394,10 @@
                     "id": 267,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 7006,
+                    "referencedDeclaration": 7061,
                     "src": "577:6:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$7006",
+                      "typeIdentifier": "t_contract$_IERC20_$7061",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -485,10 +485,10 @@
               "id": 277,
               "name": "TargetValueOracle",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 620,
+              "referencedDeclaration": 675,
               "src": "673:17:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TargetValueOracle_$620",
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
                 "typeString": "contract TargetValueOracle"
               }
             },
@@ -498,7 +498,7 @@
           }
         ],
         "contractDependencies": [
-          620
+          675
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -506,7 +506,7 @@
         "id": 346,
         "linearizedBaseContracts": [
           346,
-          620
+          675
         ],
         "name": "DutchXTokenPriceOracle",
         "nodeType": "ContractDefinition",
@@ -549,7 +549,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IERC20_$7006",
+              "typeIdentifier": "t_contract$_IERC20_$7061",
               "typeString": "contract IERC20"
             },
             "typeName": {
@@ -557,10 +557,10 @@
               "id": 281,
               "name": "IERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 7006,
+              "referencedDeclaration": 7061,
               "src": "724:6:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IERC20_$7006",
+                "typeIdentifier": "t_contract$_IERC20_$7061",
                 "typeString": "contract IERC20"
               }
             },
@@ -636,7 +636,7 @@
                       "referencedDeclaration": 282,
                       "src": "1063:5:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IERC20_$7006",
+                        "typeIdentifier": "t_contract$_IERC20_$7061",
                         "typeString": "contract IERC20"
                       }
                     },
@@ -651,13 +651,13 @@
                       "referencedDeclaration": 294,
                       "src": "1071:6:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IERC20_$7006",
+                        "typeIdentifier": "t_contract$_IERC20_$7061",
                         "typeString": "contract IERC20"
                       }
                     },
                     "src": "1063:14:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$7006",
+                      "typeIdentifier": "t_contract$_IERC20_$7061",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -683,7 +683,7 @@
                     "referencedDeclaration": 284,
                     "src": "971:8:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -734,10 +734,10 @@
                   "name": "TargetValueOracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 620,
+                  "referencedDeclaration": 675,
                   "src": "953:17:6",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$620_$",
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
                     "typeString": "type(contract TargetValueOracle)"
                   }
                 },
@@ -761,7 +761,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                     "typeString": "contract PredictionMarketSystem"
                   },
                   "typeName": {
@@ -769,10 +769,10 @@
                     "id": 283,
                     "name": "PredictionMarketSystem",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3043,
+                    "referencedDeclaration": 3098,
                     "src": "772:22:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -895,7 +895,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IERC20_$7006",
+                    "typeIdentifier": "t_contract$_IERC20_$7061",
                     "typeString": "contract IERC20"
                   },
                   "typeName": {
@@ -903,10 +903,10 @@
                     "id": 293,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 7006,
+                    "referencedDeclaration": 7061,
                     "src": "926:6:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$7006",
+                      "typeIdentifier": "t_contract$_IERC20_$7061",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -1156,7 +1156,7 @@
                         "referencedDeclaration": 282,
                         "src": "1284:5:6",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IERC20_$7006",
+                          "typeIdentifier": "t_contract$_IERC20_$7061",
                           "typeString": "contract IERC20"
                         }
                       }
@@ -1164,7 +1164,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_contract$_IERC20_$7006",
+                          "typeIdentifier": "t_contract$_IERC20_$7061",
                           "typeString": "contract IERC20"
                         }
                       ],
@@ -1191,7 +1191,7 @@
                       "referencedDeclaration": 275,
                       "src": "1248:35:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_external_view$_t_contract$_IERC20_$7006_$returns$_t_uint256_$_t_uint256_$",
+                        "typeIdentifier": "t_function_external_view$_t_contract$_IERC20_$7061_$returns$_t_uint256_$_t_uint256_$",
                         "typeString": "function (contract IERC20) view external returns (uint256,uint256)"
                       }
                     },
@@ -1384,7 +1384,7 @@
             "scope": 346,
             "src": "1090:253:6",
             "stateMutability": "nonpayable",
-            "superFunction": 567,
+            "superFunction": 622,
             "visibility": "internal"
           }
         ],
@@ -1430,7 +1430,7 @@
         "id": 243,
         "nodeType": "ImportDirective",
         "scope": 347,
-        "sourceUnit": 3044,
+        "sourceUnit": 3099,
         "src": "25:102:6",
         "symbolAliases": [
           {
@@ -1446,7 +1446,7 @@
         "id": 245,
         "nodeType": "ImportDirective",
         "scope": 347,
-        "sourceUnit": 621,
+        "sourceUnit": 676,
         "src": "128:60:6",
         "symbolAliases": [
           {
@@ -1462,7 +1462,7 @@
         "id": 247,
         "nodeType": "ImportDirective",
         "scope": 347,
-        "sourceUnit": 7007,
+        "sourceUnit": 7062,
         "src": "189:80:6",
         "symbolAliases": [
           {
@@ -1734,7 +1734,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IERC20_$7006",
+                    "typeIdentifier": "t_contract$_IERC20_$7061",
                     "typeString": "contract IERC20"
                   },
                   "typeName": {
@@ -1742,10 +1742,10 @@
                     "id": 267,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 7006,
+                    "referencedDeclaration": 7061,
                     "src": "577:6:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$7006",
+                      "typeIdentifier": "t_contract$_IERC20_$7061",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -1833,10 +1833,10 @@
               "id": 277,
               "name": "TargetValueOracle",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 620,
+              "referencedDeclaration": 675,
               "src": "673:17:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TargetValueOracle_$620",
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
                 "typeString": "contract TargetValueOracle"
               }
             },
@@ -1846,7 +1846,7 @@
           }
         ],
         "contractDependencies": [
-          620
+          675
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -1854,7 +1854,7 @@
         "id": 346,
         "linearizedBaseContracts": [
           346,
-          620
+          675
         ],
         "name": "DutchXTokenPriceOracle",
         "nodeType": "ContractDefinition",
@@ -1897,7 +1897,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IERC20_$7006",
+              "typeIdentifier": "t_contract$_IERC20_$7061",
               "typeString": "contract IERC20"
             },
             "typeName": {
@@ -1905,10 +1905,10 @@
               "id": 281,
               "name": "IERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 7006,
+              "referencedDeclaration": 7061,
               "src": "724:6:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IERC20_$7006",
+                "typeIdentifier": "t_contract$_IERC20_$7061",
                 "typeString": "contract IERC20"
               }
             },
@@ -1984,7 +1984,7 @@
                       "referencedDeclaration": 282,
                       "src": "1063:5:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IERC20_$7006",
+                        "typeIdentifier": "t_contract$_IERC20_$7061",
                         "typeString": "contract IERC20"
                       }
                     },
@@ -1999,13 +1999,13 @@
                       "referencedDeclaration": 294,
                       "src": "1071:6:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IERC20_$7006",
+                        "typeIdentifier": "t_contract$_IERC20_$7061",
                         "typeString": "contract IERC20"
                       }
                     },
                     "src": "1063:14:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$7006",
+                      "typeIdentifier": "t_contract$_IERC20_$7061",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -2031,7 +2031,7 @@
                     "referencedDeclaration": 284,
                     "src": "971:8:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -2082,10 +2082,10 @@
                   "name": "TargetValueOracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 620,
+                  "referencedDeclaration": 675,
                   "src": "953:17:6",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$620_$",
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
                     "typeString": "type(contract TargetValueOracle)"
                   }
                 },
@@ -2109,7 +2109,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                     "typeString": "contract PredictionMarketSystem"
                   },
                   "typeName": {
@@ -2117,10 +2117,10 @@
                     "id": 283,
                     "name": "PredictionMarketSystem",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3043,
+                    "referencedDeclaration": 3098,
                     "src": "772:22:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -2243,7 +2243,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IERC20_$7006",
+                    "typeIdentifier": "t_contract$_IERC20_$7061",
                     "typeString": "contract IERC20"
                   },
                   "typeName": {
@@ -2251,10 +2251,10 @@
                     "id": 293,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 7006,
+                    "referencedDeclaration": 7061,
                     "src": "926:6:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$7006",
+                      "typeIdentifier": "t_contract$_IERC20_$7061",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -2504,7 +2504,7 @@
                         "referencedDeclaration": 282,
                         "src": "1284:5:6",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IERC20_$7006",
+                          "typeIdentifier": "t_contract$_IERC20_$7061",
                           "typeString": "contract IERC20"
                         }
                       }
@@ -2512,7 +2512,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_contract$_IERC20_$7006",
+                          "typeIdentifier": "t_contract$_IERC20_$7061",
                           "typeString": "contract IERC20"
                         }
                       ],
@@ -2539,7 +2539,7 @@
                       "referencedDeclaration": 275,
                       "src": "1248:35:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_external_view$_t_contract$_IERC20_$7006_$returns$_t_uint256_$_t_uint256_$",
+                        "typeIdentifier": "t_function_external_view$_t_contract$_IERC20_$7061_$returns$_t_uint256_$_t_uint256_$",
                         "typeString": "function (contract IERC20) view external returns (uint256,uint256)"
                       }
                     },
@@ -2732,7 +2732,7 @@
             "scope": 346,
             "src": "1090:253:6",
             "stateMutability": "nonpayable",
-            "superFunction": 567,
+            "superFunction": 622,
             "visibility": "internal"
           }
         ],
@@ -2748,7 +2748,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.18",
-  "updatedAt": "2019-12-09T06:29:31.253Z",
+  "updatedAt": "2019-12-20T11:45:35.937Z",
   "devdoc": {
     "methods": {}
   },

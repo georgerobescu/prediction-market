@@ -2,14 +2,14 @@ const deployConfig = require("./utils/deploy-config");
 
 module.exports = function(deployer) {
   const RinkebyChainlinkedEcoTree =
-    "0x76b8e6AcB389090f38d37A82d521d8ef0D6E2318";
+    "0xCCccCb48132191636B95aBF45e32BaFbf5A77f5c";
 
   deployer.deploy(
-    artifacts.require("DutchXTokenPriceOracle"),
+    artifacts.require("SumValueMintedAssetsOracle"),
     artifacts.require("PredictionMarketSystem").address,
-    deployConfig.daiPriceResolutionTime,
-    deployConfig.daiPriceTargetValue,
-    deployConfig.daiPriceQuestionID,
+    deployConfig.sumMintedResolutionTime,
+    deployConfig.sumMintedTargetValue,
+    deployConfig.sumMintedQuestionID,
     // artifacts.require("DutchXStandin").address,
     // artifacts.require("DaiStandin").address,
     RinkebyChainlinkedEcoTree

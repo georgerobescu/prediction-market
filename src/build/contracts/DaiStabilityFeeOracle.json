@@ -133,8 +133,8 @@
   "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"pmSystem\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"resolveValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"targetValue\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"daiTub\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"questionId\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"resolutionTime\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"pmSystem\",\"type\":\"address\"},{\"name\":\"resolutionTime\",\"type\":\"uint256\"},{\"name\":\"targetETHPrice\",\"type\":\"uint256\"},{\"name\":\"questionId\",\"type\":\"bytes32\"},{\"name\":\"_daiTub\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"resolutionTime\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"currentTime\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"ResolutionSuccessful\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{\"resolveValue()\":{\"details\":\"Triggers an oracle report. If the transaction occurs within the prescribed valid time window, the oracle will attempt to read a value and report a result to the prediction market system. The result reported will be two EVM words (2*32=64 bytes). If the witnessed value exceeds the target value, the first word will be 1 and the second will be 0. Otherwise, if the witnessed value is less than or equal to the target value, the first word will be 0 and the second will be 1. \",\"return\":\"value witnessed by this oracle\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol\":\"DaiStabilityFeeOracle\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol\":{\"keccak256\":\"0xcfe42e530f37a6ff57d70e033126f4e5a16b53856d09c0de9dbba2be76df9979\",\"urls\":[\"bzzr://55718644e941b2d0613c7afa1d5054c20088aac4c42e30b738e3040a1c76e20e\"]},\"/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol\":{\"keccak256\":\"0xd509be0414f136bed7c27df14064d194a48b85221e04b66716c9fc82bb2be6b5\",\"urls\":[\"bzzr://ef73cfc3d49e6ce991c0d499f83e2a4655b92ddc0fe4e6b16450247b712912c3\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/ERC1155.sol\":{\"keccak256\":\"0x10343cd2da9bec10446451aa4f5fefc2fdd01f691d279b71e2f806f3a25c6b3d\",\"urls\":[\"bzzr://a76eaacc5082f5f83f6bf8f2a44eca80761551e2c119e2013944535ef7c87e30\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/IERC1155.sol\":{\"keccak256\":\"0x4971631d7de74464fed3e0abac04553e917be5e8cd10b3f825e2e7c39ccc2734\",\"urls\":[\"bzzr://e1e88dfe7440ceab59d4cd604d12e5dc93409a3c5058e497763703027ea7b9e6\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/IERC1155TokenReceiver.sol\":{\"keccak256\":\"0x675eaf04410e936cbd50325aa661216666214ca89f113b0880b917e3d00dda26\",\"urls\":[\"bzzr://e6d4db28e3180f99029df28a1df07988e1d313d6981725ec22af84f799ccdf6a\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1820Registry.sol\":{\"keccak256\":\"0x5a98e0985b1c43c8fe355ea4ca5d2f434ffbf24c8b77bf0c1a0b405fbd728dee\",\"urls\":[\"bzzr://15b63f9b61ed5c19993149654f5bdc1a71909973f510fa858d094a2dae9af512\"]},\"@gnosis.pm/hg-contracts/contracts/OracleConsumer.sol\":{\"keccak256\":\"0xf54ac4060959a5e1c1714933711c90cd62bbbf127d5e37dc6cbcbb3711b3c186\",\"urls\":[\"bzzr://2efcd8089b7f032f4cc05e4a00304eb01bad0edbc43388332c79b010df532ffc\"]},\"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\":{\"keccak256\":\"0x18e0ce1f7e728a9f38b1d309bd3a44e5b988779131922d6b85777582d8222e6f\",\"urls\":[\"bzzr://d55af5598b18264cc1b02beee0f2123f8f27e6cea3f6cc0b3a6d34246bfc5542\"]},\"openzeppelin-solidity/contracts/introspection/ERC165.sol\":{\"keccak256\":\"0xac2eacd7e7762e275442f28f21d821544df5aae2ed7698af13be8c41b7005e2e\",\"urls\":[\"bzzr://43e901f6f210568ebc1d3591da3ce6a9d10796b854767a9c6e3da10305a8a332\"]},\"openzeppelin-solidity/contracts/introspection/IERC165.sol\":{\"keccak256\":\"0x661553e43d7c4fbb2de504e5999fd5c104d367488350ed5bf023031bd1ba5ac5\",\"urls\":[\"bzzr://fc2ba15143ce3a00268ecd15fc98eb2469b18bfe27a64bbab0ac6446f161c739\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x90e8c2521653bbb1768b05889c5760031e688d9cd361f167489b89215e201b95\",\"urls\":[\"bzzr://aa8b45b57edafc3d67bc5d916327ea16807fae33f753ca163ae0c4061b789766\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0xf3358e5819ca73357abd6c90bdfffd0474af54364897f6b3e3234c4b71fbe9a1\",\"urls\":[\"bzzr://f7f6da60a184233fd666ac44e6fb2bd51ca6ebdc4867a310d368049aa4e62786\"]}},\"version\":1}",
   "bytecode": "0x608060405234801561001057600080fd5b5060405160a0806107bb833981018060405260a081101561003057600080fd5b81019080805190602001909291908051906020019092919080519060200190929190805190602001909291908051906020019092919050505084848484836000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508260018190555081600281905550806003819055505050505080600460006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050505050506106a08061011b6000396000f3fe608060405260043610610072576000357c01000000000000000000000000000000000000000000000000000000009004806305be8b2c1461007757806314685929146100ce57806341b0c9ba146100e5578063655f2aba14610110578063b06a5c5214610167578063f3e41e9014610192575b600080fd5b34801561008357600080fd5b5061008c6101bd565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156100da57600080fd5b506100e36101e2565b005b3480156100f157600080fd5b506100fa610576565b6040518082815260200191505060405180910390f35b34801561011c57600080fd5b5061012561057c565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561017357600080fd5b5061017c6105a2565b6040518082815260200191505060405180910390f35b34801561019e57600080fd5b506101a76105a8565b6040518082815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6001544210151515610282576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252603b8152602001807f506c65617365207375626d69742061207265736f6c7574696f6e20647572696e81526020017f672074686520636f72726563742074696d6520696e74657276616c000000000081525060400191505060405180910390fd5b600061028c6105ae565b90506002548111156103e3576000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16635dd8085560035460016000604051602001808360ff1681526020018260ff168152602001925050506040516020818303038152906040526040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200180602001828103825283818151815260200191508051906020019080838360005b8381101561037957808201518184015260208101905061035e565b50505050905090810190601f1680156103a65780820380516001836020036101000a031916815260200191505b509350505050600060405180830381600087803b1580156103c657600080fd5b505af11580156103da573d6000803e3d6000fd5b5050505061052a565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16635dd8085560035460006001604051602001808360ff1681526020018260ff168152602001925050506040516020818303038152906040526040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200180602001828103825283818151815260200191508051906020019080838360005b838110156104c45780820151818401526020810190506104a9565b50505050905090810190601f1680156104f15780820380516001836020036101000a031916815260200191505b509350505050600060405180830381600087803b15801561051157600080fd5b505af1158015610525573d6000803e3d6000fd5b505050505b7fd60f27d6ed7f097522f99624c010efabe0629a1f69468e2c97ab84ff445510d8600154428360405180848152602001838152602001828152602001935050505060405180910390a150565b60025481565b600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60035481565b60015481565b6000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663ddca3f436040518163ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040160206040518083038186803b15801561063457600080fd5b505afa158015610648573d6000803e3d6000fd5b505050506040513d602081101561065e57600080fd5b810190808051906020019092919050505090509056fea165627a7a72305820ae795cc1d13e17685e5b88a35a6986c50a28ae9e99ee7bd2c4f77785f6257fbe0029",
   "deployedBytecode": "0x608060405260043610610072576000357c01000000000000000000000000000000000000000000000000000000009004806305be8b2c1461007757806314685929146100ce57806341b0c9ba146100e5578063655f2aba14610110578063b06a5c5214610167578063f3e41e9014610192575b600080fd5b34801561008357600080fd5b5061008c6101bd565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156100da57600080fd5b506100e36101e2565b005b3480156100f157600080fd5b506100fa610576565b6040518082815260200191505060405180910390f35b34801561011c57600080fd5b5061012561057c565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561017357600080fd5b5061017c6105a2565b6040518082815260200191505060405180910390f35b34801561019e57600080fd5b506101a76105a8565b6040518082815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6001544210151515610282576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252603b8152602001807f506c65617365207375626d69742061207265736f6c7574696f6e20647572696e81526020017f672074686520636f72726563742074696d6520696e74657276616c000000000081525060400191505060405180910390fd5b600061028c6105ae565b90506002548111156103e3576000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16635dd8085560035460016000604051602001808360ff1681526020018260ff168152602001925050506040516020818303038152906040526040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200180602001828103825283818151815260200191508051906020019080838360005b8381101561037957808201518184015260208101905061035e565b50505050905090810190601f1680156103a65780820380516001836020036101000a031916815260200191505b509350505050600060405180830381600087803b1580156103c657600080fd5b505af11580156103da573d6000803e3d6000fd5b5050505061052a565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16635dd8085560035460006001604051602001808360ff1681526020018260ff168152602001925050506040516020818303038152906040526040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200180602001828103825283818151815260200191508051906020019080838360005b838110156104c45780820151818401526020810190506104a9565b50505050905090810190601f1680156104f15780820380516001836020036101000a031916815260200191505b509350505050600060405180830381600087803b15801561051157600080fd5b505af1158015610525573d6000803e3d6000fd5b505050505b7fd60f27d6ed7f097522f99624c010efabe0629a1f69468e2c97ab84ff445510d8600154428360405180848152602001838152602001828152602001935050505060405180910390a150565b60025481565b600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60035481565b60015481565b6000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663ddca3f436040518163ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040160206040518083038186803b15801561063457600080fd5b505afa158015610648573d6000803e3d6000fd5b505050506040513d602081101561065e57600080fd5b810190808051906020019092919050505090509056fea165627a7a72305820ae795cc1d13e17685e5b88a35a6986c50a28ae9e99ee7bd2c4f77785f6257fbe0029",
-  "sourceMap": "261:457:1:-;;;347:283;8:9:-1;5:2;;;30:1;27;20:12;5:2;347:283:1;;;;;;;;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;347:283:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;543:8;553:14;569;585:10;1466:9:11;1455:8;;:20;;;;;;;;;;;;;;;;;;1502:15;1485:14;:32;;;;1541:12;1527:11;:26;;;;1576:11;1563:10;:24;;;;1291:303;;;;616:7:1;607:6;;:16;;;;;;;;;;;;;;;;;;347:283;;;;;261:457;;;;;;",
-  "deployedSourceMap": "261:457:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;218:38:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;218:38:11;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;2185:493;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2185:493:11;;;:::i;:::-;;653:23;;8:9:-1;5:2;;;30:1;27;20:12;5:2;653:23:11;;;:::i;:::-;;;;;;;;;;;;;;;;;;;319:21:1;;8:9:-1;5:2;;;30:1;27;20:12;5:2;319:21:1;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;765:25:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;765:25:11;;;:::i;:::-;;;;;;;;;;;;;;;;;;;404:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;404:26:11;;;:::i;:::-;;;;;;;;;;;;;;;;;;;218:38;;;;;;;;;;;;;:::o;2185:493::-;2268:14;;2249:15;:33;;2228:139;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2378:10;2391:11;:9;:11::i;:::-;2378:24;;2424:11;;2416:5;:19;2412:185;;;2451:8;;;;;;;;;;;:22;;;2474:10;;2497:1;2500;2486:16;;;;;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;2486:16:11;;;2451:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2451:52:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2451:52:11;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2451:52:11;;;;2412:185;;;2534:8;;;;;;;;;;;:22;;;2557:10;;2580:1;2583;2569:16;;;;;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;2569:16:11;;;2534:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2534:52:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2534:52:11;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2534:52:11;;;;2412:185;2611:60;2632:14;;2648:15;2665:5;2611:60;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2185:493;:::o;653:23::-;;;;:::o;319:21:1:-;;;;;;;;;;;;;:::o;765:25:11:-;;;;:::o;404:26::-;;;;:::o;636:80:1:-;674:4;697:6;;;;;;;;;;;:10;;;:12;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;697:12:1;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;697:12:1;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;697:12:1;;;;;;;;;;;;;;;;690:19;;636:80;:::o",
+  "sourceMap": "261:457:1:-;;;347:283;8:9:-1;5:2;;;30:1;27;20:12;5:2;347:283:1;;;;;;;;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;347:283:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;543:8;553:14;569;585:10;1466:9:12;1455:8;;:20;;;;;;;;;;;;;;;;;;1502:15;1485:14;:32;;;;1541:12;1527:11;:26;;;;1576:11;1563:10;:24;;;;1291:303;;;;616:7:1;607:6;;:16;;;;;;;;;;;;;;;;;;347:283;;;;;261:457;;;;;;",
+  "deployedSourceMap": "261:457:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;218:38:12;;8:9:-1;5:2;;;30:1;27;20:12;5:2;218:38:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;2185:493;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2185:493:12;;;:::i;:::-;;653:23;;8:9:-1;5:2;;;30:1;27;20:12;5:2;653:23:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;319:21:1;;8:9:-1;5:2;;;30:1;27;20:12;5:2;319:21:1;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;765:25:12;;8:9:-1;5:2;;;30:1;27;20:12;5:2;765:25:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;404:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;404:26:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;218:38;;;;;;;;;;;;;:::o;2185:493::-;2268:14;;2249:15;:33;;2228:139;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2378:10;2391:11;:9;:11::i;:::-;2378:24;;2424:11;;2416:5;:19;2412:185;;;2451:8;;;;;;;;;;;:22;;;2474:10;;2497:1;2500;2486:16;;;;;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;2486:16:12;;;2451:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2451:52:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2451:52:12;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2451:52:12;;;;2412:185;;;2534:8;;;;;;;;;;;:22;;;2557:10;;2580:1;2583;2569:16;;;;;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;2569:16:12;;;2534:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2534:52:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2534:52:12;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2534:52:12;;;;2412:185;2611:60;2632:14;;2648:15;2665:5;2611:60;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2185:493;:::o;653:23::-;;;;:::o;319:21:1:-;;;;;;;;;;;;;:::o;765:25:12:-;;;;:::o;404:26::-;;;;:::o;636:80:1:-;674:4;697:6;;;;;;;;;;;:10;;;:12;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;697:12:1;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;697:12:1;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;697:12:1;;;;;;;;;;;;;;;;690:19;;636:80;:::o",
   "source": "pragma solidity ^0.5.1;\nimport { PredictionMarketSystem } from \"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\";\nimport { TargetValueOracle } from \"./TargetValueOracle.sol\";\n\ninterface IDaiTub {\n    function fee() external view returns (uint);\n}\n\ncontract DaiStabilityFeeOracle is TargetValueOracle {\n    IDaiTub public daiTub;\n\n    constructor (\n        PredictionMarketSystem pmSystem,\n        uint resolutionTime,\n        uint targetETHPrice,\n        bytes32 questionId,\n        IDaiTub _daiTub\n    ) public TargetValueOracle(pmSystem, resolutionTime, targetETHPrice, questionId) {\n        daiTub = _daiTub;\n    }\n\n    function readValue() internal returns(uint) {\n        return daiTub.fee();\n    }\n}\n",
   "sourcePath": "/Users/leo/flyingcarpet/prediction-market/contracts/DaiStabilityFeeOracle.sol",
   "ast": {
@@ -167,7 +167,7 @@
         "id": 11,
         "nodeType": "ImportDirective",
         "scope": 59,
-        "sourceUnit": 3044,
+        "sourceUnit": 3099,
         "src": "24:102:1",
         "symbolAliases": [
           {
@@ -183,7 +183,7 @@
         "id": 13,
         "nodeType": "ImportDirective",
         "scope": 59,
-        "sourceUnit": 621,
+        "sourceUnit": 676,
         "src": "127:60:1",
         "symbolAliases": [
           {
@@ -273,10 +273,10 @@
               "id": 20,
               "name": "TargetValueOracle",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 620,
+              "referencedDeclaration": 675,
               "src": "295:17:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TargetValueOracle_$620",
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
                 "typeString": "contract TargetValueOracle"
               }
             },
@@ -286,7 +286,7 @@
           }
         ],
         "contractDependencies": [
-          620
+          675
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -294,7 +294,7 @@
         "id": 58,
         "linearizedBaseContracts": [
           58,
-          620
+          675
         ],
         "name": "DaiStabilityFeeOracle",
         "nodeType": "ContractDefinition",
@@ -397,7 +397,7 @@
                     "referencedDeclaration": 25,
                     "src": "543:8:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -448,10 +448,10 @@
                   "name": "TargetValueOracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 620,
+                  "referencedDeclaration": 675,
                   "src": "525:17:1",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$620_$",
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
                     "typeString": "type(contract TargetValueOracle)"
                   }
                 },
@@ -475,7 +475,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                     "typeString": "contract PredictionMarketSystem"
                   },
                   "typeName": {
@@ -483,10 +483,10 @@
                     "id": 24,
                     "name": "PredictionMarketSystem",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3043,
+                    "referencedDeclaration": 3098,
                     "src": "369:22:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -723,7 +723,7 @@
             "scope": 58,
             "src": "636:80:1",
             "stateMutability": "nonpayable",
-            "superFunction": 567,
+            "superFunction": 622,
             "visibility": "internal"
           }
         ],
@@ -763,7 +763,7 @@
         "id": 11,
         "nodeType": "ImportDirective",
         "scope": 59,
-        "sourceUnit": 3044,
+        "sourceUnit": 3099,
         "src": "24:102:1",
         "symbolAliases": [
           {
@@ -779,7 +779,7 @@
         "id": 13,
         "nodeType": "ImportDirective",
         "scope": 59,
-        "sourceUnit": 621,
+        "sourceUnit": 676,
         "src": "127:60:1",
         "symbolAliases": [
           {
@@ -869,10 +869,10 @@
               "id": 20,
               "name": "TargetValueOracle",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 620,
+              "referencedDeclaration": 675,
               "src": "295:17:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TargetValueOracle_$620",
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
                 "typeString": "contract TargetValueOracle"
               }
             },
@@ -882,7 +882,7 @@
           }
         ],
         "contractDependencies": [
-          620
+          675
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -890,7 +890,7 @@
         "id": 58,
         "linearizedBaseContracts": [
           58,
-          620
+          675
         ],
         "name": "DaiStabilityFeeOracle",
         "nodeType": "ContractDefinition",
@@ -993,7 +993,7 @@
                     "referencedDeclaration": 25,
                     "src": "543:8:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -1044,10 +1044,10 @@
                   "name": "TargetValueOracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 620,
+                  "referencedDeclaration": 675,
                   "src": "525:17:1",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$620_$",
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
                     "typeString": "type(contract TargetValueOracle)"
                   }
                 },
@@ -1071,7 +1071,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                     "typeString": "contract PredictionMarketSystem"
                   },
                   "typeName": {
@@ -1079,10 +1079,10 @@
                     "id": 24,
                     "name": "PredictionMarketSystem",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3043,
+                    "referencedDeclaration": 3098,
                     "src": "369:22:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3043",
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
                     }
                   },
@@ -1319,7 +1319,7 @@
             "scope": 58,
             "src": "636:80:1",
             "stateMutability": "nonpayable",
-            "superFunction": 567,
+            "superFunction": 622,
             "visibility": "internal"
           }
         ],
@@ -1333,41 +1333,9 @@
     "name": "solc",
     "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
   },
-  "networks": {
-    "4": {
-      "events": {
-        "0xd60f27d6ed7f097522f99624c010efabe0629a1f69468e2c97ab84ff445510d8": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "name": "resolutionTime",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "name": "currentTime",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "name": "value",
-              "type": "uint256"
-            }
-          ],
-          "name": "ResolutionSuccessful",
-          "type": "event",
-          "signature": "0xd60f27d6ed7f097522f99624c010efabe0629a1f69468e2c97ab84ff445510d8"
-        }
-      },
-      "links": {},
-      "address": "0xd839de4ce36E093DbDC045aA7967Fc09497F4eAC",
-      "transactionHash": "0xad17bddc2baa1ebee97a8ddc7188ad6e674690ce1a564f816d3e81ee17f80904"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.0.18",
-  "updatedAt": "2019-12-09T06:34:35.851Z",
-  "networkType": "ethereum",
+  "updatedAt": "2019-12-20T11:45:35.892Z",
   "devdoc": {
     "methods": {
       "resolveValue()": {

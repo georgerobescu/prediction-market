@@ -85,7 +85,7 @@
         "id": 156,
         "nodeType": "ImportDirective",
         "scope": 240,
-        "sourceUnit": 7007,
+        "sourceUnit": 7062,
         "src": "25:80:5",
         "symbolAliases": [
           {
@@ -979,7 +979,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IERC20_$7006",
+                    "typeIdentifier": "t_contract$_IERC20_$7061",
                     "typeString": "contract IERC20"
                   },
                   "typeName": {
@@ -987,10 +987,10 @@
                     "id": 225,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 7006,
+                    "referencedDeclaration": 7061,
                     "src": "917:6:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$7006",
+                      "typeIdentifier": "t_contract$_IERC20_$7061",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -1105,7 +1105,7 @@
         "id": 156,
         "nodeType": "ImportDirective",
         "scope": 240,
-        "sourceUnit": 7007,
+        "sourceUnit": 7062,
         "src": "25:80:5",
         "symbolAliases": [
           {
@@ -1999,7 +1999,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IERC20_$7006",
+                    "typeIdentifier": "t_contract$_IERC20_$7061",
                     "typeString": "contract IERC20"
                   },
                   "typeName": {
@@ -2007,10 +2007,10 @@
                     "id": 225,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 7006,
+                    "referencedDeclaration": 7061,
                     "src": "917:6:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$7006",
+                      "typeIdentifier": "t_contract$_IERC20_$7061",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -2096,17 +2096,9 @@
     "name": "solc",
     "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
   },
-  "networks": {
-    "4": {
-      "events": {},
-      "links": {},
-      "address": "0x3948B2142cfE27b2d16D2eE25A59990dDbd09A6d",
-      "transactionHash": "0x6fdfcbc3e3163fb3f7aa376df81687c1e83908e450cadc7135960cae69f0a12e"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.0.18",
-  "updatedAt": "2019-12-09T06:33:05.956Z",
-  "networkType": "ethereum",
+  "updatedAt": "2019-12-20T11:45:35.904Z",
   "devdoc": {
     "methods": {}
   },

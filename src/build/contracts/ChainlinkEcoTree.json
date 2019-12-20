@@ -1,18 +1,18 @@
 {
-  "contractName": "Medianizer",
+  "contractName": "ChainlinkEcoTree",
   "abi": [
     {
-      "constant": true,
+      "constant": false,
       "inputs": [],
-      "name": "read",
+      "name": "sumPrixTtc",
       "outputs": [
         {
-          "name": "",
-          "type": "bytes32"
+          "name": "a",
+          "type": "uint256"
         }
       ],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     }
   ],
@@ -21,23 +21,23 @@
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.5.1;\nimport { PredictionMarketSystem } from \"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\";\nimport { TargetValueOracle } from \"./TargetValueOracle.sol\";\n\ninterface Medianizer {\n    function read() external view returns (bytes32);\n}\n\ncontract ETHValueOracle is TargetValueOracle {\n    /// Price feed which this oracle uses to price Ether\n    Medianizer public priceFeed;\n\n    constructor (\n        PredictionMarketSystem pmSystem,\n        Medianizer _priceFeed,\n        uint resolutionTime,\n        uint targetETHPrice,\n        bytes32 questionId\n    ) public TargetValueOracle(pmSystem, resolutionTime, targetETHPrice, questionId) {\n        priceFeed = _priceFeed;\n    }\n\n    function readValue() internal returns(uint) {\n        return uint(priceFeed.read());\n    }\n}\n",
-  "sourcePath": "/Users/leo/flyingcarpet/prediction-market/contracts/ETHValueOracle.sol",
+  "source": "pragma solidity ^0.5.1;\n\nimport { PredictionMarketSystem } from \"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\";\nimport { TargetValueOracle } from \"./TargetValueOracle.sol\";\n\ninterface ChainlinkEcoTree {\n  // function sumNbrArbres() external returns (uint256 a);\n  function sumPrixTtc() external returns (uint256 a);\n}\n\ncontract SumValueMintedAssetsOracle is TargetValueOracle {\n  ChainlinkEcoTree internal chainlinkedEcoTree;\n\n  constructor (\n    PredictionMarketSystem pmSystem,\n    uint resolutionTime,\n    uint difficultyTarget,\n    bytes32 questionId,\n    address _chainlinkedEcoTree\n  ) public TargetValueOracle(pmSystem, resolutionTime, difficultyTarget, questionId) {\n    chainlinkedEcoTree = ChainlinkEcoTree(_chainlinkedEcoTree);\n  }\n\n  function readValue() internal returns(uint) {\n    return uint(chainlinkedEcoTree.sumPrixTtc());\n  }\n}\n",
+  "sourcePath": "/Users/leo/flyingcarpet/prediction-market/contracts/SumValueMintedAssetsOracle.sol",
   "ast": {
-    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/ETHValueOracle.sol",
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/SumValueMintedAssetsOracle.sol",
     "exportedSymbols": {
-      "ETHValueOracle": [
-        399
+      "ChainlinkEcoTree": [
+        526
       ],
-      "Medianizer": [
-        358
+      "SumValueMintedAssetsOracle": [
+        569
       ]
     },
-    "id": 400,
+    "id": 570,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 348,
+        "id": 516,
         "literals": [
           "solidity",
           "^",
@@ -45,19 +45,19 @@
           ".1"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:7"
+        "src": "0:23:11"
       },
       {
         "absolutePath": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
         "file": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
-        "id": 350,
+        "id": 518,
         "nodeType": "ImportDirective",
-        "scope": 400,
+        "scope": 570,
         "sourceUnit": 3099,
-        "src": "24:102:7",
+        "src": "25:102:11",
         "symbolAliases": [
           {
-            "foreign": 349,
+            "foreign": 517,
             "local": null
           }
         ],
@@ -66,14 +66,14 @@
       {
         "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol",
         "file": "./TargetValueOracle.sol",
-        "id": 352,
+        "id": 520,
         "nodeType": "ImportDirective",
-        "scope": 400,
+        "scope": 570,
         "sourceUnit": 676,
-        "src": "127:60:7",
+        "src": "128:60:11",
         "symbolAliases": [
           {
-            "foreign": 351,
+            "foreign": 519,
             "local": null
           }
         ],
@@ -85,70 +85,70 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 358,
+        "id": 526,
         "linearizedBaseContracts": [
-          358
+          526
         ],
-        "name": "Medianizer",
+        "name": "ChainlinkEcoTree",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": null,
             "documentation": null,
-            "id": 357,
+            "id": 525,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
-            "name": "read",
+            "name": "sumPrixTtc",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 353,
+              "id": 521,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "229:2:7"
+              "src": "299:2:11"
             },
             "returnParameters": {
-              "id": 356,
+              "id": 524,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 355,
-                  "name": "",
+                  "id": 523,
+                  "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 357,
-                  "src": "255:7:7",
+                  "scope": 525,
+                  "src": "320:9:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_bytes32",
-                    "typeString": "bytes32"
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 354,
-                    "name": "bytes32",
+                    "id": 522,
+                    "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "255:7:7",
+                    "src": "320:7:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_bytes32",
-                      "typeString": "bytes32"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "value": null,
                   "visibility": "internal"
                 }
               ],
-              "src": "254:9:7"
+              "src": "319:11:11"
             },
-            "scope": 358,
-            "src": "216:48:7",
-            "stateMutability": "view",
+            "scope": 526,
+            "src": "280:51:11",
+            "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 400,
-        "src": "189:77:7"
+        "scope": 570,
+        "src": "190:143:11"
       },
       {
         "baseContracts": [
@@ -156,19 +156,19 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 359,
+              "id": 527,
               "name": "TargetValueOracle",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 675,
-              "src": "295:17:7",
+              "src": "374:17:11",
               "typeDescriptions": {
                 "typeIdentifier": "t_contract$_TargetValueOracle_$675",
                 "typeString": "contract TargetValueOracle"
               }
             },
-            "id": 360,
+            "id": 528,
             "nodeType": "InheritanceSpecifier",
-            "src": "295:17:7"
+            "src": "374:17:11"
           }
         ],
         "contractDependencies": [
@@ -177,98 +177,134 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 399,
+        "id": 569,
         "linearizedBaseContracts": [
-          399,
+          569,
           675
         ],
-        "name": "ETHValueOracle",
+        "name": "SumValueMintedAssetsOracle",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 362,
-            "name": "priceFeed",
+            "id": 530,
+            "name": "chainlinkedEcoTree",
             "nodeType": "VariableDeclaration",
-            "scope": 399,
-            "src": "376:27:7",
+            "scope": 569,
+            "src": "396:44:11",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_Medianizer_$358",
-              "typeString": "contract Medianizer"
+              "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+              "typeString": "contract ChainlinkEcoTree"
             },
             "typeName": {
               "contractScope": null,
-              "id": 361,
-              "name": "Medianizer",
+              "id": 529,
+              "name": "ChainlinkEcoTree",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 358,
-              "src": "376:10:7",
+              "referencedDeclaration": 526,
+              "src": "396:16:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Medianizer_$358",
-                "typeString": "contract Medianizer"
+                "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                "typeString": "contract ChainlinkEcoTree"
               }
             },
             "value": null,
-            "visibility": "public"
+            "visibility": "internal"
           },
           {
             "body": {
-              "id": 385,
+              "id": 555,
               "nodeType": "Block",
-              "src": "666:39:7",
+              "src": "689:69:11",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 383,
+                    "id": 553,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 381,
-                      "name": "priceFeed",
+                      "id": 549,
+                      "name": "chainlinkedEcoTree",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 362,
-                      "src": "676:9:7",
+                      "referencedDeclaration": 530,
+                      "src": "695:18:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Medianizer_$358",
-                        "typeString": "contract Medianizer"
+                        "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                        "typeString": "contract ChainlinkEcoTree"
                       }
                     },
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 382,
-                      "name": "_priceFeed",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 366,
-                      "src": "688:10:7",
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 551,
+                          "name": "_chainlinkedEcoTree",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 540,
+                          "src": "733:19:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 550,
+                        "name": "ChainlinkEcoTree",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 526,
+                        "src": "716:16:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ChainlinkEcoTree_$526_$",
+                          "typeString": "type(contract ChainlinkEcoTree)"
+                        }
+                      },
+                      "id": 552,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "716:37:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Medianizer_$358",
-                        "typeString": "contract Medianizer"
+                        "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                        "typeString": "contract ChainlinkEcoTree"
                       }
                     },
-                    "src": "676:22:7",
+                    "src": "695:58:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Medianizer_$358",
-                      "typeString": "contract Medianizer"
+                      "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                      "typeString": "contract ChainlinkEcoTree"
                     }
                   },
-                  "id": 384,
+                  "id": 554,
                   "nodeType": "ExpressionStatement",
-                  "src": "676:22:7"
+                  "src": "695:58:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 386,
+            "id": 556,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -276,12 +312,12 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 375,
+                    "id": 543,
                     "name": "pmSystem",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 364,
-                    "src": "612:8:7",
+                    "referencedDeclaration": 532,
+                    "src": "633:8:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
@@ -289,12 +325,12 @@
                   },
                   {
                     "argumentTypes": null,
-                    "id": 376,
+                    "id": 544,
                     "name": "resolutionTime",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 368,
-                    "src": "622:14:7",
+                    "referencedDeclaration": 534,
+                    "src": "643:14:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -302,12 +338,12 @@
                   },
                   {
                     "argumentTypes": null,
-                    "id": 377,
-                    "name": "targetETHPrice",
+                    "id": 545,
+                    "name": "difficultyTarget",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 370,
-                    "src": "638:14:7",
+                    "referencedDeclaration": 536,
+                    "src": "659:16:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -315,49 +351,49 @@
                   },
                   {
                     "argumentTypes": null,
-                    "id": 378,
+                    "id": 546,
                     "name": "questionId",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 372,
-                    "src": "654:10:7",
+                    "referencedDeclaration": 538,
+                    "src": "677:10:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   }
                 ],
-                "id": 379,
+                "id": 547,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 374,
+                  "id": 542,
                   "name": "TargetValueOracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
                   "referencedDeclaration": 675,
-                  "src": "594:17:7",
+                  "src": "615:17:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
                     "typeString": "type(contract TargetValueOracle)"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "594:71:7"
+                "src": "615:73:11"
               }
             ],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 373,
+              "id": 541,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 364,
+                  "id": 532,
                   "name": "pmSystem",
                   "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "432:31:7",
+                  "scope": 556,
+                  "src": "463:31:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -366,11 +402,11 @@
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 363,
+                    "id": 531,
                     "name": "PredictionMarketSystem",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 3098,
-                    "src": "432:22:7",
+                    "src": "463:22:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
@@ -381,39 +417,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 366,
-                  "name": "_priceFeed",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "473:21:7",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_Medianizer_$358",
-                    "typeString": "contract Medianizer"
-                  },
-                  "typeName": {
-                    "contractScope": null,
-                    "id": 365,
-                    "name": "Medianizer",
-                    "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 358,
-                    "src": "473:10:7",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Medianizer_$358",
-                      "typeString": "contract Medianizer"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 368,
+                  "id": 534,
                   "name": "resolutionTime",
                   "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "504:19:7",
+                  "scope": 556,
+                  "src": "500:19:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -421,10 +429,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 367,
+                    "id": 533,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "504:4:7",
+                    "src": "500:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -435,11 +443,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 370,
-                  "name": "targetETHPrice",
+                  "id": 536,
+                  "name": "difficultyTarget",
                   "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "533:19:7",
+                  "scope": 556,
+                  "src": "525:21:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -447,10 +455,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 369,
+                    "id": 535,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "533:4:7",
+                    "src": "525:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -461,11 +469,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 372,
+                  "id": 538,
                   "name": "questionId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "562:18:7",
+                  "scope": 556,
+                  "src": "552:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -473,10 +481,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 371,
+                    "id": 537,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "562:7:7",
+                    "src": "552:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -484,27 +492,54 @@
                   },
                   "value": null,
                   "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 540,
+                  "name": "_chainlinkedEcoTree",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "576:27:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 539,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "576:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
                 }
               ],
-              "src": "422:164:7"
+              "src": "457:150:11"
             },
             "returnParameters": {
-              "id": 380,
+              "id": 548,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "666:0:7"
+              "src": "689:0:11"
             },
-            "scope": 399,
-            "src": "410:295:7",
+            "scope": 569,
+            "src": "445:313:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 397,
+              "id": 567,
               "nodeType": "Block",
-              "src": "755:46:7",
+              "src": "806:55:11",
               "statements": [
                 {
                   "expression": {
@@ -517,32 +552,32 @@
                           "argumentTypes": [],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 392,
-                            "name": "priceFeed",
+                            "id": 562,
+                            "name": "chainlinkedEcoTree",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 362,
-                            "src": "777:9:7",
+                            "referencedDeclaration": 530,
+                            "src": "824:18:11",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Medianizer_$358",
-                              "typeString": "contract Medianizer"
+                              "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                              "typeString": "contract ChainlinkEcoTree"
                             }
                           },
-                          "id": 393,
+                          "id": 563,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberName": "read",
+                          "memberName": "sumPrixTtc",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 357,
-                          "src": "777:14:7",
+                          "referencedDeclaration": 525,
+                          "src": "824:29:11",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_external_view$__$returns$_t_bytes32_$",
-                            "typeString": "function () view external returns (bytes32)"
+                            "typeIdentifier": "t_function_external_nonpayable$__$returns$_t_uint256_$",
+                            "typeString": "function () external returns (uint256)"
                           }
                         },
-                        "id": 394,
+                        "id": 564,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -550,34 +585,34 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "777:16:7",
+                        "src": "824:31:11",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_bytes32",
-                          "typeString": "bytes32"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       }
                     ],
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_bytes32",
-                          "typeString": "bytes32"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       ],
-                      "id": 391,
+                      "id": 561,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "lValueRequested": false,
                       "nodeType": "ElementaryTypeNameExpression",
-                      "src": "772:4:7",
+                      "src": "819:4:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_type$_t_uint256_$",
                         "typeString": "type(uint256)"
                       },
                       "typeName": "uint"
                     },
-                    "id": 395,
+                    "id": 565,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -585,43 +620,43 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "772:22:7",
+                    "src": "819:37:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 390,
-                  "id": 396,
+                  "functionReturnParameters": 560,
+                  "id": 566,
                   "nodeType": "Return",
-                  "src": "765:29:7"
+                  "src": "812:44:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 398,
+            "id": 568,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "readValue",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 387,
+              "id": 557,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "729:2:7"
+              "src": "780:2:11"
             },
             "returnParameters": {
-              "id": 390,
+              "id": 560,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 389,
+                  "id": 559,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 398,
-                  "src": "749:4:7",
+                  "scope": 568,
+                  "src": "800:4:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -629,10 +664,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 388,
+                    "id": 558,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "749:4:7",
+                    "src": "800:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -642,36 +677,36 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "748:6:7"
+              "src": "799:6:11"
             },
-            "scope": 399,
-            "src": "711:90:7",
+            "scope": 569,
+            "src": "762:99:11",
             "stateMutability": "nonpayable",
             "superFunction": 622,
             "visibility": "internal"
           }
         ],
-        "scope": 400,
-        "src": "268:535:7"
+        "scope": 570,
+        "src": "335:528:11"
       }
     ],
-    "src": "0:804:7"
+    "src": "0:864:11"
   },
   "legacyAST": {
-    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/ETHValueOracle.sol",
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/SumValueMintedAssetsOracle.sol",
     "exportedSymbols": {
-      "ETHValueOracle": [
-        399
+      "ChainlinkEcoTree": [
+        526
       ],
-      "Medianizer": [
-        358
+      "SumValueMintedAssetsOracle": [
+        569
       ]
     },
-    "id": 400,
+    "id": 570,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 348,
+        "id": 516,
         "literals": [
           "solidity",
           "^",
@@ -679,19 +714,19 @@
           ".1"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:7"
+        "src": "0:23:11"
       },
       {
         "absolutePath": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
         "file": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
-        "id": 350,
+        "id": 518,
         "nodeType": "ImportDirective",
-        "scope": 400,
+        "scope": 570,
         "sourceUnit": 3099,
-        "src": "24:102:7",
+        "src": "25:102:11",
         "symbolAliases": [
           {
-            "foreign": 349,
+            "foreign": 517,
             "local": null
           }
         ],
@@ -700,14 +735,14 @@
       {
         "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol",
         "file": "./TargetValueOracle.sol",
-        "id": 352,
+        "id": 520,
         "nodeType": "ImportDirective",
-        "scope": 400,
+        "scope": 570,
         "sourceUnit": 676,
-        "src": "127:60:7",
+        "src": "128:60:11",
         "symbolAliases": [
           {
-            "foreign": 351,
+            "foreign": 519,
             "local": null
           }
         ],
@@ -719,70 +754,70 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 358,
+        "id": 526,
         "linearizedBaseContracts": [
-          358
+          526
         ],
-        "name": "Medianizer",
+        "name": "ChainlinkEcoTree",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": null,
             "documentation": null,
-            "id": 357,
+            "id": 525,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
-            "name": "read",
+            "name": "sumPrixTtc",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 353,
+              "id": 521,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "229:2:7"
+              "src": "299:2:11"
             },
             "returnParameters": {
-              "id": 356,
+              "id": 524,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 355,
-                  "name": "",
+                  "id": 523,
+                  "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 357,
-                  "src": "255:7:7",
+                  "scope": 525,
+                  "src": "320:9:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_bytes32",
-                    "typeString": "bytes32"
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 354,
-                    "name": "bytes32",
+                    "id": 522,
+                    "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "255:7:7",
+                    "src": "320:7:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_bytes32",
-                      "typeString": "bytes32"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "value": null,
                   "visibility": "internal"
                 }
               ],
-              "src": "254:9:7"
+              "src": "319:11:11"
             },
-            "scope": 358,
-            "src": "216:48:7",
-            "stateMutability": "view",
+            "scope": 526,
+            "src": "280:51:11",
+            "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 400,
-        "src": "189:77:7"
+        "scope": 570,
+        "src": "190:143:11"
       },
       {
         "baseContracts": [
@@ -790,19 +825,19 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 359,
+              "id": 527,
               "name": "TargetValueOracle",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 675,
-              "src": "295:17:7",
+              "src": "374:17:11",
               "typeDescriptions": {
                 "typeIdentifier": "t_contract$_TargetValueOracle_$675",
                 "typeString": "contract TargetValueOracle"
               }
             },
-            "id": 360,
+            "id": 528,
             "nodeType": "InheritanceSpecifier",
-            "src": "295:17:7"
+            "src": "374:17:11"
           }
         ],
         "contractDependencies": [
@@ -811,98 +846,134 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 399,
+        "id": 569,
         "linearizedBaseContracts": [
-          399,
+          569,
           675
         ],
-        "name": "ETHValueOracle",
+        "name": "SumValueMintedAssetsOracle",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 362,
-            "name": "priceFeed",
+            "id": 530,
+            "name": "chainlinkedEcoTree",
             "nodeType": "VariableDeclaration",
-            "scope": 399,
-            "src": "376:27:7",
+            "scope": 569,
+            "src": "396:44:11",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_Medianizer_$358",
-              "typeString": "contract Medianizer"
+              "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+              "typeString": "contract ChainlinkEcoTree"
             },
             "typeName": {
               "contractScope": null,
-              "id": 361,
-              "name": "Medianizer",
+              "id": 529,
+              "name": "ChainlinkEcoTree",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 358,
-              "src": "376:10:7",
+              "referencedDeclaration": 526,
+              "src": "396:16:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Medianizer_$358",
-                "typeString": "contract Medianizer"
+                "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                "typeString": "contract ChainlinkEcoTree"
               }
             },
             "value": null,
-            "visibility": "public"
+            "visibility": "internal"
           },
           {
             "body": {
-              "id": 385,
+              "id": 555,
               "nodeType": "Block",
-              "src": "666:39:7",
+              "src": "689:69:11",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 383,
+                    "id": 553,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 381,
-                      "name": "priceFeed",
+                      "id": 549,
+                      "name": "chainlinkedEcoTree",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 362,
-                      "src": "676:9:7",
+                      "referencedDeclaration": 530,
+                      "src": "695:18:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Medianizer_$358",
-                        "typeString": "contract Medianizer"
+                        "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                        "typeString": "contract ChainlinkEcoTree"
                       }
                     },
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 382,
-                      "name": "_priceFeed",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 366,
-                      "src": "688:10:7",
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 551,
+                          "name": "_chainlinkedEcoTree",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 540,
+                          "src": "733:19:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 550,
+                        "name": "ChainlinkEcoTree",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 526,
+                        "src": "716:16:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ChainlinkEcoTree_$526_$",
+                          "typeString": "type(contract ChainlinkEcoTree)"
+                        }
+                      },
+                      "id": 552,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "716:37:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Medianizer_$358",
-                        "typeString": "contract Medianizer"
+                        "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                        "typeString": "contract ChainlinkEcoTree"
                       }
                     },
-                    "src": "676:22:7",
+                    "src": "695:58:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Medianizer_$358",
-                      "typeString": "contract Medianizer"
+                      "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                      "typeString": "contract ChainlinkEcoTree"
                     }
                   },
-                  "id": 384,
+                  "id": 554,
                   "nodeType": "ExpressionStatement",
-                  "src": "676:22:7"
+                  "src": "695:58:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 386,
+            "id": 556,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -910,12 +981,12 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 375,
+                    "id": 543,
                     "name": "pmSystem",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 364,
-                    "src": "612:8:7",
+                    "referencedDeclaration": 532,
+                    "src": "633:8:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
@@ -923,12 +994,12 @@
                   },
                   {
                     "argumentTypes": null,
-                    "id": 376,
+                    "id": 544,
                     "name": "resolutionTime",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 368,
-                    "src": "622:14:7",
+                    "referencedDeclaration": 534,
+                    "src": "643:14:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -936,12 +1007,12 @@
                   },
                   {
                     "argumentTypes": null,
-                    "id": 377,
-                    "name": "targetETHPrice",
+                    "id": 545,
+                    "name": "difficultyTarget",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 370,
-                    "src": "638:14:7",
+                    "referencedDeclaration": 536,
+                    "src": "659:16:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -949,49 +1020,49 @@
                   },
                   {
                     "argumentTypes": null,
-                    "id": 378,
+                    "id": 546,
                     "name": "questionId",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 372,
-                    "src": "654:10:7",
+                    "referencedDeclaration": 538,
+                    "src": "677:10:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   }
                 ],
-                "id": 379,
+                "id": 547,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 374,
+                  "id": 542,
                   "name": "TargetValueOracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
                   "referencedDeclaration": 675,
-                  "src": "594:17:7",
+                  "src": "615:17:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
                     "typeString": "type(contract TargetValueOracle)"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "594:71:7"
+                "src": "615:73:11"
               }
             ],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 373,
+              "id": 541,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 364,
+                  "id": 532,
                   "name": "pmSystem",
                   "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "432:31:7",
+                  "scope": 556,
+                  "src": "463:31:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1000,11 +1071,11 @@
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 363,
+                    "id": 531,
                     "name": "PredictionMarketSystem",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 3098,
-                    "src": "432:22:7",
+                    "src": "463:22:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
                       "typeString": "contract PredictionMarketSystem"
@@ -1015,39 +1086,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 366,
-                  "name": "_priceFeed",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "473:21:7",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_Medianizer_$358",
-                    "typeString": "contract Medianizer"
-                  },
-                  "typeName": {
-                    "contractScope": null,
-                    "id": 365,
-                    "name": "Medianizer",
-                    "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 358,
-                    "src": "473:10:7",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Medianizer_$358",
-                      "typeString": "contract Medianizer"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 368,
+                  "id": 534,
                   "name": "resolutionTime",
                   "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "504:19:7",
+                  "scope": 556,
+                  "src": "500:19:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1055,10 +1098,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 367,
+                    "id": 533,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "504:4:7",
+                    "src": "500:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1069,11 +1112,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 370,
-                  "name": "targetETHPrice",
+                  "id": 536,
+                  "name": "difficultyTarget",
                   "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "533:19:7",
+                  "scope": 556,
+                  "src": "525:21:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1081,10 +1124,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 369,
+                    "id": 535,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "533:4:7",
+                    "src": "525:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1095,11 +1138,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 372,
+                  "id": 538,
                   "name": "questionId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 386,
-                  "src": "562:18:7",
+                  "scope": 556,
+                  "src": "552:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1107,10 +1150,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 371,
+                    "id": 537,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "562:7:7",
+                    "src": "552:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1118,27 +1161,54 @@
                   },
                   "value": null,
                   "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 540,
+                  "name": "_chainlinkedEcoTree",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "576:27:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 539,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "576:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
                 }
               ],
-              "src": "422:164:7"
+              "src": "457:150:11"
             },
             "returnParameters": {
-              "id": 380,
+              "id": 548,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "666:0:7"
+              "src": "689:0:11"
             },
-            "scope": 399,
-            "src": "410:295:7",
+            "scope": 569,
+            "src": "445:313:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 397,
+              "id": 567,
               "nodeType": "Block",
-              "src": "755:46:7",
+              "src": "806:55:11",
               "statements": [
                 {
                   "expression": {
@@ -1151,32 +1221,32 @@
                           "argumentTypes": [],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 392,
-                            "name": "priceFeed",
+                            "id": 562,
+                            "name": "chainlinkedEcoTree",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 362,
-                            "src": "777:9:7",
+                            "referencedDeclaration": 530,
+                            "src": "824:18:11",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Medianizer_$358",
-                              "typeString": "contract Medianizer"
+                              "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                              "typeString": "contract ChainlinkEcoTree"
                             }
                           },
-                          "id": 393,
+                          "id": 563,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberName": "read",
+                          "memberName": "sumPrixTtc",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 357,
-                          "src": "777:14:7",
+                          "referencedDeclaration": 525,
+                          "src": "824:29:11",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_external_view$__$returns$_t_bytes32_$",
-                            "typeString": "function () view external returns (bytes32)"
+                            "typeIdentifier": "t_function_external_nonpayable$__$returns$_t_uint256_$",
+                            "typeString": "function () external returns (uint256)"
                           }
                         },
-                        "id": 394,
+                        "id": 564,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1184,34 +1254,34 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "777:16:7",
+                        "src": "824:31:11",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_bytes32",
-                          "typeString": "bytes32"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       }
                     ],
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_bytes32",
-                          "typeString": "bytes32"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       ],
-                      "id": 391,
+                      "id": 561,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "lValueRequested": false,
                       "nodeType": "ElementaryTypeNameExpression",
-                      "src": "772:4:7",
+                      "src": "819:4:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_type$_t_uint256_$",
                         "typeString": "type(uint256)"
                       },
                       "typeName": "uint"
                     },
-                    "id": 395,
+                    "id": 565,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1219,43 +1289,43 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "772:22:7",
+                    "src": "819:37:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 390,
-                  "id": 396,
+                  "functionReturnParameters": 560,
+                  "id": 566,
                   "nodeType": "Return",
-                  "src": "765:29:7"
+                  "src": "812:44:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 398,
+            "id": 568,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "readValue",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 387,
+              "id": 557,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "729:2:7"
+              "src": "780:2:11"
             },
             "returnParameters": {
-              "id": 390,
+              "id": 560,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 389,
+                  "id": 559,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 398,
-                  "src": "749:4:7",
+                  "scope": 568,
+                  "src": "800:4:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1263,10 +1333,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 388,
+                    "id": 558,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "749:4:7",
+                    "src": "800:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1276,20 +1346,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "748:6:7"
+              "src": "799:6:11"
             },
-            "scope": 399,
-            "src": "711:90:7",
+            "scope": 569,
+            "src": "762:99:11",
             "stateMutability": "nonpayable",
             "superFunction": 622,
             "visibility": "internal"
           }
         ],
-        "scope": 400,
-        "src": "268:535:7"
+        "scope": 570,
+        "src": "335:528:11"
       }
     ],
-    "src": "0:804:7"
+    "src": "0:864:11"
   },
   "compiler": {
     "name": "solc",
@@ -1297,7 +1367,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.18",
-  "updatedAt": "2019-12-20T11:45:35.948Z",
+  "updatedAt": "2019-12-20T11:45:35.955Z",
   "devdoc": {
     "methods": {}
   },

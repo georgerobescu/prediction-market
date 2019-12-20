@@ -1,0 +1,1514 @@
+{
+  "contractName": "SumValueMintedAssetsOracle",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "pmSystem",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "resolveValue",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "targetValue",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "questionId",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "resolutionTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "pmSystem",
+          "type": "address"
+        },
+        {
+          "name": "resolutionTime",
+          "type": "uint256"
+        },
+        {
+          "name": "difficultyTarget",
+          "type": "uint256"
+        },
+        {
+          "name": "questionId",
+          "type": "bytes32"
+        },
+        {
+          "name": "_chainlinkedEcoTree",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "resolutionTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "currentTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "ResolutionSuccessful",
+      "type": "event"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"pmSystem\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"resolveValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"targetValue\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"questionId\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"resolutionTime\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"pmSystem\",\"type\":\"address\"},{\"name\":\"resolutionTime\",\"type\":\"uint256\"},{\"name\":\"difficultyTarget\",\"type\":\"uint256\"},{\"name\":\"questionId\",\"type\":\"bytes32\"},{\"name\":\"_chainlinkedEcoTree\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"resolutionTime\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"currentTime\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"ResolutionSuccessful\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{\"resolveValue()\":{\"details\":\"Triggers an oracle report. If the transaction occurs within the prescribed valid time window, the oracle will attempt to read a value and report a result to the prediction market system. The result reported will be two EVM words (2*32=64 bytes). If the witnessed value exceeds the target value, the first word will be 1 and the second will be 0. Otherwise, if the witnessed value is less than or equal to the target value, the first word will be 0 and the second will be 1. \",\"return\":\"value witnessed by this oracle\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/leo/flyingcarpet/prediction-market/contracts/SumValueMintedAssetsOracle.sol\":\"SumValueMintedAssetsOracle\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/leo/flyingcarpet/prediction-market/contracts/SumValueMintedAssetsOracle.sol\":{\"keccak256\":\"0x719a873869039a233c266f69b47bb838f6535a5e2c7f30c0595d192db7c8133d\",\"urls\":[\"bzzr://d371423e30ca0568bc8833b45fc0054ea838e640ea5fcd9bd8784a1fde83390f\"]},\"/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol\":{\"keccak256\":\"0xd509be0414f136bed7c27df14064d194a48b85221e04b66716c9fc82bb2be6b5\",\"urls\":[\"bzzr://ef73cfc3d49e6ce991c0d499f83e2a4655b92ddc0fe4e6b16450247b712912c3\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/ERC1155.sol\":{\"keccak256\":\"0x10343cd2da9bec10446451aa4f5fefc2fdd01f691d279b71e2f806f3a25c6b3d\",\"urls\":[\"bzzr://a76eaacc5082f5f83f6bf8f2a44eca80761551e2c119e2013944535ef7c87e30\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/IERC1155.sol\":{\"keccak256\":\"0x4971631d7de74464fed3e0abac04553e917be5e8cd10b3f825e2e7c39ccc2734\",\"urls\":[\"bzzr://e1e88dfe7440ceab59d4cd604d12e5dc93409a3c5058e497763703027ea7b9e6\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1155/IERC1155TokenReceiver.sol\":{\"keccak256\":\"0x675eaf04410e936cbd50325aa661216666214ca89f113b0880b917e3d00dda26\",\"urls\":[\"bzzr://e6d4db28e3180f99029df28a1df07988e1d313d6981725ec22af84f799ccdf6a\"]},\"@gnosis.pm/hg-contracts/contracts/ERC1820Registry.sol\":{\"keccak256\":\"0x5a98e0985b1c43c8fe355ea4ca5d2f434ffbf24c8b77bf0c1a0b405fbd728dee\",\"urls\":[\"bzzr://15b63f9b61ed5c19993149654f5bdc1a71909973f510fa858d094a2dae9af512\"]},\"@gnosis.pm/hg-contracts/contracts/OracleConsumer.sol\":{\"keccak256\":\"0xf54ac4060959a5e1c1714933711c90cd62bbbf127d5e37dc6cbcbb3711b3c186\",\"urls\":[\"bzzr://2efcd8089b7f032f4cc05e4a00304eb01bad0edbc43388332c79b010df532ffc\"]},\"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\":{\"keccak256\":\"0x18e0ce1f7e728a9f38b1d309bd3a44e5b988779131922d6b85777582d8222e6f\",\"urls\":[\"bzzr://d55af5598b18264cc1b02beee0f2123f8f27e6cea3f6cc0b3a6d34246bfc5542\"]},\"openzeppelin-solidity/contracts/introspection/ERC165.sol\":{\"keccak256\":\"0xac2eacd7e7762e275442f28f21d821544df5aae2ed7698af13be8c41b7005e2e\",\"urls\":[\"bzzr://43e901f6f210568ebc1d3591da3ce6a9d10796b854767a9c6e3da10305a8a332\"]},\"openzeppelin-solidity/contracts/introspection/IERC165.sol\":{\"keccak256\":\"0x661553e43d7c4fbb2de504e5999fd5c104d367488350ed5bf023031bd1ba5ac5\",\"urls\":[\"bzzr://fc2ba15143ce3a00268ecd15fc98eb2469b18bfe27a64bbab0ac6446f161c739\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x90e8c2521653bbb1768b05889c5760031e688d9cd361f167489b89215e201b95\",\"urls\":[\"bzzr://aa8b45b57edafc3d67bc5d916327ea16807fae33f753ca163ae0c4061b789766\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0xf3358e5819ca73357abd6c90bdfffd0474af54364897f6b3e3234c4b71fbe9a1\",\"urls\":[\"bzzr://f7f6da60a184233fd666ac44e6fb2bd51ca6ebdc4867a310d368049aa4e62786\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405160a080610735833981018060405260a081101561003057600080fd5b81019080805190602001909291908051906020019092919080519060200190929190805190602001909291908051906020019092919050505084848484836000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508260018190555081600281905550806003819055505050505080600460006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505050505061061a8061011b6000396000f3fe608060405260043610610067576000357c01000000000000000000000000000000000000000000000000000000009004806305be8b2c1461006c57806314685929146100c357806341b0c9ba146100da578063b06a5c5214610105578063f3e41e9014610130575b600080fd5b34801561007857600080fd5b5061008161015b565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156100cf57600080fd5b506100d8610180565b005b3480156100e657600080fd5b506100ef610514565b6040518082815260200191505060405180910390f35b34801561011157600080fd5b5061011a61051a565b6040518082815260200191505060405180910390f35b34801561013c57600080fd5b50610145610520565b6040518082815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6001544210151515610220576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252603b8152602001807f506c65617365207375626d69742061207265736f6c7574696f6e20647572696e81526020017f672074686520636f72726563742074696d6520696e74657276616c000000000081525060400191505060405180910390fd5b600061022a610526565b9050600254811115610381576000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16635dd8085560035460016000604051602001808360ff1681526020018260ff168152602001925050506040516020818303038152906040526040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200180602001828103825283818151815260200191508051906020019080838360005b838110156103175780820151818401526020810190506102fc565b50505050905090810190601f1680156103445780820380516001836020036101000a031916815260200191505b509350505050600060405180830381600087803b15801561036457600080fd5b505af1158015610378573d6000803e3d6000fd5b505050506104c8565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16635dd8085560035460006001604051602001808360ff1681526020018260ff168152602001925050506040516020818303038152906040526040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200180602001828103825283818151815260200191508051906020019080838360005b83811015610462578082015181840152602081019050610447565b50505050905090810190601f16801561048f5780820380516001836020036101000a031916815260200191505b509350505050600060405180830381600087803b1580156104af57600080fd5b505af11580156104c3573d6000803e3d6000fd5b505050505b7fd60f27d6ed7f097522f99624c010efabe0629a1f69468e2c97ab84ff445510d8600154428360405180848152602001838152602001828152602001935050505060405180910390a150565b60025481565b60035481565b60015481565b6000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16636daf3a6c6040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b1580156105ae57600080fd5b505af11580156105c2573d6000803e3d6000fd5b505050506040513d60208110156105d857600080fd5b810190808051906020019092919050505090509056fea165627a7a723058205d9b4f589101f24bb815500aa57d13e6119a60079b0bdcbadea9b39351854c190029",
+  "deployedBytecode": "0x608060405260043610610067576000357c01000000000000000000000000000000000000000000000000000000009004806305be8b2c1461006c57806314685929146100c357806341b0c9ba146100da578063b06a5c5214610105578063f3e41e9014610130575b600080fd5b34801561007857600080fd5b5061008161015b565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156100cf57600080fd5b506100d8610180565b005b3480156100e657600080fd5b506100ef610514565b6040518082815260200191505060405180910390f35b34801561011157600080fd5b5061011a61051a565b6040518082815260200191505060405180910390f35b34801561013c57600080fd5b50610145610520565b6040518082815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6001544210151515610220576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252603b8152602001807f506c65617365207375626d69742061207265736f6c7574696f6e20647572696e81526020017f672074686520636f72726563742074696d6520696e74657276616c000000000081525060400191505060405180910390fd5b600061022a610526565b9050600254811115610381576000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16635dd8085560035460016000604051602001808360ff1681526020018260ff168152602001925050506040516020818303038152906040526040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200180602001828103825283818151815260200191508051906020019080838360005b838110156103175780820151818401526020810190506102fc565b50505050905090810190601f1680156103445780820380516001836020036101000a031916815260200191505b509350505050600060405180830381600087803b15801561036457600080fd5b505af1158015610378573d6000803e3d6000fd5b505050506104c8565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16635dd8085560035460006001604051602001808360ff1681526020018260ff168152602001925050506040516020818303038152906040526040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200180602001828103825283818151815260200191508051906020019080838360005b83811015610462578082015181840152602081019050610447565b50505050905090810190601f16801561048f5780820380516001836020036101000a031916815260200191505b509350505050600060405180830381600087803b1580156104af57600080fd5b505af11580156104c3573d6000803e3d6000fd5b505050505b7fd60f27d6ed7f097522f99624c010efabe0629a1f69468e2c97ab84ff445510d8600154428360405180848152602001838152602001828152602001935050505060405180910390a150565b60025481565b60035481565b60015481565b6000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16636daf3a6c6040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b1580156105ae57600080fd5b505af11580156105c2573d6000803e3d6000fd5b505050506040513d60208110156105d857600080fd5b810190808051906020019092919050505090509056fea165627a7a723058205d9b4f589101f24bb815500aa57d13e6119a60079b0bdcbadea9b39351854c190029",
+  "sourceMap": "335:528:11:-;;;445:313;8:9:-1;5:2;;;30:1;27;20:12;5:2;445:313:11;;;;;;;;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;445:313:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;633:8;643:14;659:16;677:10;1466:9:12;1455:8;;:20;;;;;;;;;;;;;;;;;;1502:15;1485:14;:32;;;;1541:12;1527:11;:26;;;;1576:11;1563:10;:24;;;;1291:303;;;;733:19:11;695:18;;:58;;;;;;;;;;;;;;;;;;445:313;;;;;335:528;;;;;;",
+  "deployedSourceMap": "335:528:11:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;218:38:12;;8:9:-1;5:2;;;30:1;27;20:12;5:2;218:38:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;2185:493;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2185:493:12;;;:::i;:::-;;653:23;;8:9:-1;5:2;;;30:1;27;20:12;5:2;653:23:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;765:25;;8:9:-1;5:2;;;30:1;27;20:12;5:2;765:25:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;404:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;404:26:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;218:38;;;;;;;;;;;;;:::o;2185:493::-;2268:14;;2249:15;:33;;2228:139;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2378:10;2391:11;:9;:11::i;:::-;2378:24;;2424:11;;2416:5;:19;2412:185;;;2451:8;;;;;;;;;;;:22;;;2474:10;;2497:1;2500;2486:16;;;;;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;2486:16:12;;;2451:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2451:52:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2451:52:12;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2451:52:12;;;;2412:185;;;2534:8;;;;;;;;;;;:22;;;2557:10;;2580:1;2583;2569:16;;;;;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;2569:16:12;;;2534:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2534:52:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2534:52:12;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2534:52:12;;;;2412:185;2611:60;2632:14;;2648:15;2665:5;2611:60;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2185:493;:::o;653:23::-;;;;:::o;765:25::-;;;;:::o;404:26::-;;;;:::o;762:99:11:-;800:4;824:18;;;;;;;;;;;:29;;;:31;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;824:31:11;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;824:31:11;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;824:31:11;;;;;;;;;;;;;;;;812:44;;762:99;:::o",
+  "source": "pragma solidity ^0.5.1;\n\nimport { PredictionMarketSystem } from \"@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol\";\nimport { TargetValueOracle } from \"./TargetValueOracle.sol\";\n\ninterface ChainlinkEcoTree {\n  // function sumNbrArbres() external returns (uint256 a);\n  function sumPrixTtc() external returns (uint256 a);\n}\n\ncontract SumValueMintedAssetsOracle is TargetValueOracle {\n  ChainlinkEcoTree internal chainlinkedEcoTree;\n\n  constructor (\n    PredictionMarketSystem pmSystem,\n    uint resolutionTime,\n    uint difficultyTarget,\n    bytes32 questionId,\n    address _chainlinkedEcoTree\n  ) public TargetValueOracle(pmSystem, resolutionTime, difficultyTarget, questionId) {\n    chainlinkedEcoTree = ChainlinkEcoTree(_chainlinkedEcoTree);\n  }\n\n  function readValue() internal returns(uint) {\n    return uint(chainlinkedEcoTree.sumPrixTtc());\n  }\n}\n",
+  "sourcePath": "/Users/leo/flyingcarpet/prediction-market/contracts/SumValueMintedAssetsOracle.sol",
+  "ast": {
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/SumValueMintedAssetsOracle.sol",
+    "exportedSymbols": {
+      "ChainlinkEcoTree": [
+        526
+      ],
+      "SumValueMintedAssetsOracle": [
+        569
+      ]
+    },
+    "id": 570,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 516,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:11"
+      },
+      {
+        "absolutePath": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "file": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "id": 518,
+        "nodeType": "ImportDirective",
+        "scope": 570,
+        "sourceUnit": 3099,
+        "src": "25:102:11",
+        "symbolAliases": [
+          {
+            "foreign": 517,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol",
+        "file": "./TargetValueOracle.sol",
+        "id": 520,
+        "nodeType": "ImportDirective",
+        "scope": 570,
+        "sourceUnit": 676,
+        "src": "128:60:11",
+        "symbolAliases": [
+          {
+            "foreign": 519,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 526,
+        "linearizedBaseContracts": [
+          526
+        ],
+        "name": "ChainlinkEcoTree",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 525,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "sumPrixTtc",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 521,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "299:2:11"
+            },
+            "returnParameters": {
+              "id": 524,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 523,
+                  "name": "a",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 525,
+                  "src": "320:9:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 522,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "320:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "319:11:11"
+            },
+            "scope": 526,
+            "src": "280:51:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 570,
+        "src": "190:143:11"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 527,
+              "name": "TargetValueOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 675,
+              "src": "374:17:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
+                "typeString": "contract TargetValueOracle"
+              }
+            },
+            "id": 528,
+            "nodeType": "InheritanceSpecifier",
+            "src": "374:17:11"
+          }
+        ],
+        "contractDependencies": [
+          675
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 569,
+        "linearizedBaseContracts": [
+          569,
+          675
+        ],
+        "name": "SumValueMintedAssetsOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 530,
+            "name": "chainlinkedEcoTree",
+            "nodeType": "VariableDeclaration",
+            "scope": 569,
+            "src": "396:44:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+              "typeString": "contract ChainlinkEcoTree"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 529,
+              "name": "ChainlinkEcoTree",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 526,
+              "src": "396:16:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                "typeString": "contract ChainlinkEcoTree"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 555,
+              "nodeType": "Block",
+              "src": "689:69:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 553,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 549,
+                      "name": "chainlinkedEcoTree",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 530,
+                      "src": "695:18:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                        "typeString": "contract ChainlinkEcoTree"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 551,
+                          "name": "_chainlinkedEcoTree",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 540,
+                          "src": "733:19:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 550,
+                        "name": "ChainlinkEcoTree",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 526,
+                        "src": "716:16:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ChainlinkEcoTree_$526_$",
+                          "typeString": "type(contract ChainlinkEcoTree)"
+                        }
+                      },
+                      "id": 552,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "716:37:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                        "typeString": "contract ChainlinkEcoTree"
+                      }
+                    },
+                    "src": "695:58:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                      "typeString": "contract ChainlinkEcoTree"
+                    }
+                  },
+                  "id": 554,
+                  "nodeType": "ExpressionStatement",
+                  "src": "695:58:11"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 556,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 543,
+                    "name": "pmSystem",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 532,
+                    "src": "633:8:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 544,
+                    "name": "resolutionTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 534,
+                    "src": "643:14:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 545,
+                    "name": "difficultyTarget",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 536,
+                    "src": "659:16:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 546,
+                    "name": "questionId",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 538,
+                    "src": "677:10:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 547,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 542,
+                  "name": "TargetValueOracle",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 675,
+                  "src": "615:17:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
+                    "typeString": "type(contract TargetValueOracle)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "615:73:11"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 541,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 532,
+                  "name": "pmSystem",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "463:31:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                    "typeString": "contract PredictionMarketSystem"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 531,
+                    "name": "PredictionMarketSystem",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3098,
+                    "src": "463:22:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 534,
+                  "name": "resolutionTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "500:19:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 533,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "500:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 536,
+                  "name": "difficultyTarget",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "525:21:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 535,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "525:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 538,
+                  "name": "questionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "552:18:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 537,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "552:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 540,
+                  "name": "_chainlinkedEcoTree",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "576:27:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 539,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "576:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "457:150:11"
+            },
+            "returnParameters": {
+              "id": 548,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "689:0:11"
+            },
+            "scope": 569,
+            "src": "445:313:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 567,
+              "nodeType": "Block",
+              "src": "806:55:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 562,
+                            "name": "chainlinkedEcoTree",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 530,
+                            "src": "824:18:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                              "typeString": "contract ChainlinkEcoTree"
+                            }
+                          },
+                          "id": 563,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sumPrixTtc",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 525,
+                          "src": "824:29:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_nonpayable$__$returns$_t_uint256_$",
+                            "typeString": "function () external returns (uint256)"
+                          }
+                        },
+                        "id": 564,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "824:31:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 561,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "819:4:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_uint256_$",
+                        "typeString": "type(uint256)"
+                      },
+                      "typeName": "uint"
+                    },
+                    "id": 565,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "819:37:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 560,
+                  "id": 566,
+                  "nodeType": "Return",
+                  "src": "812:44:11"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 568,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "readValue",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 557,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "780:2:11"
+            },
+            "returnParameters": {
+              "id": 560,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 559,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 568,
+                  "src": "800:4:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 558,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "800:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "799:6:11"
+            },
+            "scope": 569,
+            "src": "762:99:11",
+            "stateMutability": "nonpayable",
+            "superFunction": 622,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 570,
+        "src": "335:528:11"
+      }
+    ],
+    "src": "0:864:11"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/SumValueMintedAssetsOracle.sol",
+    "exportedSymbols": {
+      "ChainlinkEcoTree": [
+        526
+      ],
+      "SumValueMintedAssetsOracle": [
+        569
+      ]
+    },
+    "id": 570,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 516,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:11"
+      },
+      {
+        "absolutePath": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "file": "@gnosis.pm/hg-contracts/contracts/PredictionMarketSystem.sol",
+        "id": 518,
+        "nodeType": "ImportDirective",
+        "scope": 570,
+        "sourceUnit": 3099,
+        "src": "25:102:11",
+        "symbolAliases": [
+          {
+            "foreign": 517,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/leo/flyingcarpet/prediction-market/contracts/TargetValueOracle.sol",
+        "file": "./TargetValueOracle.sol",
+        "id": 520,
+        "nodeType": "ImportDirective",
+        "scope": 570,
+        "sourceUnit": 676,
+        "src": "128:60:11",
+        "symbolAliases": [
+          {
+            "foreign": 519,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 526,
+        "linearizedBaseContracts": [
+          526
+        ],
+        "name": "ChainlinkEcoTree",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 525,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "sumPrixTtc",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 521,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "299:2:11"
+            },
+            "returnParameters": {
+              "id": 524,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 523,
+                  "name": "a",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 525,
+                  "src": "320:9:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 522,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "320:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "319:11:11"
+            },
+            "scope": 526,
+            "src": "280:51:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 570,
+        "src": "190:143:11"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 527,
+              "name": "TargetValueOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 675,
+              "src": "374:17:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_TargetValueOracle_$675",
+                "typeString": "contract TargetValueOracle"
+              }
+            },
+            "id": 528,
+            "nodeType": "InheritanceSpecifier",
+            "src": "374:17:11"
+          }
+        ],
+        "contractDependencies": [
+          675
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 569,
+        "linearizedBaseContracts": [
+          569,
+          675
+        ],
+        "name": "SumValueMintedAssetsOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 530,
+            "name": "chainlinkedEcoTree",
+            "nodeType": "VariableDeclaration",
+            "scope": 569,
+            "src": "396:44:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+              "typeString": "contract ChainlinkEcoTree"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 529,
+              "name": "ChainlinkEcoTree",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 526,
+              "src": "396:16:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                "typeString": "contract ChainlinkEcoTree"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 555,
+              "nodeType": "Block",
+              "src": "689:69:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 553,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 549,
+                      "name": "chainlinkedEcoTree",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 530,
+                      "src": "695:18:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                        "typeString": "contract ChainlinkEcoTree"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 551,
+                          "name": "_chainlinkedEcoTree",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 540,
+                          "src": "733:19:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 550,
+                        "name": "ChainlinkEcoTree",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 526,
+                        "src": "716:16:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ChainlinkEcoTree_$526_$",
+                          "typeString": "type(contract ChainlinkEcoTree)"
+                        }
+                      },
+                      "id": 552,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "716:37:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                        "typeString": "contract ChainlinkEcoTree"
+                      }
+                    },
+                    "src": "695:58:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                      "typeString": "contract ChainlinkEcoTree"
+                    }
+                  },
+                  "id": 554,
+                  "nodeType": "ExpressionStatement",
+                  "src": "695:58:11"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 556,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 543,
+                    "name": "pmSystem",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 532,
+                    "src": "633:8:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 544,
+                    "name": "resolutionTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 534,
+                    "src": "643:14:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 545,
+                    "name": "difficultyTarget",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 536,
+                    "src": "659:16:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 546,
+                    "name": "questionId",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 538,
+                    "src": "677:10:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 547,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 542,
+                  "name": "TargetValueOracle",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 675,
+                  "src": "615:17:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_TargetValueOracle_$675_$",
+                    "typeString": "type(contract TargetValueOracle)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "615:73:11"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 541,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 532,
+                  "name": "pmSystem",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "463:31:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                    "typeString": "contract PredictionMarketSystem"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 531,
+                    "name": "PredictionMarketSystem",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3098,
+                    "src": "463:22:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PredictionMarketSystem_$3098",
+                      "typeString": "contract PredictionMarketSystem"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 534,
+                  "name": "resolutionTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "500:19:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 533,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "500:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 536,
+                  "name": "difficultyTarget",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "525:21:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 535,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "525:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 538,
+                  "name": "questionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "552:18:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 537,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "552:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 540,
+                  "name": "_chainlinkedEcoTree",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 556,
+                  "src": "576:27:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 539,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "576:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "457:150:11"
+            },
+            "returnParameters": {
+              "id": 548,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "689:0:11"
+            },
+            "scope": 569,
+            "src": "445:313:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 567,
+              "nodeType": "Block",
+              "src": "806:55:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 562,
+                            "name": "chainlinkedEcoTree",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 530,
+                            "src": "824:18:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ChainlinkEcoTree_$526",
+                              "typeString": "contract ChainlinkEcoTree"
+                            }
+                          },
+                          "id": 563,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sumPrixTtc",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 525,
+                          "src": "824:29:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_nonpayable$__$returns$_t_uint256_$",
+                            "typeString": "function () external returns (uint256)"
+                          }
+                        },
+                        "id": 564,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "824:31:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 561,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "819:4:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_uint256_$",
+                        "typeString": "type(uint256)"
+                      },
+                      "typeName": "uint"
+                    },
+                    "id": 565,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "819:37:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 560,
+                  "id": 566,
+                  "nodeType": "Return",
+                  "src": "812:44:11"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 568,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "readValue",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 557,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "780:2:11"
+            },
+            "returnParameters": {
+              "id": 560,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 559,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 568,
+                  "src": "800:4:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 558,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "800:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "799:6:11"
+            },
+            "scope": 569,
+            "src": "762:99:11",
+            "stateMutability": "nonpayable",
+            "superFunction": 622,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 570,
+        "src": "335:528:11"
+      }
+    ],
+    "src": "0:864:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {
+    "4": {
+      "events": {
+        "0xd60f27d6ed7f097522f99624c010efabe0629a1f69468e2c97ab84ff445510d8": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "resolutionTime",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "currentTime",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "ResolutionSuccessful",
+          "type": "event",
+          "signature": "0xd60f27d6ed7f097522f99624c010efabe0629a1f69468e2c97ab84ff445510d8"
+        }
+      },
+      "links": {},
+      "address": "0x5D1481c540C3b24F66bE572813Acc2Ab14d0CE28",
+      "transactionHash": "0xbb7129285967a566a342ed4a8321fee0f2ae10b1b6f8e711060b9b6d8661421b"
+    }
+  },
+  "schemaVersion": "3.0.18",
+  "updatedAt": "2019-12-20T11:53:10.652Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {
+      "resolveValue()": {
+        "details": "Triggers an oracle report. If the transaction occurs within the prescribed valid time window, the oracle will attempt to read a value and report a result to the prediction market system. The result reported will be two EVM words (2*32=64 bytes). If the witnessed value exceeds the target value, the first word will be 1 and the second will be 0. Otherwise, if the witnessed value is less than or equal to the target value, the first word will be 0 and the second will be 1. ",
+        "return": "value witnessed by this oracle"
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

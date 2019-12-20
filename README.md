@@ -15,7 +15,45 @@ Gnosis uses this Division Contract where EcoTree / AMF attest to divisions: http
 ## Available markets
 Carbon offset
 
-## Workflow
+## Live platform
+
+### Login
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/login
+
+### live market
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/live_markets.png" />
+</p>
+
+### Create postion
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/create_position.png" />
+</p>
+
+### Chainlink data
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/chainlink_data.png" />
+</p>
+
+### Tree NFT's
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/ecoTree_all.png" />
+</p>
+
+### NFT
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/ecoTree.png" />
+</p>
+
+### Trees on Opensea
+<p align="center">
+  <img width="400px" src="https://github.com/flyingcarpet-network/prediction-market/blob/master/src/assets/workflow/openSea.png" />
+</p>
+
+
+
+## Workflow / Mockups
 
 ### PM Dashboard workflow
 <p align="center">

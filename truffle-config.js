@@ -42,6 +42,7 @@ const config = {
       //   https://github.com/trufflesuite/truffle/issues/1612
       //   https://github.com/trufflesuite/truffle/issues/1698
       skipDryRun: true,
+      gas: 4500000,
       gasPrice: web3.utils.toWei("50", "gwei"),
       networkCheckTimeout: 10000000
     },

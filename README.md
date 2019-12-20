@@ -7,13 +7,13 @@ The FCLA Carbon Offsets Prediction Market enables environmentally conscious user
 
 ## Smartcontracts
 
+The current PM is the total amount of euros of all attested trees on EcoTree. 
+
 Gnosis uses the EcoTree Chainlinked Contract: https://rinkeby.etherscan.io/address/0xCCccCb48132191636B95aBF45e32BaFbf5A77f5c
 
 Gnosis uses this Division Contract where EcoTree / AMF attest to divisions: https://rinkeby.etherscan.io/address/0x76b8e6AcB389090f38d37A82d521d8ef0D6E2318
 
-Current is the current amount of euros of all trees on EcoTree are worth. 
-
-Oracle for Gnosis PM that imports form Chainlink contract: 0xB4baf3B840bdD05f0154558B980AF50a0daB78b0
+Oracle for Gnosis PM that imports form Chainlink contract: https://rinkeby.etherscan.io/address/0xB4baf3B840bdD05f0154558B980AF50a0daB78b0
 
 NFT's of trees: https://rinkeby.etherscan.io/tx/0x2fe5494f19c22b59ee9a9b82a76ac5eb3e78e9afe79cfae86996fd67f7d4dd79
 

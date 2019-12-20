@@ -20,15 +20,13 @@ function* product(head = [], ...tail) {
 module.exports = function(callback) {
   (async function() {
     const config = JSON.parse(
-      fs.readFileSync(path.join(__dirname, "..", "app", "config.json"))
+      fs.readFileSync(path.join(__dirname, "..", "src", "config.json"))
     );
     const currentNetworkId = await web3.eth.net.getId();
 
     if (currentNetworkId !== config.networkId)
       throw new Error(
-        `expected configured network ID ${
-          config.networkId
-        } but connected to network ID ${currentNetworkId}`
+        `expected configured network ID ${config.networkId} but connected to network ID ${currentNetworkId}`
       );
 
     const lmsrMarketMaker = await LMSRMarketMaker.at(config.lmsrAddress);
@@ -37,7 +35,7 @@ module.exports = function(callback) {
     const owner = await lmsrMarketMaker.owner();
     const defaultAccount = LMSRMarketMaker.defaults().from;
 
-    const collateral = await require("../app/src/utils/collateral-info")(
+    const collateral = await require("../src/utils/collateral-info")(
       web3,
       Decimal,
       { ERC20Detailed, IDSToken, WETH9 },
@@ -163,9 +161,7 @@ module.exports = function(callback) {
                 {
                   type: "string",
                   name: "fundingChangeStr",
-                  message: `How much ${
-                    collateral.symbol
-                  } would you like to change the funding by?`
+                  message: `How much ${collateral.symbol} would you like to change the funding by?`
                 }
               ]);
 

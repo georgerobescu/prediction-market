@@ -24,7 +24,7 @@ const Market = ({
   setOpenInfoIndex,
   // oracle,
   lastMarketListed,
-  icon,
+  // icon,
   SumValueMintedAssetsOracleContract,
   ChainlinkEcoTreeContract,
   oracleReportedValueLocationKeys,
@@ -74,7 +74,7 @@ const Market = ({
                     <img
                       className="market-avatar size-50"
                       alt="Market Icon"
-                      src={icon}
+                      src="/assets/images/trees2.jpg"
                     ></img>
                   </span>
                   <p className="mb-0 list-group-item-text">
